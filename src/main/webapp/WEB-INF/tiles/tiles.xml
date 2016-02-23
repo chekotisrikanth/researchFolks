@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+	<!-- Templates -->
+	
+	<definition name="layout.basic" template="/WEB-INF/tiles/layout/basic.jsp">
+		<put-attribute name="title" value="Spring Web MVC with Tiles 3" />
+		<put-attribute name="header" value="/WEB-INF/tiles/view/public/header/header.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/tiles/view/footer.jsp" />
+	</definition>
+	
+	<!-- Pages -->	
+	
+	<definition name="homepage" extends="layout.basic">
+		<put-attribute name="body" value="/WEB-INF/tiles/view/public/home/home.jsp" />
+	</definition>
+	
+	<definition name="adminhome" extends="layout.basic">
+		<put-attribute name="header" value="/WEB-INF/tiles/view/secure/header/adminheader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/home/adminhome.jsp" />
+	</definition>
+	
+	<definition name="authorhome" extends="layout.basic">
+		<put-attribute name="header" value="/WEB-INF/tiles/view//secure/header/authorheader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/home/authorhome.jsp" />
+	 </definition>
+	 
+	 <definition name="reviewerhome" extends="layout.basic">
+		<put-attribute name="header" value="/WEB-INF/tiles/view/secure/header/adminheader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/home/reviewerhome.jsp" />
+	</definition>
+	
+	<definition name="admin_create" extends="layout.basic">
+		<put-attribute name="body" value="/WEB-INF/tiles/view/public/create/admin_create.jsp" />
+	</definition>
+	
+	<definition name="access_denied" extends="layout.basic">
+		<put-attribute name="body" value="/WEB-INF/tiles/view/access_denied.jsp" />
+	</definition>
+	
+	<definition name="customer_create" extends="layout.basic">
+		<put-attribute name="body" value="/WEB-INF/tiles/view/public/create/customer_create.jsp" />
+	</definition>
+	
+	<definition name="customer_created" extends="layout.basic">
+		<put-attribute name="body" value="/WEB-INF/tiles/view/public/create/customer_created.jsp" />
+	</definition>
+	
+	<definition name="admin_created" extends="layout.basic">
+		<put-attribute name="body" value="/WEB-INF/tiles/view/public/create/admin_created.jsp" />
+	</definition>
+	
+	<definition name="cpdpReportForm_create" extends="layout.basic">
+   		 <put-attribute name="header" value="header" />
+		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/create/cpdpReportForm_create.jsp" />
+	</definition>
+	
+	<definition name="cpdpReportForm_created" extends="layout.basic">
+   		 <put-attribute name="header" value="header" />
+		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/create/cpdpReportForm_created.jsp" />
+	</definition>
+	
+	<definition name="industryReportForm_create" extends="layout.basic">
+   		 <put-attribute name="header" value="header" />
+		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/create/industryReportForm_create.jsp" />
+	</definition>
+	
+	<definition name="industryReportForm_created" extends="layout.basic">
+   		 <put-attribute name="header" value="header" />
+		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/create/industryReportForm_created.jsp" />
+	</definition>
+	
+	
+	<definition name="author_create" extends="layout.basic">
+		<put-attribute name="body" value="/WEB-INF/tiles/view/public/create/author_create.jsp" />
+	</definition>
+	
+	<definition name="author_created" extends="layout.basic">
+		<put-attribute name="body" value="/WEB-INF/tiles/view/public/create/author_created.jsp" />
+	</definition>
+	
+	<!-- <definition name="header"
+               preparer="com.marketing.tool.controller.HeaderController"
+               template="/WEB-INF/tiles/view/header.jsp">
+	</definition> -->
+
+	<definition name="loginPage" extends="layout.basic">
+		<put-attribute name="body" value="/WEB-INF/tiles/view/login.jsp" />
+	</definition>
+	
+</tiles-definitions>
