@@ -237,3 +237,391 @@ insert into report_status (report_status_id, comments, report_id, status, user_i
 insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('2', 'sadsadsad', 'anil', 0.0, '02/16/2016 00:00:00.000', '<byte[]>', 'sdasd', 'anil', 'Quarterly', 2);
 insert into cpdpreport_form (company_intl_type, currency, headcount, report_type, revenue, stock_exchange_id, ticker, units, report_id) values (2, 'US$', 1, 1, '5545454', 3, 'asdasdsad', 3, 2);
 insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 2, 'Created', 1, 'AUTHOR');
+INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME) VALUES ('1', 'India');
+INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME) VALUES ('2', 'USA');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('1', '1', 'Telangana');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('2', '1', 'Ap');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('3', '2', 'Colorado');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 1, 'java');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 2, '.net');
+insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('user', 0);
+update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'user';
+insert into user (account_type, email_id, first_name, last_name, mobile_no, password, title, userstatus, id) values ('ADMIN', 'sri3', 'sri', 'ch', '9032164651', 's', 'MR', 'Active', 1);
+insert into admin (designation, profile_pic, id) values ('it', NULL, 1);
+update hibernate_sequences set sequence_next_hi_value = 2 where sequence_next_hi_value = 1 and sequence_name = 'user';
+insert into user (account_type, email_id, first_name, last_name, mobile_no, password, title, userstatus, id) values ('REVIEWER', 'sri4', 'ch', 'sri', '9032164651', 's', 'MR', 'Active', 32768);
+insert into admin (designation, profile_pic, id) values ('it', NULL, 32768);
+insert into stock_exchange(name) values('Bombay Stock Exchange');
+insert into stock_exchange(name) values('National Stock Exchange');
+insert into stock_exchange(name) values('Shenzhen Stock Exchange');
+insert into stock_exchange(name) values('Shanghai Stock Exchange');
+insert into stock_exchange(name) values('London Stock Exchange');
+insert into stock_exchange(name) values('SIX Swiss Exchange');
+insert into stock_exchange(name) values('NASDAQ Stock Exchange');
+insert into stock_exchange(name) values('Osaka Securities Exchange');
+insert into stock_exchange(name) values('JASDAQ Securities Exchange');
+insert into stock_exchange(name) values('Hercules Stock Exchange');
+insert into stock_exchange(name) values('Tokyo Stock Exchange');
+insert into stock_exchange(name) values('Berlin Stock Exchange');
+insert into stock_exchange(name) values('Frankfurt Stock Exchange');
+insert into stock_exchange(name) values('Borsa Italiana');
+insert into stock_exchange(name) values('Italian Stock Exchange');
+insert into stock_exchange(name) values('Hong Kong Stock Exchange');
+insert into stock_exchange(name) values('Korea Stock Exchange');
+insert into stock_exchange(name) values('Toronto Stock Exchange');
+insert into stock_exchange(name) values('TSX Venture Exchange');
+insert into stock_exchange(name) values('Ghana Stock Exchange');
+insert into stock_exchange(name) values('Nairobi Stock Exchange');
+insert into stock_exchange(name) values('Nigerian Stock Exchange');
+insert into stock_exchange(name) values('JSE Securities Exchange');
+insert into stock_exchange(name) values('Zimbabwe Stock Exchange');
+insert into stock_exchange(name) values('Australian Securities Exchange');
+insert into stock_exchange(name) values('Dhaka Stock Exchange');
+insert into stock_exchange(name) values('Indonesia Stock Exchange');
+insert into stock_exchange(name) values('Malaysia Exchange');
+insert into stock_exchange(name) values('Karachi Stock Exchange');
+insert into stock_exchange(name) values('Philippine Stock Exchange');
+insert into stock_exchange(name) values('Singapore Exchange');
+insert into stock_exchange(name) values('Colombo Stock Exchange');
+insert into stock_exchange(name) values('Taiwan Stock Exchange');
+insert into stock_exchange(name) values('Stock Exchange of Thailand');
+insert into stock_exchange(name) values('Euronext - Brussels');
+insert into stock_exchange(name) values('Bulgarian Stock Exchange');
+insert into stock_exchange(name) values('Zagreb Stock Exchange');
+insert into stock_exchange(name) values('Cyprus Stock Exchange');
+insert into stock_exchange(name) values('Euronext - Paris');
+insert into stock_exchange(name) values('Athens Stock Exchange');
+insert into stock_exchange(name) values('Irish Stock Exchange');
+insert into stock_exchange(name) values('Luxembourg Stock Exchange');
+insert into stock_exchange(name) values('Oslo Stock Exchange');
+insert into stock_exchange(name) values('Warsaw Stock Exchange');
+insert into stock_exchange(name) values('Euronext - Lisbon');
+insert into stock_exchange(name) values('Russian Stock Exchange');
+insert into stock_exchange(name) values('Istanbul Stock Exchange');
+insert into stock_exchange(name) values('Egyptian Stock Exchange');
+insert into stock_exchange(name) values('Tel Aviv Stock Exchange');
+INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME) VALUES ('1', 'India');
+INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME) VALUES ('2', 'USA');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('1', '1', 'Telangana');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('2', '1', 'Ap');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('3', '2', 'Colorado');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 1, 'java');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 2, '.net');
+insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('user', 0);
+update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'user';
+insert into user (account_type, email_id, first_name, last_name, mobile_no, password, title, userstatus, id) values ('ADMIN', 'sri3', 'sri', 'ch', '9032164651', 's', 'MR', 'Active', 1);
+insert into admin (designation, profile_pic, id) values ('it', NULL, 1);
+update hibernate_sequences set sequence_next_hi_value = 2 where sequence_next_hi_value = 1 and sequence_name = 'user';
+insert into user (account_type, email_id, first_name, last_name, mobile_no, password, title, userstatus, id) values ('REVIEWER', 'sri4', 'ch', 'sri', '9032164651', 's', 'MR', 'Active', 32768);
+insert into admin (designation, profile_pic, id) values ('it', NULL, 32768);
+insert into stock_exchange(name) values('Bombay Stock Exchange');
+insert into stock_exchange(name) values('National Stock Exchange');
+insert into stock_exchange(name) values('Shenzhen Stock Exchange');
+insert into stock_exchange(name) values('Shanghai Stock Exchange');
+insert into stock_exchange(name) values('London Stock Exchange');
+insert into stock_exchange(name) values('SIX Swiss Exchange');
+insert into stock_exchange(name) values('NASDAQ Stock Exchange');
+insert into stock_exchange(name) values('Osaka Securities Exchange');
+insert into stock_exchange(name) values('JASDAQ Securities Exchange');
+insert into stock_exchange(name) values('Hercules Stock Exchange');
+insert into stock_exchange(name) values('Tokyo Stock Exchange');
+insert into stock_exchange(name) values('Berlin Stock Exchange');
+insert into stock_exchange(name) values('Frankfurt Stock Exchange');
+insert into stock_exchange(name) values('Borsa Italiana');
+insert into stock_exchange(name) values('Italian Stock Exchange');
+insert into stock_exchange(name) values('Hong Kong Stock Exchange');
+insert into stock_exchange(name) values('Korea Stock Exchange');
+insert into stock_exchange(name) values('Toronto Stock Exchange');
+insert into stock_exchange(name) values('TSX Venture Exchange');
+insert into stock_exchange(name) values('Ghana Stock Exchange');
+insert into stock_exchange(name) values('Nairobi Stock Exchange');
+insert into stock_exchange(name) values('Nigerian Stock Exchange');
+insert into stock_exchange(name) values('JSE Securities Exchange');
+insert into stock_exchange(name) values('Zimbabwe Stock Exchange');
+insert into stock_exchange(name) values('Australian Securities Exchange');
+insert into stock_exchange(name) values('Dhaka Stock Exchange');
+insert into stock_exchange(name) values('Indonesia Stock Exchange');
+insert into stock_exchange(name) values('Malaysia Exchange');
+insert into stock_exchange(name) values('Karachi Stock Exchange');
+insert into stock_exchange(name) values('Philippine Stock Exchange');
+insert into stock_exchange(name) values('Singapore Exchange');
+insert into stock_exchange(name) values('Colombo Stock Exchange');
+insert into stock_exchange(name) values('Taiwan Stock Exchange');
+insert into stock_exchange(name) values('Stock Exchange of Thailand');
+insert into stock_exchange(name) values('Euronext - Brussels');
+insert into stock_exchange(name) values('Bulgarian Stock Exchange');
+insert into stock_exchange(name) values('Zagreb Stock Exchange');
+insert into stock_exchange(name) values('Cyprus Stock Exchange');
+insert into stock_exchange(name) values('Euronext - Paris');
+insert into stock_exchange(name) values('Athens Stock Exchange');
+insert into stock_exchange(name) values('Irish Stock Exchange');
+insert into stock_exchange(name) values('Luxembourg Stock Exchange');
+insert into stock_exchange(name) values('Oslo Stock Exchange');
+insert into stock_exchange(name) values('Warsaw Stock Exchange');
+insert into stock_exchange(name) values('Euronext - Lisbon');
+insert into stock_exchange(name) values('Russian Stock Exchange');
+insert into stock_exchange(name) values('Istanbul Stock Exchange');
+insert into stock_exchange(name) values('Egyptian Stock Exchange');
+insert into stock_exchange(name) values('Tel Aviv Stock Exchange');
+insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('report', 0);
+update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'report';
+insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('1', 'anil', 'anil', 0.0, '02/02/2016 00:00:00.000', '<byte[]>', 'anil', 'anil', 'Quarterly', 1);
+3. Statement.execute(insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('1', 'anil', 'anil', 0.0, '02/02/2016 00:00:00.000', '<byte[]>', 'anil', 'anil', 'Quarterly', 1)) insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('1', 'anil', 'anil', 0.0, '02/02/2016 00:00:00.000', '<byte[]>', 'anil', 'anil', 'Quarterly', 1)
+org.h2.jdbc.JdbcSQLException: Cannot parse "TIMESTAMP" constant "02/02/2016 00:00:00.000"; SQL statement:
+insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('1', 'anil', 'anil', 0.0, '02/02/2016 00:00:00.000', '<byte[]>', 'anil', 'anil', 'Quarterly', 1) -- ('1', 'anil', 'anil', 0.0, '02/02/2016 00:00:00.000', '<byte[]>', 'anil', 'anil', 'Quarterly', 1) [22007-190]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:345) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.message.DbException.get(DbException.java:168) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:122) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.value.Value.convertTo(Value.java:862) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.table.Column.convert(Column.java:148) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.command.dml.Insert.insertRows(Insert.java:143) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.command.dml.Insert.update(Insert.java:114) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.command.CommandContainer.update(CommandContainer.java:78) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.command.Command.executeUpdate(Command.java:253) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:184) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:158) ~[h2-1.4.190.jar:1.4.190]
+	at net.sf.log4jdbc.StatementSpy.execute(StatementSpy.java:839) ~[log4jdbc-remix-0.2.7.jar:na]
+	at org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript(ScriptUtils.java:472) [spring-jdbc-4.2.4.RELEASE.jar:4.2.4.RELEASE]
+	at org.springframework.jdbc.datasource.init.ResourceDatabasePopulator.populate(ResourceDatabasePopulator.java:229) [spring-jdbc-4.2.4.RELEASE.jar:4.2.4.RELEASE]
+	at org.springframework.jdbc.datasource.init.DatabasePopulatorUtils.execute(DatabasePopulatorUtils.java:48) [spring-jdbc-4.2.4.RELEASE.jar:4.2.4.RELEASE]
+	at org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer.runScripts(DataSourceInitializer.java:157) [spring-boot-autoconfigure-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer.runDataScripts(DataSourceInitializer.java:114) [spring-boot-autoconfigure-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer.onApplicationEvent(DataSourceInitializer.java:107) [spring-boot-autoconfigure-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.autoconfigure.jdbc.DataSourceInitializer.onApplicationEvent(DataSourceInitializer.java:47) [spring-boot-autoconfigure-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:163) [spring-context-4.2.4.RELEASE.jar:4.2.4.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:136) [spring-context-4.2.4.RELEASE.jar:4.2.4.RELEASE]
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:119) [spring-context-4.2.4.RELEASE.jar:4.2.4.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.registerListeners(AbstractApplicationContext.java:809) [spring-context-4.2.4.RELEASE.jar:4.2.4.RELEASE]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:535) [spring-context-4.2.4.RELEASE.jar:4.2.4.RELEASE]
+	at org.springframework.boot.context.embedded.EmbeddedWebApplicationContext.refresh(EmbeddedWebApplicationContext.java:118) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:766) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.createAndRefreshContext(SpringApplication.java:361) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1191) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1180) [spring-boot-1.3.2.RELEASE.jar:1.3.2.RELEASE]
+	at com.marketing.tool.Application.main(Application.java:49) [classes/:na]
+Caused by: java.lang.IllegalArgumentException: 02/02/2016 00:00:00.000
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:303) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.value.ValueTimestamp.parseTry(ValueTimestamp.java:140) ~[h2-1.4.190.jar:1.4.190]
+	at org.h2.value.ValueTimestamp.parse(ValueTimestamp.java:120) ~[h2-1.4.190.jar:1.4.190]
+	... 28 common frames omitted
+INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME) VALUES ('1', 'India');
+INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME) VALUES ('2', 'USA');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('1', '1', 'Telangana');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('2', '1', 'Ap');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('3', '2', 'Colorado');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 1, 'java');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 2, '.net');
+insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('user', 0);
+update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'user';
+insert into user (account_type, email_id, first_name, last_name, mobile_no, password, title, userstatus, id) values ('ADMIN', 'sri3', 'sri', 'ch', '9032164651', 's', 'MR', 'Active', 1);
+insert into admin (designation, profile_pic, id) values ('it', NULL, 1);
+update hibernate_sequences set sequence_next_hi_value = 2 where sequence_next_hi_value = 1 and sequence_name = 'user';
+insert into user (account_type, email_id, first_name, last_name, mobile_no, password, title, userstatus, id) values ('REVIEWER', 'sri4', 'ch', 'sri', '9032164651', 's', 'MR', 'Active', 32768);
+insert into admin (designation, profile_pic, id) values ('it', NULL, 32768);
+insert into stock_exchange(name) values('Bombay Stock Exchange');
+insert into stock_exchange(name) values('National Stock Exchange');
+insert into stock_exchange(name) values('Shenzhen Stock Exchange');
+insert into stock_exchange(name) values('Shanghai Stock Exchange');
+insert into stock_exchange(name) values('London Stock Exchange');
+insert into stock_exchange(name) values('SIX Swiss Exchange');
+insert into stock_exchange(name) values('NASDAQ Stock Exchange');
+insert into stock_exchange(name) values('Osaka Securities Exchange');
+insert into stock_exchange(name) values('JASDAQ Securities Exchange');
+insert into stock_exchange(name) values('Hercules Stock Exchange');
+insert into stock_exchange(name) values('Tokyo Stock Exchange');
+insert into stock_exchange(name) values('Berlin Stock Exchange');
+insert into stock_exchange(name) values('Frankfurt Stock Exchange');
+insert into stock_exchange(name) values('Borsa Italiana');
+insert into stock_exchange(name) values('Italian Stock Exchange');
+insert into stock_exchange(name) values('Hong Kong Stock Exchange');
+insert into stock_exchange(name) values('Korea Stock Exchange');
+insert into stock_exchange(name) values('Toronto Stock Exchange');
+insert into stock_exchange(name) values('TSX Venture Exchange');
+insert into stock_exchange(name) values('Ghana Stock Exchange');
+insert into stock_exchange(name) values('Nairobi Stock Exchange');
+insert into stock_exchange(name) values('Nigerian Stock Exchange');
+insert into stock_exchange(name) values('JSE Securities Exchange');
+insert into stock_exchange(name) values('Zimbabwe Stock Exchange');
+insert into stock_exchange(name) values('Australian Securities Exchange');
+insert into stock_exchange(name) values('Dhaka Stock Exchange');
+insert into stock_exchange(name) values('Indonesia Stock Exchange');
+insert into stock_exchange(name) values('Malaysia Exchange');
+insert into stock_exchange(name) values('Karachi Stock Exchange');
+insert into stock_exchange(name) values('Philippine Stock Exchange');
+insert into stock_exchange(name) values('Singapore Exchange');
+insert into stock_exchange(name) values('Colombo Stock Exchange');
+insert into stock_exchange(name) values('Taiwan Stock Exchange');
+insert into stock_exchange(name) values('Stock Exchange of Thailand');
+insert into stock_exchange(name) values('Euronext - Brussels');
+insert into stock_exchange(name) values('Bulgarian Stock Exchange');
+insert into stock_exchange(name) values('Zagreb Stock Exchange');
+insert into stock_exchange(name) values('Cyprus Stock Exchange');
+insert into stock_exchange(name) values('Euronext - Paris');
+insert into stock_exchange(name) values('Athens Stock Exchange');
+insert into stock_exchange(name) values('Irish Stock Exchange');
+insert into stock_exchange(name) values('Luxembourg Stock Exchange');
+insert into stock_exchange(name) values('Oslo Stock Exchange');
+insert into stock_exchange(name) values('Warsaw Stock Exchange');
+insert into stock_exchange(name) values('Euronext - Lisbon');
+insert into stock_exchange(name) values('Russian Stock Exchange');
+insert into stock_exchange(name) values('Istanbul Stock Exchange');
+insert into stock_exchange(name) values('Egyptian Stock Exchange');
+insert into stock_exchange(name) values('Tel Aviv Stock Exchange');
+insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('report', 0);
+update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'report';
+insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('1', 'anil', 'anil', 0.0, null, null, 'anil', 'anil', 'Quarterly', 1);
+insert into industry_report_form (company_type, report_id) values ('2', 1);
+insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 1, 'Created', 1, 'AUTHOR');
+insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('2', 'sadsadsad', 'anil', 0.0, null, null, 'sdasd', 'anil', 'Quarterly', 2);
+insert into cpdpreport_form (company_intl_type, currency, headcount, report_type, revenue, stock_exchange_id, ticker, units, report_id) values (2, 'US$', 1, 1, '5545454', 3, 'asdasdsad', 3, 2);
+insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 2, 'Created', 1, 'AUTHOR');
+INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME) VALUES ('1', 'India');
+INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME) VALUES ('2', 'USA');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('1', '1', 'Telangana');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('2', '1', 'Ap');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('3', '2', 'Colorado');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 1, 'java');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 2, '.net');
+insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('user', 0);
+update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'user';
+insert into user (account_type, email_id, first_name, last_name, mobile_no, password, title, userstatus, id) values ('ADMIN', 'sri3', 'sri', 'ch', '9032164651', 's', 'MR', 'Active', 1);
+insert into admin (designation, profile_pic, id) values ('it', NULL, 1);
+update hibernate_sequences set sequence_next_hi_value = 2 where sequence_next_hi_value = 1 and sequence_name = 'user';
+insert into user (account_type, email_id, first_name, last_name, mobile_no, password, title, userstatus, id) values ('REVIEWER', 'sri4', 'ch', 'sri', '9032164651', 's', 'MR', 'Active', 32768);
+insert into admin (designation, profile_pic, id) values ('it', NULL, 32768);
+insert into stock_exchange(name) values('Bombay Stock Exchange');
+insert into stock_exchange(name) values('National Stock Exchange');
+insert into stock_exchange(name) values('Shenzhen Stock Exchange');
+insert into stock_exchange(name) values('Shanghai Stock Exchange');
+insert into stock_exchange(name) values('London Stock Exchange');
+insert into stock_exchange(name) values('SIX Swiss Exchange');
+insert into stock_exchange(name) values('NASDAQ Stock Exchange');
+insert into stock_exchange(name) values('Osaka Securities Exchange');
+insert into stock_exchange(name) values('JASDAQ Securities Exchange');
+insert into stock_exchange(name) values('Hercules Stock Exchange');
+insert into stock_exchange(name) values('Tokyo Stock Exchange');
+insert into stock_exchange(name) values('Berlin Stock Exchange');
+insert into stock_exchange(name) values('Frankfurt Stock Exchange');
+insert into stock_exchange(name) values('Borsa Italiana');
+insert into stock_exchange(name) values('Italian Stock Exchange');
+insert into stock_exchange(name) values('Hong Kong Stock Exchange');
+insert into stock_exchange(name) values('Korea Stock Exchange');
+insert into stock_exchange(name) values('Toronto Stock Exchange');
+insert into stock_exchange(name) values('TSX Venture Exchange');
+insert into stock_exchange(name) values('Ghana Stock Exchange');
+insert into stock_exchange(name) values('Nairobi Stock Exchange');
+insert into stock_exchange(name) values('Nigerian Stock Exchange');
+insert into stock_exchange(name) values('JSE Securities Exchange');
+insert into stock_exchange(name) values('Zimbabwe Stock Exchange');
+insert into stock_exchange(name) values('Australian Securities Exchange');
+insert into stock_exchange(name) values('Dhaka Stock Exchange');
+insert into stock_exchange(name) values('Indonesia Stock Exchange');
+insert into stock_exchange(name) values('Malaysia Exchange');
+insert into stock_exchange(name) values('Karachi Stock Exchange');
+insert into stock_exchange(name) values('Philippine Stock Exchange');
+insert into stock_exchange(name) values('Singapore Exchange');
+insert into stock_exchange(name) values('Colombo Stock Exchange');
+insert into stock_exchange(name) values('Taiwan Stock Exchange');
+insert into stock_exchange(name) values('Stock Exchange of Thailand');
+insert into stock_exchange(name) values('Euronext - Brussels');
+insert into stock_exchange(name) values('Bulgarian Stock Exchange');
+insert into stock_exchange(name) values('Zagreb Stock Exchange');
+insert into stock_exchange(name) values('Cyprus Stock Exchange');
+insert into stock_exchange(name) values('Euronext - Paris');
+insert into stock_exchange(name) values('Athens Stock Exchange');
+insert into stock_exchange(name) values('Irish Stock Exchange');
+insert into stock_exchange(name) values('Luxembourg Stock Exchange');
+insert into stock_exchange(name) values('Oslo Stock Exchange');
+insert into stock_exchange(name) values('Warsaw Stock Exchange');
+insert into stock_exchange(name) values('Euronext - Lisbon');
+insert into stock_exchange(name) values('Russian Stock Exchange');
+insert into stock_exchange(name) values('Istanbul Stock Exchange');
+insert into stock_exchange(name) values('Egyptian Stock Exchange');
+insert into stock_exchange(name) values('Tel Aviv Stock Exchange');
+insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('report', 0);
+update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'report';
+insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('1', 'anil', 'anil', 0.0, null, null, 'anil', 'anil', 'Quarterly', 1);
+insert into industry_report_form (company_type, report_id) values ('2', 1);
+insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 1, 'Created', 1, 'AUTHOR');
+insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('2', 'sadsadsad', 'anil', 0.0, null, null, 'sdasd', 'anil', 'Quarterly', 2);
+insert into cpdpreport_form (company_intl_type, currency, headcount, report_type, revenue, stock_exchange_id, ticker, units, report_id) values (2, 'US$', 1, 1, '5545454', 3, 'asdasdsad', 3, 2);
+insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 2, 'Created', 1, 'AUTHOR');
+INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME) VALUES ('1', 'India');
+INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME) VALUES ('2', 'USA');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('1', '1', 'Telangana');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('2', '1', 'Ap');
+INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('3', '2', 'Colorado');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 1, 'java');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 2, '.net');
+insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('user', 0);
+update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'user';
+insert into user (account_type, email_id, first_name, last_name, mobile_no, password, title, userstatus, id) values ('ADMIN', 'sri3', 'sri', 'ch', '9032164651', 's', 'MR', 'Active', 1);
+insert into admin (designation, profile_pic, id) values ('it', NULL, 1);
+update hibernate_sequences set sequence_next_hi_value = 2 where sequence_next_hi_value = 1 and sequence_name = 'user';
+insert into user (account_type, email_id, first_name, last_name, mobile_no, password, title, userstatus, id) values ('REVIEWER', 'sri4', 'ch', 'sri', '9032164651', 's', 'MR', 'Active', 32768);
+insert into admin (designation, profile_pic, id) values ('it', NULL, 32768);
+insert into stock_exchange(name) values('Bombay Stock Exchange');
+insert into stock_exchange(name) values('National Stock Exchange');
+insert into stock_exchange(name) values('Shenzhen Stock Exchange');
+insert into stock_exchange(name) values('Shanghai Stock Exchange');
+insert into stock_exchange(name) values('London Stock Exchange');
+insert into stock_exchange(name) values('SIX Swiss Exchange');
+insert into stock_exchange(name) values('NASDAQ Stock Exchange');
+insert into stock_exchange(name) values('Osaka Securities Exchange');
+insert into stock_exchange(name) values('JASDAQ Securities Exchange');
+insert into stock_exchange(name) values('Hercules Stock Exchange');
+insert into stock_exchange(name) values('Tokyo Stock Exchange');
+insert into stock_exchange(name) values('Berlin Stock Exchange');
+insert into stock_exchange(name) values('Frankfurt Stock Exchange');
+insert into stock_exchange(name) values('Borsa Italiana');
+insert into stock_exchange(name) values('Italian Stock Exchange');
+insert into stock_exchange(name) values('Hong Kong Stock Exchange');
+insert into stock_exchange(name) values('Korea Stock Exchange');
+insert into stock_exchange(name) values('Toronto Stock Exchange');
+insert into stock_exchange(name) values('TSX Venture Exchange');
+insert into stock_exchange(name) values('Ghana Stock Exchange');
+insert into stock_exchange(name) values('Nairobi Stock Exchange');
+insert into stock_exchange(name) values('Nigerian Stock Exchange');
+insert into stock_exchange(name) values('JSE Securities Exchange');
+insert into stock_exchange(name) values('Zimbabwe Stock Exchange');
+insert into stock_exchange(name) values('Australian Securities Exchange');
+insert into stock_exchange(name) values('Dhaka Stock Exchange');
+insert into stock_exchange(name) values('Indonesia Stock Exchange');
+insert into stock_exchange(name) values('Malaysia Exchange');
+insert into stock_exchange(name) values('Karachi Stock Exchange');
+insert into stock_exchange(name) values('Philippine Stock Exchange');
+insert into stock_exchange(name) values('Singapore Exchange');
+insert into stock_exchange(name) values('Colombo Stock Exchange');
+insert into stock_exchange(name) values('Taiwan Stock Exchange');
+insert into stock_exchange(name) values('Stock Exchange of Thailand');
+insert into stock_exchange(name) values('Euronext - Brussels');
+insert into stock_exchange(name) values('Bulgarian Stock Exchange');
+insert into stock_exchange(name) values('Zagreb Stock Exchange');
+insert into stock_exchange(name) values('Cyprus Stock Exchange');
+insert into stock_exchange(name) values('Euronext - Paris');
+insert into stock_exchange(name) values('Athens Stock Exchange');
+insert into stock_exchange(name) values('Irish Stock Exchange');
+insert into stock_exchange(name) values('Luxembourg Stock Exchange');
+insert into stock_exchange(name) values('Oslo Stock Exchange');
+insert into stock_exchange(name) values('Warsaw Stock Exchange');
+insert into stock_exchange(name) values('Euronext - Lisbon');
+insert into stock_exchange(name) values('Russian Stock Exchange');
+insert into stock_exchange(name) values('Istanbul Stock Exchange');
+insert into stock_exchange(name) values('Egyptian Stock Exchange');
+insert into stock_exchange(name) values('Tel Aviv Stock Exchange');
+insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('report', 0);
+update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'report';
+insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('1', 'anil', 'anil', 0.0, null, null, 'anil', 'anil', 'Quarterly', 1);
+insert into industry_report_form (company_type, report_id) values ('2', 1);
+insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 1, 'Created', 1, 'AUTHOR');
+insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('2', 'sadsadsad', 'anil', 0.0, null, null, 'sdasd', 'anil', 'Quarterly', 2);
+insert into cpdpreport_form (company_intl_type, currency, headcount, report_type, revenue, stock_exchange_id, ticker, units, report_id) values (2, 'US$', 1, 1, '5545454', 3, 'asdasdsad', 3, 2);
+insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 2, 'Created', 1, 'AUTHOR');
+update hibernate_sequences set sequence_next_hi_value = 2 where sequence_next_hi_value = 1 and sequence_name = 'report';
+insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('1', 'hello', '67', 0.0, '02/18/2016 00:00:00.000', '<byte[]>', 'hello', '67', 'Annually', 32768);
+insert into cpdpreport_form (company_intl_type, currency, headcount, report_type, revenue, stock_exchange_id, ticker, units, report_id) values (2, 'US$', 67, 1, '676767', 2, 'hello', 1, 32768);
+insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 32768, 'Created', 1, 'AUTHOR');
+insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('1', '67', '67', 0.0, '02/18/2016 00:00:00.000', '<byte[]>', 'hello', '67', 'Quarterly', 32769);
+insert into industry_report_form (company_type, report_id) values ('2', 32769);
+insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 32769, 'Created', 1, 'AUTHOR');

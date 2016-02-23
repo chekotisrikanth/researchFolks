@@ -2,6 +2,7 @@ package com.marketing.tool.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -9,7 +10,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class CPDPReportForm extends ReportForm{
 	
 
-		@NotEmpty
+		@NotNull
 		@Column(name="stock_exchange_id" , nullable=true)
 		private Integer stockExchageId;
 		
@@ -23,7 +24,7 @@ public class CPDPReportForm extends ReportForm{
 		private String currency;
 		
 		
-		@NotEmpty
+		@NotNull
 		@Column(name="company_intl_type" , nullable=true)
 		private Integer comIntl;
 		
@@ -32,16 +33,16 @@ public class CPDPReportForm extends ReportForm{
 		private String revenue;
 		
 		
-		@NotEmpty
+		@NotNull
 		@Column(name="units" , nullable=true)
 		private Integer units;
 		
-		@NotEmpty
+		@NotNull
 		@Column(name="reportType" , nullable=true)
 		private Integer reportType;
 		
 
-		@NotEmpty
+		@NotNull
 		@Column(name="headcount" , nullable=true)
 		private Integer headcount;
 
