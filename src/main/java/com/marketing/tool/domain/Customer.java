@@ -20,8 +20,8 @@ public class Customer extends User {
     private String country;
     
     @NotEmpty
-    @Column(name = "state", nullable = false)
-    private String state;
+    @Column(name = "city", nullable = false)
+    private String city;
     
     @NotEmpty
     @Column(name = "occupation", nullable = false)
@@ -30,7 +30,20 @@ public class Customer extends User {
     
     @Column(name = "isAgreedTC", nullable = false)
     private boolean isAgreedTC;
+    
+    @Size(max = 50)
+    @Column(name = "userName", nullable = false)    
+    private String userName;
+    
+    
+    
+	public String getUserName() {
+		return userName;
+	}
 
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public String getCountry() {
 		return country;
@@ -40,13 +53,7 @@ public class Customer extends User {
 		this.country = country;
 	}
 
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
+	
 
 	public String getOccupation() {
 		return occupation;
@@ -71,12 +78,37 @@ public class Customer extends User {
 	public Customer() {
 		// TODO Auto-generated constructor stub
 	}
-    
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public void setAgreedTC(boolean isAgreedTC) {
+		this.isAgreedTC = isAgreedTC;
+	}
+
 	@Override
 	public String toString() {
-		return "Customer [name=" + firstName + ", email=" + emailId + ", phone=" + mobileNo + ", country=" + country + ", state="
-				+ state + ", title=" + title + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Customer [country=");
+		builder.append(country);
+		builder.append(", city=");
+		builder.append(city);
+		builder.append(", occupation=");
+		builder.append(occupation);
+		builder.append(", isAgreedTC=");
+		builder.append(isAgreedTC);
+		builder.append(", userName=");
+		builder.append(userName);
+		builder.append("]");
+		return builder.toString();
 	}
+    
+	
     
 
 }

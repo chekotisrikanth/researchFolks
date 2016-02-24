@@ -30,29 +30,16 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 	
-    @Size(max = 50)
-    @Column(name = "accountType", nullable = false)
-    private String accountType;
+   /* @Size(max = 50)
+    @Column(name = "accountType", nullable = false)*/
+    private String accountType;  
+   
 	
 	
-	@Column(name="userstatus", nullable=false)
+	//@Column(name="userstatus", nullable=false)
 	private String userstatus=UserStatus.ACTIVE.getState();
 	
-	
-	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	private Set<ReportStatus> reportStatuses = new HashSet<ReportStatus>(0);
-	
-	
-	public Set<ReportStatus> getReportStatuses() {
-		return this.reportStatuses;
-	}
-
-	public void setReportStatuses(Set<ReportStatus> reportStatuses) {
-		this.reportStatuses = reportStatuses;
-	}*/
-
-	
-    @NotNull
+	@NotNull
     @Size(max = 3)
     @Column(name = "title", nullable = false)
 	protected String title;
@@ -66,14 +53,49 @@ public class User {
     @Column(name = "lastName", nullable = true)
     private String lastName;
     
-    @Size(min=10) @Phone
-    @Column(name = "mobileNo", nullable = true)
+   // @Size(min=10) @Phone
+   // @Column(name = "mobileNo", nullable = true)
 	protected String mobileNo;
     
     @NotEmpty
     @Size(max = 50)
     @Column(name = "emailId", nullable = false)
 	protected String emailId;
+    
+    
+	 private String reTypePwd;
+	 
+	 
+	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private Set<ReportStatus> reportStatuses = new HashSet<ReportStatus>(0);
+	
+	
+	public Set<ReportStatus> getReportStatuses() {
+		return this.reportStatuses;
+	}
+
+	public void setReportStatuses(Set<ReportStatus> reportStatuses) {
+		this.reportStatuses = reportStatuses;
+	}*/
+
+	
+   /* public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+*/
+	public String getReTypePwd() {
+		return reTypePwd;
+	}
+
+	public void setReTypePwd(String reTypePwd) {
+		this.reTypePwd = reTypePwd;
+	}
+
+	
     
    public Integer  getId() {
 		return id;
@@ -158,6 +180,33 @@ public class User {
 
 	public User() {
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [id=");
+		builder.append(id);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", accountType=");
+		builder.append(accountType);
+		builder.append(", userstatus=");
+		builder.append(userstatus);
+		builder.append(", title=");
+		builder.append(title);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", mobileNo=");
+		builder.append(mobileNo);
+		builder.append(", emailId=");
+		builder.append(emailId);
+		builder.append(", reTypePwd=");
+		builder.append(reTypePwd);
+		builder.append("]");
+		return builder.toString();
 	}
     
 }

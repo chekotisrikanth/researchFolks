@@ -96,6 +96,13 @@ public class CustomerCreateController {
 			titles.add("Ms");
 			model.addObject("titles", titles);
 			
+			
+			List<String> occupationList = new ArrayList<String>();
+			occupationList.add("Occupation-1");
+			occupationList.add("Occupation-2");
+			occupationList.add("Occupation-3");
+			model.addObject("occupationList", occupationList);
+			
 			List<String> accountTypes = new ArrayList<String>();
 			accountTypes.add("test");
 			accountTypes.add("test1");

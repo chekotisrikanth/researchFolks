@@ -2,111 +2,222 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<html>
-<head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    </head>
-    <script>
-        
-        $(document).ready(
-        function() {
-
-            $('#country').change(
-            function() {
-                
-                $.getJSON('loadStates.json', {
-                    countryId : $(this).val(),
-                    ajax : 'true'
-                }, function(data) {
-                    
-                    var html = '<option value="">----Select State----</option>';
-                    var len = data.length;
-      
-                    for ( var i = 0; i < len; i++) {
-                        html += '<option value="' + data[i].stateId + '">' + data[i].stateName + '</option>';
-                    }
-                    html += '</option>';
+<html lang = "en">
    
-                    $('#state').html(html);
-                });
-            });
-            
-        });
+   <head>
+      <meta charset = "utf-8">
+      <meta http-equiv = "X-UA-Compatible" content = "IE = edge">
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+      
+      <title>Research Floks</title>
+      
+      <!-- Bootstrap -->
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/datepicker.min.css">
+      
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      
+      <!--[if lt IE 9]>
+      <script src = "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src = "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      
+      <script type="text/javascript">
+            jQuery.noConflict();
+        </script>
+      
+   </head>
+   
+   <body>
+   <div class="container-fluid">
+   <header class="clearfix paddT20">
+     <div class="logo col-md-8 col-sm-12">
+     <a href="#"><img src="${pageContext.request.contextPath}/images/logo.png" alt="Research Floks"/></a>
+     </div>
+     <div class="customerInfo col-md-4 col-sm-12 paddT20">
+     	<div class="col-md-8 col-sm-12">
+        	<div class="col-md-4">
+            	<a href="#"><img src="${pageContext.request.contextPath}/images/icon-user.png" alt="Customer Img"/></a>
+            </div>
+            <div class="col-md-8 noPaddRL paddT15">
+            <div class="customerName col-md-12 col-sm-12 noPaddRL">Customer Name</div>
+            <div class="fontSmall  col-md-12 col-sm-12">Customer Skill</div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12 noPaddRL paddT15 ">
+	        <div class="col-md-12 fontSmall marginB5">
+            	<span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-alert.png" alt="alerts"/></span> <a href="#">Alerts</a>
+            </div>
+            <div class="col-md-12 fontSmall">
+            	<span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-mesage.png" alt="Message"/></span> <a href="#">Message</a>
+            </div>
+        </div>
+     </div>
+     </header>
+    <section>
+    <nav id="myNavbar" class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse noPaddRL" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Customer Research</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
+    </nav>
+      </section>
+      <section>
+     
+      	
+        <article class="col-md-12 noPaddRL">
+        <div class="contentWraper marginB20">
         
-    </script>
-<body>
-<h1><spring:message code="customer.create"/></h1>
-<form:form method="POST" action="/public/customer_create.html" commandName="form" modelAttribute="form">
-    <form:errors path="" element="div"/>
-    <div>
-        <form:label path="title"><spring:message code="user.title"/></form:label>
-       <form:select path="title">
-					  <form:option value="" label="--- Select ---" />
+        <form:form method="POST" class="form-horizontal alignHCenter " action="/public/customer_create.html" commandName="form" modelAttribute="form">
+       <form:errors />
+        
+			<div class="form-group">
+            	<div class="col-md-12 col-centered" >
+                	<span> Author Login Form</span>
+                </div>                
+            </div>
+        	<div class="form-group">
+				<div class="col-md-1 col-sm-1 col-xs-6">
+					<!--<spring:message code="user.title" var="title"/> -->
+			       <form:select path="title" class = "form-control" >
+					  <!--<form:option value="" label="${title}" /> -->
 					  <form:options items="${titles}" />
-		</form:select>
-        <form:errors path="title"/>
-    </div>
-    <div>
-        <form:label path="firstName"><spring:message code="user.firstName"/></form:label>
-        <form:input path="firstName"/>
-        <form:errors path="firstName"/>
-    </div>
-    <div>
-        <form:label path="lastName"><spring:message code="user.lastName"/></form:label>
-        <form:input path="lastName"/>
-        <form:errors path="lastName"/>
-    </div>
-    <div>
-        <form:label path="mobileNo"><spring:message code="user.mobileNo"/></form:label>
-        <form:input path="mobileNo"/>
-        <form:errors path="mobileNo"/>
-    </div>
-    <div>
-        <form:label path="emailId"><spring:message code="user.emailId"/></form:label>
-        <form:input path="emailId"/>
-        <form:errors path="emailId"/>
-    </div>
-    <div>
-        <form:label path="password"><spring:message code="user.password"/></form:label>
-        <form:input path="password"/>
-        <form:errors path="password"/>
-    </div>
-    <div>
+					</form:select>
+			        <form:errors path="title"/>	
+				</div>
+            	<div class="col-md-3">				
+					<spring:message code="user.firstName" var="firstNameLbl"/> 
+					<form:input path="firstName" class = "form-control" placeholder="${firstNameLbl}"/>
+					<form:errors path="firstName"/>                	
+                </div>
+                <div class="col-md-2">
+					<spring:message code="user.lastName" var="lastNameLbl"/>
+					<form:input path="lastName" class = "form-control" placeholder="${lastNameLbl}" />
+					<form:errors path="lastName"/></div>
+            </div>            
+			<div class="form-group">
+				<div class="col-md-6">
+					<spring:message code="userName" var="userNameLbl"/>					
+					<form:input path="userName" class = "form-control" placeholder="${userNameLbl}"/>
+					<form:errors path="userName"/>
+				</div>                
+			</div>
+			<div class="form-group">            	
+				 <div class="col-md-6">
+					<spring:message code="user.emailId" var="emailIdLbl"/>					
+					<form:input path="emailId" class = "form-control" placeholder="${emailIdLbl}"/>
+					<form:errors path="emailId"/>
+				 </div>
+			</div>
+			<div class="form-group">				
+            	<div class="col-md-3">
+					<spring:message code="user.password" var="passwordLal"/>
+					<form:password path="password" class ="form-control" placeholder="${passwordLal}"/>
+					<form:errors path="password"/>                	
+                </div>
+                <div class="col-md-3">
+					<spring:message code="user.reTypePwd" var="reTypePwdLal"/>
+					<form:password path="reTypePwd" class ="form-control" placeholder="${reTypePwdLal}"/>
+					<form:errors path="reTypePwd"/> 
+                </div>
+            </div>             
+            <div class="form-group">
+            	<div class="col-md-6">
+            		<spring:message code="user.country" var="countryLbl"/>	
+					<select id="country" name="country" class = "form-control">					
+								      
+					  <option value="">${countryLbl}</option>
+						<c:forEach items="${countryList}" var="country">
+							<option   value="${country.countryId}"  >${country.countryName}</option>
+						</c:forEach>
+					</select>
+					<form:errors path="country"/>
+                	
+                </div>
+            </div>
+			<div class="form-group">
+				<div class="col-md-6">
+					<spring:message code="user.city" var="cityLbl"/>					
+					<form:input path="city" class = "form-control" placeholder="${cityLbl}"/>
+					<form:errors path="city"/>                	
+				</div>
+			</div>
+			<div class="form-group">            	
+                <div class="col-md-6">				
+					<spring:message code="customer.occupation" var="occupationLbl" />
+					<select id="occupation" name="occupation" class = "form-control" required>																      
+						  <option value="">${occupationLbl}</option>
+							<c:forEach items="${occupationList}" var="occupation" varStatus="loop">
+								<option value="${loop.index}">${occupation}</option>
+							</c:forEach>
+					</select>
+					<form:errors path="occupation"/>                	
+				</div>			  
+            </div>
+			  
+              <div class="form-group">
+            	<div class="col-md-3">
+            	<div class="col-md-1 noPaddL">
+                	<input type="checkbox"  value="true" class =" pull-left" name="isAgreedTC" required/>
+                </div>
+                	<div class="col-md-11 noPaddL">
+                	Agree terms & conditions
+                </div>
+                </div>
+                
+              </div>
+           
+            
+            <div class="form-group">
+            <div class="col-md-4">
+              </div>
+            <div class="col-md-4">
+                <button class="btn btn-primary btn-lg sncButton  pull-center" type="submit">Create Account</button>
+              </div>
+            </div>
+            <div class="col-md-4">
+              </div>
+            </form:form>
+            </div>
+        </article>
         
+      </section>
+      
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+     <!-- <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> -->
+      
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+     
+      <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
        
-        <form:label path="country"><spring:message code="user.country"/></form:label>
-         <select id="country" name="country">
-                        <option value="">Select Country</option> 
-                        <c:forEach items="${countryList}" var="country">
-                            <option   value="${country.countryId}"  >${country.countryName}</option>
-                        </c:forEach>
-                    </select>
-             <form:errors path="country"/>        
-    </div>
-    <div>
-        <form:label path="state"><spring:message code="user.state"/></form:label>
-         <select  id="state" name="state">
-                        <option value="">Select State</option> 
-                    </select>
-        <form:errors path="state"/>
-    </div>
-    <div>
-        <form:label path="occupation"><spring:message code="customer.occupation"/></form:label>
-        <form:input path="occupation"/>
-        <form:errors path="occupation"/>
-    </div>
-    <div>
-        <form:label path="isAgreedTC"><spring:message code="customer.isAgreedTC"/></form:label>
-        <form:checkbox path="isAgreedTC" />
-        <form:errors path="isAgreedTC"/>
-    </div>
-    
-    <div>
-        <input type="submit" name="Create Account"/>
-    </div>
-</form:form>
-</body>
+
+       <script>
+        $(document).ready(function() {
+            $(".open, .impatient").pageslide();
+        });
+    </script>
+     </div> 
+   </body>
 </html>
