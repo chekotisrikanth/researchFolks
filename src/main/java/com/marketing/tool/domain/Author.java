@@ -11,6 +11,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -27,12 +28,16 @@ public class Author extends User {
     private String country;
     
     @NotEmpty
-    @Column(name = "state", nullable = false)
-    private String state;
+    @Column(name = "city", nullable = false)
+    private String city;
     
     @NotEmpty
-    @Column(name = "biodata", nullable = false)
-    private String biodata;
+    @Column(name = "bio", nullable = false)
+    private String bio;
+    
+    
+    @Column(name = "mobile", nullable = false)
+   	protected String mobileNo;
     
     
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -43,9 +48,6 @@ public class Author extends User {
     private Set<Keyskills> keyskills;  
     
     
-    
-    @Column(name = "isAgreedTC", nullable = false)
-    private boolean isAgreedTC;
 
 	public String getCountry() {
 		return country;
@@ -55,21 +57,31 @@ public class Author extends User {
 		this.country = country;
 	}
 
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
+	
 
 	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String bio) {
+		this.bio = bio;
+	}
+
 	public String getBiodata() {
-		return biodata;
+		return bio;
 	}
 
 	public void setBiodata(String biodata) {
-		this.biodata = biodata;
+		this.bio = biodata;
 	}
 
 	public Set<Keyskills> getKeyskills() {
@@ -80,27 +92,24 @@ public class Author extends User {
 		this.keyskills = keyskills;
 	}
 
-	public boolean getIsAgreedTC() {
-		return isAgreedTC;
-	}
-
-	public void setIsAgreedTC(boolean isAgreedTC) {
-		this.isAgreedTC = isAgreedTC;
-	}
+	
 
 	public Author(Integer  id) {
 		super(id);
+	}
+	
+	public String getMobileNo() {
+		return mobileNo;
+	}
+
+	public void setMobileNo(String mobileNo) {
+		this.mobileNo = mobileNo;
 	}
 
 	public Author() {
 		// TODO Auto-generated constructor stub
 	}
-    
-	@Override
-	public String toString() {
-		return "Author [name=" + firstName + ", email=" + emailId + ", phone=" + mobileNo + ", country=" + country + ", state="
-				+ state + ", title=" + title + " keyskills=" + keyskills + "]";
-	}
-    
 
+	
+    
 }

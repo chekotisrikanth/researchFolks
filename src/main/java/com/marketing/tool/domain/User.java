@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -55,17 +56,24 @@ public class User {
     
    // @Size(min=10) @Phone
    // @Column(name = "mobileNo", nullable = true)
-	protected String mobileNo;
+   
     
     @NotEmpty
     @Size(max = 50)
     @Column(name = "emailId", nullable = false)
 	protected String emailId;
     
-    
+     @Transient
 	 private String reTypePwd;
 	 
+     
+     @Size(max = 50)
+     @Column(name = "userName", nullable = false)    
+     private String userName;
 	 
+     
+     @Column(name = "isAgreedTc", nullable = false)
+	    private boolean agreedTc;
 	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private Set<ReportStatus> reportStatuses = new HashSet<ReportStatus>(0);
 	
@@ -129,14 +137,7 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public String getMobileNo() {
-		return mobileNo;
-	}
-
-	public void setMobileNo(String mobileNo) {
-		this.mobileNo = mobileNo;
-	}
-
+	
 	public String getEmailId() {
 		return emailId;
 	}
@@ -171,11 +172,31 @@ public class User {
 		this.accountType = accountType;
 	}
 
-
+	 
 	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	public User(Integer  id) {
 		super();
 		this.id = id;
+	}
+	
+	
+
+	
+
+	public boolean isAgreedTc() {
+		return agreedTc;
+	}
+
+	public void setAgreedTc(boolean agreedTc) {
+		this.agreedTc = agreedTc;
 	}
 
 	public User() {
@@ -199,8 +220,7 @@ public class User {
 		builder.append(firstName);
 		builder.append(", lastName=");
 		builder.append(lastName);
-		builder.append(", mobileNo=");
-		builder.append(mobileNo);
+		
 		builder.append(", emailId=");
 		builder.append(emailId);
 		builder.append(", reTypePwd=");

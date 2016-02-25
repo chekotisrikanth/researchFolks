@@ -25,25 +25,11 @@ public class Customer extends User {
     
     @NotEmpty
     @Column(name = "occupation", nullable = false)
-    private String occupation;
-    
-    
-    @Column(name = "isAgreedTC", nullable = false)
-    private boolean isAgreedTC;
-    
-    @Size(max = 50)
-    @Column(name = "userName", nullable = false)    
-    private String userName;
+    private String occupation;  
     
     
     
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
+   
 
 	public String getCountry() {
 		return country;
@@ -63,14 +49,7 @@ public class Customer extends User {
 		this.occupation = occupation;
 	}
 
-	public boolean getIsAgreedTC() {
-		return isAgreedTC;
-	}
-
-	public void setIsAgreedTC(boolean isAgreedTC) {
-		this.isAgreedTC = isAgreedTC;
-	}
-
+	
 	public Customer(Integer  id) {
 		super(id);
 	}
@@ -87,9 +66,7 @@ public class Customer extends User {
 		this.city = city;
 	}
 
-	public void setAgreedTC(boolean isAgreedTC) {
-		this.isAgreedTC = isAgreedTC;
-	}
+	
 
 	@Override
 	public String toString() {
@@ -100,11 +77,8 @@ public class Customer extends User {
 		builder.append(city);
 		builder.append(", occupation=");
 		builder.append(occupation);
-		builder.append(", isAgreedTC=");
-		builder.append(isAgreedTC);
-		builder.append(", userName=");
-		builder.append(userName);
-		builder.append("]");
+		
+		
 		return builder.toString();
 	}
     

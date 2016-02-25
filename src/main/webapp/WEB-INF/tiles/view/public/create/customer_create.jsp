@@ -100,7 +100,7 @@
         	<div class="form-group">
 				<div class="col-md-1 col-sm-1 col-xs-6">
 					<!--<spring:message code="user.title" var="title"/> -->
-			       <form:select path="title" class = "form-control" >
+			       <form:select path="title" class ="form-control">
 					  <!--<form:option value="" label="${title}" /> -->
 					  <form:options items="${titles}" />
 					</form:select>
@@ -108,44 +108,44 @@
 				</div>
             	<div class="col-md-3">				
 					<spring:message code="user.firstName" var="firstNameLbl"/> 
-					<form:input path="firstName" class = "form-control" placeholder="${firstNameLbl}"/>
+					<form:input path="firstName" class = "form-control" placeholder="${firstNameLbl}" required="required"/>
 					<form:errors path="firstName"/>                	
                 </div>
                 <div class="col-md-2">
 					<spring:message code="user.lastName" var="lastNameLbl"/>
-					<form:input path="lastName" class = "form-control" placeholder="${lastNameLbl}" />
+					<form:input path="lastName" class = "form-control" placeholder="${lastNameLbl}" required="required"/>
 					<form:errors path="lastName"/></div>
             </div>            
 			<div class="form-group">
 				<div class="col-md-6">
 					<spring:message code="userName" var="userNameLbl"/>					
-					<form:input path="userName" class = "form-control" placeholder="${userNameLbl}"/>
+					<form:input path="userName" class = "form-control" placeholder="${userNameLbl}" required="required"/>
 					<form:errors path="userName"/>
 				</div>                
 			</div>
 			<div class="form-group">            	
 				 <div class="col-md-6">
 					<spring:message code="user.emailId" var="emailIdLbl"/>					
-					<form:input path="emailId" class = "form-control" placeholder="${emailIdLbl}"/>
+					<form:input path="emailId" class = "form-control" placeholder="${emailIdLbl}" required="required" />
 					<form:errors path="emailId"/>
 				 </div>
 			</div>
 			<div class="form-group">				
             	<div class="col-md-3">
 					<spring:message code="user.password" var="passwordLal"/>
-					<form:password path="password" class ="form-control" placeholder="${passwordLal}"/>
+					<form:password path="password" class ="form-control" placeholder="${passwordLal}" required="required"/>
 					<form:errors path="password"/>                	
                 </div>
                 <div class="col-md-3">
 					<spring:message code="user.reTypePwd" var="reTypePwdLal"/>
-					<form:password path="reTypePwd" class ="form-control" placeholder="${reTypePwdLal}"/>
+					<form:password path="reTypePwd" class ="form-control" placeholder="${reTypePwdLal}" required="required" />
 					<form:errors path="reTypePwd"/> 
                 </div>
             </div>             
             <div class="form-group">
             	<div class="col-md-6">
             		<spring:message code="user.country" var="countryLbl"/>	
-					<select id="country" name="country" class = "form-control">					
+					<select id="country" name="country" class = "form-control" required="required">					
 								      
 					  <option value="">${countryLbl}</option>
 						<c:forEach items="${countryList}" var="country">
@@ -159,7 +159,7 @@
 			<div class="form-group">
 				<div class="col-md-6">
 					<spring:message code="user.city" var="cityLbl"/>					
-					<form:input path="city" class = "form-control" placeholder="${cityLbl}"/>
+					<form:input path="city" class = "form-control" placeholder="${cityLbl}" required="required"/>
 					<form:errors path="city"/>                	
 				</div>
 			</div>
@@ -179,7 +179,7 @@
               <div class="form-group">
             	<div class="col-md-3">
             	<div class="col-md-1 noPaddL">
-                	<input type="checkbox"  value="true" class =" pull-left" name="isAgreedTC" required/>
+                	<input type="checkbox"  value="true" class =" pull-left" name="isAgreedTc" required/>
                 </div>
                 	<div class="col-md-11 noPaddL">
                 	Agree terms & conditions
