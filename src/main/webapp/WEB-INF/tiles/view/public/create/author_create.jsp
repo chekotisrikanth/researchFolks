@@ -16,7 +16,7 @@
       <!-- Bootstrap -->
        <!-- Bootstrap -->
        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
+     <!--  -->  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css"> -->
        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/datepicker.min.css">
@@ -168,13 +168,21 @@
                 </div>
               </div>
 			  <div class="form-group">
-            	<div class="col-md-6">
+            	<div class="col-md-2">
             		<spring:message code="author.keyskills" var="skillLbl"/>
-			         <form:select multiple="true" path="keyskills">
+			         <form:select multiple="true" path="keyskills" class ="form-control allSkills">
 								  <form:option value="" label="${skillLbl}" />
 								  <form:options items="${keyskills}" itemValue="id" itemLabel="skill" required="required" />
 					</form:select>
 			        <form:errors path="keyskills"/>
+                </div>
+                 <div class="col-md-1">
+                	<button class="btn btn-primary form-control   addSkill" type="button">ADD</button>
+                </div>
+				<div class="col-md-2">
+                	<select  name="country" class = "form-control selSkills"  required multiple>	
+					 
+					</select>
                 </div>
               </div>
 			  <div class="form-group">
@@ -183,6 +191,8 @@
 					<form:textarea path="bio" class = "form-control" placeholder="bioLbl" required="required" />
 					<form:errors path="bio"/>                	
                 </div>
+               
+              </div>
               </div>
                <div class="form-group">
             	<div class="col-md-6">
@@ -214,7 +224,20 @@
 		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
        <script>
         $(document).ready(function() {
-            $(".open, .impatient").pageslide();
+            //$(".open, .impatient").pageslide();
+            $(document).on('click', '.addSkill', function(){
+				//alert('k');
+				$(".allSkills > option").each(function(index,object) {
+					console.log($(object).prop('selected'));
+					if($(object).prop('selected')) {
+						
+						$(".selSkills").append(object);
+					}
+					
+					
+				
+				});
+			});
         });
     </script>
      </div> 
