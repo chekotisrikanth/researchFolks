@@ -12,7 +12,12 @@
       <meta name = "viewport" content = "width = device-width, initial-scale = 1">
       
       <title>Research Floks</title>
-      
+      <style type="text/css">
+      .top-space{
+		  margin-top: 5px;
+		 
+		}
+      </style>
       <!-- Bootstrap -->
        <!-- Bootstrap -->
        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
@@ -30,7 +35,7 @@
       <![endif]-->
       
       <script type="text/javascript">
-            jQuery.noConflict();
+           // jQuery.noConflict();
         </script>
       
    </head>
@@ -107,37 +112,37 @@
 				</div>
             	<div class="col-md-3">
                 	<spring:message code="user.firstName" var="firstNameLbl"/> 
-					<form:input path="firstName" class = "form-control" placeholder="firstNameLbl" required="required" />
+					<form:input path="firstName" class = "form-control" placeholder="${firstNameLbl}" required="required" />
 					<form:errors path="firstName"/> 
                 </div>
                 <div class="col-md-2">
                 	<spring:message code="user.lastName" var="lastNameLbl"/>
-					<form:input path="lastName" class = "form-control" placeholder="lastNameLbl" required="required" />
+					<form:input path="lastName" class = "form-control" placeholder="${lastNameLbl}" required="required" />
 					<form:errors path="lastName"/></div>
             </div> 
             <div class="form-group">
             	<div class="col-md-6">
                 	<spring:message code="userName" var="userNameLbl"/>					
-					<form:input path="userName" class = "form-control" placeholder="userNameLbl" required="required" />
+					<form:input path="userName" class = "form-control" placeholder="${userNameLbl}" required="required" />
 					<form:errors path="userName"/>
                 </div>                
              </div>
              <div class="form-group">            	
 				<div class="col-md-6">
 					<spring:message code="user.emailId" var="emailIdLbl"/>					
-					<form:input path="emailId" class = "form-control" placeholder="emailIdLbl" required="required" />
+					<form:input path="emailId" class = "form-control" placeholder="${emailIdLbl}" required="required" />
 					<form:errors path="emailId"/>
 				</div>
               </div>
 			<div class="form-group">				
 				<div class="col-md-3">
 					<spring:message code="user.password" var="passwordLal"/>
-					<form:password path="password" class ="form-control" placeholder="passwordLal" required="required" />
+					<form:password path="password" class ="form-control" placeholder="${passwordLal}" required="required" />
 					<form:errors path="password"/>                	
                 </div>
                 <div class="col-md-3">
 					<spring:message code="user.reTypePwd" var="reTypePwdLal"/>
-					<form:password path="reTypePwd" class ="form-control" placeholder="reTypePwdLal" required="required" />
+					<form:password path="reTypePwd" class ="form-control" placeholder="${reTypePwdLal}" required="required" />
 					<form:errors path="reTypePwd"/> 
                 </div>
             </div> 
@@ -156,31 +161,43 @@
 			   <div class="form-group">
             	<div class="col-md-6">
                 	<spring:message code="user.city" var="cityLbl"/>					
-					<form:input path="city" class = "form-control" placeholder="cityLbl" required="required" />
+					<form:input path="city" class = "form-control" placeholder="${cityLbl}" required="required" />
 					<form:errors path="city"/>
                 </div>
               </div>
 			   <div class="form-group">
             	<div class="col-md-6">
                 	<spring:message code="user.mobileNo" var="mobileNoLbl"/>					
-					<form:input path="mobileNo" class = "form-control" placeholder="mobileNoLbl" required="required" />
+					<form:input path="mobileNo" class = "form-control" placeholder="${mobileNoLbl}" required="required" />
 					<form:errors path="mobileNo"/>
                 </div>
               </div>
 			  <div class="form-group">
             	<div class="col-md-2">
             		<spring:message code="author.keyskills" var="skillLbl"/>
-			         <form:select multiple="true" path="keyskills" class ="form-control allSkills">
+            		<select   class = "form-control allSkills" multiple >	
+					  <option value=""> ${countryLbl} </option>
+						<c:forEach items="${keyskills}" var="skill">
+							<option   value="${skill.id}"  >${skill.skill}</option>
+						</c:forEach>
+					</select>
+			        <!-- <form:select multiple="true" path="keyskills" class ="form-control allSkills">
 								  <form:option value="" label="${skillLbl}" />
 								  <form:options items="${keyskills}" itemValue="id" itemLabel="skill" required="required" />
-					</form:select>
-			        <form:errors path="keyskills"/>
+					</form:select> -->
                 </div>
                  <div class="col-md-1">
-                	<button class="btn btn-primary form-control   addSkill" type="button">ADD</button>
+                 	<div class="row">
+                		<button class="btn btn-primary form-control   addSkill " type="button">Add</button>
+                	</div>
+                	
+                	<div class="row top-space">
+                		<button class="btn btn-primary form-control   addSkill " type="button">Remove</button>
+                	</div>
+                	
                 </div>
 				<div class="col-md-2">
-                	<select  name="country" class = "form-control selSkills"  required multiple>	
+                	<select   class = "form-control selSkills" name="keyskills" required multiple>	
 					 
 					</select>
                 </div>
@@ -188,7 +205,7 @@
 			  <div class="form-group">
             	<div class="col-md-6">
 					<spring:message code="bio" var="bioLbl"/>					
-					<form:textarea path="bio" class = "form-control" placeholder="bioLbl" required="required" />
+					<form:textarea path="bio" class = "form-control" placeholder="${bioLbl}" required="required" />
 					<form:errors path="bio"/>                	
                 </div>
                
@@ -227,16 +244,25 @@
             //$(".open, .impatient").pageslide();
             $(document).on('click', '.addSkill', function(){
 				//alert('k');
-				$(".allSkills > option").each(function(index,object) {
+				//add skil
+				var sourceList = "allSkills";
+				var destList = "selSkills";
+				if($(this).text() === "Remove") {
+					console.log("remove");
+					sourceList = "selSkills";
+					destList = "allSkills";					
+				} 				
+				$("."+sourceList+" > option").each(function(index,object) {
 					console.log($(object).prop('selected'));
-					if($(object).prop('selected')) {
-						
-						$(".selSkills").append(object);
+					if($(object).prop('selected')) {						
+						$("."+destList).append(object);
+						//$(object).remove();
 					}
-					
-					
-				
 				});
+				
+				
+				
+				
 			});
         });
     </script>
