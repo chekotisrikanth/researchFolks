@@ -2,9 +2,14 @@ package com.marketing.tool.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.marketing.tool.validator.Email;
+import com.marketing.tool.validator.Phone;
 
 @Entity
 public class CPDPReportForm extends ReportForm{
@@ -45,7 +50,10 @@ public class CPDPReportForm extends ReportForm{
 		@NotNull
 		@Column(name="headcount" , nullable=true)
 		private Integer headcount;
-
+		@Transient
+		private String reportImage;
+		@Transient
+		private MultipartFile reportImg;
 		
 
 	public Integer getStockExchageId() {
@@ -142,10 +150,61 @@ public class CPDPReportForm extends ReportForm{
 			this.headcount = headcount;
 		}
 
+		
+		public String getReportImage() {
+			return reportImage;
+		}
+		public void setReportImage(String reportImage) {
+			this.reportImage = reportImage;
+		}
+	
+		public MultipartFile getReportImg() {
+			return reportImg;
+		}
+		public void setReportImg(MultipartFile reportImg) {
+			this.reportImg = reportImg;
+		}
+			 @Transient
+		     @Phone
+		    private String phone;
+			 @Transient
+		     @Email
+		    private String email;
+			 
+			 
+		 
+
+	       public String getEmail() {
+				return email;
+			}
+
+
+
+			public void setEmail(String email) {
+				this.email = email;
+			}
+
+
+
+		public String getPhone() {
+				return phone;
+			}
+
+
+
+			public void setPhone(String phone) {
+				this.phone = phone;
+			}
+
 
 
 	@Override
 	public String toString() {
 		return super.toString();
 	}
+
+
+	
+	
+	
 }

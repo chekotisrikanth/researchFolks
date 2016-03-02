@@ -17,6 +17,9 @@
 		  margin-top: 5px;
 		 
 		}
+		.errorCls{
+		color:red
+		}
       </style>
       <!-- Bootstrap -->
        <!-- Bootstrap -->
@@ -136,12 +139,14 @@
               </div>
 			<div class="form-group">				
 				<div class="col-md-3">
+					
 					<spring:message code="user.password" var="passwordLal"/>
 					<form:password path="password" class ="form-control" placeholder="${passwordLal}" required="required" />
 					<form:errors path="password"/>                	
                 </div>
                 <div class="col-md-3">
-					<spring:message code="user.reTypePwd" var="reTypePwdLal"/>
+                	<span class="errorCls"></span>
+					<spring:message code="user.reTypePwd" var="reTypePwdLal" />
 					<form:password path="reTypePwd" class ="form-control" placeholder="${reTypePwdLal}" required="required" />
 					<form:errors path="reTypePwd"/> 
                 </div>
@@ -167,6 +172,7 @@
               </div>
 			   <div class="form-group">
             	<div class="col-md-6">
+            	<span class="errorCls"></span>
                 	<spring:message code="user.mobileNo" var="mobileNoLbl"/>					
 					<form:input path="mobileNo" class = "form-control" placeholder="${mobileNoLbl}" required="required" />
 					<form:errors path="mobileNo"/>
@@ -225,7 +231,7 @@
 				<div class="col-md-4">
 				 </div>
 				<div class="col-md-4">
-					<button class="btn btn-primary btn-lg sncButton  pull-center" type="submit">Create Account</button>
+					<button class="btn btn-primary btn-lg sncButton  pull-center " type="submit" onclick="validateFields();">Create Account</button>
 				</div>
             </div>
             <div class="col-md-4">
@@ -265,7 +271,30 @@
 				
 			});
         });
+        
+        function validateFields()
+        {
+        	$(".errorCls").html("");
+        	var flag = false;
+        	var pwd = $("#password").val();
+        	var reTypePwd = $("#reTypePwd").val();
+        	var mobilePattern = /^\d{10}$/;
+            var mobileNo = $("#mobileNo").val();
+        	if (pwd != reTypePwd) { 
+        		$("#reTypePwd").parent().find(".errorCls").html("Your password and Retype password do not match.");
+        		flag =true;
+        		
+        		}
+        	else if(!mobilePattern.test(mobileNo)) {
+		        $("#mobileNo").parent().find(".errorCls").html("Mobile number must be 10 digits");
+		        flag =true;
+		        	
+		        }
+        	if(flag == true)
+        	 return false; 
+        }
     </script>
+    
      </div> 
    </body>
 </html>

@@ -1,6 +1,8 @@
 package com.marketing.tool.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.validation.Valid;
@@ -29,6 +31,9 @@ import com.marketing.tool.service.CountryStateService;
 import com.marketing.tool.service.ReportFormService;
 import com.marketing.tool.service.ReportService;
 import com.marketing.tool.service.StockExchangeService;
+import com.marketing.tool.utility.FileUtils;
+import com.marketing.tool.validator.FileUploadValidator;
+
 
 @Controller
 public class CPDPReportFormCreateController {
@@ -72,8 +77,18 @@ public class CPDPReportFormCreateController {
 	        ModelAndView modelAndView = new ModelAndView();
 			//modelAndView.addObject("pers", person);
 			
-			
-	        if (result.hasErrors()) {
+				if(reportForm.getReportImg() != null && reportForm.getReportImg().getSize() > 0){
+				String ext = reportForm.getReportImg().getOriginalFilename().split("\\.")[1];
+				if(reportForm.getComIntl() != null && reportForm.getComIntl().intValue() == 2)
+			        FileUploadValidator.validatefile(reportForm,result,".excel");
+				else if(!(ext.contains("ppt") || ext.contains("docx") || ext.contains("doc")))
+				 FileUploadValidator.validatefile(reportForm,result,"Other");
+				}
+				else
+				{
+					result.reject("reportImg", "File Required");
+				}
+				 if (result.hasErrors()) {
 	        	 //initModelList(model);
 	        	initModelList(modelAndView);
 	        	modelAndView.setViewName("cpdpReportForm_create");
@@ -81,6 +96,12 @@ public class CPDPReportFormCreateController {
 	        }
 	        try {
 	        	cpdpPReportFormService.save(reportForm);
+	        	 try {
+	 				FileUtils.saveFiles(reportForm.getReportImg(),String.valueOf(reportForm.getReportId()),new StringBuilder("E:\\gitImages").append("\\Profile").toString());
+	 			} catch (IOException e1) {
+	 				// TODO Auto-generated catch block
+	 				e1.printStackTrace();
+	 			}
 	        } catch (UserAlreadyExistsException e) {
 	            LOGGER.debug("Tried to create reportForm with existing id", e);
 	            result.reject("reportForm.error.exists");

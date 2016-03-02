@@ -2,6 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang = "en">
    
@@ -111,7 +112,8 @@
         </aside>
         <article class="col-md-9 noPaddRL">
         <div class="contentWraper">
-        <form:form class="form-horizontal alignHCenter" method="POST" action="/publish/cpdpReportForm_create.html" commandName="form" modelAttribute="form">
+        <form:form class="form-horizontal alignHCenter" method="POST" action="/publish/cpdpReportForm_create.html" commandName="form" modelAttribute="form"
+         enctype="multipart/form-data">
         
        
         	<div class="form-group">
@@ -159,6 +161,19 @@
 					<form:input class="form-control" path="ticker"/>
 					<form:errors path="ticker"/>                	
                 </div>
+                
+                
+              <!--<form:label path="ticker" class="col-md-2 control-label text-right"><spring:message code="reportForm.ticker"/></form:label>	
+                <div class="col-md-4">
+					<form:input class="form-control" path="phone"/>
+					<form:errors path="phone"/>                	
+                </div>
+                
+                <form:label path="ticker" class="col-md-2 control-label text-right"><spring:message code="reportForm.ticker"/></form:label>	
+                <div class="col-md-4">
+					<form:input class="form-control" path="email"/>
+					<form:errors path="email"/>                	
+                </div>-->
             </div>
             
             <div class="form-group"> 
@@ -271,8 +286,9 @@
              <div class="form-group">
 				<form:label class="col-md-2 control-label text-right" path="report"><spring:message code="reportForm.report"/></form:label>
                 <div class="col-md-4">
-                	<input type="file" name="report"/>
-                	<form:errors path="report"/>
+                	<input type="file" name="reportImg"  />
+                	
+                	<form:errors path="reportImg" />
                 </div>
                 <div class="col-md-5 note">Note: Upload either MS Word or PPT</div>
             </div>
