@@ -53,6 +53,7 @@ public class SuccessHandler extends SavedRequestAwareAuthenticationSuccessHandle
 	        boolean isAdmin = false;
 	        boolean isAuthor = false;
 	        boolean isReviewer = false;
+	        boolean isPublisher = false;
 	        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 	        for (GrantedAuthority grantedAuthority : authorities) {
 	            if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
@@ -62,9 +63,14 @@ public class SuccessHandler extends SavedRequestAwareAuthenticationSuccessHandle
 	            	isReviewer = true;
 	                break;
 	            }else if (grantedAuthority.getAuthority().equals("ROLE_PUBLISHER")) {
+	            	isPublisher = true;
+	                break;
+	            }
+	            else if (grantedAuthority.getAuthority().equals("ROLE_AUTHOR")) {
 	            	isAuthor = true;
 	                break;
-	            }else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
+	            }
+	            else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
 	                isAdmin = true;
 	                break;
 	            }
