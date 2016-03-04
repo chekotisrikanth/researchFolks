@@ -14,6 +14,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.marketing.tool.validator.Email;
 import com.marketing.tool.validator.Phone;
 
 @Entity  
@@ -60,6 +61,7 @@ public class User {
     
     @NotEmpty
     @Size(max = 50)
+    @Email
     @Column(name = "emailId", nullable = false)
 	protected String emailId;
     
