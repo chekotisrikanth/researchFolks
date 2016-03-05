@@ -182,7 +182,7 @@
             	<div class="col-md-2">
             		<spring:message code="author.keyskills" var="skillLbl"/>
             		<select   class = "form-control allSkills" multiple >	
-					  <option value=""> ${countryLbl} </option>
+					  <option disabled> ${skillLbl} </option>
 						<c:forEach items="${keyskills}" var="skill">
 							<option   value="${skill.id}"  >${skill.skill}</option>
 						</c:forEach>
