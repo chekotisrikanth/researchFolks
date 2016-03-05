@@ -26,6 +26,7 @@ public class SuccessHandler extends SavedRequestAwareAuthenticationSuccessHandle
   public void onAuthenticationSuccess(HttpServletRequest request,
       HttpServletResponse response, Authentication authentication)
       throws ServletException, IOException {
+	  request.getSession().setMaxInactiveInterval(60*15);
     String referrer = request.getParameter("referrer");
     logger.info("onAuthenticationSuccess " + referrer);
     if("loginlink".equalsIgnoreCase(referrer)) {
