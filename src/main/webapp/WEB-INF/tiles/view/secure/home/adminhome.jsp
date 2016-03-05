@@ -6,6 +6,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+ 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
 <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
  <script type="text/javascript">
@@ -77,7 +81,9 @@
 </head>
 <body>
 <form:form method="POST" action="/secure/updateReports.html" commandName="ViewReports" modelAttribute="editreports">
-<table>
+ <section>
+<article class="col-md-12 noPaddRL table-responsive">
+<table class="table table-striped table-hover table-bordered colored-Thead">
     <th>Report Title</th>
     <th>Publishing Date</th>
     <th>Industry</th>
@@ -134,7 +140,8 @@
 <div>
         <input type="submit"/>
     </div>
-    
+  </article>
+  </section>
 </form:form>
 <a href="/public/logout.html">Logout</a>
 </body>
