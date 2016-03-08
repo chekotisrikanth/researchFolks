@@ -97,7 +97,7 @@ public class Application extends SpringBootServletInitializer {
 			  	.antMatchers("/public/**", "/home").permitAll()
 			  	.antMatchers("/console/**").permitAll()
 			  	.antMatchers("/admin/**").access("hasRole('ADMIN')")
-			  	.antMatchers("/publish/**").access("hasRole('ADMIN') or hasRole('PUBLISHER')")
+			  	.antMatchers("/publish/**").access("hasRole('AUTHOR')")
 			  	.antMatchers("/secure/**").access("hasRole('ADMIN') or hasRole('PUBLISHER') or hasRole('REVIEWER')")
 			  	.and().formLogin().loginPage("/public/login").loginProcessingUrl("/j_spring_security_check").successHandler(successHandler)
 			  	.usernameParameter("emailId").passwordParameter("password")

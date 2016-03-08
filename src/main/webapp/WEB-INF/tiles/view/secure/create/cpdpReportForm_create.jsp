@@ -40,7 +40,7 @@
    <div class="container-fluid">
    <header class="clearfix paddT20">
      <div class="logo col-md-8 col-sm-12">
-     <a href="#"><img src="${pageContext.request.contextPath}/images/logo.png" alt="Research Floks"/></a>
+     <a href="/"><img src="${pageContext.request.contextPath}/images/logo.png" alt="Research Floks"/></a>
      </div>
      <div class="customerInfo col-md-4 col-sm-12 paddT20">
      	<div class="col-md-8 col-sm-12">
@@ -77,7 +77,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse noPaddRL" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
+                    <li><a href="/">Home</a></li>
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Products</a></li>
                     <li><a href="#">Customer Research</a></li>
@@ -142,8 +142,7 @@
                 	<form:textarea class="form-control" path="industry" rows="5" cols="30"/>
 					<form:errors path="industry"/>
                 </div>
-            </div>
-			${stocksList.size()	}
+            </div>			
 			
             <div class="form-group">
 				<form:label path="stockExchageId" class="col-md-2 control-label text-right"><spring:message code="reportForm.stockExchange"/></form:label>            	

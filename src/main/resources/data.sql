@@ -69,3 +69,9 @@ insert into report_status (report_status_id, comments, report_id, status, user_i
 insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('2', 'sadsadsad', 'anil', 0.0, null, null, 'sdasd', 'anil', 'Quarterly', 2);
 insert into cpdpreport_form (company_intl_type, currency, headcount, report_type, revenue, stock_exchange_id, ticker, units, report_id) values (2, 'US$', 1, 1, '5545454', 3, 'asdasdsad', 3, 2);
 insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 2, 'Created', 1, 'AUTHOR');
+update hibernate_sequences set sequence_next_hi_value = 3 where sequence_next_hi_value = 2 and sequence_name = 'user';
+insert into user (account_type, is_agreed_tc, email_id, first_name, last_name, password, title, user_name, userstatus, id) values ('AUTHOR', 1, 'kumar@gmail.com', 'Anilkumar ', 'Ravula', 'pirate', 'MR', 'anil', 'Active', 65536);
+insert into author (bio, city, country, mobile, id) values ('asdasdasdasds', 'hello', '1', '9505485048', 65536);
+insert into author_key_skill (author_id, skill_id) values (65536, 2);
+
+insert into user (account_type, email_id, first_name, last_name,  password, title, userstatus,IS_AGREED_TC,USER_NAME, id) values ('PUBLISHER', 'anil1@gamil.com', 'anil', 'sri', 'pirate', 'MR', 'Active',1,'anil', 32769);

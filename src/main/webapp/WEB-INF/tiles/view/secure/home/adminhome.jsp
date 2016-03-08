@@ -137,41 +137,56 @@
       <section>
         <article class="col-md-12 noPaddRL table-responsive">
         
-       <table class="table table-striped table-hover table-bordered colored-Thead">
-    <th>Report Title</th>
-    <th>Published Date</th>
+       		<table class="table table-striped table-hover table-bordered colored-Thead">
+			    <th>Report Title</th>
+			    <th>Published Date</th>
+			   
+			    <th>Industry</th>
+			    <th>Country</th>
+			    <th>Author</th>
+			    <th>UserType</th>
+			    
+			    <th>Status</th>
+			    <th>Edit</th>
+			    
+			    <th>Publisher</th>
+			    <th>Reviewer</th>
+			    <th>Published</th>
+    
    
-    <th>Industry</th>
-    <th>Country</th>
-    <th>Author</th>
-    <th>UserType</th>
-    
-    <th>Status</th>
-    <th>Edit</th>
-    
-    <th>Publisher</th>
-    <th>Reviewer</th>
-    <th>Published</th>
-    
-   
-    <c:forEach items="${editreports.reports}" var="report">
-        <tr>
-            <td> <c:out value="${report.reportTitle}"/> </td>
-            <td> <c:out value="${report.publishingDate}"/> </td>
-            <td> <c:out value="${report.industry}"/> </td>
-            <td> <c:out value="${report.country}"/> </td>
-            <c:forEach items="${report.reportStatuses}" var="reportStatuses">
-	            <td> <c:out value="${reportStatuses.user.firstName}"/> </td>
-	            <td> <c:out value="${reportStatuses.userType}"/> </td>
-	            <td> <c:out value="${reportStatuses.status}"/> </td>
-	             <td><a href="#"><img src="${pageContext.request.contextPath}/images/icon-download.png" alt="Edit"/></a></td>
-	            <td><select>
-	           
-         </select> <a href="#"><img src="${pageContext.request.contextPath}/images/icon-reasign.png" alt="Re Asign"/></td>
-          <td><select id="reviewrsSelect">
-        
-         </select> <a href="#"><img src="${pageContext.request.contextPath}/images/icon-reasign.png" alt="Re Asign"/></td>
-            </c:forEach>
+			     <c:forEach items="${editreports.reports}" var="report">
+			        <tr>
+			            <td> <c:out value="${report.reportTitle}"/> </td>
+			            <td> <c:out value="${report.publishingDate}"/> </td>
+			            <td> <c:out value="${report.industry}"/> </td>
+			            <td> <c:out value="${report.country}"/> </td>
+			            <c:forEach items="${report.reportStatuses}" var="reportStatuses">
+				            <td> <c:out value="${reportStatuses.user.firstName}"/> </td>
+				            <td> <c:out value="${reportStatuses.userType}"/> </td>
+				            <td> <c:out value="${reportStatuses.status}"/> </td>
+				            <td><a href="#"><img src="${pageContext.request.contextPath}/images/icon-download.png" alt="Edit"/></a></td>
+				            <td>
+					            <select id="reviewrsSelect" name="pubSelect" class = "form-control">
+			                  		 <option value="">Select Publisher</option> 
+					                    <c:forEach items="${publishersJson}" var="publisher">
+					          				 <option   value="${publisher.id}"  >${publisher.firstName}</option>
+					          			 </c:forEach>
+			                	 </select> 
+			            	    <a href="#"><img src="${pageContext.request.contextPath}/images/icon-reasign.png" alt="Re Asign"/></a>				         		
+			         		</td>
+			         		 <td>		        
+		            	   <select id="reviewrsSelect" name="reviewrsSelect" class = "form-control">
+	                  		 <option value="">Select Reviewer</option> 
+			                    <c:forEach items="${reviewersJson}" var="reviewer">
+			          				 <option   value="${reviewer.id}"  >${reviewer.firstName}</option>
+			          			 </c:forEach>
+	                	 </select>
+		            	  <a href="#"><img src="${pageContext.request.contextPath}/images/icon-reasign.png" alt="Re Asign"/>	</a>	         		
+		            	
+			           
+		         			         		
+			         </td>
+			       </c:forEach>
    <td>  <input type="checkbox"/></td>
    
      <%-- <div>
@@ -224,56 +239,7 @@
       </section>
       </form:form>
       </div> 
-      <footer class="container-fluid">
-        <div class="container clearfix">
-            <div class="links clearfix">
-                <div class="col">
-                    <h3>Solutions</h3>
-                    <a href="">Company Information</a>
-                    <a href="">Industry Analysis</a>
-                    <a href="">Contact Lists</a>
-                    <a href="">IPO Central</a>
-                </div>
-                <div class="col">
-                    <h3>Global Search</h3>
-                    <a href="">Build Custom Lists</a>
-                    <a href="">Reports - Company</a>
-                    <a href="">Reports - Industry</a>
-                    <a href="">Subscriptions</a>
-                </div>
-                <div class="col">
-                    <h3>Support</h3>
-                    <a href="">Customer Service</a>
-                    <a href="">Conctact Us</a>
-                </div>
-                <div class="col">
-                    <h3>Company</h3>
-                    <a href="">About Us</a>
-                    <a href="">Careers</a>
-                    <a href="">Why Report Matters</a>
-                </div>
-                <div class="col col2">
-                    <a href="callto:18001234567" class="ico call">1800.234.5678</a>
-                    <a href="mailto:support@reportmatters.com" class="ico mail">support@reportmatters.com</a>
-                </div>
-            </div>
-            <div class="copyrights clearfix">
-                <div class="share">
-                    <a href="" class="ico icon1">Facebook</a>
-                    <a href="" class="ico icon2">Twitter</a>
-                    <a href="" class="ico icon3">Linkedin</a>
-                    <a href="" class="ico icon4">Youtube</a>
-                </div>
-                <div class="copy">
-                    <div>&copy; Research Floks, 2016. All rights reserved.</div>
-                    <a href="">Privacy Policy</a>
-                    <a href="">Terms &amp; Conditions</a>
-                    <a href="">Sitemap</a>
-                    <a href="">Feedback</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+      
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
       

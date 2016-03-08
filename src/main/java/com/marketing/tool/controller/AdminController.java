@@ -139,8 +139,8 @@ public class AdminController {
 			}
 			
 	        model.addObject("user",user);
-	        model.addObject("reviewersJson",reviewersJson);
-	        model.addObject("publishersJson",publishersJson);
+	        model.addObject("reviewersJson",reviewers);
+	        model.addObject("publishersJson",publishers);
 	        model.addObject("editreports",editreports);
 	        model.addObject("viewreports",new ViewReports());
 	        model.setViewName("adminhome");

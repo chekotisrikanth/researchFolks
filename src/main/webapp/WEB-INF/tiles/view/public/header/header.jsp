@@ -2,7 +2,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
  
- header
+  	  <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
+      <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+      <script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
 <div id="content">
     <c:if test="${message != null}">
         <c:out value="${message}"/>
@@ -19,4 +25,4 @@
 <sec:authorize access="isAuthenticated()">
     <a href="<c:url value="/public/logout.html" />">Logout</a>
 </sec:authorize>
-<a href="/">Home</a>
+
