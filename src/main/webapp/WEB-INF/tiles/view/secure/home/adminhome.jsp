@@ -154,7 +154,7 @@
 			    <th>Published</th>
     
    
-			     <c:forEach items="${editreports.reports}" var="report">
+			     <c:forEach items="${editreports.reports}" var="report" varStatus="indexLoop">
 			        <tr>
 			            <td> <c:out value="${report.reportTitle}"/> </td>
 			            <td> <c:out value="${report.publishingDate}"/> </td>
@@ -166,7 +166,7 @@
 				            <td> <c:out value="${reportStatuses.status}"/> </td>
 				            <td><a href="#"><img src="${pageContext.request.contextPath}/images/icon-download.png" alt="Edit"/></a></td>
 				            <td>
-					            <select id="reviewrsSelect" name="pubSelect" class = "form-control">
+					            <select id="pubSelect" name="pubSelect" class = "form-control pub-${indexLoop.index} }">
 			                  		 <option value="">Select Publisher</option> 
 					                    <c:forEach items="${publishersJson}" var="publisher">
 					          				 <option   value="${publisher.id}"  >${publisher.firstName}</option>
@@ -175,7 +175,7 @@
 			            	    <a href="#"><img src="${pageContext.request.contextPath}/images/icon-reasign.png" alt="Re Asign"/></a>				         		
 			         		</td>
 			         		 <td>		        
-		            	   <select id="reviewrsSelect" name="reviewrsSelect" class = "form-control">
+		            	   <select id="reviewrsSelect" name="reviewrsSelect" class = "form-control rev-${indexLoop.index}">
 	                  		 <option value="">Select Reviewer</option> 
 			                    <c:forEach items="${reviewersJson}" var="reviewer">
 			          				 <option   value="${reviewer.id}"  >${reviewer.firstName}</option>
@@ -183,11 +183,9 @@
 	                	 </select>
 		            	  <a href="#"><img src="${pageContext.request.contextPath}/images/icon-reasign.png" alt="Re Asign"/>	</a>	         		
 		            	
-			           
-		         			         		
 			         </td>
 			       </c:forEach>
-   <td>  <input type="checkbox"/></td>
+   <td>  <input type="checkbox" class="chk" value="true" rep-id="${report.reportId}" id="${indexLoop.index}"/></td>
    
      <%-- <div>
         <form:label path="reportStatuses.user.accountType"><spring:message code="admin.accountType"/></form:label>
@@ -220,6 +218,9 @@
      </tr>    
     </c:forEach>
 </table>
+<div class="col-md-2 pull-right">
+        <button class="btn btn-block btn-custom btn-info m_top20  sncButton " type="button"><img id="processingImg1" style="display:none;height:25px;width:25px;margin-right:5px" src="${pageContext.request.contextPath}/images/ajax-loader.gif"/>Submit</button>
+  </div>
 <div class="col-md-12">
 <ul class = "pagination pagination-sm noMarginTB" style="padding-left:40%;">
    <li><a href = "#">&laquo;</a></li>
@@ -231,9 +232,7 @@
    <li><a href = "#">&raquo;</a></li>
 </ul>
 </div>
-  <div class="col-md-12">
-        <button class="btn btn-primary btn-lg sncButton pull-right" type="submit">Submit</button>
-  </div>
+  
         </article>
         
       </section>
@@ -241,12 +240,13 @@
       </div> 
       
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+     <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
       
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script>
       <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
       <script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>
+      <script src="${pageContext.request.contextPath}/js/admin/ajaxcalls.js"></script>
        <script>
         $(document).ready(function() {
             $(".open, .impatient").pageslide();
