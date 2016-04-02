@@ -6,10 +6,6 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.marketing.tool.validator.Email;
-import com.marketing.tool.validator.Phone;
 
 @Entity
 public class CPDPReportForm extends ReportForm{
@@ -52,8 +48,7 @@ public class CPDPReportForm extends ReportForm{
 		private Integer headcount;
 		@Transient
 		private String reportImage;
-		@Transient
-		private MultipartFile reportImg;
+		
 		
 
 	public Integer getStockExchageId() {
@@ -158,13 +153,8 @@ public class CPDPReportForm extends ReportForm{
 			this.reportImage = reportImage;
 		}
 	
-		public MultipartFile getReportImg() {
-			return reportImg;
-		}
-		public void setReportImg(MultipartFile reportImg) {
-			this.reportImg = reportImg;
-		}
-			 @Transient
+		
+		/*	 @Transient
 		     @Phone
 		    private String phone;
 			 @Transient
@@ -194,7 +184,7 @@ public class CPDPReportForm extends ReportForm{
 
 			public void setPhone(String phone) {
 				this.phone = phone;
-			}
+			}*/
 
 
 

@@ -39,6 +39,8 @@ public class ReportFormServiceImpl implements ReportFormService {
 		ReportStatus status = new ReportStatus();
 		status.setReport(reportForm);
 		status.setStatus(ReportWorkFlowStatus.CREATED.toString());
+		status.setStatusId(1);
+		status.setCycleId(1);
 		status.setUser(helper.getPrincipalUser());
 		status.setComments("reported created");
 		status.setUserType(UserProfileType.AUTHOR.toString());

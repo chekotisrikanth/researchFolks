@@ -7,80 +7,16 @@
 <html lang="en">
 <head>
  		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
+      <%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css"> --%>
        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
- <script type="text/javascript">
-    $(function() {
-
-        // Start indexing at the size of the current list
-        var index = ${fn:length(editreports.reports[0].reportStatuses)};
-        //var reviewers[] = '${reviewers}';
-        // Add a new Employee
-        //$("#add").off("click").on("click", function() {
-        	$('button[name="reviewer"]').off("click").on("click", function() {
-            $(this).before(function() {
-            	var value=$(this).attr("value");
-            	//alert(value)
-            	var reportId = '<input type="hidden" name="viewReportsList[0].reportId" value="'+value+'"/>';
-            	//alert(reportId);
-            	var newDropdown = '<select name="viewReportsList[0].reviewerIds[0]">'; 
-            	//var accountType ='<input type="hidden" name="reports[0].reportUserProfiles[0].userProfile.type" value="REVIEWER"/>';
-            	//'<select name=' + value + '>';    //document.createElement('select');
-            	var list = ${reviewersJson};
-        		$.each(list, function( index, value ) {
-        			//alert( index + ": " + value.emailId );
-        			newDropdown += '<option value="'+value.emailId+'">'+value.firstName+'</option>';
-        		});
-        		newDropdown += reportId;
-        		
-                
-                //alert(${fn:length(reviewers)});
-                //alert('${reviewers.get(0).getEmailId()}');	
-                //for(i=0;i<reviewers.lenght;i++) {
-	                //newDropdown += '<option value="'+reviewers[i].getEmailId()+'">'+'{reviewers.get(i).getEmailId()}'+'</option>';
-                	
-                	/* newDropdownOption = document.createElement("option");
-	                newDropdownOption.value = reviewers[i].getEmailId();
-	                newDropdownOption.text = reviewers[i].getEmailId();
-	                newDropdown.add(newDropdownOption); */
-	             //}  
-                newDropdown += '</select>';
-                //alert(newDropdown);
-                var html = '<td id="editreports' + index + '.wrapper" class="hidden"></td>';                    
-                //html += '<td>accountype<input type="text" id="reports[0].reportStatuses' + index + '.user.accountType" name="reports[0].reportStatuses[' + index + '].user.accountType" /></td>';
-                html += '<td>'+newDropdown+'</td>';
-                //html += '<td>emailid<input type="text" id="reports[0].reportStatuses' + index + '.user.emailId" name="reports[0].reportStatuses[' + index + '].user.emailId" /><td>';
-                //html += '<input type="hidden" id="editreports' + index + '.remove" name="editreports[' + index + '].remove" value="0" />';
-                //html += '<a href="#" class="editreports.remove" data-index="' + index + '">remove</a>';                    
-                html += "</div>";
-                return html;
-            });
-            $("#editreports" + index + "\\.wrapper").show();
-            index++;
-            return false;
-        });
-        
-     // Remove an Employee
-        $("a.editreports\\.remove").off("click").on("click", function() {
-            var index2remove = $(this).data("index");
-            $("#editreports" + index2remove + "\\.wrapper").hide();
-            $("#editreports" + index2remove + "\\.remove").val("1");
-            return false;
-        });
-
-    });
-
-   </script>     
-        
-        
-<script type="text/javascript">
-            jQuery.noConflict();
-        </script>
-      
-
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">       
+<style type="text/css">
+.vertical-alignment-helper {
+    display:table;
+    height: 50%;
+    width: 50%;
+}
+</style>
 </head>
 <body>
    <div class="container-fluid">
@@ -133,6 +69,7 @@
             </div><!-- /.navbar-collapse -->
     </nav>
       </section>
+      <div id="total_count" total-cnt="${editreports.totalPages}"></div>
       <form:form method="POST" action="/secure/updateReports.html" commandName="ViewReports" modelAttribute="editreports">
       <section>
         <article class="col-md-12 noPaddRL table-responsive">
@@ -151,7 +88,7 @@
 			    
 			    <th>Publisher</th>
 			    <th>Reviewer</th>
-			    <th>Published</th>
+			    <th></th>
     
    
 			     <c:forEach items="${editreports.reports}" var="report" varStatus="indexLoop">
@@ -164,28 +101,67 @@
 				            <td> <c:out value="${reportStatuses.user.firstName}"/> </td>
 				            <td> <c:out value="${reportStatuses.userType}"/> </td>
 				            <td> <c:out value="${reportStatuses.status}"/> </td>
-				            <td><a href="#"><img src="${pageContext.request.contextPath}/images/icon-download.png" alt="Edit"/></a></td>
+				            <td><a href="#" class="downreport" rep-id="${report.reportId}"><img src="${pageContext.request.contextPath}/images/icon-download.png" alt="Edit"/></a></td>
 				            <td>
-					            <select id="pubSelect" name="pubSelect" class = "form-control pub-${indexLoop.index} }">
+				            <c:if test="${empty report.publisherId}">
+					            <select id="pubSelect" name="pubSelect" class = "form-control dis-able pub-${indexLoop.index} }" >
+							</c:if>
+							
+							<c:if test="${not empty report.publisherId}">
+					            <select id="pubSelect" name="pubSelect" class = "form-control dis-able pub-${indexLoop.index} }" disabled="disabled">
+							</c:if>	
 			                  		 <option value="">Select Publisher</option> 
 					                    <c:forEach items="${publishersJson}" var="publisher">
-					          				 <option   value="${publisher.id}"  >${publisher.firstName}</option>
+						                   	<c:choose>
+						                 		<c:when test="${report.publisherId == publisher.id}">
+						                 			<option   value="${publisher.id}"  selected>${publisher.firstName}</option>
+						                 		</c:when>
+						                 		<c:otherwise>
+						                 			<option   value="${publisher.id}"  >${publisher.firstName}${reportForm.publisherId}</option>
+						                 		</c:otherwise>
+						                 	</c:choose>
+					          				 
 					          			 </c:forEach>
 			                	 </select> 
-			            	    <a href="#"><img src="${pageContext.request.contextPath}/images/icon-reasign.png" alt="Re Asign"/></a>				         		
+			            	  <!--    <a href="#"><img src="${pageContext.request.contextPath}/images/icon-reasign.png" alt="Re Asign"/></a> -->				         		
 			         		</td>
-			         		 <td>		        
-		            	   <select id="reviewrsSelect" name="reviewrsSelect" class = "form-control rev-${indexLoop.index}">
+			         		 <td>
+		         		 	<c:if test="${empty report.reporterId}">
+						    	<select id="reviewrsSelect" name="reviewrsSelect" class = "form-control dis-able rev-${indexLoop.index}">
+							</c:if>
+							
+							<c:if test="${not empty report.reporterId}">
+						    	<select id="reviewrsSelect" name="reviewrsSelect" class = "form-control dis-able rev-${indexLoop.index}" disabled="disabled">
+							</c:if>		        
+		            	  <!--   <select id="reviewrsSelect" name="reviewrsSelect" class = "form-control dis-able rev-${indexLoop.index}"> -->
 	                  		 <option value="">Select Reviewer</option> 
 			                    <c:forEach items="${reviewersJson}" var="reviewer">
-			          				 <option   value="${reviewer.id}"  >${reviewer.firstName}</option>
+			                    	<c:choose>
+			                    		<c:when test="${report.reporterId == reviewer.id}">
+			                    			<option   value="${reviewer.id}"  selected>${reviewer.firstName}</option>
+			                    		</c:when>
+			                    		<c:otherwise>
+			                    			<option   value="${reviewer.id}"  >${reviewer.firstName}</option>
+			                    		</c:otherwise>
+			                    	</c:choose>
+			          				 
 			          			 </c:forEach>
 	                	 </select>
-		            	  <a href="#"><img src="${pageContext.request.contextPath}/images/icon-reasign.png" alt="Re Asign"/>	</a>	         		
+		            	 <!--  <a href="#"><img src="${pageContext.request.contextPath}/images/icon-reasign.png" alt="Re Asign"/>	</a>  -->	         		
 		            	
 			         </td>
 			       </c:forEach>
-   <td>  <input type="checkbox" class="chk" value="true" rep-id="${report.reportId}" id="${indexLoop.index}"/></td>
+					 <c:if test="${(empty report.reporterId) || (empty report.publisherId)  }">
+					   <td>  <input type="checkbox" class="chk" value="true" rep-id="${report.reportId}" id="${indexLoop.index}"/></td>
+					</c:if>
+					 <c:if test="${(not empty report.reporterId) || (not empty report.publisherId)  }">
+					  
+					  <!--  <td>  <input type="checkbox" class="chk" value="true" rep-id="${report.reportId}" id="${indexLoop.index}"/></td>  -->
+						<td><a href="#" class="edit  edit-${report.reportId}" rep-id="${report.reportId}" alt="Edit" ><img src="${pageContext.request.contextPath}/images/PersmissionsActiveIcon.png" alt="Edit"/></a>
+						<input type="checkbox" class="chk" value="true" rep-id="${report.reportId}" id="${indexLoop.index}" style="display:none;"/>
+						</td>
+					</c:if>
+  				
    
      <%-- <div>
         <form:label path="reportStatuses.user.accountType"><spring:message code="admin.accountType"/></form:label>
@@ -218,11 +194,12 @@
      </tr>    
     </c:forEach>
 </table>
+<div id="dialog-confirm"></div>
 <div class="col-md-2 pull-right">
         <button class="btn btn-block btn-custom btn-info m_top20  sncButton " type="button"><img id="processingImg1" style="display:none;height:25px;width:25px;margin-right:5px" src="${pageContext.request.contextPath}/images/ajax-loader.gif"/>Submit</button>
   </div>
 <div class="col-md-12">
-<ul class = "pagination pagination-sm noMarginTB" style="padding-left:40%;">
+<!-- <ul class = "pagination pagination-sm noMarginTB" style="padding-left:40%;">
    <li><a href = "#">&laquo;</a></li>
    <li class = "active"><a href = "#">1</a></li>
    <li class = "disabled"><a href = "#">2</a></li>
@@ -230,30 +207,39 @@
    <li><a href = "#">4</a></li>
    <li><a href = "#">5</a></li>
    <li><a href = "#">&raquo;</a></li>
-</ul>
+</ul> -->
+<div id="paginateDiv"></div>
 </div>
+
   
         </article>
         
       </section>
       </form:form>
       </div> 
-      
+      <div id="displayAlertMsg"></div>
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
      <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
       
       <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script>
+   <%--    <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script> --%>
       <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
       <script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>
+      <!-- pagenation start -->
+      <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/simplePagination.css"/>
+      <script type="text/javascript" src="${pageContext.request.contextPath}/js/simplePagination.js" ></script>
+      <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/pagenationutil.js" ></script>
+      <!-- pagenation end -->
       <script src="${pageContext.request.contextPath}/js/admin/ajaxcalls.js"></script>
+      <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/popuputil.js" ></script>
+<!-- 
        <script>
         $(document).ready(function() {
             $(".open, .impatient").pageslide();
         });
        
         console.log(${reviewersJson})
-    </script>
+    </script> -->
      
    </body>
 </html>

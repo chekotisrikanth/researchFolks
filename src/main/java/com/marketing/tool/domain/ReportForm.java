@@ -14,8 +14,13 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 //@MappedSuperclass
 /**
@@ -26,6 +31,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name = "report")  
 @Inheritance(strategy=InheritanceType.JOINED)
 public class ReportForm {
+
+	public MultipartFile getReportImg() {
+		return reportImg;
+	}
+
+	public void setReportImg(MultipartFile reportImg) {
+		this.reportImg = reportImg;
+	}
 
 	@Id 
 	@GeneratedValue(strategy=GenerationType.TABLE)
@@ -46,8 +59,9 @@ public class ReportForm {
 	private String country;
 	
 	
-	@Column(name="publishingDate")
-	//@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@Column(name="publishingDate", nullable=true)
+	@DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss.SSS")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date publishingDate;
 
 	@Column(name="price" , nullable=false)
@@ -64,8 +78,8 @@ public class ReportForm {
 	// new cloumns start
 	
 	
-	@NotEmpty
-	@Column(name="updateCycle" , nullable=false)
+	//@NotEmpty
+	@Column(name="updateCycle" , nullable=true)
 	private String updateCycle;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report",cascade = CascadeType.ALL)
@@ -73,10 +87,38 @@ public class ReportForm {
 
 	@Column(name="report" , nullable=true)
 	private byte[] report;
+	
+	@Column(name="filePath" , nullable=true)
+	private String filePath;
+	
+	@Transient
+	private Integer publisherId;
+	@Transient
+	private Integer reporterId;
+	
+	
+	
+	@Transient
+	private MultipartFile reportImg;
+	
 
-		
-	
-	
+	public Integer getPublisherId() {
+		return publisherId;
+	}
+
+	public void setPublisherId(Integer publisherId) {
+		this.publisherId = publisherId;
+	}
+
+
+
+	public Integer getReporterId() {
+		return reporterId;
+	}
+
+	public void setReporterId(Integer reporterId) {
+		this.reporterId = reporterId;
+	}
 
 	public ReportForm(Integer id) {
            this.reportId = id;
@@ -174,6 +216,15 @@ public class ReportForm {
 
 	public void setReport(byte[] report) {
 		this.report = report;
+	}
+	
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
 	}
 
 	@Override

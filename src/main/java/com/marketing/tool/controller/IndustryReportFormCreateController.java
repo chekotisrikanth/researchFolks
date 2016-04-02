@@ -1,7 +1,11 @@
 package com.marketing.tool.controller;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -25,6 +29,11 @@ import com.marketing.tool.domain.Country;
 import com.marketing.tool.domain.ReportForm;
 import com.marketing.tool.exception.UserAlreadyExistsException;
 import com.marketing.tool.service.IndustryReportFormService;
+import com.marketing.tool.utility.DateUtills;
+import com.marketing.tool.utility.FileUtils;
+import com.marketing.tool.utility.SharedConstants;
+import com.marketing.tool.utility.StringUtil;
+import com.marketing.tool.validator.FileUploadValidator;
 import com.marketing.tool.service.CountryStateService;
 
 @Controller
@@ -88,6 +97,20 @@ public class IndustryReportFormCreateController {
 	        ModelAndView modelAndView = new ModelAndView();
 			//modelAndView.addObject("pers", person);
 			
+	        if(reportForm.getReportImg() != null && reportForm.getReportImg().getSize() > 0){
+				String ext = reportForm.getReportImg().getOriginalFilename().split("\\.")[1];
+				if(reportForm.getCompanyType() != null && reportForm.getCompanyType() == "2")
+				    FileUploadValidator.validatefile(reportForm,result,".excel");
+				else if(!(ext.contains("ppt") || ext.contains("docx") || ext.contains("doc")))
+				 FileUploadValidator.validatefile(reportForm,result,"Other");
+				}
+				else
+				{	
+					
+					//result.addError(new ObjectError("reportImg", "Please Upload Report"));
+					//result.reject("reportImg", "File Required");
+					result.rejectValue("reportImg", "FileRequired");
+				}
 			
 	        if (result.hasErrors()) {
 	        	 //initModelList(model);
@@ -96,12 +119,28 @@ public class IndustryReportFormCreateController {
 	   	        return modelAndView;
 	        }
 	        try {
+	        	long time= Calendar.getInstance().getTimeInMillis();
+	        	 String uuid = UUID.randomUUID().toString();
+				 FileUtils.saveFiles(reportForm.getReportImg(),String.valueOf(uuid+""+time),StringUtil.buildString(SharedConstants.FILE_PATH+SharedConstants.REEEPORT_FOLDER_PATH));
+					//reportComments2.setFilePath(SharedConstants.FILE_PATH+String.valueOf(reportComments2.getReportId()+""+time)+SharedConstants.DOT+reportComments2.getReportFile().getOriginalFilename().split("\\.")[1]);
+	        	String filePath = StringUtil.buildString(SharedConstants.REEEPORT_FOLDER_PATH,SharedConstants.FILE_SEPERATOR,uuid,time,SharedConstants.DOT,reportForm.getReportImg().getOriginalFilename().split("\\.")[1]);
+				//FileUtils.saveFiles(reportForm.getReportImg(),String.valueOf(reportForm.getReportId()),new StringBuilder("E:\\gitImages").append("\\Profile").toString());
+	        	reportForm.setPublishingDate(DateUtills.getCurrentDate());
+	        	reportForm.setFilePath(filePath);
 	        	industryReportFormService.save(reportForm);
 	        } catch (UserAlreadyExistsException e) {
-	            LOGGER.debug("Tried to create reportForm with existing id", e);
+	            LOGGER.error("Tried to create reportForm with existing id", e);
 	            result.reject("reportForm.error.exists");
 	            modelAndView.setViewName("industryReportForm_create");
-	        }
+	        }catch (IOException e) {
+	        	 LOGGER.error("Tried to create reportForm with existing id", e);
+		          result.reject("reportForm.error.exists");
+		          modelAndView.setViewName("industryReportForm_create");
+			} catch (ParseException e) {
+				LOGGER.error("Date Parsing Exception", e);
+		        result.reject("reportForm.error.exists");
+		        modelAndView.setViewName("industryReportForm_create");
+			}
 	        List<ReportForm>  reportForms= industryReportFormService.getAllReports();
 	        modelAndView.addObject("reports", reportForms);
 	        modelAndView.setViewName("industryReportForm_created");

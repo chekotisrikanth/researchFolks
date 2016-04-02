@@ -27,6 +27,10 @@ public class ReportStatus implements java.io.Serializable {
 	private String comments;
 	
 	
+	public ReportStatus() {
+	}
+
+	
 	@NotNull
 	@Column
 	private String userType;
@@ -35,9 +39,12 @@ public class ReportStatus implements java.io.Serializable {
 	@Column
 	private String status;
 
-	public ReportStatus() {
-	}
-
+	@Column(name="status_id")
+	private Integer statusId;
+	
+	
+	@Column(name="cycle_id")
+	private int cycleId;
 	
 
 	public ReportStatus(ReportForm report, User user, String comments, String status) {
@@ -107,10 +114,24 @@ public class ReportStatus implements java.io.Serializable {
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
-	
-	@Override
-	public String toString() {
-		return  "User emailId " + user.emailId + " usertype " + user.getAccountType() + "staus " + status + "commented " + comments;
+
+	public Integer getStatusId() {
+		return statusId;
 	}
 
+	public void setStatusId(Integer statusId) {
+		this.statusId = statusId;
+	}
+
+	public int getCycleId() {
+		return cycleId;
+	}
+
+	public void setCycleId(int cycleId) {
+		this.cycleId = cycleId;
+	}
+
+	
+	
+	
 }

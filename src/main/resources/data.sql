@@ -65,13 +65,33 @@ insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('r
 update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'report';
 insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('1', 'anil', 'anil', 0.0, null, null, 'anil', 'anil', 'Quarterly', 1);
 insert into industry_report_form (company_type, report_id) values ('2', 1);
-insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 1, 'Created', 1, 'AUTHOR');
+insert into report_status (report_status_id, comments, report_id, status, user_id, user_type,status_id,cycle_id) values (null, 'reported created', 1, 'Created', 1, 'AUTHOR',2,0);
 insert into report (country, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('2', 'sadsadsad', 'anil', 0.0, null, null, 'sdasd', 'anil', 'Quarterly', 2);
 insert into cpdpreport_form (company_intl_type, currency, headcount, report_type, revenue, stock_exchange_id, ticker, units, report_id) values (2, 'US$', 1, 1, '5545454', 3, 'asdasdsad', 3, 2);
-insert into report_status (report_status_id, comments, report_id, status, user_id, user_type) values (null, 'reported created', 2, 'Created', 1, 'AUTHOR');
+insert into report_status (report_status_id, comments, report_id, status, user_id, user_type,status_id,cycle_id) values (null, 'reported created', 2, 'Created', 1, 'AUTHOR',2,0);
 update hibernate_sequences set sequence_next_hi_value = 3 where sequence_next_hi_value = 2 and sequence_name = 'user';
 insert into user (account_type, is_agreed_tc, email_id, first_name, last_name, password, title, user_name, userstatus, id) values ('AUTHOR', 1, 'kumar@gmail.com', 'Anilkumar ', 'Ravula', 'pirate', 'MR', 'anil', 'Active', 65536);
 insert into author (bio, city, country, mobile, id) values ('asdasdasdasds', 'hello', '1', '9505485048', 65536);
 insert into author_key_skill (author_id, skill_id) values (65536, 2);
 
 insert into user (account_type, email_id, first_name, last_name,  password, title, userstatus,IS_AGREED_TC,USER_NAME, id) values ('PUBLISHER', 'anil1@gamil.com', 'anil', 'sri', 'pirate', 'MR', 'Active',1,'anil', 32769);
+
+
+insert into report_assigners (publisher_id, report_id, reviwer_id, report_assigners_id,active) values (32769, 1, 32768, 1,'Y');
+insert into report_assigners (publisher_id, report_id, reviwer_id, report_assigners_id,active) values (32769, 2, 32768, 2,'Y');
+
+
+INSERT INTO REPORT_CYCLE (STATUS_ID, STATUS_NAME)  VALUES ('1', 'CREATED');
+INSERT INTO REPORT_CYCLE (STATUS_ID, STATUS_NAME)  VALUES ('2', 'REVIWER PENDING');
+INSERT INTO REPORT_CYCLE (STATUS_ID, STATUS_NAME)  VALUES ('3', 'REVIWER COMMENTS');
+INSERT INTO REPORT_CYCLE (STATUS_ID, STATUS_NAME)  VALUES ('4', 'PUBLISHED');
+
+insert into user (account_type, email_id, first_name, last_name,  password, title, userstatus,IS_AGREED_TC,USER_NAME, id) values ('PUBLISHER', 'ani', 'ch', 'an', 'ani', 'MR', 'Active',1,'b', 32770);
+
+
+insert into report (country, file_path, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('2', 'reports\8d2563f7-88b4-4414-b804-31c740d6b4e31459020405701.doc', 'Company1Company1', 'Company1Company1Company1', 456789.0, NULL, NULL, 'Company1', 'Company1Company1Company1Company1', 'Annually', 32768);
+insert into cpdpreport_form (company_intl_type, currency, headcount, report_type, revenue, stock_exchange_id, ticker, units, report_id) values (1, 'US$', 4566, 1, '23000', 1, '2323', 1, 32768);
+insert into report_status (report_status_id, comments, cycle_id, report_id, status, status_id, user_id, user_type) values (null, 'reported created', 1, 32768, 'Created', 1, 65536, 'AUTHOR');
+insert into report (country, file_path, industry, overview, price, publishing_date, report, report_title, table_of_contents, update_cycle, report_id) values ('1', 'reports\d6d99529-175e-4530-a1cd-beb375a562e31459020717224.doc', 'Company2Company2Company2', 'Company2Company2Company2', 456789.0, NULL, NULL, 'Company2', 'Company2Company2Company2Company2', 'Annually', 32769);
+insert into industry_report_form (company_type, report_id) values ('1', 32769);
+insert into report_status (report_status_id, comments, cycle_id, report_id, status, status_id, user_id, user_type) values (null, 'reported created', 1, 32769, 'Created', 1, 65536, 'AUTHOR');

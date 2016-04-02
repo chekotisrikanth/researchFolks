@@ -12,7 +12,7 @@ public class StringUtil {
 	 * @param strings
 	 * @return
 	 */
-	public static String buildString(String ... strings) {
+	public static String buildString(Object ... strings) {
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < strings.length; i++) {
 			builder.append(strings[i]);

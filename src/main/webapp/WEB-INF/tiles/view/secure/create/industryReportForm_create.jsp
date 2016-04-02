@@ -106,7 +106,7 @@
         </aside>
         <article class="col-md-9 noPaddRL">
         <div class="contentWraper">
-		<form:form method="POST"  class="form-horizontal alignHCenter" action="/publish/industryReportForm_create.html" commandName="form" modelAttribute="form">
+		<form:form method="POST"  class="form-horizontal alignHCenter" action="/publish/industryReportForm_create.html" commandName="form" modelAttribute="form" enctype="multipart/form-data">
 			<form:errors path="" element="div"/>
 			<div class="form-group">
 			<form:label class="col-md-3 control-label text-right" path="reportTitle"><spring:message code="indReportForm.reportTitle"/></form:label>	
@@ -144,8 +144,9 @@
 					<span class="input-group-addon">
 									   <span class="glyphicon glyphicon-calendar"></span>
 					</span>
-					<form:errors path="publishingDate"/>
+					
 				</div>
+				<form:errors path="publishingDate"/>
 			</div>  
 														   
 			<form:label path="price" class="col-md-2 control-label text-right"><spring:message code="reportForm.price"/></form:label>          
@@ -193,8 +194,8 @@
 		<div class="form-group">
 			<form:label class="col-md-3 control-label text-right" path="report"><spring:message code="reportForm.report"/></form:label>
 			<div class="col-md-4">
-				<input type="file" name="report"/>
-				<form:errors path="report"/>
+				<input type="file" name="reportImg"  />
+                <form:errors path="reportImg" />
 			</div>
 			<div class="col-md-5 note">Note: Upload either MS Word or PPT</div>
 		</div>										   
@@ -238,6 +239,7 @@
 				}
  				//$('#all_locations').append('<select name="loc_in_england" id="loc_in_england" class="location" ><option value="blank">Select</option><option value="london">London</option>');    
 		});
+			$('#publishingDate').val('');
 			$('#publishingDate').daterangepicker(
 				    { 
 				    	singleDatePicker: true				 

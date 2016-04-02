@@ -1,9 +1,6 @@
 package com.marketing.tool.validator;
 
-import javax.validation.Validator;
-
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 
 import com.marketing.tool.domain.CPDPReportForm;
 
@@ -15,11 +12,11 @@ public class FileUploadValidator
 		String ext = file.getReportImg().getOriginalFilename().split("\\.")[1];
 		
 		if(file.getReportImg().getSize()==0){
-			result.reject("reportImg", "File Required");
+			result.rejectValue("reportImg", "FileRequired");
 		}
 		else if(extention != null && !extention.contains(ext))
 		{
-			result.reject("reportImg", "File Not Support");
+			result.rejectValue("reportImg", "FileNotAllowed");
 		}
 			
 	}

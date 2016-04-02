@@ -2,8 +2,6 @@ package com.marketing.tool;
 
 import javax.sql.DataSource;
 
-import net.sf.log4jdbc.Log4jdbcProxyDataSource;
-
 import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -21,12 +19,17 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.marketing.tool.handler.SuccessHandler;
+
+import net.sf.log4jdbc.Log4jdbcProxyDataSource;
 
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan
+//@EnableWebSecurity
+//@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class Application extends SpringBootServletInitializer {
 
 	@Autowired
@@ -65,6 +68,12 @@ public class Application extends SpringBootServletInitializer {
         registrationBean.addUrlMappings("/console/*");
         return registrationBean;
     }
+    @Bean
+    public CommonsMultipartResolver multipartResolve() {
+    	CommonsMultipartResolver res = new CommonsMultipartResolver();
+		res.setMaxUploadSize(-1);;
+    	return res;
+    }
     
 	protected static class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
@@ -98,6 +107,7 @@ public class Application extends SpringBootServletInitializer {
 			  	.antMatchers("/console/**").permitAll()
 			  	.antMatchers("/admin/**").access("hasRole('ADMIN')")
 			  	.antMatchers("/publish/**").access("hasRole('AUTHOR')")
+			  	.antMatchers("/downloadReport/**").access("hasRole('ADMIN') or hasRole('PUBLISHER') or hasRole('REVIEWER') or hasRole('AUTHOR')")
 			  	.antMatchers("/secure/**").access("hasRole('ADMIN') or hasRole('PUBLISHER') or hasRole('REVIEWER')")
 			  	.and().formLogin().loginPage("/public/login").loginProcessingUrl("/j_spring_security_check").successHandler(successHandler)
 			  	.usernameParameter("emailId").passwordParameter("password")

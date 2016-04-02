@@ -33,6 +33,10 @@
 		<put-attribute name="header" value="/WEB-INF/tiles/view/secure/header/adminheader.jsp" />
 		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/home/reviewerhome.jsp" />
 	</definition>
+	<definition name="publisherhome" extends="layout.basic">
+		<put-attribute name="header" value="/WEB-INF/tiles/view/secure/header/adminheader.jsp" />
+		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/home/publisherhome.jsp" />
+	</definition>
 	
 	<definition name="admin_create" extends="layout.basic">
 		<put-attribute name="body" value="/WEB-INF/tiles/view/public/create/admin_create.jsp" />

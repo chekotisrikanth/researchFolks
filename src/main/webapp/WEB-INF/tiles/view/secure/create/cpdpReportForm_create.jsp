@@ -15,7 +15,7 @@
       
       <!-- Bootstrap -->
        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
+     <%--   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css"> --%>
        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Calendar.css">
@@ -30,9 +30,7 @@
       <script src = "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
       
-      <script type="text/javascript">
-            jQuery.noConflict();
-        </script>
+    
       
    </head>
    
@@ -160,19 +158,7 @@
 					<form:input class="form-control" path="ticker"/>
 					<form:errors path="ticker"/>                	
                 </div>
-                
-                
-              <!--<form:label path="ticker" class="col-md-2 control-label text-right"><spring:message code="reportForm.ticker"/></form:label>	
-                <div class="col-md-4">
-					<form:input class="form-control" path="phone"/>
-					<form:errors path="phone"/>                	
-                </div>
-                
-                <form:label path="ticker" class="col-md-2 control-label text-right"><spring:message code="reportForm.ticker"/></form:label>	
-                <div class="col-md-4">
-					<form:input class="form-control" path="email"/>
-					<form:errors path="email"/>                	
-                </div>-->
+              
             </div>
             
             <div class="form-group"> 
@@ -239,11 +225,12 @@
 				<div class="input-append date col-md-4">
 					<div class="input-group date date-input" id='startDate' >
 						 <form:input class="form-control" path="publishingDate" id="publishingDate"/>					                     
-						<span class="input-group-addon">
+						<span class="input-group-addon ">
 							   <span class="glyphicon glyphicon-calendar"></span>
 						</span>
-						<form:errors path="publishingDate"/>
+						
 					 </div>
+					 <form:errors path="publishingDate"/>
 				</div>	
 				<form:label class="col-md-2 control-label text-right" path="updateCycle"><spring:message code="reportForm.updateCycle"/></form:label>            	
                 
@@ -325,16 +312,18 @@
 					$('.note').html("Note: Allowed Upload Types Are MS Excel Only");
 				}
  				//$('#all_locations').append('<select name="loc_in_england" id="loc_in_england" class="location" ><option value="blank">Select</option><option value="london">London</option>');    
-		});
-		 $('#publishingDate').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
-				console.log(start.toISOString(), end.toISOString(), label);
-			  });
-		/* $(function() {
-         	$("#publishingDate").datepicker({
-                dateFormat: 'dd/mm/yy'
-            }); 
-    		}); */
-        });
+			});
+			
+		//$("#publishingDate").daterangepicker("destroy");
+		 $('#publishingDate').val('');
+		 $('#publishingDate').daterangepicker({ 
+			 singleDatePicker: true ,
+			 showDropdowns: true
+		 }, function(start, end, label) {
+		       
+		 }); //dtpicker
+		
+     }); //ready end
 		
     </script>
      </div> 
