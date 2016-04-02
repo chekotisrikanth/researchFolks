@@ -113,170 +113,222 @@
         <form:form class="form-horizontal alignHCenter" method="POST" action="/publish/cpdpReportForm_create.html" commandName="form" modelAttribute="form"
          enctype="multipart/form-data">
         
-       
-        	<div class="form-group">
+       		<spring:bind path="reportTitle">
+            <div class="form-group ${status.error ?'has-error':''} ">        	
 			<form:label class="col-md-2 control-label text-right" path="reportTitle"><spring:message code="reportForm.reportTitle"/></form:label>	
                 <div class="col-md-10">
                 	<form:input path="reportTitle" class="form-control"/>
-					<form:errors path="reportTitle"/>
+					<!--<form:errors path="reportTitle"/>-->
                 </div>
             </div>
-            <div class="form-group">
-			<form:label class="col-md-2 control-label text-right" path="reportType"><spring:message code="reportForm.reportType"/></form:label>	
-                <div class="col-md-10">
-                	<select class = "form-control" name="reportType">
-					 <option value="1">Public</option>
-					 <option value="2">Private</option>
-					 <option value="3">Non-Profit</option>
-					 <option value="4">Government</option>					 
-				  </select>
-				<form:errors path="reportType"/> 
-                </div>              
+            </spring:bind>
+            <spring:bind path="reportType">
+            <div class="form-group ${status.error ?'has-error':''} ">
+				<form:label class="col-md-2 control-label text-right" path="reportType"><spring:message code="reportForm.reportType"/></form:label>	
+	                <div class="col-md-10">
+	                	<select class = "form-control form-temp" name="reportType" form-temp="${form.reportType}">
+	                	 <option value="">Select CompanyType</option>  
+						 <option value="1">Public</option>
+						 <option value="2">Private</option>
+						 <option value="3">Non-Profit</option>
+						 <option value="4">Government</option>					 
+					  </select>
+					<!--<form:errors  class="text-warning" path="reportType"/>--> 
+	                </div>              
             </div>
-			
-           <div class="form-group">
+			</spring:bind>
+           <spring:bind path="industry">
+            <div class="form-group ${status.error ?'has-error':''} ">
 			 <form:label path="industry" class="col-md-2 control-label text-right"><spring:message code="reportForm.industry"/></form:label>               	
                 <div class="col-md-10">
-                	<form:textarea class="form-control" path="industry" rows="5" cols="30"/>
-					<form:errors path="industry"/>
+                	<form:textarea class="form-control" path="industry" max-char="1000" rows="5" cols="30"/>
+                	<span class="text-info"></span>
+					<!--<form:errors path="industry"/>-->
                 </div>
-            </div>			
-			
+             </div>			
+			</spring:bind>
             <div class="form-group">
-				<form:label path="stockExchageId" class="col-md-2 control-label text-right"><spring:message code="reportForm.stockExchange"/></form:label>            	
-                <div class="input-append date col-md-4">
-                    <select class = "form-control" name="stockExchageId">
-					 <option value="0">Select Stock Exchange</option> 
-					 <c:forEach var="item" items="${stocksList}">					 
-					 <option   value="${item.stockExchangeId}">${item.name}</option>
-					</c:forEach>
-					</select>
-					<form:errors path="stockExchageId"/>
-                </div>
-				<form:label path="ticker" class="col-md-2 control-label text-right"><spring:message code="reportForm.ticker"/></form:label>	
-                <div class="col-md-4">
-					<form:input class="form-control" path="ticker"/>
-					<form:errors path="ticker"/>                	
-                </div>
-              
+            	<spring:bind path="stockExchageId">
+	             <div class="${status.error ?'has-error':''}">
+					<form:label path="stockExchageId" class="col-md-2 control-label text-right"><spring:message code="reportForm.stockExchange"/></form:label>            	
+	                <div class="input-append date col-md-4">
+	                    <select class = "form-control form-temp" name="stockExchageId" form-temp="${form.stockExchageId}">
+						 <option value="">Select Stock Exchange</option> 
+						 <c:forEach var="item" items="${stocksList}">					 
+						 <option   value="${item.stockExchangeId}">${item.name}</option>
+						</c:forEach>
+						</select>
+						<!--<form:errors path="stockExchageId"/> -->
+	                </div>
+	              </div>
+                </spring:bind>
+              <spring:bind path="ticker">
+	             <div class="${status.error ?'has-error':''}">
+					<form:label path="ticker" class="col-md-2 control-label text-right"><spring:message code="reportForm.ticker"/></form:label>	
+		                <div class="col-md-4">
+							<form:input class="form-control" path="ticker"/>
+							<!--<form:errors path="ticker"/>  -->              	
+		                </div>
+		            </div>
+             </spring:bind>
             </div>
             
             <div class="form-group"> 
+            <spring:bind path="headcount">
+	             <div class="${status.error ?'has-error':''}">
 				<form:label path="headcount" class="col-md-2 control-label text-right"><spring:message code="reportForm.headcount"/></form:label>	
                 <div class="input-append date col-md-4">
-					<form:input class="form-control" path="headcount"/>
-					<form:errors path="headcount"/>                	
+					<form:input class="form-control" path="headcount" onblur="formatNumber(this)"/>
+					<!--<form:errors path="headcount"/>  -->              	
                 </div>
+                </div>
+             </spring:bind>
+                <spring:bind path="country">
+	             <div class="${status.error ?'has-error':''}">
 				<form:label class="col-md-2 control-label text-right" path="country"><spring:message code="reportForm.country"/></form:label>	
                 <div class="col-md-4">
-                	<select id="country" name="country" class = "form-control">
+                	<select id="country" name="country" class = "form-control form-temp" form-temp="${form.country}">
                         <option value="">Select Country</option> 
                         <c:forEach items="${countryList}" var="country">
                             <option   value="${country.countryId}"  >${country.countryName}</option>
                         </c:forEach>
                     </select>
-				<form:errors path="country"/> 
+				<!--<form:errors path="country"/> -->
                 </div>
+                </div>
+             </spring:bind>
             </div>
             
             <div class="form-group">
+            <spring:bind path="revenue">
+	             <div class="${status.error ?'has-error':''}">
 				<form:label path="revenue" class="col-md-2 control-label text-right"><spring:message code="reportForm.revenue"/></form:label>	
-                <div class="input-append date col-md-4">
-					<form:input class="form-control" path="revenue"/>
-					<form:errors path="revenue"/>                	
+                <div class="input-append date col-md-4" >
+					<form:input class="form-control" path="revenue" onblur="formatNumber(this)"/>
+				<!--	<form:errors path="revenue"/> -->               	
                 </div>
-				
+                </div>
+             </spring:bind>
+				<spring:bind path="units">
+	             <div class="${status.error ?'has-error':''}">
 				<form:label path="units" class="col-md-2 control-label text-right"><spring:message code="reportForm.units"/></form:label>            	
                 <div class="col-md-4">
-                 <select class = "form-control" name="units">
+                 <select class = "form-control form-temp" name="units" form-temp="${form.units}">
+                 	<option value="">Select Units</option> 
 					 <option value="1">Thousands</option>
 					 <option value="2">Millions</option>
 					 <option value="3">Billions</option>
 					 <option value="4">Trillions</option>					 
 				  </select>  
-				<form:errors path="units"/>
+				<!--<form:errors path="units"/>-->
                 </div>
+                </div>
+             </spring:bind>
             </div>
             
             <div class="form-group">
-				<form:label path="currency" class="col-md-2 control-label text-right"><spring:message code="indReportForm.currency"/></form:label>	            	
-                <div class="input-append date col-md-4">
-                  <select class = "form-control" name="currency">
-					 <option value="US$">US$</option>
-					 <option value="GBP">GBP</option>
-					 <option value="INR">INR</option>
-					 <option value="CHF">CHF</option>
-					 <option value="CAD">CAD</option>
-					 <option value="AU$">AU$</option>
-					 <option value="ZAR">ZAR</option>
-			 
-				  </select>  
-				<form:errors path="currency"/>
-                </div>
-				<form:label path="price" class="col-md-2 control-label text-right"><spring:message code="reportForm.price"/></form:label>	
-                <div class="col-md-4">
-					<form:input class="form-control" path="price"/>
-					<form:errors path="price"/>                	
-                </div>            	
-            </div>
-			
-            <div class="form-group">
-				<form:label class="col-md-2 control-label text-right" path="publishingDate"><spring:message code="reportForm.publishingDate"/></form:label>
-				<div class="input-append date col-md-4">
-					<div class="input-group date date-input" id='startDate' >
-						 <form:input class="form-control" path="publishingDate" id="publishingDate"/>					                     
-						<span class="input-group-addon ">
-							   <span class="glyphicon glyphicon-calendar"></span>
-						</span>
-						
+	            <spring:bind path="currency">
+		             <div class="${status.error ?'has-error':''}">
+					 	<form:label path="currency" class="col-md-2 control-label text-right"><spring:message code="indReportForm.currency"/></form:label>	            	
+			                <div class="input-append date col-md-4">
+			                  <select class = "form-control form-temp" name="currency" form-temp="${form.currency}">
+			                  	<option value="">Select Currency</option> 
+								 <option value="US$">US$</option>
+								 <option value="GBP">GBP</option>
+								 <option value="INR">INR</option>
+								 <option value="CHF">CHF</option>
+								 <option value="CAD">CAD</option>
+								 <option value="AU$">AU$</option>
+								 <option value="ZAR">ZAR</option>						 
+							  </select>  
+							<!--<form:errors path="currency"/>-->
+			                </div>
+			          </div>
+	             </spring:bind>
+				<spring:bind path="price">
+					<div class="${status.error ?'has-error':''}">
+						<form:label path="price" class="col-md-2 control-label text-right"><spring:message code="reportForm.price"/></form:label>	
+						<div class="col-md-4">
+							<form:input class="form-control" path="price" onblur="formatNumber(this)" />
+							<!--	<form:errors path="price"/>     -->           	
+						</div> 
 					 </div>
-					 <form:errors path="publishingDate"/>
-				</div>	
-				<form:label class="col-md-2 control-label text-right" path="updateCycle"><spring:message code="reportForm.updateCycle"/></form:label>            	
-                
-                <div class="col-md-4">
-				 <select class = "form-control" name="updateCycle">
-                    <option value="Annually">Annually </option>
-					<option value="Half-Yearly">Half-Yearly</option>
-					<option value="Quarterly">Quarterly</option>
-					<option value="Monthly">Monthly</option>					
-					</select>
-                  </div>
-				<form:errors path="updateCycle"/>
-            </div>
-			
-			<div class="form-group">
-				<form:label class="col-md-2 control-label text-right" path="comIntl"><spring:message code="reportForm.comIntl"/></form:label> 				
-				<div class="col-md-4">
-				 <select class = "form-control cit" name="comIntl">
-					 <option value="1">Company Report</option> //Upload either MS Word or PPT
-					 <option value="2">Company Database</option> //Upload MS Excel						
-				  </select>						
+				</spring:bind>
+	   	    </div>			
+            <div class="form-group">            
+	            <spring:bind path="publishingDate">
+		             <div class="${status.error ?'has-error':''}">
+					<form:label class="col-md-2 control-label text-right" path="publishingDate"><spring:message code="reportForm.publishingDate"/></form:label>
+					<div class="input-append date col-md-4">
+						<div class="input-group date date-input" id='startDate' >
+							 <form:input class="form-control form-temp" path="publishingDate" id="publishingDate" form-temp="${form.publishingDate}"/>					                     
+							<span class="input-group-addon ">
+								   <span class="glyphicon glyphicon-calendar"></span>
+							</span>							
+						 </div>
+						<!--   <form:errors path="publishingDate"/>-->
+					</div>	
+					</div>
+	             </spring:bind>
+	            
+				<spring:bind path="updateCycle">
+		            <div class="${status.error ?'has-error':''}">
+						<form:label class="col-md-2 control-label text-right" path="updateCycle"><spring:message code="reportForm.updateCycle"/></form:label>            	
+	                    <div class="col-md-4">
+						 <select class = "form-control form-temp" name="updateCycle" form-temp="${form.updateCycle}">
+						   <option value="">Select Cycle</option> 
+		                    <option value="Annually" >Annually </option>
+							<option value="Half-Yearly" >Half-Yearly</option>
+							<option value="Quarterly" >Quarterly</option>
+							<option value="Monthly"  >Monthly</option>					
+							</select>
+		                  </div>
+					<!--<form:errors path="updateCycle"/>-->
+	           		 </div>
+	            </spring:bind>
+	   	    </div>
+           
+			<spring:bind path="comIntl">
+	             <div class="form-group ${status.error ?'has-error':''} ">    			
+					<form:label class="col-md-2 control-label text-right" path="comIntl"><spring:message code="reportForm.comIntl"/></form:label> 				
+					<div class="col-md-4">
+					 <select class = "form-control cit" name="comIntl">
+					  <option value="">Select Intelligence</option>
+						 <option value="1" ${form.comIntl eq 1 ?'selected':''}>Company Report</option> 
+						 <option value="2" ${form.comIntl eq 2 ?'selected':''}>Company Database</option> 				
+					  </select>						
+					</div>
+					<!--<form:errors path="comIntl"/> -->
 				</div>
-				<form:errors path="comIntl"/>
-			</div>
-				
-            <div class="form-group">
-				<form:label path="overview" class="col-md-2 control-label text-right"><spring:message code="reportForm.overview"/></form:label>  <div class="col-md-10">
-                	<form:textarea class="form-control" path="overview" rows="3" cols="30" />
-					<form:errors path="overview"/>
-                </div>
-            </div>
-            <div class="form-group">
-				<form:label class="col-md-2 control-label text-right" path="tableOfContents"><spring:message code="reportForm.tableOfContents"/></form:label>            	
-                <div class="col-md-10">
-                	<form:textarea class="form-control" path="tableOfContents" rows="3" cols="30" />
-					<form:errors path="tableOfContents"/>
-                </div>
-            </div>
+			</spring:bind>	
+            <spring:bind path="overview">
+	            <div class="form-group ${status.error ?'has-error':''} ">    
+					<form:label path="overview" class="col-md-2 control-label text-right"><spring:message code="reportForm.overview"/></form:label>  <div class="col-md-10">
+	                	<form:textarea class="form-control" max-char="1500" path="overview" rows="3" cols="30" />
+	                	<span class="text-info"></span>
+						<!--<form:errors path="overview"/> -->
+	                </div>
+	            </div>
+            </spring:bind>
+            <spring:bind path="tableOfContents">
+	            <div class="form-group ${status.error ?'has-error':''} ">    
+					<form:label class="col-md-2 control-label text-right" path="tableOfContents"><spring:message code="reportForm.tableOfContents"/></form:label>            	
+	                <div class="col-md-10">
+	                	<form:textarea class="form-control" max-char="1500" path="tableOfContents" rows="3" cols="30" />
+						<!--<form:errors path="tableOfContents"/> -->
+						<span class="text-info"></span>
+	                </div>
+	            </div>
+            </spring:bind>
              <div class="form-group">
-				<form:label class="col-md-2 control-label text-right" path="report"><spring:message code="reportForm.report"/></form:label>
+				<form:label class="col-md-2 control-label text-right" path="reportImg"><spring:message code="reportForm.report"/></form:label>
                 <div class="col-md-4">
                 	<input type="file" name="reportImg"  />
                 	
-                	<form:errors path="reportImg" />
-                </div>
-                <div class="col-md-5 note">Note: Upload either MS Word or PPT</div>
+                	 <div class="bg-danger"><form:errors path="reportImg" /> </div>
+               </div>
+                <div class="col-md-5 note bg-info">Note: Supported Formats are MS WORD,PPT and EXCEL</div>
+           
             </div>
             <div class="form-group">
             <label class="col-md-7 control-label text-right">&nbsp;</label>
@@ -302,20 +354,45 @@
       <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
       <script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>
        <script>
+       function formatNumber (num) {
+    	   //console.log(num);
+    	  var modified =  num.value.replace(/,/g,"");
+    	  console.log(modified);
+    	  var formatter = modified.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+   	   	  return num.value=formatter;
+   		}
+       
+       function appenduploadText (num) {
+    	   if($(num).val()==1) {
+				//alert('1');
+				$('.note').html("Note: Allowed Upload Types Are Either MS Word or PPT");
+			} else if($(num).val()==2) {
+				$('.note').html("Note: Allowed Upload Types Are MS Excel Only");
+			}
+   		}
+       
+       $("textarea").keyup(function(){
+    	   $(this).next().html("Characters left: " + ($(this).attr("max-char") - $(this).val().length));
+    	 });
+       
         $(document).ready(function() {
+        	
+        	appenduploadText($(".cit"));
+
+        	$(".form-temp").each(function(index,object) {
+        		//console.log($(this).attr('form-temp'));
+        		$(this).val($(this).attr('form-temp'));
+        	});
+        	
             $(".open, .impatient").pageslide();
+           
 			$(document).on('change', '.cit', function(){
-				if($(this).val()==1) {
-					//alert('1');
-					$('.note').html("Note: Allowed Upload Types Are Either MS Word or PPT");
-				} else if($(this).val()==2) {
-					$('.note').html("Note: Allowed Upload Types Are MS Excel Only");
-				}
+				appenduploadText(this);
  				//$('#all_locations').append('<select name="loc_in_england" id="loc_in_england" class="location" ><option value="blank">Select</option><option value="london">London</option>');    
 			});
 			
 		//$("#publishingDate").daterangepicker("destroy");
-		 $('#publishingDate').val('');
+		// $('#publishingDate').val('');
 		 $('#publishingDate').daterangepicker({ 
 			 singleDatePicker: true ,
 			 showDropdowns: true

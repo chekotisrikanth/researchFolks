@@ -108,13 +108,22 @@
         <div class="contentWraper">
 		<form:form method="POST"  class="form-horizontal alignHCenter" action="/publish/industryReportForm_create.html" commandName="form" modelAttribute="form" enctype="multipart/form-data">
 			<form:errors path="" element="div"/>
-			<div class="form-group">
+			<%-- <div class="form-group">
 			<form:label class="col-md-3 control-label text-right" path="reportTitle"><spring:message code="indReportForm.reportTitle"/></form:label>	
                 <div class="col-md-9">
                 	<form:input path="reportTitle" class="form-control"/>
 					<form:errors path="reportTitle"/>
                 </div>
+            </div> --%>
+            <spring:bind path="reportTitle">
+            <div class="form-group ${status.error ?'has-error':''} ">        	
+			<form:label class="col-md-3 control-label text-right" path="reportTitle"><spring:message code="indReportForm.reportTitle"/></form:label>	
+                <div class="col-md-10">
+                	<form:input path="reportTitle" class="form-control"/>
+					<!--<form:errors path="reportTitle"/>-->
+                </div>
             </div>
+            </spring:bind>
 			<div class="form-group">
 				<form:label path="industry" class="col-md-3 control-label text-right"><spring:message code="reportForm.industry"/></form:label>                    
 				<div class="col-md-9">
@@ -192,7 +201,7 @@
 			</div>
 		</div>										   
 		<div class="form-group">
-			<form:label class="col-md-3 control-label text-right" path="report"><spring:message code="reportForm.report"/></form:label>
+			<form:label class="col-md-3 control-label text-right" path="reportImg"><spring:message code="reportForm.report"/></form:label>
 			<div class="col-md-4">
 				<input type="file" name="reportImg"  />
                 <form:errors path="reportImg" />
@@ -203,7 +212,7 @@
 		<div class="form-group">
 		<label class="col-md-3 control-label text-right">&nbsp;</label>
 			<div class="col-md-9">					
-					<button class="btn btn-primary btn-lg sncButton" type="submit">Save & Submit</button>
+					<button class="btn btn-primary btn-lg sncButton pull-right" type="submit">Save & Submit</button>
 				</div>
 		</div>
      </form:form>

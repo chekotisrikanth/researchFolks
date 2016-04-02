@@ -1,6 +1,7 @@
 package com.marketing.tool.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -31,6 +31,7 @@ import com.marketing.tool.exception.UserAlreadyExistsException;
 import com.marketing.tool.service.CPDPReportFormService;
 import com.marketing.tool.service.CountryStateService;
 import com.marketing.tool.service.StockExchangeService;
+import com.marketing.tool.utility.DateUtills;
 import com.marketing.tool.utility.FileUtils;
 import com.marketing.tool.utility.SharedConstants;
 import com.marketing.tool.utility.StringUtil;
@@ -74,7 +75,7 @@ public class CPDPReportFormCreateController {
 	    }
 
 	    @RequestMapping(value = "/publish/cpdpReportForm_create.html", method = RequestMethod.POST)
-	    public ModelAndView createReportForm(@ModelAttribute("form") @Valid CPDPReportForm reportForm, BindingResult result) {
+	    public ModelAndView createReportForm(@ModelAttribute("form") @Valid CPDPReportForm reportForm, BindingResult result)  {
 	        LOGGER.debug("Received request to create {}, with result={}", reportForm, result);
 	        ModelAndView modelAndView = new ModelAndView();
 			//modelAndView.addObject("pers", person);
@@ -83,7 +84,7 @@ public class CPDPReportFormCreateController {
 			String ext = reportForm.getReportImg().getOriginalFilename().split("\\.")[1];
 			if(reportForm.getComIntl() != null && reportForm.getComIntl().intValue() == 2)
 			    FileUploadValidator.validatefile(reportForm,result,".excel");
-			else if(!(ext.contains("ppt") || ext.contains("docx") || ext.contains("doc")))
+			else if(!((ext.contains("ppt") || ext.contains("docx") || ext.contains("doc"))))
 			 FileUploadValidator.validatefile(reportForm,result,"Other");
 			}
 			else
@@ -94,7 +95,7 @@ public class CPDPReportFormCreateController {
 				result.rejectValue("reportImg", "FileRequired");
 			}
 			if (result.hasErrors()) {
-				 //initModelList(model);
+				 //initModel List(model);
 				initModelList(modelAndView);
 				modelAndView.setViewName("cpdpReportForm_create");
 			    return modelAndView;
@@ -108,6 +109,7 @@ public class CPDPReportFormCreateController {
 				//FileUtils.saveFiles(reportForm.getReportImg(),String.valueOf(reportForm.getReportId()),new StringBuilder("E:\\gitImages").append("\\Profile").toString());
 				
 				reportForm.setFilePath(filePath);
+				reportForm.setInsertedDate(DateUtills.getCurrentDate());
 				//reportForm.setPublishingDate(DateUtills.getCurrentDate());
 				cpdpPReportFormService.save(reportForm);
 	        	
@@ -118,12 +120,17 @@ public class CPDPReportFormCreateController {
 	        	}catch (IOException e) {
 		        	LOGGER.error("Tried to create reportForm with existing id", e);
 			        result.reject("reportForm.error.exists");
-			        modelAndView.setViewName("industryReportForm_create");
+			        modelAndView.setViewName("cpdpReportForm_create");
 	        	} /*catch (ParseException e) {
 				LOGGER.error("Date Parsing Exception", e);
 		        result.reject("reportForm.error.exists");
 		        modelAndView.setViewName("industryReportForm_create");
-			}*/
+			}*/ catch (ParseException e) {
+					// TODO Auto-generated catch block
+				LOGGER.error("Parsing Exception id", e);
+		        result.reject("reportForm.error.exists");
+		        modelAndView.setViewName("industryReportForm_create");
+				}
 	        List<ReportForm>  reportForms= cpdpPReportFormService.getAllReports();
 	        modelAndView.addObject("reports", reportForms);
 	        modelAndView.setViewName("cpdpReportForm_created");

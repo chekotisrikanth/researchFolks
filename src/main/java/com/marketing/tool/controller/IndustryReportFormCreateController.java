@@ -125,7 +125,8 @@ public class IndustryReportFormCreateController {
 					//reportComments2.setFilePath(SharedConstants.FILE_PATH+String.valueOf(reportComments2.getReportId()+""+time)+SharedConstants.DOT+reportComments2.getReportFile().getOriginalFilename().split("\\.")[1]);
 	        	String filePath = StringUtil.buildString(SharedConstants.REEEPORT_FOLDER_PATH,SharedConstants.FILE_SEPERATOR,uuid,time,SharedConstants.DOT,reportForm.getReportImg().getOriginalFilename().split("\\.")[1]);
 				//FileUtils.saveFiles(reportForm.getReportImg(),String.valueOf(reportForm.getReportId()),new StringBuilder("E:\\gitImages").append("\\Profile").toString());
-	        	reportForm.setPublishingDate(DateUtills.getCurrentDate());
+	        	reportForm.setInsertedDate(DateUtills.getCurrentDate());
+	        	//reportForm.setPublishingDate(DateUtills.getCurrentDate());
 	        	reportForm.setFilePath(filePath);
 	        	industryReportFormService.save(reportForm);
 	        } catch (UserAlreadyExistsException e) {

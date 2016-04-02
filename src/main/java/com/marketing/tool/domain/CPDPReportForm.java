@@ -45,7 +45,7 @@ public class CPDPReportForm extends ReportForm{
 
 		@NotNull
 		@Column(name="headcount" , nullable=true)
-		private Integer headcount;
+		private String headcount;
 		@Transient
 		private String reportImage;
 		
@@ -135,17 +135,19 @@ public class CPDPReportForm extends ReportForm{
 
 
 
-		public Integer getHeadcount() {
+		
+		public String getHeadcount() {
 			return headcount;
 		}
 
 
 
-		public void setHeadcount(Integer headcount) {
+		public void setHeadcount(String headcount) {
 			this.headcount = headcount;
 		}
 
-		
+
+
 		public String getReportImage() {
 			return reportImage;
 		}

@@ -12,11 +12,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -51,6 +54,8 @@ public class ReportForm {
 	
 	
 	@NotEmpty
+	@Lob
+	@Size(max=1000)
 	@Column(name="industry" , nullable=false)
 	private String industry;
 	
@@ -59,34 +64,38 @@ public class ReportForm {
 	private String country;
 	
 	
-	@Column(name="publishingDate", nullable=true)
+	@Column(name="insertedDate", nullable=false)
 	@DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss.SSS")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date publishingDate;
-
+	private Date insertedDate;
+	@NotNull
 	@Column(name="price" , nullable=false)
-	private float price;
+	private String price;
 	
 	@NotEmpty
+	@Lob
+	@Size(max=1500)
 	@Column(name="overview" , nullable=false)
 	private String overview;
 	
 	@NotEmpty
+	@Lob
+	@Size(max=1500)
 	@Column(name="tableOfContents" , nullable=false)
 	private String tableOfContents;
 	
 	// new cloumns start
 	
 	
-	//@NotEmpty
-	@Column(name="updateCycle" , nullable=true)
+	@NotEmpty
+	@Column(name="updateCycle" , nullable=false)
 	private String updateCycle;
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report",cascade = CascadeType.ALL)
 	private List<ReportStatus> reportStatuses = null;
 
-	@Column(name="report" , nullable=true)
-	private byte[] report;
+	/*@Column(name="report" , nullable=true)
+	private byte[] report;*/
 	
 	@Column(name="filePath" , nullable=true)
 	private String filePath;
@@ -101,6 +110,9 @@ public class ReportForm {
 	@Transient
 	private MultipartFile reportImg;
 	
+	@NotEmpty
+	@Column(name="publishingDate", nullable=false)
+	private String publishingDate;
 
 	public Integer getPublisherId() {
 		return publisherId;
@@ -162,20 +174,22 @@ public class ReportForm {
 		this.country = country;
 	}
 
-	public Date getPublishingDate() {
+	
+
+	public Date getInsertedDate() {
+		return insertedDate;
+	}
+
+	public void setInsertedDate(Date insertedDate) {
+		this.insertedDate = insertedDate;
+	}
+
+	public String getPublishingDate() {
 		return publishingDate;
 	}
 
-	public void setPublishingDate(Date publishingDate) {
+	public void setPublishingDate(String publishingDate) {
 		this.publishingDate = publishingDate;
-	}
-
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
 	}
 
 	public String getOverview() {
@@ -210,13 +224,13 @@ public class ReportForm {
 		this.reportStatuses = reportStatuses;
 	}
 
-	public byte[] getReport() {
+	/*public byte[] getReport() {
 		return report;
 	}
 
 	public void setReport(byte[] report) {
 		this.report = report;
-	}
+	}*/
 	
 
 	public String getFilePath() {
@@ -225,6 +239,15 @@ public class ReportForm {
 
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
+	}
+	
+	
+	public String getPrice() {
+		return price;
+	}
+
+	public void setPrice(String price) {
+		this.price = price;
 	}
 
 	@Override
