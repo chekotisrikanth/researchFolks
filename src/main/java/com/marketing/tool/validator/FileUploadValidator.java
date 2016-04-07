@@ -2,13 +2,13 @@ package com.marketing.tool.validator;
 
 import org.springframework.validation.BindingResult;
 
-import com.marketing.tool.domain.CPDPReportForm;
+import com.marketing.tool.domain.ReportForm;
 
 public class FileUploadValidator 
 {
 	public static void validatefile(Object target, BindingResult result,String extention) {
 		
-		CPDPReportForm file = (CPDPReportForm)target;
+		ReportForm file = (ReportForm)target;
 		String ext = file.getReportImg().getOriginalFilename().split("\\.")[1];
 		
 		if(file.getReportImg().getSize()==0){

@@ -49,6 +49,7 @@ public class ReportForm {
 	private Integer reportId;
 	
 	@NotEmpty
+	@Size(max=100)
 	@Column(name="reportTitle" , nullable=false)
 	private String reportTitle;
 	
@@ -70,6 +71,7 @@ public class ReportForm {
 	private Date insertedDate;
 	@NotNull
 	@Column(name="price" , nullable=false)
+	@Size(max=20)
 	private String price;
 	
 	@NotEmpty

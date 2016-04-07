@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -16,11 +17,12 @@ public class CPDPReportForm extends ReportForm{
 		private Integer stockExchageId;
 		
 		@NotEmpty
+		@Size(max=20)
 		@Column(name="ticker" , nullable=true)
 		private String ticker;
 		
 		
-		@NotEmpty
+		//@NotEmpty
 		@Column(name="currency")
 		private String currency;
 		
@@ -29,12 +31,13 @@ public class CPDPReportForm extends ReportForm{
 		@Column(name="company_intl_type" , nullable=true)
 		private Integer comIntl;
 		
-		@NotEmpty
+		
 		@Column(name="revenue" , nullable=false)
+		@Size(max=20)
 		private String revenue;
 		
 		
-		@NotNull
+		//@NotNull
 		@Column(name="units" , nullable=true)
 		private Integer units;
 		
@@ -43,9 +46,11 @@ public class CPDPReportForm extends ReportForm{
 		private Integer reportType;
 		
 
-		@NotNull
+		
 		@Column(name="headcount" , nullable=true)
+		@Size(max=20)
 		private String headcount;
+		
 		@Transient
 		private String reportImage;
 		

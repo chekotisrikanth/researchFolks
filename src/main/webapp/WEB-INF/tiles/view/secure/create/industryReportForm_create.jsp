@@ -118,97 +118,121 @@
             <spring:bind path="reportTitle">
             <div class="form-group ${status.error ?'has-error':''} ">        	
 			<form:label class="col-md-3 control-label text-right" path="reportTitle"><spring:message code="indReportForm.reportTitle"/></form:label>	
-                <div class="col-md-10">
-                	<form:input path="reportTitle" class="form-control"/>
+                <div class="col-md-9">
+                	<form:input path="reportTitle" class="form-control" required="required"/>
 					<!--<form:errors path="reportTitle"/>-->
                 </div>
             </div>
             </spring:bind>
-			<div class="form-group">
-				<form:label path="industry" class="col-md-3 control-label text-right"><spring:message code="reportForm.industry"/></form:label>                    
-				<div class="col-md-9">
-					<form:textarea class="form-control" path="industry" rows="5" cols="30"/>
-					<form:errors path="industry"/>
+			<spring:bind path="industry">
+	            <div class="form-group ${status.error ?'has-error':''} ">
+					<form:label path="industry" class="col-md-3 control-label text-right"><spring:message code="reportForm.industry"/></form:label>                    
+					<div class="col-md-9">
+						<form:textarea class="form-control" path="industry" rows="5" cols="30" required="required"/>
+						<!--<form:errors path="industry"/>-->
+					</div>
 				</div>
-			</div>
-	   
-			<div class="form-group">
+		    </spring:bind>
+			<spring:bind path="country">
+	            <div class="form-group ${status.error ?'has-error':''} ">
 				<form:label class="col-md-3 control-label text-right" path="country"><spring:message code="reportForm.country"/></form:label>               
 				<div class="col-md-9">
-					<select id="country" name="country" class = "form-control">
+					<select id="country" name="country" class = "form-control form-temp" form-temp="${form.country}" required="required">
 						<option value="">Select Country</option>
 						<c:forEach items="${countryList}" var="country">
 							<option   value="${country.countryId}"  >${country.countryName}</option>
 						</c:forEach>
 					</select>
-				<form:errors path="country"/>                                                               
+				<!--<form:errors path="country"/>-->                                                               
 				</div>
 			</div>
-														   
+		</spring:bind>												   
 		<div class="form-group">
-			<form:label class="col-md-3 control-label text-right" path="publishingDate"><spring:message code="reportForm.publishingDate"/></form:label>
-			<div class="input-append date col-md-3">
-				<div class="input-group date date-input" id='startDate' >
-					<form:input class="form-control" path="publishingDate" id="publishingDate"/>                                                                                       
-					<span class="input-group-addon">
-									   <span class="glyphicon glyphicon-calendar"></span>
-					</span>
-					
+			 <spring:bind path="publishingDate">
+			             <div class="${status.error ?'has-error':''}">
+				<form:label class="col-md-3 control-label text-right" path="publishingDate"><spring:message code="reportForm.publishingDate"/></form:label>
+				<div class="input-append date col-md-3">
+					<div class="input-group date date-input" id='startDate' >
+						<form:input class="form-control" path="publishingDate" id="publishingDate" required="required"/>                                                                                       
+						<span class="input-group-addon">
+							 <span class="glyphicon glyphicon-calendar"></span>
+						</span>					
+					</div>
+					<!--<form:errors path="publishingDate"/>-->
+				</div>  
 				</div>
-				<form:errors path="publishingDate"/>
-			</div>  
-														   
-			<form:label path="price" class="col-md-2 control-label text-right"><spring:message code="reportForm.price"/></form:label>          
-			<div class="col-md-4">
-				<form:input class="form-control" path="price"/>
-				<form:errors path="price"/>                     
-			</div>
+		     </spring:bind>	
+		     <spring:bind path="price">
+			  <div class="${status.error ?'has-error':''}">									   
+				<form:label path="price" class="col-md-2 control-label text-right"><spring:message code="reportForm.price"/></form:label>          
+				<div class="col-md-4">
+					<form:input class="form-control" path="price" required="required"/>
+					<!--<form:errors path="price"/>-->                     
+				</div>
+				 </div>
+		    </spring:bind>
 		</div>
 		<div class="form-group">
-			<form:label class="col-md-3 control-label text-right" path="companyType"><spring:message code="indReportForm.companyType"/></form:label>                                                                
-			<div class="col-md-4">
-				<select class = "form-control cit" name="companyType">
-					<option value="1">Industry Report</option> //Upload either MS Word or PPT
-					<option value="2">Industry Database</option> //Upload MS Excel                                                                                    
-				  </select>      
-				  <form:errors path="companyType"/>                                                                                    
-			</div>
-			
-			<form:label class="col-md-2 control-label text-right" path="updateCycle"><spring:message code="reportForm.updateCycle"/></form:label>            	
-                
-                <div class="col-md-3">
-				 <select class = "form-control" name="updateCycle">
-                    <option value="Annually">Annually </option>
-					<option value="Half-Yearly">Half-Yearly</option>
-					<option value="Quarterly">Quarterly</option>
-					<option value="Monthly">Monthly</option>					
-					</select>
-                  </div>
-				<form:errors path="updateCycle"/>
-		</div>
-		<div class="form-group">
+			<spring:bind path="companyType">
+			   <div class="${status.error ?'has-error':''}">
+				<form:label class="col-md-3 control-label text-right" path="companyType"><spring:message code="indReportForm.companyType"/></form:label>                                                                
+				<div class="col-md-4">
+					<select class = "form-control cit" name="companyType" required="required">
+					<option value="">Select Intelligence</option>
+						<option value="1" ${form.companyType eq 1 ?'selected':''}>Industry Report</option> 
+						<option value="2" ${form.companyType eq 2 ?'selected':''}>Industry Database</option>                                                                               
+					  </select>      
+					  <!--<form:errors path="companyType"/>    -->                                                                                
+				</div>
+			  </div>
+			</spring:bind>
+			 <spring:bind path="updateCycle">
+			  <div class="${status.error ?'has-error':''}">	
+				<form:label class="col-md-2 control-label text-right" path="updateCycle"><spring:message code="reportForm.updateCycle"/></form:label>     
+					<div class="col-md-3">
+					 <select class = "form-control form-temp" name="updateCycle" form-temp="${form.updateCycle}" required="required">
+					 <option value="">Select Cycle</option>
+	                    <option value="Annually">Annually </option>
+						<option value="Half-Yearly">Half-Yearly</option>
+						<option value="Quarterly">Quarterly</option>
+						<option value="Monthly">Monthly</option>					
+						</select>
+	                </div>
+					<!--<form:errors path="updateCycle"/>-->
+				 </div>
+			</spring:bind>
+	   </div>
+		<spring:bind path="overview">
+	       <div class="form-group ${status.error ?'has-error':''} ">
 			<form:label path="overview" class="col-md-3 control-label text-right"><spring:message code="reportForm.overview"/></form:label> 
 			<div class="col-md-9">
-				<form:textarea class="form-control" path="overview" rows="3" cols="30" />
-				<form:errors path="overview"/>
+				<form:textarea class="form-control" path="overview" rows="3" cols="30" required="required"/>
+				<!--<form:errors path="overview"/>-->
 			</div>
 		</div>
-		 <div class="form-group">
+	  </spring:bind>
+		 <spring:bind path="tableOfContents">
+	       <div class="form-group ${status.error ?'has-error':''} ">
 			<form:label class="col-md-3 control-label text-right" path="tableOfContents"><spring:message code="reportForm.tableOfContents"/></form:label>                          
 			<div class="col-md-9">
-				<form:textarea class="form-control" path="tableOfContents" rows="3" cols="30" />
-				<form:errors path="tableOfContents"/>
+				<form:textarea class="form-control" path="tableOfContents" rows="3" cols="30" required="required"/>
+				<!--<form:errors path="tableOfContents"/>-->
 			</div>
-		</div>										   
-		<div class="form-group">
+		</div>
+		</spring:bind>										   
+		 <div class="form-group">
+	          <spring:bind path="reportImg">
+	            <div class="${status.error ?'has-error':''}">
 			<form:label class="col-md-3 control-label text-right" path="reportImg"><spring:message code="reportForm.report"/></form:label>
 			<div class="col-md-4">
-				<input type="file" name="reportImg"  />
-                <form:errors path="reportImg" />
+				<input type="file" name="reportImg" required="required" />
+               <div class="bg-danger"><form:errors path="reportImg" /> </div>
 			</div>
-			<div class="col-md-5 note">Note: Upload either MS Word or PPT</div>
-		</div>										   
-										   
+			</div>	
+			</spring:bind>
+			<div class="col-md-5 note bg-info">Note: Supported Formats are MS WORD,PPT and EXCEL</div>
+			
+			</div>								   
 		<div class="form-group">
 		<label class="col-md-3 control-label text-right">&nbsp;</label>
 			<div class="col-md-9">					
@@ -236,19 +260,27 @@
      
     
        <script>
+       
+       function appenduploadText (num) {
+    	   if($(num).val()==1) {
+				//alert('1');
+				$('.note').html("Note: Allowed Upload Types Are Either MS Word or PPT");
+			} else if($(num).val()==2) {
+				$('.note').html("Note: Allowed Upload Types Are MS Excel Only");
+			}
+   		}
         $(document).ready(function() {
+        	$(".form-temp").each(function(index,object) {
+        		//console.log($(this).attr('form-temp'));
+        		$(this).val($(this).attr('form-temp'));
+        	}); 
         	  //jQuery.noConflict();
             $(".open, .impatient").pageslide();
-			$(document).on('change', '.cit', function(){
-				if($(this).val()==1) {
-					//alert('1');
-					$('.note').html("Note: Allowed Upload Types Are Either MS Word or PPT");
-				} else if($(this).val()==2) {
-					$('.note').html("Note: Allowed Upload Types Are MS Excel Only");
-				}
+            appenduploadText($(".cit"));
+            $(document).on('change', '.cit', function(){
+				appenduploadText(this);
  				//$('#all_locations').append('<select name="loc_in_england" id="loc_in_england" class="location" ><option value="blank">Select</option><option value="london">London</option>');    
-		});
-			$('#publishingDate').val('');
+			});
 			$('#publishingDate').daterangepicker(
 				    { 
 				    	singleDatePicker: true				 

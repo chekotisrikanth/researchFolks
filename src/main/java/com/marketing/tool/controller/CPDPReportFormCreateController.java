@@ -40,9 +40,9 @@ import com.marketing.tool.validator.FileUploadValidator;
 
 @Controller
 public class CPDPReportFormCreateController {
-
+		
 	 private static final Logger LOGGER = LoggerFactory.getLogger(CPDPReportFormCreateController.class);
-	    
+	 private static String xlFormats ="xlsx,xlsm,xls";
 	   // @Autowired
 	    //private CPDPReportFormService cpdpPReportFormService;
 	 /*	@Autowired
@@ -83,7 +83,7 @@ public class CPDPReportFormCreateController {
 			if(reportForm.getReportImg() != null && reportForm.getReportImg().getSize() > 0){
 			String ext = reportForm.getReportImg().getOriginalFilename().split("\\.")[1];
 			if(reportForm.getComIntl() != null && reportForm.getComIntl().intValue() == 2)
-			    FileUploadValidator.validatefile(reportForm,result,".excel");
+			    FileUploadValidator.validatefile(reportForm,result,xlFormats);
 			else if(!((ext.contains("ppt") || ext.contains("docx") || ext.contains("doc"))))
 			 FileUploadValidator.validatefile(reportForm,result,"Other");
 			}

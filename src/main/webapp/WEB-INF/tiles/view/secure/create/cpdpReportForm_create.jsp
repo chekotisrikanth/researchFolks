@@ -29,7 +29,12 @@
       <script src = "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src = "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
-      
+      <style type="text/css">
+      	.dis-able 			{
+			    background-color: #DDD;
+			    color: #999;
+			}
+      </style>
     
       
    </head>
@@ -110,14 +115,14 @@
         </aside>
         <article class="col-md-9 noPaddRL">
         <div class="contentWraper">
-        <form:form class="form-horizontal alignHCenter" method="POST" action="/publish/cpdpReportForm_create.html" commandName="form" modelAttribute="form"
+        <form:form class="form-horizontal alignHCenter" onsubmit="return validateForm(event)" method="POST" action="/publish/cpdpReportForm_create.html" commandName="form" modelAttribute="form"
          enctype="multipart/form-data">
         
        		<spring:bind path="reportTitle">
             <div class="form-group ${status.error ?'has-error':''} ">        	
 			<form:label class="col-md-2 control-label text-right" path="reportTitle"><spring:message code="reportForm.reportTitle"/></form:label>	
                 <div class="col-md-10">
-                	<form:input path="reportTitle" class="form-control"/>
+                	<form:input path="reportTitle" class="form-control" required="required"/>
 					<!--<form:errors path="reportTitle"/>-->
                 </div>
             </div>
@@ -126,7 +131,7 @@
             <div class="form-group ${status.error ?'has-error':''} ">
 				<form:label class="col-md-2 control-label text-right" path="reportType"><spring:message code="reportForm.reportType"/></form:label>	
 	                <div class="col-md-10">
-	                	<select class = "form-control form-temp" name="reportType" form-temp="${form.reportType}">
+	                	<select class = "form-control form-temp reportType" name="reportType" form-temp="${form.reportType}" required="required">
 	                	 <option value="">Select CompanyType</option>  
 						 <option value="1">Public</option>
 						 <option value="2">Private</option>
@@ -141,15 +146,15 @@
             <div class="form-group ${status.error ?'has-error':''} ">
 			 <form:label path="industry" class="col-md-2 control-label text-right"><spring:message code="reportForm.industry"/></form:label>               	
                 <div class="col-md-10">
-                	<form:textarea class="form-control" path="industry" max-char="1000" rows="5" cols="30"/>
+                	<form:textarea class="form-control" path="industry" max-char="1000" rows="5" cols="30" required="required"/>
                 	<span class="text-info"></span>
 					<!--<form:errors path="industry"/>-->
                 </div>
              </div>			
 			</spring:bind>
-            <div class="form-group">
+            <div class="form-group stockex" style="display:none;">
             	<spring:bind path="stockExchageId">
-	             <div class="${status.error ?'has-error':''}">
+	             <div class="err-div ${status.error ?'has-error':''}">
 					<form:label path="stockExchageId" class="col-md-2 control-label text-right"><spring:message code="reportForm.stockExchange"/></form:label>            	
 	                <div class="input-append date col-md-4">
 	                    <select class = "form-control form-temp" name="stockExchageId" form-temp="${form.stockExchageId}">
@@ -163,7 +168,7 @@
 	              </div>
                 </spring:bind>
               <spring:bind path="ticker">
-	             <div class="${status.error ?'has-error':''}">
+	             <div class="err-div ${status.error ?'has-error':''}">
 					<form:label path="ticker" class="col-md-2 control-label text-right"><spring:message code="reportForm.ticker"/></form:label>	
 		                <div class="col-md-4">
 							<form:input class="form-control" path="ticker"/>
@@ -187,7 +192,7 @@
 	             <div class="${status.error ?'has-error':''}">
 				<form:label class="col-md-2 control-label text-right" path="country"><spring:message code="reportForm.country"/></form:label>	
                 <div class="col-md-4">
-                	<select id="country" name="country" class = "form-control form-temp" form-temp="${form.country}">
+                	<select id="country" name="country" class = "form-control form-temp" form-temp="${form.country}" required="required">
                         <option value="">Select Country</option> 
                         <c:forEach items="${countryList}" var="country">
                             <option   value="${country.countryId}"  >${country.countryName}</option>
@@ -199,21 +204,22 @@
              </spring:bind>
             </div>
             
-            <div class="form-group">
+            <div class="form-group ">
             <spring:bind path="revenue">
 	             <div class="${status.error ?'has-error':''}">
-				<form:label path="revenue" class="col-md-2 control-label text-right"><spring:message code="reportForm.revenue"/></form:label>	
+				<form:label path="revenue" class="col-md-2 control-label text-right "><spring:message code="reportForm.revenue"/></form:label>	
                 <div class="input-append date col-md-4" >
-					<form:input class="form-control" path="revenue" onblur="formatNumber(this)"/>
-				<!--	<form:errors path="revenue"/> -->               	
+					<form:input class="form-control revenue" path="revenue" onblur="formatNumber(this)"/>
+				<!--	<form:errors path="revenue"/> -->  
+				<span class="text-info"></span>             	
                 </div>
                 </div>
              </spring:bind>
 				<spring:bind path="units">
-	             <div class="${status.error ?'has-error':''}">
-				<form:label path="units" class="col-md-2 control-label text-right"><spring:message code="reportForm.units"/></form:label>            	
+	             <div class="err-div ${status.error ?'has-error':''}">
+				 <form:label path="units" class="col-md-2 control-label text-right"><spring:message code="reportForm.units"/></form:label>            	
                 <div class="col-md-4">
-                 <select class = "form-control form-temp" name="units" form-temp="${form.units}">
+                 <select class = "form-control form-temp currency dis-able dis-able-supp" name="units" form-temp="${form.units}" >
                  	<option value="">Select Units</option> 
 					 <option value="1">Thousands</option>
 					 <option value="2">Millions</option>
@@ -228,10 +234,10 @@
             
             <div class="form-group">
 	            <spring:bind path="currency">
-		             <div class="${status.error ?'has-error':''}">
+		             <div class="err-div ${status.error ?'has-error':''}">
 					 	<form:label path="currency" class="col-md-2 control-label text-right"><spring:message code="indReportForm.currency"/></form:label>	            	
 			                <div class="input-append date col-md-4">
-			                  <select class = "form-control form-temp" name="currency" form-temp="${form.currency}">
+			                  <select class = "form-control form-temp currency dis-able dis-able-supp" name="currency" form-temp="${form.currency}" >
 			                  	<option value="">Select Currency</option> 
 								 <option value="US$">US$</option>
 								 <option value="GBP">GBP</option>
@@ -249,7 +255,7 @@
 					<div class="${status.error ?'has-error':''}">
 						<form:label path="price" class="col-md-2 control-label text-right"><spring:message code="reportForm.price"/></form:label>	
 						<div class="col-md-4">
-							<form:input class="form-control" path="price" onblur="formatNumber(this)" />
+							<form:input class="form-control" path="price" onblur="formatNumber(this)" required="required" />
 							<!--	<form:errors path="price"/>     -->           	
 						</div> 
 					 </div>
@@ -261,7 +267,7 @@
 					<form:label class="col-md-2 control-label text-right" path="publishingDate"><spring:message code="reportForm.publishingDate"/></form:label>
 					<div class="input-append date col-md-4">
 						<div class="input-group date date-input" id='startDate' >
-							 <form:input class="form-control form-temp" path="publishingDate" id="publishingDate" form-temp="${form.publishingDate}"/>					                     
+							 <form:input class="form-control form-temp" path="publishingDate" id="publishingDate" form-temp="${form.publishingDate}" required="required"/>					                     
 							<span class="input-group-addon ">
 								   <span class="glyphicon glyphicon-calendar"></span>
 							</span>							
@@ -275,7 +281,7 @@
 		            <div class="${status.error ?'has-error':''}">
 						<form:label class="col-md-2 control-label text-right" path="updateCycle"><spring:message code="reportForm.updateCycle"/></form:label>            	
 	                    <div class="col-md-4">
-						 <select class = "form-control form-temp" name="updateCycle" form-temp="${form.updateCycle}">
+						 <select class = "form-control form-temp" name="updateCycle" form-temp="${form.updateCycle}" required="required">
 						   <option value="">Select Cycle</option> 
 		                    <option value="Annually" >Annually </option>
 							<option value="Half-Yearly" >Half-Yearly</option>
@@ -292,7 +298,7 @@
 	             <div class="form-group ${status.error ?'has-error':''} ">    			
 					<form:label class="col-md-2 control-label text-right" path="comIntl"><spring:message code="reportForm.comIntl"/></form:label> 				
 					<div class="col-md-4">
-					 <select class = "form-control cit" name="comIntl">
+					 <select class = "form-control cit" name="comIntl" required="required">
 					  <option value="">Select Intelligence</option>
 						 <option value="1" ${form.comIntl eq 1 ?'selected':''}>Company Report</option> 
 						 <option value="2" ${form.comIntl eq 2 ?'selected':''}>Company Database</option> 				
@@ -304,7 +310,7 @@
             <spring:bind path="overview">
 	            <div class="form-group ${status.error ?'has-error':''} ">    
 					<form:label path="overview" class="col-md-2 control-label text-right"><spring:message code="reportForm.overview"/></form:label>  <div class="col-md-10">
-	                	<form:textarea class="form-control" max-char="1500" path="overview" rows="3" cols="30" />
+	                	<form:textarea class="form-control" max-char="1500" path="overview" rows="3" cols="30" required="required"/>
 	                	<span class="text-info"></span>
 						<!--<form:errors path="overview"/> -->
 	                </div>
@@ -314,7 +320,7 @@
 	            <div class="form-group ${status.error ?'has-error':''} ">    
 					<form:label class="col-md-2 control-label text-right" path="tableOfContents"><spring:message code="reportForm.tableOfContents"/></form:label>            	
 	                <div class="col-md-10">
-	                	<form:textarea class="form-control" max-char="1500" path="tableOfContents" rows="3" cols="30" />
+	                	<form:textarea class="form-control" max-char="1500" path="tableOfContents" rows="3" cols="30" required="required"/>
 						<!--<form:errors path="tableOfContents"/> -->
 						<span class="text-info"></span>
 	                </div>
@@ -323,7 +329,7 @@
              <div class="form-group">
 				<form:label class="col-md-2 control-label text-right" path="reportImg"><spring:message code="reportForm.report"/></form:label>
                 <div class="col-md-4">
-                	<input type="file" name="reportImg"  />
+                	<input type="file" name="reportImg"  required="required"/>
                 	
                 	 <div class="bg-danger"><form:errors path="reportImg" /> </div>
                </div>
@@ -361,7 +367,7 @@
     	  var formatter = modified.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
    	   	  return num.value=formatter;
    		}
-       
+      
        function appenduploadText (num) {
     	   if($(num).val()==1) {
 				//alert('1');
@@ -370,37 +376,135 @@
 				$('.note').html("Note: Allowed Upload Types Are MS Excel Only");
 			}
    		}
-       
-       $("textarea").keyup(function(){
-    	   $(this).next().html("Characters left: " + ($(this).attr("max-char") - $(this).val().length));
-    	 });
-       
-        $(document).ready(function() {
+       function hideStockExchange (num) {
+    	   if($(num).val()==1) {
+				//alert('1');
+    		   $('.stockex').show();
+			} else {
+				$('.stockex').hide();
+			}
+   		}
+       var validateForm = function(event){
+    	    /* validate here */
+    	    var helper = validateFormHelper();
+    	    console.log(helper);
+    	    if(!helper && event.preventDefault)
+    	        event.preventDefault();
+    	    else
+    	        event.returnValue = helper;
+    	};
+       function validateFormHelper() {
+	   	var validateFlag= true;
+	   	//stack exchange validation
+    	var form = $("form"); 
+		var repType = $("[name='reportType']", form).val();
+		var stoackId = $("[name='stockExchageId']", form).val();
+		var tickerValue = $("[name='ticker']", form).val();
+		 
+		//currency validation
+	   	 if (repType === "1"  ) {
+	   		if(stoackId == null || stoackId == "" ) {	   			
+	   			$("[name='stockExchageId']", form).parentsUntil(".err-div").addClass('has-error');
+	   			validateFlag = false;
+	   		} else {
+	   			$("[name='stockExchageId']", form).parentsUntil(".err-div").removeClass('has-error');
+	   		}
+	   		if(tickerValue == null || tickerValue == "" ) {
+	   			$("[name='ticker']", form).parentsUntil(".err-div").addClass('has-error');
+	   			validateFlag = false;
+	   		}else {
+	   			$("[name='ticker']", form).parentsUntil(".err-div").removeClass('has-error');
+	   		}
+	   		
+	   	 }
+	   	 
+	   	var revenue = $("[name='revenue']", form).val();
+		var currency = $("[name='currency']", form).val();
+		var units = $("[name='units']", form).val();
+		//currency validation
+    	if (revenue != null || revenue != "" ) {
+	   		if(currency == null || currency == "" ) {	   			
+	   			$("[name='currency']", form).parentsUntil(".err-div").addClass('has-error');
+	   			validateFlag = false;
+	   		} else {
+	   			$("[name='currency']", form).parentsUntil(".err-div").removeClass('has-error');
+	   		}
+	   		if(units == null || units == "" ) {
+	   			$("[name='units']", form).parentsUntil(".err-div").addClass('has-error');
+	   			validateFlag = false;
+	   		}else {
+	   			$("[name='units']", form).parentsUntil(".err-div").removeClass('has-error');
+	   		}
+	   		
+	   	 }
+		return validateFlag;
+       }
+        $(document).ready(function() {   
+        	//alert($.browser.mozilla);
+        	$('.dis-able-supp').click(function (event) {
+        		if( $(".dis-able-supp").hasClass("dis-able")) {
+        			 $(".dis-able-supp").attr("disabled",true);
+            		 $( ".dis-able-supp" ).removeClass( "dis-able" );
+            		 $(".revenue").next().html("Enter Revenue To Choose Currency And Units");
+            		 $(".revenue").focus();
+        		}
+        		
+			});
+        	//based on revinue enable the text boxes
+        	$("textarea").keyup(function(){
+         	   $(this).next().html("Characters left: " + ($(this).attr("max-char") - $(this).val().length));
+         	 });
+        	
+        	$(".revenue").on('keyup', function(event) {
+        		$( ".dis-able-supp" ).removeClass( "dis-able" );
+        		console.log( $('.revenue').val().length);
+        		 if( $('.revenue').val().length >=1) {
+        			 
+        	      	 $(".dis-able-supp").attr("disabled",false);
+        	      } else {
+        	          $(".dis-able-supp").attr("disabled",true);
+        	       }
+        	});
+        	
+        	//max character setting for textarea
+        	//$(".revenue").keypress(function(){
+         	//  if( $(this).val().length >=1) {
+         	//	 $(".dis-able").attr("disabled",false);
+         	//  } else {
+         	//	 $(".dis-able").attr("disabled",true);
+         	//  }
+         	  
+         	 //});
         	
         	appenduploadText($(".cit"));
-
+        	//keeping form state
         	$(".form-temp").each(function(index,object) {
         		//console.log($(this).attr('form-temp'));
         		$(this).val($(this).attr('form-temp'));
-        	});
-        	
+        	});        	
             $(".open, .impatient").pageslide();
-           
+           //Set Corresponding Upload Types
 			$(document).on('change', '.cit', function(){
 				appenduploadText(this);
  				//$('#all_locations').append('<select name="loc_in_england" id="loc_in_england" class="location" ><option value="blank">Select</option><option value="london">London</option>');    
 			});
+			if($(".reportType").val() === "1") {
+				hideStockExchange($(".reportType"));
+			}
 			
-		//$("#publishingDate").daterangepicker("destroy");
-		// $('#publishingDate').val('');
-		 $('#publishingDate').daterangepicker({ 
-			 singleDatePicker: true ,
-			 showDropdowns: true
-		 }, function(start, end, label) {
-		       
-		 }); //dtpicker
+           //based on type hide divs
+			$(document).on('change', '.reportType', function(){
+				hideStockExchange(this);
+			});			
+			// $('#publishingDate').val('');
+			 $('#publishingDate').daterangepicker({ 
+				 singleDatePicker: true ,
+				 showDropdowns: true
+			 }, function(start, end, label) {
+			       
+			 }); //dtpicker
 		
-     }); //ready end
+    	 }); //ready end
 		
     </script>
      </div> 
