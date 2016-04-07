@@ -12,11 +12,11 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class CPDPReportForm extends ReportForm{
 	
 
-		@NotNull
+		//@NotNull
 		@Column(name="stock_exchange_id" , nullable=true)
 		private Integer stockExchageId;
 		
-		@NotEmpty
+		//@NotEmpty
 		@Size(max=20)
 		@Column(name="ticker" , nullable=true)
 		private String ticker;

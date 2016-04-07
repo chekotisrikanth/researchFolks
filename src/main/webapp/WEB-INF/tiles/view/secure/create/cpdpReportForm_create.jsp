@@ -387,10 +387,6 @@
        var validateForm = function(event){
     	    /* validate here */
     	    var helper = validateFormHelper();
-    	    console.log(helper);
-    	    if(!helper && event.preventDefault)
-    	        event.preventDefault();
-    	    else
     	        event.returnValue = helper;
     	};
        function validateFormHelper() {
@@ -454,6 +450,10 @@
         	$("textarea").keyup(function(){
          	   $(this).next().html("Characters left: " + ($(this).attr("max-char") - $(this).val().length));
          	 });
+        	if( $('.revenue').val().length >=1) {
+        		 $(".dis-able-supp").attr("disabled",false);
+        		 $( ".dis-able-supp" ).removeClass( "dis-able" );
+        	}
         	
         	$(".revenue").on('keyup', function(event) {
         		$( ".dis-able-supp" ).removeClass( "dis-able" );
