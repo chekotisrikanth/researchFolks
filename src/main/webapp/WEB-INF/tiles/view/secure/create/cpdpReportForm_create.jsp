@@ -115,6 +115,7 @@
         </aside>
         <article class="col-md-9 noPaddRL">
         <div class="contentWraper">
+        <!--onsubmit="return validateForm(event)" -->
         <form:form class="form-horizontal alignHCenter" onsubmit="return validateForm(event)" method="POST" action="/publish/cpdpReportForm_create.html" commandName="form" modelAttribute="form"
          enctype="multipart/form-data">
         
@@ -183,7 +184,7 @@
 	             <div class="${status.error ?'has-error':''}">
 				<form:label path="headcount" class="col-md-2 control-label text-right"><spring:message code="reportForm.headcount"/></form:label>	
                 <div class="input-append date col-md-4">
-					<form:input class="form-control" path="headcount" onblur="formatNumber(this)"/>
+					<form:input class="form-control opt-field" path="headcount" onblur="formatNumber(this)"/>
 					<!--<form:errors path="headcount"/>  -->              	
                 </div>
                 </div>
@@ -209,7 +210,7 @@
 	             <div class="${status.error ?'has-error':''}">
 				<form:label path="revenue" class="col-md-2 control-label text-right "><spring:message code="reportForm.revenue"/></form:label>	
                 <div class="input-append date col-md-4" >
-					<form:input class="form-control revenue" path="revenue" onblur="formatNumber(this)"/>
+					<form:input class="form-control revenue opt-field" path="revenue" onblur="formatNumber(this)"/>
 				<!--	<form:errors path="revenue"/> -->  
 				<span class="text-info"></span>             	
                 </div>
@@ -346,7 +347,7 @@
 </form:form>
             </div>
         </article>
-        
+         <div id="displayAlertMsg"></div>
       </section>
       
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
@@ -359,6 +360,8 @@
       <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script>
       <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
       <script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>
+      <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/popuputil.js" ></script>
+      
        <script>
        function formatNumber (num) {
     	   //console.log(num);
@@ -384,10 +387,35 @@
 				$('.stockex').hide();
 			}
    		}
-       var validateForm = function(event){
-    	    /* validate here */
-    	    var helper = validateFormHelper();
-    	        event.returnValue = helper;
+	   var validateForm = function(event){    	 
+	   	    var helper = validateFormHelper();  
+	   	    if(!helper) {
+	   	    	return helper;
+	   	    } 
+	   	  var str='';
+	   	  
+	   	  $(".opt-field").each(function(index,object) {
+	   	
+	   		  if($(this).val().length<=1) {
+	   			  if(index ==0) {	  	   			
+	  	   			str+='<div class="col-md-12  bg-info"><h4>Following Optional Fields Are Not Filled..Still Want to Continue....</h4></div>';	  	   			
+	  	   			str+='<div class="col-md-12"/>';	  	   			
+	  	   		  }
+	   			  var lab = $("label[for='"+$(this).attr('name')+"']").html();	  
+	   			str+='<div class="row">';
+	   			str+=' <div class="col-md-6 col-md-offset-3 text-success"><h4>'+lab+'</h4></div>';
+	   			str+='</div>';
+	   		  }
+	   		  
+	   	  });
+	   	  if(str.length>1) {
+	   		str+='</div>';
+	   		event.preventDefault();
+	   		confirmationDialog(str);
+	   	  }else {
+	   		$("form").submit();
+	   	  }  	  
+	   	  
     	};
        function validateFormHelper() {
 	   	var validateFlag= true;
@@ -399,15 +427,19 @@
 		 
 		//currency validation
 	   	 if (repType === "1"  ) {
-	   		if(stoackId == null || stoackId == "" ) {	   			
-	   			$("[name='stockExchageId']", form).parentsUntil(".err-div").addClass('has-error');
+	   		if(stoackId == null || stoackId == "" ) {
+	   			var stockExchange = $("[name='stockExchageId']", form);
+	   			stockExchange.parentsUntil(".err-div").addClass('has-error');
 	   			validateFlag = false;
+	   			stockExchange.focus();
 	   		} else {
 	   			$("[name='stockExchageId']", form).parentsUntil(".err-div").removeClass('has-error');
 	   		}
 	   		if(tickerValue == null || tickerValue == "" ) {
-	   			$("[name='ticker']", form).parentsUntil(".err-div").addClass('has-error');
+	   			var ticker = $("[name='ticker']", form);
+	   			ticker.parentsUntil(".err-div").addClass('has-error');
 	   			validateFlag = false;
+	   			ticker.focus();
 	   		}else {
 	   			$("[name='ticker']", form).parentsUntil(".err-div").removeClass('has-error');
 	   		}
@@ -418,16 +450,20 @@
 		var currency = $("[name='currency']", form).val();
 		var units = $("[name='units']", form).val();
 		//currency validation
-    	if (revenue != null || revenue != "" ) {
-	   		if(currency == null || currency == "" ) {	   			
-	   			$("[name='currency']", form).parentsUntil(".err-div").addClass('has-error');
+    	if (revenue != "" ) {
+	   		if(currency == null || currency == "" ) {	 
+	   			var currencyObj = $("[name='currency']", form);
+	   			currencyObj.parentsUntil(".err-div").addClass('has-error');
 	   			validateFlag = false;
+	   			currencyObj.focus();
 	   		} else {
 	   			$("[name='currency']", form).parentsUntil(".err-div").removeClass('has-error');
 	   		}
 	   		if(units == null || units == "" ) {
-	   			$("[name='units']", form).parentsUntil(".err-div").addClass('has-error');
+	   			var unitsObj = $("[name='units']", form);
+	   			unitsObj.parentsUntil(".err-div").addClass('has-error');
 	   			validateFlag = false;
+	   			unitsObj.focus();
 	   		}else {
 	   			$("[name='units']", form).parentsUntil(".err-div").removeClass('has-error');
 	   		}
@@ -435,7 +471,16 @@
 	   	 }
 		return validateFlag;
        }
-        $(document).ready(function() {   
+        $(document).ready(function() {
+        	$(document).on('click', '.formSubmit', function(){
+        		 $("form").attr("onsubmit","");
+        		 $("form").submit();
+			});
+        	/* $(document).on('click', '.sncButton', function(){
+        		validateForm(this.event);
+			}); */
+        	
+        	
         	//alert($.browser.mozilla);
         	$('.dis-able-supp').click(function (event) {
         		if( $(".dis-able-supp").hasClass("dis-able")) {
@@ -457,7 +502,7 @@
         	
         	$(".revenue").on('keyup', function(event) {
         		$( ".dis-able-supp" ).removeClass( "dis-able" );
-        		console.log( $('.revenue').val().length);
+        		//console.log( $('.revenue').val().length);
         		 if( $('.revenue').val().length >=1) {
         			 
         	      	 $(".dis-able-supp").attr("disabled",false);
