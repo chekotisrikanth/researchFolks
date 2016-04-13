@@ -104,6 +104,7 @@ public class Application extends SpringBootServletInitializer {
 			
 			  http.authorizeRequests()
 			  	.antMatchers("/public/**", "/home").permitAll()
+			  	.antMatchers("/freefolk/**", "/home").permitAll()
 			  	.antMatchers("/console/**").permitAll()
 			  	.antMatchers("/admin/**").access("hasRole('ADMIN')")
 			  	.antMatchers("/publish/**").access("hasRole('AUTHOR')")

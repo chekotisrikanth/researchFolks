@@ -344,6 +344,7 @@
                         <!-- <button class="btn btn-primary btn-lg pull-right" type="submit">Save</button> -->
                     </div>
             </div>
+            <input type="hidden" name="repTypeId" value="1">
 </form:form>
             </div>
         </article>

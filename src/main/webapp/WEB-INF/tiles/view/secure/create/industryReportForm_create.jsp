@@ -173,16 +173,16 @@
 		    </spring:bind>
 		</div>
 		<div class="form-group">
-			<spring:bind path="companyType">
+			<spring:bind path="comIntl">
 			   <div class="${status.error ?'has-error':''}">
-				<form:label class="col-md-3 control-label text-right" path="companyType"><spring:message code="indReportForm.companyType"/></form:label>                                                                
+				<form:label class="col-md-3 control-label text-right" path="comIntl"><spring:message code="indReportForm.comIntl"/></form:label>                                                                
 				<div class="col-md-4">
-					<select class = "form-control cit" name="companyType" required="required">
+					<select class = "form-control cit" name=comIntl required="required">
 					<option value="">Select Intelligence</option>
-						<option value="1" ${form.companyType eq 1 ?'selected':''}>Industry Report</option> 
-						<option value="2" ${form.companyType eq 2 ?'selected':''}>Industry Database</option>                                                                               
+						<option value="3" ${form.comIntl eq 3 ?'selected':''}>Industry Report</option> 
+						<option value="4" ${form.comIntl eq 4 ?'selected':''}>Industry Database</option>                                                                               
 					  </select>      
-					  <!--<form:errors path="companyType"/>    -->                                                                                
+					                                                                        
 				</div>
 			  </div>
 			</spring:bind>
@@ -239,6 +239,7 @@
 					<button class="btn btn-primary btn-lg sncButton pull-right" type="submit">Save & Submit</button>
 				</div>
 		</div>
+		<input type="hidden" name="repTypeId" value="2">
      </form:form>
             </div>
         </article>

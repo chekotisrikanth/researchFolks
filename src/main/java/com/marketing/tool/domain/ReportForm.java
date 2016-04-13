@@ -69,7 +69,7 @@ public class ReportForm {
 	@DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss.SSS")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date insertedDate;
-	@NotNull
+	@NotEmpty
 	@Column(name="price" , nullable=false)
 	@Size(max=20)
 	private String price;
@@ -95,6 +95,12 @@ public class ReportForm {
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report",cascade = CascadeType.ALL)
 	private List<ReportStatus> reportStatuses = null;
+	
+	
+/*	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report",cascade = CascadeType.ALL)
+	private List<CPDPReportForm> cdpdReport = null;*/
+	
+	
 
 	/*@Column(name="report" , nullable=true)
 	private byte[] report;*/
@@ -106,8 +112,9 @@ public class ReportForm {
 	private Integer publisherId;
 	@Transient
 	private Integer reporterId;
-	
-	
+	@NotNull
+	@Column(name="reptype_id" , nullable=false)
+	private Integer repTypeId;
 	
 	@Transient
 	private MultipartFile reportImg;
@@ -250,6 +257,15 @@ public class ReportForm {
 
 	public void setPrice(String price) {
 		this.price = price;
+	}
+	
+	
+	public Integer getRepTypeId() {
+		return repTypeId;
+	}
+
+	public void setRepTypeId(Integer repTypeId) {
+		this.repTypeId = repTypeId;
 	}
 
 	@Override

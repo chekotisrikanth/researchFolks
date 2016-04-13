@@ -99,7 +99,7 @@ public class IndustryReportFormCreateController {
 			
 	        if(reportForm.getReportImg() != null && reportForm.getReportImg().getSize() > 0){
 				String ext = reportForm.getReportImg().getOriginalFilename().split("\\.")[1];
-				if(reportForm.getCompanyType() != null && reportForm.getCompanyType() == "2")
+				if(reportForm.getComIntl() != null && reportForm.getComIntl().equals(4))
 				    FileUploadValidator.validatefile(reportForm,result,".excel");
 				else if(!(ext.contains("ppt") || ext.contains("docx") || ext.contains("doc")))
 				 FileUploadValidator.validatefile(reportForm,result,"Other");

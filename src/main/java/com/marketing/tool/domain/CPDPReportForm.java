@@ -2,6 +2,9 @@ package com.marketing.tool.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -52,7 +55,22 @@ public class CPDPReportForm extends ReportForm{
 		@Transient
 		private String reportImage;
 		
+		@ManyToOne(fetch = FetchType.LAZY)
+		@JoinColumn(name = "report_id", insertable = false, updatable = false)
+		private ReportForm report;
 		
+
+		public ReportForm getReport() {
+			return report;
+		}
+
+
+
+		public void setReport(ReportForm report) {
+			this.report = report;
+		}
+
+
 
 	public Integer getStockExchageId() {
 			return stockExchageId;

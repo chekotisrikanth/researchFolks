@@ -2,8 +2,7 @@ package com.marketing.tool.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class IndustryReportForm extends ReportForm {
@@ -11,20 +10,17 @@ public class IndustryReportForm extends ReportForm {
 	
 	
 	
-	@NotEmpty
-	@Column(name="companyType",nullable=false)
-	private String companyType;
+	@NotNull
+	@Column(name="company_intl_type",nullable=false)
+	private Integer comIntl;
 	
-	
-	public String getCompanyType() {
-		return companyType;
+	public Integer getComIntl() {
+		return comIntl;
 	}
 
-
-	public void setCompanyType(String companyType) {
-		this.companyType = companyType;
+	public void setComIntl(Integer comIntl) {
+		this.comIntl = comIntl;
 	}
-
 
 	@Override
 	public String toString() {
