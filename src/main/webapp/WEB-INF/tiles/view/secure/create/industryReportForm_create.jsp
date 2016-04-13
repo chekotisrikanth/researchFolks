@@ -128,8 +128,9 @@
 	            <div class="form-group ${status.error ?'has-error':''} ">
 					<form:label path="industry" class="col-md-3 control-label text-right"><spring:message code="reportForm.industry"/></form:label>                    
 					<div class="col-md-9">
-						<form:textarea class="form-control" path="industry" rows="5" cols="30" required="required"/>
+						<form:textarea class="form-control" path="industry" max-char="1000" rows="5" cols="30" required="required"/>
 						<!--<form:errors path="industry"/>-->
+						<span class="text-info"></span>
 					</div>
 				</div>
 		    </spring:bind>
@@ -177,10 +178,10 @@
 			   <div class="${status.error ?'has-error':''}">
 				<form:label class="col-md-3 control-label text-right" path="comIntl"><spring:message code="indReportForm.comIntl"/></form:label>                                                                
 				<div class="col-md-4">
-					<select class = "form-control cit" name=comIntl required="required">
+					<select class = "form-control cit" name="comIntl" required="required">
 					<option value="">Select Intelligence</option>
-						<option value="3" ${form.comIntl eq 3 ?'selected':''}>Industry Report</option> 
-						<option value="4" ${form.comIntl eq 4 ?'selected':''}>Industry Database</option>                                                                               
+						<option value=1 ${form.comIntl eq 1 ?'selected':''}>Industry Report</option> 
+						<option value=2 ${form.comIntl eq 2 ?'selected':''}>Industry Database</option>                                                                               
 					  </select>      
 					                                                                        
 				</div>
@@ -206,8 +207,9 @@
 	       <div class="form-group ${status.error ?'has-error':''} ">
 			<form:label path="overview" class="col-md-3 control-label text-right"><spring:message code="reportForm.overview"/></form:label> 
 			<div class="col-md-9">
-				<form:textarea class="form-control" path="overview" rows="3" cols="30" required="required"/>
+				<form:textarea class="form-control" path="overview" max-char="1500" rows="3" cols="30" required="required"/>
 				<!--<form:errors path="overview"/>-->
+				<span class="text-info"></span>
 			</div>
 		</div>
 	  </spring:bind>
@@ -215,8 +217,9 @@
 	       <div class="form-group ${status.error ?'has-error':''} ">
 			<form:label class="col-md-3 control-label text-right" path="tableOfContents"><spring:message code="reportForm.tableOfContents"/></form:label>                          
 			<div class="col-md-9">
-				<form:textarea class="form-control" path="tableOfContents" rows="3" cols="30" required="required"/>
+				<form:textarea class="form-control" path="tableOfContents" max-char="1500" rows="3" cols="30" required="required"/>
 				<!--<form:errors path="tableOfContents"/>-->
+				<span class="text-info"></span>
 			</div>
 		</div>
 		</spring:bind>										   
@@ -263,6 +266,7 @@
        <script>
        
        function appenduploadText (num) {
+    	  
     	   if($(num).val()==1) {
 				//alert('1');
 				$('.note').html("Note: Allowed Upload Types Are Either MS Word or PPT");
@@ -275,10 +279,13 @@
         		//console.log($(this).attr('form-temp'));
         		$(this).val($(this).attr('form-temp'));
         	}); 
+        	$("textarea").keyup(function(){
+          	   $(this).next().html("Characters left: " + ($(this).attr("max-char") - $(this).val().length));
+          	 });
         	  //jQuery.noConflict();
             $(".open, .impatient").pageslide();
             appenduploadText($(".cit"));
-            $(document).on('change', '.cit', function(){
+            $(document).on('change', '.cit', function(){            	
 				appenduploadText(this);
  				//$('#all_locations').append('<select name="loc_in_england" id="loc_in_england" class="location" ><option value="blank">Select</option><option value="london">London</option>');    
 			});
