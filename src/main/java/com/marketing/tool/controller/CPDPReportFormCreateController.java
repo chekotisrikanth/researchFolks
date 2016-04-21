@@ -1,6 +1,7 @@
 package com.marketing.tool.controller;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -9,6 +10,7 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +23,21 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.marketing.tool.domain.CPDPReportForm;
 import com.marketing.tool.domain.Country;
+import com.marketing.tool.domain.MasterIndustries;
+import com.marketing.tool.domain.MasterIndustriesView;
 import com.marketing.tool.domain.ReportForm;
 import com.marketing.tool.exception.UserAlreadyExistsException;
 import com.marketing.tool.service.CPDPReportFormService;
 import com.marketing.tool.service.CountryStateService;
+import com.marketing.tool.service.MasterIndustriesService;
 import com.marketing.tool.service.StockExchangeService;
 import com.marketing.tool.utility.DateUtills;
 import com.marketing.tool.utility.FileUtils;
@@ -50,13 +58,15 @@ public class CPDPReportFormCreateController {
 	 	
 	 	@Autowired
 	    private CPDPReportFormService cpdpPReportFormService;
+	 	
 	    @Autowired
 		 private CountryStateService countryStateService;
 	    
 	    @Autowired
-	    
 	    private StockExchangeService stockExchangeService;
 	
+	    @Autowired
+	    private MasterIndustriesService masterIndustriesService;
 	   	    
 	    @InitBinder("form")
 	    public void initBinder(WebDataBinder binder) {
@@ -151,4 +161,36 @@ public class CPDPReportFormCreateController {
 			model.addObject("stocksList",stockExchangeService.findAll());
 		}
 	    
+	    public String getJsonElement(List<MasterIndustriesView> bean) {
+			String element = null;
+			 GsonBuilder gsonbuilder=new GsonBuilder();
+	         
+	         Gson gson =  gsonbuilder.setExclusionStrategies(new com.google.gson.ExclusionStrategy() {  
+	             public boolean shouldSkipField(com.google.gson.FieldAttributes fieldAttributes) {  
+	               return "masterIndustries".equals(fieldAttributes.getName())
+	            		   || "miChildId".equals(fieldAttributes.getName())
+	            		   || "miUpdTs".equals(fieldAttributes.getName()	   
+	            				   );  
+	             }  
+	             public boolean shouldSkipClass(Class<?> arg0) {  
+	               return false;  
+	             }  
+	           }).create();           
+	         element =  gson.toJson(bean);
+	         return element;
+		}
+	    
+	    @RequestMapping(value = "/public/loadIndustries.json", headers = "Accept=*/*",produces = "application/json", method = RequestMethod.GET)
+	    public @ResponseBody
+	    String loadIndustries() throws IllegalStateException, IllegalAccessException, InvocationTargetException {
+	    	List<MasterIndustries> industries = masterIndustriesService.findAllIndustries();
+	    	List<MasterIndustriesView> newBeans = new ArrayList();
+	    	for(MasterIndustries indus : industries) {
+	    		MasterIndustriesView newbean = new MasterIndustriesView();
+	    		BeanUtils.copyProperties(newbean, indus);
+	    		newBeans.add(newbean);
+	    	}
+	        return getJsonElement(newBeans);
+	    }
+
 }

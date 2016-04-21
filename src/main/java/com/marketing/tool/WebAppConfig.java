@@ -14,5 +14,6 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
              registry.addResourceHandler("/js/**").addResourceLocations("classpath:/js/");  
              registry.addResourceHandler("/images/**").addResourceLocations("classpath:/images/"); 
              registry.addResourceHandler("/fonts/**").addResourceLocations("classpath:/fonts/"); 
+             registry.addResourceHandler("/tree/**").addResourceLocations("classpath:/tree/"); 
      }  
 }
