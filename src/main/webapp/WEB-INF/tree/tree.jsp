@@ -17,6 +17,11 @@
     </style>
 
 
+ <div class="modal" style="display: none">
+        <div class="center">
+            <img alt="" src="/images/loader.gif" />
+        </div>
+    </div>
 
                     
                         <div id="jstree-proton-3" style="margin-top:20px;" class="proton-demo"></div>
@@ -29,6 +34,18 @@
  <script>
     $(function() {
     	
+    	 $.ajaxSetup({
+             global: false,
+             type: "GET",
+             url: "http://www.telize.com/jsonip",
+             beforeSend: function () {
+                 $(".modal").show();
+             },
+             complete: function () {
+                 $(".modal").hide();
+             }
+         });
+
     	$.ajax({
             async : true,
             type : "GET",
