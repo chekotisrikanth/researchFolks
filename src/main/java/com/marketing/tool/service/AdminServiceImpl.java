@@ -1,5 +1,7 @@
 package com.marketing.tool.service;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
+import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.User;
 import com.marketing.tool.repository.AdminRepository;
 
@@ -40,5 +43,7 @@ public class AdminServiceImpl extends UserServiceImpl implements AdminService {
 		user.setUserProfiles(roles);*/
 		return super.save(user);
 	}
+	
+	
 
 }

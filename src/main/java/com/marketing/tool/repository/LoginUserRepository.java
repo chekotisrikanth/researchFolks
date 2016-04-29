@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.repository.Repository;
 
+import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.User;
 
 public interface LoginUserRepository extends Repository<User,Integer> {
@@ -13,5 +14,7 @@ public interface LoginUserRepository extends Repository<User,Integer> {
     User findById(Integer id);	
     User findByEmailId(String emailId);
     List<User> findByAccountType(String accountType);
+    
+    
 	
 }
