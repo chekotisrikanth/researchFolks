@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.springframework.util.CollectionUtils;
 
+import com.marketing.tool.domain.CPDPReportForm;
+import com.marketing.tool.domain.IndustryReportForm;
 import com.marketing.tool.domain.ReportForm;
 import com.marketing.tool.vo.ReportVo;
 
@@ -31,6 +33,11 @@ public class ReportsSearchResponseBuilder {
 				vo.setIndustry(reportForm.getIndustry());
 				vo.setReportTitle(reportForm.getReportTitle());
 				vo.setUserName(reportForm.getReportStatuses().get(0).getUser().getLastName()+" "+reportForm.getReportStatuses().get(0).getUser().getFirstName() );
+				/*if(reportForm instanceof IndustryReportForm) {
+					vo.setComIntl(((IndustryReportForm)reportForm).getComIntl());	
+				} else {*/
+					vo.setComIntl(reportForm.getComIntl());
+				//}
 				rep.add(vo);
 			}
 		}

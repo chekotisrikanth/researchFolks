@@ -10,7 +10,7 @@ public class IndustryReportForm extends ReportForm {
 	
 	
 	
-	@NotNull
+/*	@NotNull
 	@Column(name="company_intl_type",nullable=false)
 	private Integer comIntl;
 	
@@ -19,8 +19,9 @@ public class IndustryReportForm extends ReportForm {
 	}
 
 	public void setComIntl(Integer comIntl) {
+		super.setComIntl(comIntl);
 		this.comIntl = comIntl;
-	}
+	}*/
 
 	@Override
 	public String toString() {

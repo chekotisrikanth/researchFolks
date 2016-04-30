@@ -46,7 +46,7 @@ public class IndustryReportFormCreateController {
 		    
 	    @Autowired
 		 private CountryStateService countryStateService;
-	
+	    private static String xlFormats ="xlsx,xlsm,xls";
 	   	    
 	    @InitBinder("form")
 	    public void initBinder(WebDataBinder binder) {
@@ -99,8 +99,8 @@ public class IndustryReportFormCreateController {
 			
 	        if(reportForm.getReportImg() != null && reportForm.getReportImg().getSize() > 0){
 				String ext = reportForm.getReportImg().getOriginalFilename().split("\\.")[1];
-				if(reportForm.getComIntl() != null && reportForm.getComIntl().equals(4))
-				    FileUploadValidator.validatefile(reportForm,result,".excel");
+				if(reportForm.getComIntl() != null && reportForm.getComIntl().equals(2))
+				    FileUploadValidator.validatefile(reportForm,result,xlFormats);
 				else if(!(ext.contains("ppt") || ext.contains("docx") || ext.contains("doc")))
 				 FileUploadValidator.validatefile(reportForm,result,"Other");
 				}

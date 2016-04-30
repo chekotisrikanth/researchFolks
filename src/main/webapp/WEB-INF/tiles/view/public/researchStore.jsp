@@ -81,14 +81,14 @@
               </select>
                     </div>
             <div class="col-md-1 boldTxt text-right">Sort By</div>
-            <div class="col-md-3 company">
+            <div class="col-md-3">
                 <select class="form-control search-data"  name="comIntl">
                   <option value="">Select SoryType</option>                
-	                <option value=1>Company Report</option>
-	                <option value=2>Comapnay Database</option>
+	                <option value=1>Classic Report</option>
+	                <option value=2>Report Database</option>
 	            </select>
             </div>
-            <div class="col-md-3 industry">
+          <!--  <div class="col-md-3 industry">
                 <select class="form-control search-data" name="comIntl">
                  <option value="">Select SoryType</option>
 	                <option value=3>Industry Report</option>
@@ -101,7 +101,7 @@
                 <option value=4>Research Report</option>
                 <option value=5>Research Database</option>
               </select>
-            </div>
+            </div> -->  
             <div class="col-md-1 noPaddL">
                 <button class="btn btn-primary buttonSmall sncButton pull-left" type=button>Search</button>
             </div>

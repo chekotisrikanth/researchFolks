@@ -64,8 +64,8 @@ public class ReportForm {
 	@Column(name="country" , nullable=false)
 	private String country;
 	
-	
-	@Column(name="insertedDate", nullable=false)
+	//TODO: nned  to update after dev
+	@Column(name="insertedDate", nullable=true)
 	@DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss.SSS")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date insertedDate;
@@ -122,6 +122,23 @@ public class ReportForm {
 	@NotEmpty
 	@Column(name="publishingDate", nullable=false)
 	private String publishingDate;
+	
+	
+	
+	@Column(name="company_intl_type" , nullable=true)
+	private Integer comIntl;
+	
+	
+	
+	
+
+	public Integer getComIntl() {
+		return comIntl;
+	}
+
+	public void setComIntl(Integer comIntl) {
+		this.comIntl = comIntl;
+	}
 
 	public Integer getPublisherId() {
 		return publisherId;

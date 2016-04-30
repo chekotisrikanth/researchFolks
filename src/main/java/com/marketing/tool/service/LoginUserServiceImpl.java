@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
+import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.User;
 import com.marketing.tool.repository.LoginUserRepository;
 
@@ -31,5 +32,7 @@ public class LoginUserServiceImpl implements LoginUserService {
 	public List<User> findByAccountType(String accountType) {
 		return loginUserRepositoryRepository.findByAccountType(accountType);
 	}
+
+	
 
 }

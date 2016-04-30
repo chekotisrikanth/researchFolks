@@ -7,6 +7,17 @@ public class ReportVo {
 	private String industry;
 	private String country;
 	private String userName;
+	private Integer comIntl;
+	
+	
+	
+
+	public Integer getComIntl() {
+		return comIntl;
+	}
+	public void setComIntl(Integer comIntl) {
+		this.comIntl = comIntl;
+	}
 	public Integer getReportId() {
 		return reportId;
 	}

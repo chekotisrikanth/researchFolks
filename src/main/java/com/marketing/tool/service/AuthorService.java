@@ -1,6 +1,9 @@
 package com.marketing.tool.service;
 
+<<<<<<< HEAD
 import com.marketing.tool.domain.EditReports;
+=======
+>>>>>>> branch 'develop' of https://aneelkumar_ravula@bitbucket.org/aneelkumar_ravula/tool.git
 import java.util.List;
 
 import com.marketing.tool.domain.Author;

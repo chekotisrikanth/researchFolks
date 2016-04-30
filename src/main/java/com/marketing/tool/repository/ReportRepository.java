@@ -29,4 +29,6 @@ public interface ReportRepository extends Repository<ReportForm,Integer>,PagingA
 	@Query("select count(distinct rep.reportId)  from ReportForm rep join rep.reportStatuses rstatus  where  rstatus.statusId=?1")
 	Integer getAllPublishedReportsCount(Integer statusId);
 	
+	@Query("select rep  from ReportForm rep join rep.reportStatuses rstatus join rstatus.user usr where usr.id=?1 and rstatus.statusId in (?2) and rs.active='Y' ")
+	Page<ReportForm> findAuthorReports(int userId,List<Integer> statusIds,Pageable pagable);
 }

@@ -7,6 +7,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -40,10 +41,11 @@ public class ReportSearchFilter {
 	                	Expression<String> path =root.get("reportTitle");
 	                    predicates.add(cb.like( cb.lower(path), "%" + searchCriteria.getTittle().toLowerCase() + "%"));
 	                }
-	                if (searchCriteria.getStatusId()!=null) {
+	                if (searchCriteria.getStatusId() != null) {
 	                	
 	                    predicates.add(cb.equal( status.<Long> get("statusId"), searchCriteria.getStatusId()));
 	                }
+	                
 	                return cb.and(predicates.toArray(new Predicate[] {}));
 	            }
 	        };

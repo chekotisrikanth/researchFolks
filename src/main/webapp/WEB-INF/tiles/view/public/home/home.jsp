@@ -31,8 +31,13 @@
 <!--  <a class="btn-info btn" href="/public/admin_create.html" >Admin Registration</a> -->
 <a class="btn-info btn " href="/public/author_create.html" >Author Registraion</a>
 <a  class="btn-info btn" href="/public/customer_create.html">Customer Registraion</a>
+<<<<<<< HEAD
 <a class="btn-info btn" href="${pageContext.request.contextPath}/publish/cpdpReportForm_create.html">Create cpdp report</a>
 <a class="btn-info btn" href="${pageContext.request.contextPath}/publish/industryReportForm_create.html">Create industry report</a>
+=======
+<a class="btn-info btn" href="/publish/cpdpReportForm_create.html">Create cpdp report</a>
+<a class="btn-info btn" href="/publish/industryReportForm_create.html">Create industry report</a>
+>>>>>>> branch 'develop' of https://aneelkumar_ravula@bitbucket.org/aneelkumar_ravula/tool.git
 <a class="btn-info btn" href="/public/customresearch">Custom Research</a>
 </div>
   </nav>

@@ -28,9 +28,9 @@ public class CPDPReportForm extends ReportForm{
 		private String currency;
 		
 		
-		@NotNull
+		/*@NotNull
 		@Column(name="company_intl_type" , nullable=true)
-		private Integer comIntl;
+		private Integer comIntl;*/
 		
 		
 		@Column(name="revenue" , nullable=false)
@@ -108,15 +108,16 @@ public class CPDPReportForm extends ReportForm{
 
 
 
-		public Integer getComIntl() {
+	/*	public Integer getComIntl() {
 			return comIntl;
 		}
 
 
 
 		public void setComIntl(Integer comIntl) {
+			super.setComIntl(comIntl);
 			this.comIntl = comIntl;
-		}
+		}*/
 
 
 
