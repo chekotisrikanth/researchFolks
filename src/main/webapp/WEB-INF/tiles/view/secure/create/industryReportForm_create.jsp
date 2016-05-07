@@ -124,16 +124,56 @@
                 </div>
             </div>
             </spring:bind>
+			
+			    <div class="form-group ${status.error ?'has-error':''} ">
+              <form:label path="" class="col-md-2 control-label text-right">Taxonomy / Industries Tree</form:label>
+                                        <div class="col-md-10">
+                							<div style='cursor: pointer; cursor: hand; display: inline-block;' onclick="popupTree();" id="overlayContainer">
+                                    			<img class="img-responsive" id="main_image" src="/tree/assets/images/tree.png"></img>
+                                    			<img class="img-responsive" id="overlay_image" src="/tree/assets/images/hand.png"></img>
+                                			</div> 
+                						</div>   
+              </div>	
+			
 			<spring:bind path="industry">
-	            <div class="form-group ${status.error ?'has-error':''} ">
-					<form:label path="industry" class="col-md-3 control-label text-right"><spring:message code="reportForm.industry"/></form:label>                    
-					<div class="col-md-9">
-						<form:textarea class="form-control" path="industry" max-char="1000" rows="5" cols="30" required="required"/>
-						<!--<form:errors path="industry"/>-->
-						<span class="text-info"></span>
-					</div>
+			<div style="display:none" id="selectedIndustires" class="form-group ${status.error ?'has-error':''} ">
+				<form:label path="industry" class="col-md-2 control-label text-right"><b>Selected Industries:</b></form:label>
+				<div class="col-md-10">
+				<span id="echoSelection3"></span>
+				<input type="hidden" name="industry" id="selectedIndus"/>
 				</div>
-		    </spring:bind>
+			</div>
+			</spring:bind>
+			
+			<div id="light" class="white_content" >
+                                    <table width="100%">
+                                        <tr>
+                                            <td>
+                                                Taxonomy / Industries Tree
+                                            </td>
+                                            <td width="70%" align='right'>
+                                                <a href="#" id="CloseTreeButton" onclick="save();" class="myButton" style='color: white!important;'>Save</a>&nbsp;<a href="#" id="CancelTreeButton" onclick="cancelPopup();" class="myButton" style='color: white!important;'>Cancel</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height='10px'></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <%-- <jsp:include page="../../../../tree/dynatree.jsp"></jsp:include> --%>
+                                            	<jsp:include page="../../../../tree/tree.jsp"></jsp:include> 
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+            <div id="fade" class="black_overlay follow-scroll"></div>
+        
+			
+			
+			
+			
+			
+			
 			<spring:bind path="country">
 	            <div class="form-group ${status.error ?'has-error':''} ">
 				<form:label class="col-md-3 control-label text-right" path="country"><spring:message code="reportForm.country"/></form:label>               
@@ -253,15 +293,14 @@
       <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
        <script src = "${pageContext.request.contextPath}/js/CalendarBase.min.js"></script>       
        <script src = "${pageContext.request.contextPath}/js/Calendar.js"></script>
-     
+     <script src="/tree/assets/dist/jstree.min.js"></script>
      <!--   <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script>
       <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
       <script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>
 	  
-	  
-     
+	   
     
        <script>
        

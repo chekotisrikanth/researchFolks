@@ -32,14 +32,45 @@ function getselecteddata() {
 	var instance = $('#jstree-proton-3').jstree(true); 
 	jsondata = instance.get_json();
 	 selectedNodes = instance.get_selected(true);
+	 //var names = instance.get_path('#' + instance.rslt.obj.attr('id'),false); 
 	for(j=0;j<selectedNodes.length;j++) {
+		var names = instance.get_path(selectedNodes[j],',',false);
+		var ids = instance.get_path(selectedNodes[j],',',true);
 	   console.log(selectedNodes[j].text);
-	   text.push(selectedNodes[j].text);
-	   nodeIds.push(selectedNodes[j].id);
+	   //names+selectedNodes[j].text
+	   text =text.concat(names.split(','));
+	   nodeIds =nodeIds.concat(ids.split(','));
+	   //nodeIds.push(ids);
 	}
+	var newText =[];
+	var newNodeIds=[];
+	newText.push(text[0]);
+	for (var j = 1; j < text.length; j++){
+		var text1=text[j];
+		if(newText.indexOf(text1)==-1){
+			newText.push(text[j]);
+		}
+	}
+	
+	newNodeIds.push(nodeIds[0]);
+	for (var j = 1; j < nodeIds.length; j++){
+		var id=nodeIds[j];
+		if(newNodeIds.indexOf(id)==-1){
+			newNodeIds.push(nodeIds[j]);
+		}
+	}
+	
 	$("#selectedIndustires").css("display","block") 
-	$("#selectedIndus").val(nodeIds.join(','));
-	$("#echoSelection3").html(text.join(', '));
+	$("#selectedIndus").val(newNodeIds.join(','));
+	$("#echoSelection3").html(newText.join(','));
+}
+
+function unique(list) {
+    var result = [];
+    $.each(list, function(i, e) {
+        if (jQuery.inArray(e, result) == -1) result.push(e);
+    });
+    return result;
 }
 
 function save() {
