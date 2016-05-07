@@ -8,7 +8,19 @@
         <meta http-equiv = "X-UA-Compatible" content = "IE = edge">
         <meta name = "viewport" content = "width = device-width, initial-scale = 1">
         <title>Research Floks</title>
+		<style>
+		div .open{
+		 display: block;
+		 text-indent: 0px;
+		}
+		
+		table.dataTable thead .sorting { background: url('${pageContext.request.contextPath}/images/sort_both.png') no-repeat center right; }
+table.dataTable thead .sorting_asc { background: url('${pageContext.request.contextPath}/images/sort_asc.png') no-repeat center right; }
+table.dataTable thead .sorting_desc { background: url('${pageContext.request.contextPath}/images/sort_desc.png') no-repeat center right; }
 
+table.dataTable thead .sorting_asc_disabled { background: url('${pageContext.request.contextPath}/images/sort_asc_disabled.png') no-repeat center right; }
+table.dataTable thead .sorting_desc_disabled { background: url('${pageContext.request.contextPath}/images/sort_desc_disabled.png') no-repeat center right; }
+		</style>
         <!-- Bootstrap -->
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
@@ -80,14 +92,22 @@
                 <option value=3>Others</option>
               </select>
                     </div>
-            <div class="col-md-1 boldTxt text-right">Sort By</div>
-            <div class="col-md-3">
+            <div class="col-md-1 boldTxt text-right">Display No Of Records</div>
+            <!-- <div class="col-md-3">
                 <select class="form-control search-data"  name="comIntl">
                   <option value="">Select SoryType</option>                
 	                <option value=1>Classic Report</option>
 	                <option value=2>Report Database</option>
 	            </select>
-            </div>
+            </div> -->
+            <div class="col-md-3">
+                    <select class="form-control  recordsPerPage">
+                    	<option value=10>10</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                        <option value=5000>All</option>
+                    </select>
+                    </div>
           <!--  <div class="col-md-3 industry">
                 <select class="form-control search-data" name="comIntl">
                  <option value="">Select SoryType</option>
@@ -110,11 +130,14 @@
             <div class="col-md-2 boldTxt text-right"> Search By Title </div>
             <div class="col-md-3"><input type="text" class="form-control search-data" name="tittle"></div>
             <div class="col-md-2 boldTxt text-right"> Search By Industry </div>
-            <div class="col-md-2">
-              <select class="form-control search-data" name="industry">
-              	<option value="">Select Industry</option>
-                <option value="Retail" >Retail</option>
-                <option value="Automotive">Automotive</option>
+            <div class="col-md-2"> <!-- class="form-control search-data"  -->
+              <select  id="example-filterBehavior" class="form-control search-data" name="industry" multiple="multiple">
+<!--               	<option value="">Select Industry</option>
+ -->                 <c:forEach var="item" items="${industries}">					 
+						 <option value="${item.text}">${item.text}</option>
+				</c:forEach>
+                <!--     <option value="Retail" >Retail</option>
+                <option value="Automotive">Automotive</option>  -->
               </select>
                     </div>
             <div class="col-md-2">
@@ -129,14 +152,14 @@
 	             </div>
              </div>
                     <div class="col-md-12">
-                    <div class="col-md-4"><span class="pull-left marginB20 marginT20">Display Number of Records</span> 
+                   <!--   <div class="col-md-4"><span class="pull-left marginB20 marginT20">Display Number of Records</span> 
                     <select class="form-control widthAuto marginL10 pull-left marginB20 marginT20 recordsPerPage">
                     	<option value=1>10</option>
                         <option value=50>50</option>
                         <option value=100>100</option>
-                        <option value=0>All</option>
+                        <option value=5000>All</option>
                     </select>
-                    </div>
+                    </div> -->
                   	<div class="col-md-4">
                   		<div class = "pagination"/>
 						   
@@ -177,21 +200,36 @@
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
-<script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script> 
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script> 
 <script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>
-
+<!-- multi select -->
+<!-- Include the plugin's CSS and JS: -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-multiselect.css" type="text/css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/multiselect/bootstrap-multiselect.js"></script>
 <!-- pagination -->
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/simplePagination.css"/>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/simplePagination.js" ></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/pagenationutil.js" ></script>
+<!-- data tables -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/css/datatables/jquery.dataTables.min.css" ></script>
+
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/datatables/jquery.dataTables.min.js" ></script>
+
 <!-- js -->
 <script src="${pageContext.request.contextPath}/js/public/researchStore.js"></script>
 
 <script>
         $(document).ready(function() {
             $(".open, .impatient").pageslide();
+            
+            $('#example-filterBehavior').multiselect({
+		            enableFiltering: true,
+		            filterBehavior: 'value'
+		   });
+            
+            
         });
+       
     </script> 
 <script type="text/javascript">
 function hideAll() {	

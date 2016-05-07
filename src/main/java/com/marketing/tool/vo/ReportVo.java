@@ -8,10 +8,24 @@ public class ReportVo {
 	private String country;
 	private String userName;
 	private Integer comIntl;
+	private String publishingDate;
+	
+	private String comIntlString;
 	
 	
 	
-
+	public String getComIntlString() {
+		return comIntlString;
+	}
+	public void setComIntlString(String comIntlString) {
+		this.comIntlString = comIntlString;
+	}
+	public String getPublishingDate() {
+		return publishingDate;
+	}
+	public void setPublishingDate(String publishingDate) {
+		this.publishingDate = publishingDate;
+	}
 	public Integer getComIntl() {
 		return comIntl;
 	}

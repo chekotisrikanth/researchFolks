@@ -18,14 +18,17 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marketing.tool.domain.Country;
 import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.Author;
+import com.marketing.tool.domain.AuthorReportsResp;
 import com.marketing.tool.domain.User;
 import com.marketing.tool.exception.UserAlreadyExistsException;
 import com.marketing.tool.service.CountryStateService;
@@ -59,7 +62,8 @@ public class AuthorController {
 	    public AuthorController(AuthorService authorService) {
 	        this.userService = authorService;
 	    }
-	    	   	    
+	  @Autowired 
+	  private AuthorService  authorService;
 	    
 	   /* public void initBinder(WebDataBinder binder) {
 	        binder.addValidators(createFormValidator);
@@ -147,7 +151,7 @@ public class AuthorController {
 	        //return "redirect:/author_created.html";
 	    }
 	    
-	    @RequestMapping(value = { "/secure/home/author.html", "/secure/home/authorhome" }, method = RequestMethod.GET)
+	    @RequestMapping(value = { "/secure/home/author.html", "/author/home/authorhome" }, method = RequestMethod.GET)
 	    public ModelAndView loginSuccessPage(@RequestParam(value = "error",required = false) String error,
 	    @RequestParam(value = "logout", required = false) String logout) {
 	         
@@ -184,4 +188,18 @@ public class AuthorController {
 			model.addObject("countryList",countries);
 		}
 	    
+	    ///author/home/authorhome
+	    @RequestMapping(value = {"/author/home/authorhome/{pageNumber}/{noOfPages}/{task}" }, method = RequestMethod.POST)
+	    public @ResponseBody AuthorReportsResp authorReports(@PathVariable Integer pageNumber,@PathVariable Integer noOfPages,@PathVariable String task) {
+	       
+	        User user = loginUserService.findByEmailId(Helper.getPrincipal()); 	
+	        AuthorReportsResp response = new AuthorReportsResp();
+	        int userId = user.getId();
+	        if(task.equals("pubReports")) {
+	        	authorService.getAuthorPublishedReports(userId, pageNumber, noOfPages, response);
+	        } else if(task.equals("otherReports")) {
+	        	authorService.getAuthorReportsList(userId, pageNumber, noOfPages, response);
+	        }
+	        return response;
+	    }
 }

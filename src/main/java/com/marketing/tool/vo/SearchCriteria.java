@@ -14,7 +14,7 @@ public class SearchCriteria implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer catagryId ;
-	private String industry ;
+	private String[] industry ;
 	private String  tittle;
 	private String comIntl;
 	private String message;
@@ -52,11 +52,12 @@ public class SearchCriteria implements Serializable{
 		this.maxResults = maxResults;
 	}
 
-	public String getIndustry() {
+	
+	public String[] getIndustry() {
 		return industry;
 	}
 
-	public void setIndustry(String industry) {
+	public void setIndustry(String[] industry) {
 		this.industry = industry;
 	}
 

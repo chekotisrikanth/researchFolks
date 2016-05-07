@@ -9,6 +9,7 @@ import org.springframework.util.CollectionUtils;
 import com.marketing.tool.domain.CPDPReportForm;
 import com.marketing.tool.domain.IndustryReportForm;
 import com.marketing.tool.domain.ReportForm;
+import com.marketing.tool.utility.ServiceConstants;
 import com.marketing.tool.vo.ReportVo;
 
 public class ReportsSearchResponseBuilder {
@@ -37,7 +38,13 @@ public class ReportsSearchResponseBuilder {
 					vo.setComIntl(((IndustryReportForm)reportForm).getComIntl());	
 				} else {*/
 					vo.setComIntl(reportForm.getComIntl());
+					if(vo.getComIntl().equals(1)) {
+						vo.setComIntlString(ServiceConstants.COMPANY_REPORT);
+					}else {
+						vo.setComIntlString(ServiceConstants.COMPANY_DATABASE);
+					}
 				//}
+					vo.setPublishingDate(reportForm.getPublishingDate());
 				rep.add(vo);
 			}
 		}
