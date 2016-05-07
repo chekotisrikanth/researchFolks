@@ -46,6 +46,27 @@ public class ReportSearchFilter {
 	                    predicates.add(cb.equal( status.<Long> get("statusId"), searchCriteria.getStatusId()));
 	                }
 	                
+	                if (!StringUtils.isEmpty(searchCriteria.getIndustry())) {
+	                	Expression<String> path =root.get("industry");
+
+	                	if(searchCriteria.getIndustry().length ==1) {
+	                		  predicates.add(cb.like(path ,  "%" + searchCriteria.getIndustry()[0] + "%"));
+	                	} else {
+	                		int cnt =0;
+		                	List<Predicate> subpredicates = new ArrayList<Predicate>();
+		                	for (String string : searchCriteria.getIndustry()) {
+		                		if(cnt==0) {
+		                			subpredicates.add(cb.like(path ,  "%" + string + "%"));
+		                		} else {
+		                			subpredicates.add(cb.like(path ,  "%" + string + "%"));
+		                		}
+		                		
+		                		cnt++;
+							}
+		                	
+		                	predicates.add(cb.or(subpredicates.toArray(new Predicate[] {})));
+	                	}
+	              }
 	                return cb.and(predicates.toArray(new Predicate[] {}));
 	            }
 	        };

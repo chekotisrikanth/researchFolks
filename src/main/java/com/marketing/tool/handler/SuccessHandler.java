@@ -83,7 +83,7 @@ public class SuccessHandler extends SavedRequestAwareAuthenticationSuccessHandle
 	            //return "/secure/home/admin";
 	        	return "/secure/home/admin/0/10";
 	        } else if(isAuthor) {
-	        	return "/secure/home/author";
+	        	return "/author/home/authorhome";
 	        } else if(isReviewer) {
 	        	return "/secure/home/reviewer/0/10";
 	        }else if(isPublisher) {

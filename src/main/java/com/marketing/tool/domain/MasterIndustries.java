@@ -43,7 +43,7 @@ public class MasterIndustries implements java.io.Serializable {
 	@Column(name = "mi_upd_ts", length = 19)
 	private Date miUpdTs;
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "masterIndustries")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "masterIndustries")
 	private Set<MasterIndustries> children = new HashSet<MasterIndustries>(0);
 
 	public MasterIndustries() {

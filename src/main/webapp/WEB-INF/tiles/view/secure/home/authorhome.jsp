@@ -121,18 +121,18 @@
 		</div>
         </div>
         <div class="row">
-        <div class="col-md-12 paddT15">
-        <h4>Published Reports List</h4>
-        	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-hover table-hover table-bordered tableStyle">
+        <div class="col-md-12 paddT15 pubReports">
+        
+        <!--	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-hover table-hover table-bordered tableStyle">
   <tbody>
-    <tr>
+     <tr>
       <th>Report Title</th>
       <th>Published Date</th>
       <th>Report Type</th>
       <th>Industry</th>
       <th>Update</th>
     </tr>
-    <tr>
+   <tr>
       <td>Abcd</td>
       <td>28/02/2016</td>
       <td>Healcth Care</td>
@@ -166,14 +166,16 @@
       <td>Healcth Care</td>
       <td>Mdidcal</td>
       <td>&nbsp;</td>
-    </tr>
+    </tr>  
   </tbody>
-</table>
+</table>-->
 </div>
-
-<div class="col-md-12 paddT15">
-        <h4>On Demond Research Work</h4>
-        	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-hover table-hover table-bordered tableStyle">
+<div class="col-md-4">
+   <div class = "pagination-pub"></div>
+</div>
+<div class="col-md-12 paddT15 otherReports">
+     
+       <!--     	<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table-hover table-hover table-bordered tableStyle">
   <tbody>
     <tr>
       <th>Report Title</th>
@@ -218,7 +220,10 @@
       <td>&nbsp;</td>
     </tr>
   </tbody>
-</table>
+</table>-->
+</div>
+<div class="col-md-4">
+   <div class ="pagination-other"></div>
 </div>
         </div>
        </div>
@@ -228,6 +233,15 @@
     <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>        
 	<script src="${pageContext.request.contextPath}/js/charts/example.js"></script>
 	<script src="${pageContext.request.contextPath}/js/charts/material-charts.js"></script>
+	
+	<!-- pagination -->
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/simplePagination.css"/>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/simplePagination.js" ></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/common/pagenationutil.js" ></script>
+	
+	<script src="${pageContext.request.contextPath}/js/author/home.js"></script>
+	
+		
 	
     <footer class="container-fluid">
         <div class="container clearfix">

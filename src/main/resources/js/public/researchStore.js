@@ -164,21 +164,26 @@ function callAjaxForDivId(object) {
 
 function buildResponseDiv(ajaxresp,div) {
 	var str='';
-	str+='<table width="100%" border="0" cellspacing="0" cellpadding="0" class="table table-striped table-bordered table-responsive tableStyle">';
-	str+='	<tbody>';
+	str+='<table width="100%" id="myTable" border="0" cellspacing="0" cellpadding="0" class="table table-striped table-bordered table-responsive tableStyle data display datatable">';
+	str+='	<thead>';
 	str+='		<tr>';
 	str+='			<th>Company Title</th>';
 	str+='			<th width="15%">Author</th>';
 	str+='			<th width="15%">Industry</th>';
 	str+='			<th width="15%">Country</th>';
+	str+='			<th width="10%">Company Intelligence </th>';
 	str+='			<th width="10%">View Report</th>';
+	
 	str+='		</tr>';
+	str+='	</thead>';
+	str+='	<tbody>';
 	$(ajaxresp.reportsList).each(function(index,report) {
 		str+='		<tr>';
 		str+='			<td><a href="#">'+report.reportTitle+'</a></td>';
 		str+='			<td>'+report.userName+'</td>';
 		str+='			<td>'+report.industry+'</td>';
 		str+='			<td>'+report.country+'</td>';
+		str+='			<td>'+report.comIntlString+'</td>';
 		str+='			<td><a href="#" class="downreport" rep-id="'+report.reportId+'"><img src="images/icon_viewProfile.png" alt="Profile" /></a></td>';
 		str+='		</tr>';
 	});
@@ -190,5 +195,11 @@ function buildResponseDiv(ajaxresp,div) {
 	str+='</table>';
 	
 	$("."+div).html(str);
-	
+$('#myTable').DataTable({
+		"bPaginate": false,
+	    "bLengthChange": false
+}
+	    );
+    
+
 }
