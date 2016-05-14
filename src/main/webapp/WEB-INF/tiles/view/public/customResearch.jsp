@@ -19,11 +19,7 @@
 }
 </style>
 <form:form method="POST" class="form-horizontal alignHCenter " action="/public/customresearch" commandName="form" modelAttribute="form">
-<section>
      
-      	<article class="col-md-12 noPaddRL">
-        <div class="contentWraper marginB20">
-        <form class="form-horizontal alignHCenter ">
         <form:errors path="*" cssClass="errorblock" element="div" />
         	<div class="form-group">
             
@@ -192,14 +188,6 @@
                     </div>
             </div>
             <%-- <jsp:include page="customResearchAuthorTable.jsp"></jsp:include> --%>
-                         
-            
-            
-            </form>
-            </div>
-        </article>
-        <div class="col-md-2"></div>
-      </section>
 </form:form>      
 
 <script type="text/javascript">

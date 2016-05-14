@@ -9,7 +9,7 @@
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus{background-color:#ff9900;}
 
 .hompageNavbar{margin-bottom:0px; border:0px;}
-.hompageNavbar .navbar-nav{width:100%; background-color:#666; margin:0px; border-top-left-radius:10px; border-top-right-radius:10px; padding-left:50px; padding-right:50px; }
+.hompageNavbar .navbar-nav{width:100%; background-color:#0b72a5; margin:0px; border-top-left-radius:10px; border-top-right-radius:10px; padding-left:50px; padding-right:50px; }
 .hompageNavbar .navbar-nav > li > a{color:#fff; font-weight:bold;  padding:15px;}
 .hompageNavbar .navbar-nav > li > a:hover, .hompageNavbar.navbar-nav > li > a:focus{background-color:#ff9900!important; color:#fff;}
 
@@ -123,6 +123,10 @@ background: -o-linear-gradient(top, #ff6600, #cc3300)}
 .sectionHeading{border-bottom:solid 1px #cc3300; float:left; width:100%;}
 .sectionHeading span.title{ background-color:#cc3300; float:left; padding:6px 15px; text-transform:capitalize; color:#fff; font-weight:bold; font-size:18px;
 	border-top: solid 10px #670A0B; border-left: solid 10px transparent; border-right: solid 10px transparent; border-top: none 0 transparent;
+}
+
+.bodycontainer {
+	width:75%
 }
 .authorContent {
     border-bottom: 1px solid #dec9cd;

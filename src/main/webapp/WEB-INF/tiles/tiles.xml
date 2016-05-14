@@ -20,21 +20,21 @@
 	</definition>
 	
 	<definition name="adminhome" extends="layout.basic">
-		<put-attribute name="header" value="/WEB-INF/tiles/view/secure/header/adminheader.jsp" />
+		<!-- <put-attribute name="header" value="/WEB-INF/tiles/view/secure/header/adminheader.jsp" /> -->
 		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/home/adminhome.jsp" />
 	</definition>
 	
 	<definition name="authorhome" extends="layout.basic">
-		<put-attribute name="header" value="/WEB-INF/tiles/view//secure/header/authorheader.jsp" />
+		<!-- <put-attribute name="header" value="/WEB-INF/tiles/view//secure/header/authorheader.jsp" /> -->
 		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/home/authorhome.jsp" />
 	 </definition>
 	 
 	 <definition name="reviewerhome" extends="layout.basic">
-		<put-attribute name="header" value="/WEB-INF/tiles/view/secure/header/adminheader.jsp" />
+		<!-- <put-attribute name="header" value="/WEB-INF/tiles/view/secure/header/adminheader.jsp" /> -->
 		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/home/reviewerhome.jsp" />
 	</definition>
 	<definition name="publisherhome" extends="layout.basic">
-		<put-attribute name="header" value="/WEB-INF/tiles/view/secure/header/adminheader.jsp" />
+		<!-- <put-attribute name="header" value="/WEB-INF/tiles/view/secure/header/adminheader.jsp" /> -->
 		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/home/publisherhome.jsp" />
 	</definition>
 	
@@ -59,7 +59,7 @@
 	</definition>
 	
 	<definition name="cpdpReportForm_create" extends="layout.basic">
-   		 <put-attribute name="header" value="header" />
+   		 <!-- <put-attribute name="header" value="header" /> -->
 		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/create/cpdpReportForm_create.jsp" />
 	</definition>
 	
@@ -69,7 +69,7 @@
 	</definition>
 	
 	<definition name="industryReportForm_create" extends="layout.basic">
-   		 <put-attribute name="header" value="header" />
+   		<!--  <put-attribute name="header" value="header" /> -->
 		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/create/industryReportForm_create.jsp" />
 	</definition>
 	

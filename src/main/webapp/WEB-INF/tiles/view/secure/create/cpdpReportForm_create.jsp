@@ -3,93 +3,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<!DOCTYPE html>
-<html lang = "en">
    
-   <head>
-      <meta charset = "utf-8">
-      <meta http-equiv = "X-UA-Compatible" content = "IE = edge">
-      <meta name = "viewport" content = "width = device-width, initial-scale = 1">
-      
-      <title>Research Floks</title>
-      
-      <!-- Bootstrap -->
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
-     <%--   <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css"> --%>
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Calendar.css">
-       
-      <!-- <link rel="stylesheet" href="${pageContext.request.contextPath}/css/datepicker.min.css"> -->
-      
-      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      
-      <!--[if lt IE 9]>
-      <script src = "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src = "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-      <style type="text/css">
-      	.dis-able 			{
-			    background-color: #DDD;
-			    color: #999;
-			}
-      </style>
-    
-      
-   </head>
-   
+  
    <body>
    <div class="container-fluid">
-   <header class="clearfix paddT20">
-     <div class="logo col-md-8 col-sm-12">
-     <a href="/"><img src="${pageContext.request.contextPath}/images/logo.png" alt="Research Floks"/></a>
-     </div>
-     <div class="customerInfo col-md-4 col-sm-12 paddT20">
-     	<div class="col-md-8 col-sm-12">
-        	<div class="col-md-4">
-            	<a href="#"><img src="${pageContext.request.contextPath}/images/icon-user.png" alt="Customer Img"/></a>
-            </div>
-            <div class="col-md-8 noPaddRL paddT15">
-            <div class="customerName col-md-12 col-sm-12 noPaddRL">Customer Name</div>
-            <div class="fontSmall  col-md-12 col-sm-12">Customer Skill</div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 noPaddRL paddT15 ">
-	        <div class="col-md-12 fontSmall marginB5">
-            	<span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-alert.png" alt="alerts"/></span> <a href="#">Alerts</a>
-            </div>
-            <div class="col-md-12 fontSmall">
-            	<span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-mesage.png" alt="Message"/></span> <a href="#">Message</a>
-            </div>
-        </div>
-     </div>
-     </header>
-    <section>
-    <nav id="myNavbar" class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse noPaddRL" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Customer Research</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-    </nav>
-      </section>
       <section>
      
       	<aside class="col-md-3 col-sm-12 noPaddL" id="content">

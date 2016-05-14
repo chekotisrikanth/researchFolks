@@ -9,21 +9,64 @@
        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
-<header class="clearfix paddB10 paddTB10">
-     <div class="logo col-md-7 col-sm-12">
-     <a href="#"><img src="/images/logo1.jpg" alt="Research Floks"/></a>
+ <div class="container">       
+<head>
+      <meta charset = "utf-8">
+      <meta http-equiv = "X-UA-Compatible" content = "IE = edge">
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+      
+      <title>Research Floks</title>
+      
+      <!-- Bootstrap -->
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/datepicker.min.css">
+      
+      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+      
+      <!--[if lt IE 9]>
+      <script src = "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src = "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      
+      <script type="text/javascript">
+            jQuery.noConflict();
+        </script>
+      
+   </head>
+   
+   <body>
+   <div class="row">
+   <header class="clearfix paddB10 paddTB10">
+     <div class="logo col-md-8 col-sm-12">
+     <a href="#"><img src="/images/logo.png" alt="Research Floks"/></a>
      </div>
      <div class="col-md-4 col-sm-12">
+     <sec:authorize access="isAnonymous()">
      	<div class="col-md-6 col-sm-12 noPaddRL">
-        <div class="registrationBT col-md-12 col-sm-12">Registration <span><img src="/images/icon-register.png" alt="Registration"/></span></div>
+        <div class="registrationBT col-md-12 col-sm-12">Registration <span>
+        <a href="/public/login.html?referrer=loginlink">
+        <img src="/images/icon-register.png" alt="Registration"/>
+        </a>
+        </span></div>
         </div>
         <div class="col-md-6 col-sm-12">
-        <div class="loginBT col-md-12 col-sm-12">Login  <span><img src="/images/icon-login.png" alt="Login"/></span></div>
+        <a href="/public/login.html?referrer=loginlink">
+        <div class="loginBT col-md-12 col-sm-12">Login  <span><img src="/images/icon-login.png" alt="Login"/></span>
+        
         </div>
+        </a>
+        </div>
+       </sec:authorize> 
+       <sec:authorize access="isAuthenticated()">
+       <a href="<c:url value="/public/logout.html" />">
+        <div class="col-md-6 col-sm-12">
+        <div class="logoutBT col-md-12 col-sm-12">Logout  <span><img src="/images/icon-logout.png" alt="Logout"/></span></div>
+        </div>
+       </a> 
+       </sec:authorize> 
      </div>
      </header>
-    <section>
-    <nav id="myNavbar" class="navbar navbar-default hompageNavbar" role="navigation">
+	  <nav id="myNavbar" class="navbar navbar-default hompageNavbar" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -37,7 +80,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse noPaddRL" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                  <li><a href="#">Home</a></li>
+                  <li><a href="/">Home</a></li>
                   <li><a href="#">How It Works</a></li>
                   <li><a href="#">Research Store</a></li>
                   <li><a href="#">Custom Research</a></li>
@@ -46,17 +89,17 @@
                 </ul>
             </div><!-- /.navbar-collapse -->
     </nav>
-      </section>
-
-<sec:authorize access="isAnonymous()">
-   <%--  <form method="POST" action="<c:url value='j_spring_security_check'/>">
+</div>
+</div>
+<%-- <sec:authorize access="isAnonymous()">
+    <form method="POST" action="<c:url value='j_spring_security_check'/>">
         Username: <input name="j_username" type="text" value="${SPRING_SECURITY_LAST_USERNAME}" /> 
         Password: <input name="j_password" type="password" /> 
         <input type="submit" value="Sign in" />
-    </form> --%>
+    </form>
     <a href="/public/login.html?referrer=loginlink">Login</a>
 </sec:authorize>
 <sec:authorize access="isAuthenticated()">
     <a href="<c:url value="/public/logout.html" />">Logout</a>
-</sec:authorize>
+</sec:authorize> --%>
 

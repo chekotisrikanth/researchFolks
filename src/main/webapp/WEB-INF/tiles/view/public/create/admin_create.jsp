@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<html>
-<body>
+<div>
 <h1><spring:message code="admin.create"/></h1>
 <form:form method="POST" action="/public/admin_create.html" commandName="form" modelAttribute="form">
     <form:errors path="" element="div"/>
@@ -56,5 +55,4 @@
         <input type="submit"/>
     </div>
 </form:form>
-</body>
-</html>
+</div>
