@@ -18,7 +18,7 @@
 	margin: 16px;
 }
 </style>
-<form:form method="POST" class="form-horizontal alignHCenter " action="/public/customresearch" commandName="form" modelAttribute="form">
+<form:form method="POST" class="form-horizontal alignHCenter " action="/public/customresearch" commandpath="form" modelAttribute="form">
      
         <form:errors path="*" cssClass="errorblock" element="div" />
         	<div class="form-group">
@@ -27,11 +27,11 @@
                 	<spring:message code="custm.research.researchType"/>
                 </div>
                 <div class="col-md-10">
-                	<select id="researchType" name="researchType" class="form-control resType">
-                    	<option selected="" value="company">Company Analysis</option>
+                	<form:select id="researchType" path="researchType" class="form-control resType">
+                    	<option selected value="company">Company Analysis</option>
                         <option value="industry">Industry Analysis</option>
                         <option value="others">Others</option>
-                    </select>
+                    </form:select>
                 </div>
                 <form:errors path="researchType"/>
             </div>
@@ -40,11 +40,11 @@
             	<div class="col-md-2 boldTxt text-right">
             	<spring:message code="custm.research.companyTittle"/>
                 </div>
-                <div class="col-md-5"><input id="companyTile" name="companyTile" type="text" class="form-control"></div>
+                <div class="col-md-5"><form:input required="required"  id="companyTile" path="companyTile" type="text" class="form-control"/></div>
                 <div class="col-md-1 boldTxt text-right">
                 	<spring:message code="custm.research.webLink"/>
                 </div>
-                <div class="col-md-4"><input id="webLink" name="webLink" type="text" class="form-control"></div>
+                <div class="col-md-4"><form:input required="required" id="webLink" path="webLink" type="text" class="form-control"/></div>
                 </div>
             <div class="form-group industry">
             
@@ -52,26 +52,26 @@
                 	<spring:message code="custm.research.induTittle"/>
                 </div>
                 <div class="col-md-10">
-                	<input id="industryTitle" name="industryTitle" type="text" class="form-control"></div>
+                	<form:input required="required" id="industryTitle" path="industryTitle" type="text" class="form-control"/></div>
                 
             </div>
-            <div class="form-group others" style="display: none;">
+            <%-- <div class="form-group others" style="display: none;">
             
             	<div class="col-md-2 boldTxt text-right">
                 	<spring:message code="custm.research.nameyourResearch"/>
                 </div>
                 <div class="col-md-10">
-                	<input id="" name="" type="text" class="form-control"></div>
+                	<form:input required="required" id="" path="" type="text" class="form-control"/></div>
                 
             </div>
-            
+             --%>
              <div class="form-group">
             
             	<div class="col-md-2 boldTxt text-right">
                 	<spring:message code="custm.research.desp"/>
                 </div>
                 <div class="col-md-10">
-                	<textarea id="description" name="description" class="form-control"></textarea>
+                	<form:textarea required="required" id="description" path="description" class="form-control"></form:textarea>
                 </div>
                 
             </div>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-md-10">
                 	<div class="col-md-5 noPaddRL">
-                	<select  class="form-control allSkills" multiple="">
+                	<select  class="form-control allSkills" multiple>
                     	<c:forEach items="${skills}" var="skill">
 							<option   value="${skill.id}"  >${skill.skill}</option>
 						</c:forEach>
@@ -92,7 +92,7 @@
                         <a id="addSkill" class="alignHCenter " href="#" onClick="selectskill('Remove')"><img alt="left arrow" src="/images/left-arrow-2.png"></a>
         			</div>
                     <div class="col-md-6 noPaddRL">
-                    	<select id="reqSkillSet" name="reqSkillSet" class="form-control reqSkillSet" multiple="">
+                    	<select id="reqSkillSet" path="reqSkillSet" class="form-control reqSkillSet" multiple="">
                     	</select>
                     </div>
                 </div>
@@ -104,13 +104,13 @@
                 	<spring:message code="custm.research.paymentPractice"/>
                 </div>
                 <div class="col-md-2">
-                	<select id="paymentType" name="paymentType" class="form-control">
+                	<form:select id="paymentType" path="paymentType" class="form-control">
                     <option>Hourly</option>
                     <option>Fixed Rate</option>
-                    </select>
+                    </form:select>
                 </div>
                 <div class="col-md-1">
-                	<input  id=""paymentAmnt name="paymentAmnt" type="text" placeholder="$000" class="form-control">
+                	<form:input required="required" path="paymentAmnt" type="text" placeholder="$000" class="form-control"/>
                 </div>
                 
             </div>
@@ -121,12 +121,12 @@
                 	<spring:message code="custm.research.turnaroundTime"/>
                 </div>
                 <div class="col-md-10">
-                	<select id="turnArndTime" name="turnArndTime" class="form-control">
+                	<form:select id="turnArndTime" path="turnArndTime" class="form-control">
                     	<option>One Day</option>
                         <option>Two Days</option>
                         <option>Three Days</option>
                         <option>Less than a week</option>
-                    </select>
+                    </form:select>
                 </div>
                 
             </div>
@@ -190,6 +190,9 @@
             <%-- <jsp:include page="customResearchAuthorTable.jsp"></jsp:include> --%>
 </form:form>      
 
+<script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+		
 <script type="text/javascript">
 
 	$('#addSkill').click(function(){	
