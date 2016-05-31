@@ -2,85 +2,6 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html lang = "en">
-  
-   <head>
-      <meta charset = "utf-8">
-      <meta http-equiv = "X-UA-Compatible" content = "IE = edge">
-      <meta name = "viewport" content = "width = device-width, initial-scale = 1">
-     
-      <title>Research Floks</title>
-     
-      <!-- Bootstrap -->
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Calendar.css">
-      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-     
-      <!--[if lt IE 9]>
-      <script src = "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src = "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-     
-    
-     
-   </head>
-   
-   <body>
-   <div class="container-fluid">
-   <header class="clearfix paddT20">
-     <div class="logo col-md-8 col-sm-12">
-     <a href="#"><img src="${pageContext.request.contextPath}/images/logo.png" alt="Research Floks"/></a>
-     </div>
-     <div class="customerInfo col-md-4 col-sm-12 paddT20">
-                <div class="col-md-8 col-sm-12">
-                <div class="col-md-4">
-                <a href="#"><img src="${pageContext.request.contextPath}/images/icon-user.png" alt="Customer Img"/></a>
-            </div>
-            <div class="col-md-8 noPaddRL paddT15">
-            <div class="customerName col-md-12 col-sm-12 noPaddRL">Customer Name</div>
-            <div class="fontSmall  col-md-12 col-sm-12">Customer Skill</div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 noPaddRL paddT15 ">
-                        <div class="col-md-12 fontSmall marginB5">
-                <span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-alert.png" alt="alerts"/></span> <a href="#">Alerts</a>
-            </div>
-            <div class="col-md-12 fontSmall">
-                <span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-mesage.png" alt="Message"/></span> <a href="#">Message</a>
-            </div>
-        </div>
-     </div>
-     </header>
-    <section>
-    <nav id="myNavbar" class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-               
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse noPaddRL" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Customer Research</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-    </nav>
-      </section>
       <section>
     
                 <aside class="col-md-3 col-sm-12 noPaddL" id="content">
@@ -124,16 +45,56 @@
                 </div>
             </div>
             </spring:bind>
+			
+			    <div class="form-group ${status.error ?'has-error':''} ">
+              <form:label path="" class="col-md-2 control-label text-right">Taxonomy / Industries Tree</form:label>
+                                        <div class="col-md-10">
+                							<div style='cursor: pointer; cursor: hand; display: inline-block;' onclick="popupTree();" id="overlayContainer">
+                                    			<img class="img-responsive" id="main_image" src="/tree/assets/images/tree.png"></img>
+                                    			<img class="img-responsive" id="overlay_image" src="/tree/assets/images/hand.png"></img>
+                                			</div> 
+                						</div>   
+              </div>	
+			
 			<spring:bind path="industry">
-	            <div class="form-group ${status.error ?'has-error':''} ">
-					<form:label path="industry" class="col-md-3 control-label text-right"><spring:message code="reportForm.industry"/></form:label>                    
-					<div class="col-md-9">
-						<form:textarea class="form-control" path="industry" max-char="1000" rows="5" cols="30" required="required"/>
-						<!--<form:errors path="industry"/>-->
-						<span class="text-info"></span>
-					</div>
+			<div style="display:none" id="selectedIndustires" class="form-group ${status.error ?'has-error':''} ">
+				<form:label path="industry" class="col-md-2 control-label text-right"><b>Selected Industries:</b></form:label>
+				<div class="col-md-10">
+				<span id="echoSelection3"></span>
+				<input type="hidden" name="industry" id="selectedIndus"/>
 				</div>
-		    </spring:bind>
+			</div>
+			</spring:bind>
+			
+			<div id="light" class="white_content" >
+                                    <table width="100%">
+                                        <tr>
+                                            <td>
+                                                Taxonomy / Industries Tree
+                                            </td>
+                                            <td width="70%" align='right'>
+                                                <a href="#" id="CloseTreeButton" onclick="save();" class="myButton" style='color: white!important;'>Save</a>&nbsp;<a href="#" id="CancelTreeButton" onclick="cancelPopup();" class="myButton" style='color: white!important;'>Cancel</a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td height='10px'></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <%-- <jsp:include page="../../../../tree/dynatree.jsp"></jsp:include> --%>
+                                            	<jsp:include page="../../../../tree/tree.jsp"></jsp:include> 
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+            <div id="fade" class="black_overlay follow-scroll"></div>
+        
+			
+			
+			
+			
+			
+			
 			<spring:bind path="country">
 	            <div class="form-group ${status.error ?'has-error':''} ">
 				<form:label class="col-md-3 control-label text-right" path="country"><spring:message code="reportForm.country"/></form:label>               
@@ -253,15 +214,14 @@
       <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
        <script src = "${pageContext.request.contextPath}/js/CalendarBase.min.js"></script>       
        <script src = "${pageContext.request.contextPath}/js/Calendar.js"></script>
-     
+     <script src="/tree/assets/dist/jstree.min.js"></script>
      <!--   <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script>
       <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
       <script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>
 	  
-	  
-     
+	   
     
        <script>
        
@@ -299,8 +259,5 @@
 					  });
         });
     </script>
-     </div>
-   </body>
-</html>
 
  
