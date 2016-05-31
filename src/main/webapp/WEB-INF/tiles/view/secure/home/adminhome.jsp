@@ -3,72 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
- 		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
-      <%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css"> --%>
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">       
-<style type="text/css">
-.vertical-alignment-helper {
-    display:table;
-    height: 50%;
-    width: 50%;
-}
-</style>
-</head>
-<body>
-   <div class="container-fluid">
-   <header class="clearfix paddT20">
-     <div class="logo col-md-8 col-sm-12">
-     <a href="#"><img src="${pageContext.request.contextPath}/images/logo.png" alt="Research Floks"/></a>
-     </div>
-     <div class="customerInfo col-md-4 col-sm-12 paddT20">
-     	<div class="col-md-8 col-sm-12">
-        	<div class="col-md-4">
-            	<a href="#"><img src="${pageContext.request.contextPath}/images/icon-user.png" alt="Customer Img"/></a>
-            </div>
-            <div class="col-md-8 noPaddRL paddT15">
-            <div class="customerName col-md-12 col-sm-12 noPaddRL">Customer Name</div>
-            <div class="fontSmall  col-md-12 col-sm-12">Customer Skill</div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 noPaddRL paddT15 ">
-	        <div class="col-md-12 fontSmall marginB5">
-            	<span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-alert.png" alt="alerts"/></span> <a href="#">Alerts</a>
-            </div>
-            <div class="col-md-12 fontSmall">
-            	<span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-mesage.png" alt="Message"/></span> <a href="#">Message</a>
-            </div>
-        </div>
-     </div>
-     </header>
-    <section>
-    <nav id="myNavbar" class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse noPaddRL" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Customer Research</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-    </nav>
-      </section>
       <div id="total_count" total-cnt="${editreports.totalPages}"></div>
       <form:form method="POST" action="/secure/updateReports.html" commandName="ViewReports" modelAttribute="editreports">
       <section>
@@ -241,6 +175,4 @@
         console.log(${reviewersJson})
     </script> -->
      
-   </body>
-</html>
 

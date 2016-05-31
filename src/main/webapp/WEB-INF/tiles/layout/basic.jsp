@@ -7,7 +7,9 @@
 		<!-- Header -->
 		<tiles:insertAttribute name="header" />
 		<!-- Body -->
-		<tiles:insertAttribute name="body" />
+		<div class="container contentWraper">
+			<tiles:insertAttribute name="body" />
+		</div>
 		<!-- Footer -->
 		<tiles:insertAttribute name="footer" />
 	</body>

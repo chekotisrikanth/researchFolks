@@ -1,4 +1,5 @@
-<footer class="container-fluid">
+<div class="row">
+      <footer class="container-fluid">
         <div class="container clearfix">
             <div class="links clearfix">
                 <div class="col">
@@ -48,3 +49,5 @@
             </div>
         </div>
     </footer>
+    </div>
+    
