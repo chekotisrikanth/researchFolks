@@ -15,12 +15,10 @@
       </encoder>
    </appender>
     
-    <logger name="eu.kielczewski" additivity="false" level="TRACE">
-        <appender-ref ref="stdout"/>
-    </logger>
+   
     
      <logger name="jdbc.sqlonly" additivity="false">
-  		<level value="info"/>
+  		<level value="error"/>
   		<appender-ref ref="sql-appender"/>
 	</logger>
     
@@ -29,7 +27,9 @@
   		<appender-ref ref="stdout"/>
 	</logger> -->
     
-    <root level="info">
+    <logger name="com.marketing" level="info" />
+    
+    <root level="error">
         <appender-ref ref="stdout"/>
     </root>
 </configuration>

@@ -3,8 +3,10 @@ package com.marketing.tool.controller;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,6 +16,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -71,6 +74,24 @@ public class CPDPReportFormCreateController {
 	    @InitBinder("form")
 	    public void initBinder(WebDataBinder binder) {
 	    	binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+	    	final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+	    	dateFormat.setLenient(false);
+	    	//binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	    	binder.registerCustomEditor(Date.class, "publishingDate", new CustomDateEditor(dateFormat, true) {
+	    		public void setAsText(String element) throws IllegalArgumentException {
+	                if (element != null) {
+	                	Date date;
+						try {
+							date = (Date)dateFormat.parse(element);
+							setValue(date);
+						} catch (ParseException e) {
+							throw new IllegalArgumentException(
+									"Could not parse publishingDate : " + element);
+						} 
+	                    
+	                }
+	            }
+	    	});
 	    }
 	    
 	   
@@ -86,6 +107,7 @@ public class CPDPReportFormCreateController {
 
 	    @RequestMapping(value = "/publish/cpdpReportForm_create.html", method = RequestMethod.POST)
 	    public ModelAndView createReportForm(@ModelAttribute("form") @Valid CPDPReportForm reportForm, BindingResult result)  {
+	    	System.out.println("published date "+reportForm.getPublishingDate());
 	        LOGGER.debug("Received request to create {}, with result={}", reportForm, result);
 	        ModelAndView modelAndView = new ModelAndView();
 			//modelAndView.addObject("pers", person);

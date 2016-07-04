@@ -184,7 +184,7 @@ function buildResponseDiv(ajaxresp,div) {
 		str+='			<td>'+report.industry+'</td>';
 		str+='			<td>'+report.country+'</td>';
 		str+='			<td>'+report.comIntlString+'</td>';
-		str+='			<td><a href="#" class="downreport" rep-id="'+report.reportId+'"><img src="images/icon_viewProfile.png" alt="Profile" /></a></td>';
+		str+='			<td><a href="/public/getReport/'+report.reportId+'" class="downreport" rep-id="'+report.reportId+'"><img src="images/icon_viewProfile.png" alt="Profile" /></a></td>';
 		str+='		</tr>';
 	});
 //				            <td><a href="#" class="downreport" rep-id="${report.reportId}"><img src="${pageContext.request.contextPath}/images/icon-download.png" alt="Edit"/></a></td>

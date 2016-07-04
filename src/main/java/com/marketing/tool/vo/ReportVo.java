@@ -1,5 +1,7 @@
 package com.marketing.tool.vo;
 
+import java.util.Date;
+
 public class ReportVo {
 	
 	private Integer reportId;
@@ -8,7 +10,7 @@ public class ReportVo {
 	private String country;
 	private String userName;
 	private Integer comIntl;
-	private String publishingDate;
+	private Date publishingDate;
 	
 	private String comIntlString;
 	
@@ -20,10 +22,10 @@ public class ReportVo {
 	public void setComIntlString(String comIntlString) {
 		this.comIntlString = comIntlString;
 	}
-	public String getPublishingDate() {
+	public Date getPublishingDate() {
 		return publishingDate;
 	}
-	public void setPublishingDate(String publishingDate) {
+	public void setPublishingDate(Date publishingDate) {
 		this.publishingDate = publishingDate;
 	}
 	public Integer getComIntl() {

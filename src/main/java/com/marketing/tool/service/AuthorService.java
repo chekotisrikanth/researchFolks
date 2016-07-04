@@ -12,4 +12,5 @@ public interface AuthorService extends UserService {
 	public List<Author> findAuhtors(String country, List<Keyskills> skills);
 	public void getAuthorPublishedReports(int userId, int pageNumber, int results, AuthorReportsResp resp) ;
 	public void getAuthorReportsList(int userId, int pageNumber, int results, AuthorReportsResp resp);
+	public Author findById(Integer id);
 }

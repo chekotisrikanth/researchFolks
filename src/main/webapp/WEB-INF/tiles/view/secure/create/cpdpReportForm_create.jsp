@@ -232,7 +232,7 @@
 								   <span class="glyphicon glyphicon-calendar"></span>
 							</span>							
 						 </div>
-						<!--   <form:errors path="publishingDate"/>-->
+						  <form:errors path="publishingDate"/>
 					</div>	
 					</div>
 	             </spring:bind>
@@ -319,7 +319,8 @@
      	<script src="/tree/assets/dist/jstree.min.js"></script>
      <!--   <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
       <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script>
+      <script src="${pageContext.request.contextPath}/js/moment.js"></script>
+      <script src="${pageContext.request.contextPath}/js/daterangepicker.js"></script>
       <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
       <script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>
       <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/popuputil.js" ></script>
@@ -505,11 +506,14 @@
 			});			
 			// $('#publishingDate').val('');
 			 $('#publishingDate').daterangepicker({ 
+				 locale: {
+			            format: 'MM-DD-YYYY'
+			        },
 				 singleDatePicker: true ,
 				 showDropdowns: true
 			 }, function(start, end, label) {
 			       
-			 }); //dtpicker
+			 }); //dtpick
 		
     	 }); //ready end
 		

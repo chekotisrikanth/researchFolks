@@ -32,5 +32,7 @@ public interface ReportRepository extends Repository<ReportForm,Integer>,PagingA
 	@Query("select rep  from ReportForm rep join rep.reportStatuses rstatus join rstatus.user usr where usr.id=?1 and rstatus.statusId in (?2)")
 	Page<ReportForm> findAuthorReports(int userId,List<Integer> statusIds,Pageable pagable);
 	
+	@Query("select a from ReportForm a where profiletype = ?1 order by publishingDate desc")
+	List<ReportForm> findByProfileTypeOrderByPublishingDate(String profileType,Pageable pagable);
 	
 }

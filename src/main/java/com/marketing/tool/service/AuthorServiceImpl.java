@@ -117,6 +117,13 @@ public class AuthorServiceImpl extends UserServiceImpl implements AuthorService 
 		List<ReportVo> pubReVo =ReportsSearchResponseBuilder.buildReports(publishedReports.getContent());
 		resp.setRepList(pubReVo);
 	}
+
+
+	@Override
+	public Author findById(Integer id) {
+		// TODO Auto-generated method stub
+		return authorRepository.findById(id);
+	}
 	
 	//Build Graphs
 	

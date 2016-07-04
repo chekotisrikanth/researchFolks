@@ -14,6 +14,7 @@ public interface AuthorRepository extends UserRepository<Author> {
 
 	List<Author> findByCountryAndKeyskillsIn(String country,List<Keyskills> skills);
 	List<Author> findByKeyskillsIn(List<Keyskills> skills);
+	Author findById(Integer id);
 	
 	//@Query("select month(rep.publishingDate)  from ReportForm rep join rep.reportStatuses rstatus join rstatus.user usr where usr.id=?1 and rstatus.statusId in (?2)")
 	//List<Object[]> findAuthorReportsByMonthWise(int userId,List<Integer> statusIds);

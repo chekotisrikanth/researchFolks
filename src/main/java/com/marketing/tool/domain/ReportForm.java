@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -33,6 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name = "report")  
 @Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="profiletype", discriminatorType=DiscriminatorType.STRING)
 public class ReportForm {
 
 	public MultipartFile getReportImg() {
@@ -75,13 +79,11 @@ public class ReportForm {
 	private String price;
 	
 	@NotEmpty
-	@Lob
 	@Size(max=1500)
 	@Column(name="overview" , nullable=false)
 	private String overview;
 	
 	@NotEmpty
-	@Lob
 	@Size(max=1500)
 	@Column(name="tableOfContents" , nullable=false)
 	private String tableOfContents;
@@ -119,9 +121,14 @@ public class ReportForm {
 	@Transient
 	private MultipartFile reportImg;
 	
-	@NotEmpty
-	@Column(name="publishingDate", nullable=false)
-	private String publishingDate;
+	//@NotEmpty
+	@Column(name="publishingDate", nullable=true)
+	//@Temporal(TemporalType.DATE)
+	//@Date
+	 //@DateTimeFormat(style = "MM-dd-yyyy")
+	//@DateTimeFormat(pattern="MM/DD/YYYY")
+	//@DateTimeFormat(pattern="MM-dd-yyyy")
+	private Date publishingDate;
 	
 	
 	
@@ -210,11 +217,11 @@ public class ReportForm {
 		this.insertedDate = insertedDate;
 	}
 
-	public String getPublishingDate() {
+	public Date getPublishingDate() {
 		return publishingDate;
 	}
 
-	public void setPublishingDate(String publishingDate) {
+	public void setPublishingDate(Date publishingDate) {
 		this.publishingDate = publishingDate;
 	}
 
@@ -283,6 +290,13 @@ public class ReportForm {
 
 	public void setRepTypeId(Integer repTypeId) {
 		this.repTypeId = repTypeId;
+	}
+	
+	@Transient
+	public String getDiscriminatorValue(){
+	    DiscriminatorValue val = this.getClass().getAnnotation(DiscriminatorValue.class);
+
+	    return val == null ? null : val.value();
 	}
 
 	@Override

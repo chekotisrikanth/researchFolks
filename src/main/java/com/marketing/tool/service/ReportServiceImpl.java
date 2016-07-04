@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -371,6 +372,12 @@ public class ReportServiceImpl implements ReportService {
 	 //log final objects here
 	 LOGGER.debug("Exit methodName {} ","updateReportStatusByRole");
 	 
+	}
+
+
+	@Override
+	public List<ReportForm> findReportsByProfileType(String profileType) {
+		return repository.findByProfileTypeOrderByPublishingDate(profileType,new PageRequest(0,10));
 	}
 
 	
