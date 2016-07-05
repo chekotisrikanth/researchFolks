@@ -2,6 +2,7 @@
     contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <article class="col-md-12 noPaddRL">
               <div class="contentWraper marginB20">
         <div class="row">
@@ -19,7 +20,7 @@
                   </tr>
                           <tr>
                     <td>Publishing Datae is </td>
-                    <td><c:out value="${viewreport.report.publishingDate}"/></td>
+                    <td><fmt:formatDate value="${viewreport.report.publishingDate}" pattern="MM-dd-yyyy" /></td>
                   </tr>
                           <tr>
                     <td class="bigFont" colspan="2">${viewreport.report.price}</td>
@@ -63,7 +64,7 @@
 			            <div class="latestPublGroup">
 			                      <h4 class="title">${report.reportTitle}</h4>
 			                      <p>$ ${report.price}</p>
-			                      <p>Publishing Date: ${report.publishingDate }</p>
+			                      <p>Publishing Date: <fmt:formatDate value="${report.publishingDate}" pattern="MM-dd-yyyy" /></p>
 			                      <div class="discrip">${report.overview}</div>
 			                      <a href="#" class="readMore">Read More...</a> 
 			             </div>

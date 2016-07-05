@@ -47,4 +47,11 @@ public class WebAppConfig extends WebMvcConfigurerAdapter {
 	      
 	        registry.addFormatter(new DateFormatter("MM/dd/yyyy"));
 	    }
-*/}
+*/
+	 @Override
+	    public void addFormatters(FormatterRegistry registry) {
+	      
+	        registry.addFormatter(new DateFormatter("MM-dd-yyyy"));
+	    }
+	 
+}

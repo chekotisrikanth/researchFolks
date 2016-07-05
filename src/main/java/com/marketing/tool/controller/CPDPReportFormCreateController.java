@@ -71,7 +71,7 @@ public class CPDPReportFormCreateController {
 	    @Autowired
 	    private MasterIndustriesService masterIndustriesService;
 	   	    
-	    @InitBinder("form")
+	   /* @InitBinder("form")
 	    public void initBinder(WebDataBinder binder) {
 	    	binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 	    	final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
@@ -93,7 +93,7 @@ public class CPDPReportFormCreateController {
 	            }
 	    	});
 	    }
-	    
+	   */ 
 	   
 	    @RequestMapping(value = "/publish/cpdpReportForm_create.html", method = RequestMethod.GET)
 	    public ModelAndView getCreateReportFormView(Model model, @Validated CPDPReportForm reportForm, BindingResult result) {
