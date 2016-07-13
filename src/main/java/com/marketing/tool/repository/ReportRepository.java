@@ -1,10 +1,15 @@
 package com.marketing.tool.repository;
 
 
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
+
+import javax.transaction.Transactional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.Repository;
@@ -29,8 +34,13 @@ public interface ReportRepository extends Repository<ReportForm,Integer>,PagingA
 	@Query("select count(distinct rep.reportId)  from ReportForm rep join rep.reportStatuses rstatus  where  rstatus.statusId=?1")
 	Integer getAllPublishedReportsCount(Integer statusId);
 	
-	@Query("select rep  from ReportForm rep join rep.reportStatuses rstatus join rstatus.user usr where usr.id=?1 and rstatus.statusId in (?2)")
+	@Query("select rep  from ReportForm rep join rep.reportStatuses rstatus join rstatus.user usr where usr.id=?1 and rstatus.statusId in (?2) group by rep.reportId ")
 	Page<ReportForm> findAuthorReports(int userId,List<Integer> statusIds,Pageable pagable);
+	@Modifying
+	@Transactional
+    @Query("update ReportForm rt set rt.publishedDate=?1 where  rt.reportId in (?2)")
+    public int  updatePublishedDateForReports( Date currentDate,Collection<Integer> reportIds) ;
 	
-	
+	@Query("select a from ReportForm a where profiletype = ?1 order by publishingDate desc")
+	List<ReportForm> findByProfileTypeOrderByPublishingDate(String profileType,Pageable pagable);
 }

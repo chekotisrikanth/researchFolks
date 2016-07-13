@@ -23,5 +23,6 @@ public interface ReportService {
 	EditReports getPublisherReports(int userId,Integer pageNumber,Integer results);
 	int publishReports(List<Integer> reportIds, String userId);
 	EditReports getAllReports(Integer pageNumber, Integer results);
-	
+	List<ReportForm> findReportsByProfileType(String industry);
+	//Map<String,Integer> getReportsCount(String email);
 }

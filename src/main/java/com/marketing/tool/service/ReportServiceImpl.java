@@ -3,6 +3,7 @@ package com.marketing.tool.service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -23,6 +25,7 @@ import org.springframework.validation.annotation.Validated;
 import com.marketing.tool.domain.EditReports;
 import com.marketing.tool.domain.ReportAssigners;
 import com.marketing.tool.domain.ReportComments;
+import com.marketing.tool.domain.ReportCommentsAlert;
 import com.marketing.tool.domain.ReportCommentsVo;
 import com.marketing.tool.domain.ReportForm;
 import com.marketing.tool.domain.ReportHistory;
@@ -32,13 +35,18 @@ import com.marketing.tool.domain.User;
 import com.marketing.tool.domain.UserProfileType;
 import com.marketing.tool.domain.ViewReport;
 import com.marketing.tool.domain.ViewReports;
+import com.marketing.tool.reponse.builder.ReportsSearchResponseBuilder;
 import com.marketing.tool.repository.ReportAssignerRepository;
+import com.marketing.tool.repository.ReportCommentsAlertRepository;
 import com.marketing.tool.repository.ReportCommentsRepository;
 import com.marketing.tool.repository.ReportRepository;
+import com.marketing.tool.repository.ReportStatusRepository;
+import com.marketing.tool.utility.DateUtills;
 import com.marketing.tool.utility.FileUtils;
 import com.marketing.tool.utility.ReportStatusEnum;
 import com.marketing.tool.utility.SharedConstants;
 import com.marketing.tool.vo.BasicResp;
+import com.marketing.tool.vo.ReportVo;
 
 @Service
 @Validated
@@ -62,9 +70,16 @@ public class ReportServiceImpl implements ReportService {
 	 @Autowired
 	 private ReportHistoryService reportHistoryService;
 	 
-	 @Autowired
+	 @Autowired	 
+	 private ReportStatusRepository reportStatusRepository;
 	 
+	 @Autowired	
+		private ReportCommentsAlertRepository reportCommentsAlertRepository;
 		
+	 @Autowired
+	 private ReportRepository reportRepository;
+	 
+	 
 	@Inject
 	public ReportServiceImpl(final ReportRepository repository) {
 		this.repository = repository;
@@ -200,8 +215,74 @@ public class ReportServiceImpl implements ReportService {
 		EditReports editreports = new EditReports();
         editreports.setReports(adminReports);
         editreports.setTotalPages(reports.getTotalElements());
+           //comments alert -pre data
+      		Map<Integer,ReportCommentsAlert>  repMpa = null;
+      		//get Records for lastSeenDate
+      		List<ReportCommentsAlert> alertRecords  = reportCommentsAlertRepository.findByUserId(userId);
+      		if(!CollectionUtils.isEmpty(alertRecords)) {
+      			repMpa = new HashMap<>();
+      			for (ReportCommentsAlert reportCommentsAlert : alertRecords) {
+      				repMpa.put(reportCommentsAlert.getReportId(),reportCommentsAlert);
+      			}
+      		}
+      		
+      		setCommentsAlert(editreports.getReports(), repMpa,userId);
+		/*List<ReportVo> pubReVo =ReportsSearchResponseBuilder.buildReports(adminReports, repMpa,true);
+		editreports.setReportsList(pubReVo);*/
         reports = null;
 		return editreports;
+		
+		
+	}
+	
+	public static void setCommentsAlert(List<ReportForm> pubReVoList, Map<Integer,ReportCommentsAlert>  repMap, int userId) {
+		
+		for (ReportForm pubReVo : pubReVoList) {
+			Integer reportId = pubReVo.getReportId();
+			List<ReportComments> commentsList= pubReVo.getReportComments();
+			List<ReportComments> comments = new ArrayList<>();
+			if(!CollectionUtils.isEmpty(commentsList)) {
+				for (ReportComments reportComments : commentsList) {
+					if(reportComments.getUserId().intValue() != userId ) {
+						comments.add(reportComments);
+					}
+				}
+			}//if
+			
+			
+			if(!CollectionUtils.isEmpty(comments) && repMap == null) {
+				if(!CollectionUtils.isEmpty(comments)) {
+					pubReVo.setHaveComments("Y");
+					pubReVo.setComntCnt(comments.size());
+				}
+			} else if(!CollectionUtils.isEmpty(comments) && repMap != null) {
+				
+					ReportCommentsAlert comment  = repMap.get(reportId);
+					if(comment == null) {
+						pubReVo.setHaveComments("Y");
+						pubReVo.setComntCnt(comments.size());
+					} else {
+						int commentsCnt = 0;
+						Date lastSeenDate = comment.getLastSeenDate();
+						for (ReportComments reportComments : comments) {
+							
+							Date cmtDate = reportComments.getInsertedDate();				
+							if( cmtDate.getTime() > lastSeenDate.getTime()) {
+								commentsCnt++;
+							}
+						}
+						if(commentsCnt>0) {
+							pubReVo.setHaveComments("Y");
+							pubReVo.setComntCnt(commentsCnt);
+						}
+					}
+					
+				
+			}//if
+				
+				
+	}//for	
+		
 		
 		
 	}
@@ -247,7 +328,13 @@ public class ReportServiceImpl implements ReportService {
 			List<ReportComments> comments = reportComments.getReports();
 			for (ReportComments reportComments2 : comments) {
 				//validate reviwer for reports 
-				Integer userId = reportAssignerRepository.getUserIdForReport(reportComments2.getReportId(), email);
+				
+				Integer userId = null;
+				 if(reportComments.getRole().equals(UserProfileType.REVIEWER)) {
+					 userId = 	reportAssignerRepository.getUserIdForReport(reportComments2.getReportId(), email);
+				 } else if(reportComments.getRole().equals(UserProfileType.AUTHOR)) {
+					 userId = reportStatusRepository.findUserIdByReportId(reportComments2.getReportId(), email);
+				 }
 				
 				if(userId ==null) {
 					continue;
@@ -256,21 +343,24 @@ public class ReportServiceImpl implements ReportService {
 				//get Report Status
 				int cnt =0;
 				//update report status 
-				if(reportComments2.getAssignee()==1) {
-					cnt= reportStatusService.update(ReportStatusEnum.PUBLISHER_PENDING.getValue(), reportComments2.getReportId());
+				if(reportComments2.getAssignee() != null) {
+					if(reportComments2.getAssignee()==1) {
+						cnt= reportStatusService.update(ReportStatusEnum.PUBLISHER_PENDING.getValue(), reportComments2.getReportId());
 
-				}else if(reportComments2.getAssignee()==2){
-					
-					cnt= reportStatusService.update(ReportStatusEnum.REVIWER_COMMENTS.getValue(), reportComments2.getReportId());
-					
-					 if(!StringUtils.hasText(reportComments2.getComment())) {
-						 // if it is reviwer comments and comments empty then throw exception
-						 
-					 }
-				}else {
-					LOGGER.warn("some thing wrong for reportId {}  and userId {}",reportComments2.getReportId(),userId);
-					continue;
+					}else if(reportComments2.getAssignee()==2){
+						
+						cnt= reportStatusService.update(ReportStatusEnum.REVIWER_COMMENTS.getValue(), reportComments2.getReportId());
+						/*
+						 if(!StringUtils.hasText(reportComments2.getComment())) {
+							 // if it is reviwer comments and comments empty then throw exception
+							 
+						 }*/
+					}else {
+						LOGGER.warn("some thing wrong for reportId {}  and userId {}",reportComments2.getReportId(),userId);
+						continue;
+					}
 				}
+				
 				//save commnets if required
 				 if(reportComments2.getReportFile() != null) {
 					 long time= Calendar.getInstance().getTimeInMillis();
@@ -279,6 +369,7 @@ public class ReportServiceImpl implements ReportService {
 				}
 				 if(StringUtils.hasText(reportComments2.getComment()) || reportComments2.getReportFile() != null) {
 					 reportComments2.setUserId(userId);
+					 reportComments2.setInsertedDate(DateUtills.getCurrentDate());					 
 					 reportCommentsRepository.save(reportComments2);
 				 }
 				 
@@ -310,18 +401,28 @@ public class ReportServiceImpl implements ReportService {
 
 
 	@Override
+	@Transactional
 	public int publishReports(List<Integer> reportIds, String email) {
 		//validation all reports assigned for publisher
-		for (Integer id : reportIds) {
-			Integer userId = reportAssignerRepository.getUserIdForReportForPublisher(id, email);
-			
-			if(userId ==null) {
-				throw new RuntimeException("Some Reports Not Assigned For User");
+		int cnt = 0;
+		int cnt1 = 0;
+		try {
+			for (Integer id : reportIds) {
+				Integer userId = reportAssignerRepository.getUserIdForReportForPublisher(id, email);
+				
+				if(userId ==null) {
+					throw new RuntimeException("Some Reports Not Assigned For User");
+				}
 			}
+			cnt1 = reportRepository.updatePublishedDateForReports(DateUtills.getCurrentDate(), reportIds);
+			cnt = reportStatusService.updateAll(ReportStatusEnum.PUBLISHED.getValue(), reportIds);
+		}catch(Exception exp) {
+			LOGGER.error("Entry methodName {} recCnt {} recCnt1 {} ","publishReports",cnt,cnt1);
+			throw  new RuntimeException(exp.getMessage());
 		}
 		
 		// TODO Auto-generated method stub
-		return reportStatusService.updateAll(ReportStatusEnum.PUBLISHED.getValue(), reportIds);
+		return cnt;
 	}
 	
 	private void updateReportStatusByRole(List<ReportForm> reports,Integer userId,UserProfileType type) {
@@ -330,7 +431,7 @@ public class ReportServiceImpl implements ReportService {
 		List<Integer> reporIds = new ArrayList<>();
 		//step :1 update report Status
 		for (ReportForm reportForm : reports) {
-			
+			reportForm.getCountryObj().getCountryName();
 			List<ReportStatus> status =reportForm.getReportStatuses();
 			   for (ReportStatus reportStatus : status) {
 				   reportStatus.setStatus(ReportStatusEnum.fromValue(reportStatus.getStatusId()));
@@ -371,6 +472,11 @@ public class ReportServiceImpl implements ReportService {
 	 //log final objects here
 	 LOGGER.debug("Exit methodName {} ","updateReportStatusByRole");
 	 
+	}	
+
+	@Override
+	public List<ReportForm> findReportsByProfileType(String profileType) {
+		return repository.findByProfileTypeOrderByPublishingDate(profileType,new PageRequest(0,10));
 	}
 
 	

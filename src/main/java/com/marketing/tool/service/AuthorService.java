@@ -1,6 +1,7 @@
 package com.marketing.tool.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.marketing.tool.domain.Author;
 import com.marketing.tool.domain.AuthorReportsResp;
@@ -12,4 +13,9 @@ public interface AuthorService extends UserService {
 	public List<Author> findAuhtors(String country, List<Keyskills> skills);
 	public void getAuthorPublishedReports(int userId, int pageNumber, int results, AuthorReportsResp resp) ;
 	public void getAuthorReportsList(int userId, int pageNumber, int results, AuthorReportsResp resp);
+    public  AuthorReportsResp getPublishedRecordsCount(Integer year,Integer userId);
+
+	Map<String, Integer> getReportsCount(String email);
+
+	public Author findById(Integer id);
 }
