@@ -506,13 +506,14 @@
 			});			
 			// $('#publishingDate').val('');
 			 $('#publishingDate').daterangepicker({ 
+				 autoUpdateInput: false,
 				 locale: {
 			            format: 'MM-DD-YYYY'
 			        },
 				 singleDatePicker: true ,
 				 showDropdowns: true
-			 }, function(start, end, label) {
-			       
+			 }, function(chosen_date) {
+				 $('#publishingDate').val(chosen_date.format('MM-DD-YYYY'));
 			 }); //dtpick
 		
     	 }); //ready end
