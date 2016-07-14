@@ -10,10 +10,30 @@ public class ReportVo {
 	private Integer comIntl;
 	private String publishingDate;
 	
+	private String haveComments = "N";
+	
+	
 	private String comIntlString;
 	
+	private Integer comntCnt;
+	
+	private Integer userId;
 	
 	
+	
+	
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+	public Integer getComntCnt() {
+		return comntCnt;
+	}
+	public void setComntCnt(Integer comntCnt) {
+		this.comntCnt = comntCnt;
+	}
 	public String getComIntlString() {
 		return comIntlString;
 	}
@@ -61,6 +81,12 @@ public class ReportVo {
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+	public String getHaveComments() {
+		return haveComments;
+	}
+	public void setHaveComments(String haveComments) {
+		this.haveComments = haveComments;
 	}
 	
 	
