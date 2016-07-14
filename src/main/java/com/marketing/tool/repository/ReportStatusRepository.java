@@ -1,6 +1,7 @@
 package com.marketing.tool.repository;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -19,7 +20,7 @@ public interface ReportStatusRepository extends Repository<ReportStatus,Integer>
 
 	@Modifying
 	@Transactional
-    @Query("update ReportStatus rt set rt.statusId=?1 where  rt.report.reportId=?2")
+    @Query("update ReportStatus rt set rt.statusId=?1  where  rt.report.reportId=?2")
     public int  updateReportStatus( int statusId,int reportId) ;
 	
 	
@@ -27,5 +28,12 @@ public interface ReportStatusRepository extends Repository<ReportStatus,Integer>
 	@Transactional
     @Query("update ReportStatus rt set rt.statusId=?1 where  rt.report.reportId in(?2)")
     public int  updateReportStatusForAllReports( int statusId,Collection<Integer> reportIds) ;
+	
+    @Query("select usr.id  from ReportStatus rt join rt.user usr where  rt.report.reportId = ?1  and usr.emailId=?2)")
+	public int findUserIdByReportId(int reportId,String email);
+    
+    @Query("select rt.statusId,count(rt.statusId)  from ReportStatus rt join rt.user usr where   usr.emailId=?1 group by rt.statusId)")
+   	public List<Object[]> reportsSummary(String email);
+    
 	
 }

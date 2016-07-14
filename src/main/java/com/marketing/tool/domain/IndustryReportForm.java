@@ -1,10 +1,10 @@
 package com.marketing.tool.domain;
 
-import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 
 @Entity
+@DiscriminatorValue("industryreport")
 public class IndustryReportForm extends ReportForm {
 	
 	

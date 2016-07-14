@@ -45,7 +45,7 @@ public class ResearchReportsServiceImpl implements ResearchReportsService {
 		searchCriteria.setStatusId(ReportStatusEnum.PUBLISHED.getValue());
 		Page<ReportForm> form = reportSearchRepository.findAll(ReportSearchFilter.findByCriteriaForindustry(searchCriteria),page);
 		EditReports editreports = new EditReports();
-        editreports.setReportsList(ReportsSearchResponseBuilder.buildReports(form.getContent()));
+        editreports.setReportsList(ReportsSearchResponseBuilder.buildReports(form.getContent(),null,false));
         editreports.setTotalPages(form.getTotalPages());
         //sort if requried
       /* List<ReportVo> vo = editreports.getReportsList();

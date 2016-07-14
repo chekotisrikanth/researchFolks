@@ -5,30 +5,30 @@ var getProperty = function (propertyName) {
 
 $(document).ready(function() {
             $(".open, .impatient").pageslide();
-            $(document).on('click', '.cmnt', function(){
+          /*  $(document).on('click', '.cmnt', function(){
         		//alert('ok');
-            	appendalertmsg1($(this).attr('rep-id'));
+            	//all ajax to get the comments for the report
+            	var repId = $(this).attr('rep-id');
+            	callAjaxPost("/comments/getComments/"+repId,"chatHistory");
+            	appendalertmsg1(repId);
             	$("#popupAlertMsg").modal('show');
             	
-        	}); 
+        	});*/ 
             $(document).on('click', '.uploadDoc', function(){
             	$(this).next().trigger('click');
         	}); 
             $(document).on('click', '.sncButton', function(){
         		var myFormData = getValueUsingClass();
         		//callAjaxForDivId("loginForm", "resp",dataArr);
-        		for (var key in myFormData) {
-        		    console.log(key, myFormData[key]);
-        		    
-        		}
+        		
         		callAjax(myFormData);
         	});
             $(document).on('click', '.modalHide', function(){
             	var reportId = $(this).attr("rep-id");
             	var textVal = $("#errorMsgDiv").val();
-            	console.log(reportId+"==="+textVal);
+            	//console.log(reportId+"==="+textVal);
             	commentsObj[reportId]=textVal ;            	
-            	console.log("Rep==="+commentsObj.length);
+            	//console.log("Rep==="+commentsObj.length);
             	$("#popupAlertMsg").modal('hide');
             	//$(".cmnt-"+$(this).attr("rep-id")).append();
             	//data-dismiss="modal"
@@ -45,33 +45,7 @@ $(document).ready(function() {
 
 			
  
-
- function appendalertmsg1(repotId){
- 	//console.log(repotId);
- 	var str='';
- 	
- 	str+='<div class="modal fade alerttop" id="popupAlertMsg" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="z-index:99999">';
- 	str+='<div class="modal-dialog  ">';
- 	str+='<div class="modal-content alertstyle">';
- 	str+='<div class="modal-body alignmenttext">';
- 	str+='<div>	<textarea  id="errorMsgDiv" class="col-md-12"></textarea></div>';
- 	str+='</div>';
- 	str+='<div class="modal-footer pad_0 bt">';
- 	str+='<div class="row">';
- 	str+='<div class="col-md-3 col-md-offset-5 col-xs-4 col-xs-offset-3 col-sm-3 col-sm-offset-5 .mtop-5">';
- 	str+='<button type="button" class="btn btn-primary btn-xs modalHide" rep-id='+repotId+' >Save Comment</button>';
- 	str+='</div>';
- 	str+='</div>';
- 	str+='</div>';
- 	str+='</div>';
- 	str+='</div>';
- 	str+='</div>';
- 	
- 	$("#displayAlertMsg").html(str);
- 	 $("#errorMsgDiv").val(getProperty(repotId));
- 	
- 	//data-dismiss="modal"
- }
+ 
  function getValueUsingClass(){
 		/* declare an checkbox array */
 		var chkArray = [];
@@ -109,38 +83,124 @@ $(document).ready(function() {
 	}
 
 //ajax
-function callAjax(formData) { 
+function callAjax(formData) {
 try{
-$("#processingImg1").show();
+//$("#processingImg1").show();
 	 $.ajax({
 		  url:'/reviwer/asignReports',
 			data: formData,
-	        type: "POST",
-          processData: false,
-			contentType: false,			
-	 success: function(ajaxresp) {
-		 //alert(ajaxresp.name);
-		 //console.log(ajaxresp); 
-		 if(ajaxresp != null && typeof ajaxresp !== typeof undefined && ajaxresp !== false && typeof ajaxresp.message !== typeof undefined ) {
+	        type: "POST", 	        
+	        processData: false,
+	        contentType: false,			
+	    	success: function(ajaxresp) {
+	    	if(ajaxresp != null && typeof ajaxresp !== typeof undefined && ajaxresp !== false && typeof ajaxresp.message !== typeof undefined ) {
 			 $("#processingImg1").hide();
 			 var reslt;
-			  if( ajaxresp.message =="SUCCESS") {				
+			 if( ajaxresp.message =="SUCCESS") {				
 			   window.location.href = "/secure/home/reviewer/0/10";
-			  }else{
-				  appendalertmsg();			
-				  reslt="Error Occured Please Try Again Message :"+ajaxresp.message ;
-				  $("#errorMsgDiv").html(reslt);				
-				  $("#popupAlertMsg").modal('show');
-			  }
+			 } else {
+			  appendalertmsg();			
+			  reslt="Error Occured Please Try Again Message :"+ajaxresp.message ;
+			  $("#errorMsgDiv").html(reslt);				
+			  $("#popupAlertMsg").modal('show');
+			}
 		  } else {
 			 handleError();
 		}	
      },
 	 error: function(request,error) { 	
-		handleError();
+		 console.log("err");
+		 handleError();
+		
 	 }
 	 });
-}catch(e) {
+} catch(e) {
+	
+	console.log(e);
+
 		 handleError();
 	 }
+}/*
+function callAjaxPost(url,respDiv) {
+	try{
+	$("#processingImg1").show();
+		 $.ajax({
+			  url:url,
+		        type: "POST",
+		        dataType: 'json', 
+		    	beforeSend: function(xhr) {
+		    	 	 xhr.setRequestHeader("Accept", "application/json");
+		    	 	 xhr.setRequestHeader("Content-Type", "application/json");
+		    	}	,	
+		 success: function(ajaxresp) {
+			 //alert(ajaxresp.name);
+			 //console.log(ajaxresp); 
+			 $("#processingImg1").hide();
+			 if(ajaxresp != null && typeof ajaxresp !== typeof undefined && ajaxresp !== false  ) {
+				 //modal-body
+				 buildChatHistory(ajaxresp,respDiv);
+			  } else {
+					console.log("no ");
+
+				 //handleError();
+			}	
+	     },
+		 error: function(request,error) {
+			//handleError();
+		 }
+		 });
+	}catch(e) {
+			console.log(e);
+			// handleError();
+		 }
+	}
+function  buildChatHistory(ajaxresp,divClass) {
+	 $("#processingImg1").hide();
+
+	var str='';
+	str+='<p class="col-md-12 bg-info text-danger"> <span class="col-md-4"></span> <span class="col-md-6">Comments History</span> </p>';
+
+	$(ajaxresp.reports).each(function(index,object) {
+		
+		str+='<p class="col-md-12 bg-primary">';
+		str+=' <span class="col-md-6">Date : '+object.date+'</span>';
+		str+=' <span class="col-md-6">User : '+object.userName+'</span>';        
+       str+='</p>';     
+       
+       str+='<p class="bg-success">'+object.comment;
+		str+='</p>';
+		if(object.filePath != null && object.filePath.length>2) {
+			str+='<a href="#" class="downreportCmnt" rep-id="'+object.cmntId+'" ><img src="/images/icon-download.png" alt="Attachments"/></a>';
+		}
+		
+		
+
+//cmntId
+      
+     
+	});
+	$("."+divClass).html(str);
+	
 }
+*/
+/*function  buildChatHistory(ajaxresp,divClass) {
+	
+	var str='';
+	str+='<p class="col-md-12 bg-info text-danger"> <span class="col-md-4"></span> <span class="col-md-6">Comments History</span> </p>';
+
+	$(ajaxresp.reports).each(function(index,object) {
+		
+		str+='<p class="col-md-12 bg-primary">';
+		str+=' <span class="col-md-6">Date : '+object.date+'</span>';
+		str+=' <span class="col-md-6">User : '+object.userName+'</span>';        
+        str+='</p>';     
+        
+        str+='<p class="bg-success">'+object.comment;
+		str+='</p>';
+
+       
+      
+	});
+	$("."+divClass).html(str);
+	
+}*/

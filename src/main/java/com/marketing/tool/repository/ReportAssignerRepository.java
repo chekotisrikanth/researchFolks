@@ -16,6 +16,9 @@ public interface ReportAssignerRepository extends CrudRepository<ReportAssigners
 	@Query("select user.id from ReportAssigners ras, User user where ras.reportId=?1 and user.emailId=?2 and  user.id=ras.reviwerId and ras.active='Y' group by ras.reviwerId,ras.reportId  ")
 	Integer  getUserIdForReport(int reportId, String email);
 	
+	
+	
+	
 	@Query("select user.id from ReportAssigners ras, User user where ras.reportId=?1 and user.emailId=?2 and  user.id=ras.publisherId and ras.active='Y' group by ras.reviwerId,ras.reportId  ")
 	Integer  getUserIdForReportForPublisher(int reportId, String email);
 	

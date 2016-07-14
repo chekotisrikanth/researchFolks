@@ -33,7 +33,7 @@
 			            <td> <c:out value="${report.reportTitle}"/> </td>
 			            <td> <c:out value="${report.publishingDate}"/> </td>
 			            <td> <c:out value="${report.industry}"/> </td>
-			            <td> <c:out value="${report.country}"/> </td>
+			            <td> <c:out value="${report.countryObj.countryName}"/> </td>
 			            <c:forEach items="${report.reportStatuses}" var="reportStatuses">
 				            <td> <c:out value="${reportStatuses.user.firstName}"/> </td>
 				            <td> <c:out value="${reportStatuses.userType}"/> </td>

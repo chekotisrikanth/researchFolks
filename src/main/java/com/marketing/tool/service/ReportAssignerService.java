@@ -4,7 +4,7 @@ import com.marketing.tool.domain.UserProfileType;
 
 public interface ReportAssignerService {
 
-	public int  reportAccessForUser(Integer userId,String email,UserProfileType role);
+	public Integer  reportAccessForUser(Integer userId,String email,UserProfileType role,String type);
 	
 	
 }

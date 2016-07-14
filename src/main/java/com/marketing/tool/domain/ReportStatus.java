@@ -25,8 +25,24 @@ public class ReportStatus implements java.io.Serializable {
 	private ReportForm report;
 	private User user;
 	private String comments;
+	/*@Column(name="have_comments")
+	private boolean haveComments;
 	
 	
+	
+	
+	public boolean isHaveComments() {
+		return haveComments;
+	}
+
+	public void setHaveComments(boolean haveComments) {
+		this.haveComments = haveComments;
+	}*/
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	public ReportStatus() {
 	}
 
@@ -66,7 +82,7 @@ public class ReportStatus implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "report_id")
+	@JoinColumn(name = "report_id",nullable=false)
 	public ReportForm getReport() {
 		return this.report;
 	}
@@ -76,7 +92,7 @@ public class ReportStatus implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "user_id",nullable=false)
 	public User getUser() {
 		return this.user;
 	}

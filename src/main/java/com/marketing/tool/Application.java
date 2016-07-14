@@ -111,6 +111,7 @@ public class Application extends SpringBootServletInitializer {
 			  	.antMatchers("/admin/**").access("hasRole('ADMIN')")
 			  	.antMatchers("/publish/**").access("hasRole('AUTHOR')")
 			  	.antMatchers("/author/**").access("hasRole('AUTHOR')")
+			  	.antMatchers("/comments/**").access("hasRole('REVIEWER') or hasRole('AUTHOR')")
 			  	.antMatchers("/downloadReport/**").access("hasRole('ADMIN') or hasRole('PUBLISHER') or hasRole('REVIEWER') or hasRole('AUTHOR')")
 			  	.antMatchers("/secure/**").access("hasRole('ADMIN') or hasRole('PUBLISHER') or hasRole('REVIEWER')")
 			  	.and().formLogin().loginPage("/public/login").loginProcessingUrl("/j_spring_security_check").successHandler(successHandler)

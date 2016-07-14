@@ -19,8 +19,18 @@ public class ReportCommentsVo implements Serializable{
 	
 	private Integer userId;
 	private String  emailId;
+	private UserProfileType role;
 	
 	
+	
+	public UserProfileType getRole() {
+		return role;
+	}
+
+	public void setRole(UserProfileType role) {
+		this.role = role;
+	}
+
 	public String getEmailId() {
 		return emailId;
 	}

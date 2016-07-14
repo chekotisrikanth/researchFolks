@@ -2,6 +2,7 @@ package com.marketing.tool.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -202,4 +203,27 @@ public class AuthorController {
 	        }
 	        return response;
 	    }
+	    
+	  ///author/home/authorhome
+	    @RequestMapping(value = {"/author/home/authorhome/getPublishedRecordsCount/{year}" }, method = {RequestMethod.GET,RequestMethod.POST})
+	    public @ResponseBody AuthorReportsResp getPublishedRecordsCount(@PathVariable Integer year) {
+	       
+	        User user = loginUserService.findByEmailId(Helper.getPrincipal()); 	
+	        //AuthorReportsResp response = new AuthorReportsResp();
+	        int userId = user.getId();
+	      
+	        return authorService.getPublishedRecordsCount(year, userId);
+	    }
+	    
+	    @RequestMapping(value = {"/author/home/authorhome/getReportsSummary" }, method = {RequestMethod.GET,RequestMethod.POST})
+	    public @ResponseBody  Map<String, Integer> getAuthorReportsSummary() {
+	       
+	        User user = loginUserService.findByEmailId(Helper.getPrincipal()); 	
+	        //AuthorReportsResp response = new AuthorReportsResp();
+	        int userId = user.getId();
+	      
+	        return authorService.getReportsCount(user.getEmailId());
+	    }
+	    
+	    
 }

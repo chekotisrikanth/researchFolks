@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.marketing.tool.domain.ReportForm;
 import com.marketing.tool.domain.UserProfileType;
+import com.marketing.tool.exception.ReportAccessExpetion;
+import com.marketing.tool.repository.ReportCommentsRepository;
 import com.marketing.tool.repository.ReportRepository;
 import com.marketing.tool.service.DownLoadReportService;
 import com.marketing.tool.service.ReportAssignerService;
@@ -29,7 +31,8 @@ public class DownLoadReportServiceImpl implements DownLoadReportService {
 	 
 	 @Autowired
 	 private ReportRepository reportRepository;
-	 
+	 @Autowired
+	 private ReportCommentsRepository reportCommentsRepository;
 	@Override
 	public ByteArrayOutputStream getReportDocument(DownLoadReportVo reportVo) {
 		String methodName = "getReportDocument";
@@ -39,16 +42,26 @@ public class DownLoadReportServiceImpl implements DownLoadReportService {
 		ByteArrayOutputStream resp = null;
     	
     	try {
-    		int userId;
+    		Integer userId = null;
     		//validate Report Accessible to LoginUser 
-    		 if(!reportVo.getRole().equals(UserProfileType.ADMIN)) {
-    			 userId = reportAssignerService.reportAccessForUser(reportVo.getReportId(), reportVo.getEmailId(),reportVo.getRole());
+    		 if(!reportVo.getRole().equals(UserProfileType.ADMIN)) {    			 
+    			 userId = reportAssignerService.reportAccessForUser(reportVo.getReportId(), reportVo.getEmailId(),reportVo.getRole(),reportVo.getType());
     		 }
-    	 	//get FilePath
-    		ReportForm repForm = reportRepository.findByReportId(reportVo.getReportId());
-    		String filePath = repForm.getFilePath();
-    		reportVo.setFileName(filePath.substring(filePath.lastIndexOf(SharedConstants.FILE_SEPERATOR)+1));
-    		filePath = StringUtil.buildString(SharedConstants.FILE_PATH,filePath);
+    		 if(userId == null || userId ==0) {
+    			 throw new ReportAccessExpetion("USer Not Have Access To DownLoad This Report");
+    		 }
+    		 String filePath = null;
+    		 if(SharedConstants.COMMENTS.equals(reportVo.getType())) {
+    			 //gte Path from Comments
+    			 filePath = reportCommentsRepository.getReportCommentsFilePath(reportVo.getReportId());
+    		 } else {
+			 	//get FilePath
+	    		ReportForm repForm = reportRepository.findByReportId(reportVo.getReportId());
+	    		filePath = repForm.getFilePath();
+	    		filePath = StringUtil.buildString(SharedConstants.FILE_PATH,filePath);
+    		 }
+	    		reportVo.setFileName(filePath.substring(filePath.lastIndexOf(SharedConstants.FILE_SEPERATOR)+1));
+
     	 	//build Response
     		resp = FileUtils.getByteArrayOutputStream(filePath);
     		

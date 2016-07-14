@@ -76,13 +76,13 @@ $(document).ready(function() {
  		 if(ajaxresp != null && typeof ajaxresp !== typeof undefined && ajaxresp !== false && typeof ajaxresp.message !== typeof undefined ) {
  			 $("#processingImg1").hide();
  			 var reslt;
- 			  if( ajaxresp.message === "Success") {
+ 			  if( ajaxresp.message === "SUCCESS") {
  				 /*  reslt = "Login Success";
  				  $("#errorMsgDiv").html(reslt); 			
  				  setTimeout(function(){$("#popupAlertMsg").modal('show');},10);
  				  setTimeout(function(){$("#popupAlertMsg").find('button').trigger('click');},1000);*/	
  				 
- 				  window.location.href = "/secure/home/publisher";
+ 				  window.location.href = "/secure/home/publisher/0/10";
  			 
  			  }else{
  				 //  reslt = "Please Enter Valid UserName and Password";

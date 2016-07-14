@@ -18,13 +18,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -68,11 +65,29 @@ public class CPDPReportFormCreateController {
 	    @Autowired
 	    private MasterIndustriesService masterIndustriesService;
 	   	    
-	    @InitBinder("form")
+	   /* @InitBinder("form")
 	    public void initBinder(WebDataBinder binder) {
 	    	binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
+	    	final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+	    	dateFormat.setLenient(false);
+	    	//binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
+	    	binder.registerCustomEditor(Date.class, "publishingDate", new CustomDateEditor(dateFormat, true) {
+	    		public void setAsText(String element) throws IllegalArgumentException {
+	                if (element != null) {
+	                	Date date;
+						try {
+							date = (Date)dateFormat.parse(element);
+							setValue(date);
+						} catch (ParseException e) {
+							throw new IllegalArgumentException(
+									"Could not parse publishingDate : " + element);
+						} 
+	                    
+	                }
+	            }
+	    	});
 	    }
-	    
+	   */ 
 	   
 	    @RequestMapping(value = "/publish/cpdpReportForm_create.html", method = RequestMethod.GET)
 	    public ModelAndView getCreateReportFormView(Model model, @Validated CPDPReportForm reportForm, BindingResult result) {
@@ -86,6 +101,7 @@ public class CPDPReportFormCreateController {
 
 	    @RequestMapping(value = "/publish/cpdpReportForm_create.html", method = RequestMethod.POST)
 	    public ModelAndView createReportForm(@ModelAttribute("form") @Valid CPDPReportForm reportForm, BindingResult result)  {
+	    	System.out.println("published date "+reportForm.getPublishingDate());
 	        LOGGER.debug("Received request to create {}, with result={}", reportForm, result);
 	        ModelAndView modelAndView = new ModelAndView();
 			//modelAndView.addObject("pers", person);

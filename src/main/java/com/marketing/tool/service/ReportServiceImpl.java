@@ -479,6 +479,6 @@ public class ReportServiceImpl implements ReportService {
 		return repository.findByProfileTypeOrderByPublishingDate(profileType,new PageRequest(0,10));
 	}
 
-	
+
 	
 }

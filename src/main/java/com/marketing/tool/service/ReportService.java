@@ -26,3 +26,4 @@ public interface ReportService {
 	List<ReportForm> findReportsByProfileType(String industry);
 	//Map<String,Integer> getReportsCount(String email);
 }
+

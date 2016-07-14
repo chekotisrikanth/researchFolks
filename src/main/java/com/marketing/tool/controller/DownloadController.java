@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,8 +30,19 @@ public class DownloadController {
 	 @Autowired
 	 private DownLoadReportService downLoadReportService;
 	 
-	 @RequestMapping(value = "/downloadReport/{reportId}", method = RequestMethod.GET) 
-	   public void generatePDFReport(@PathVariable("reportId") Integer reportId,HttpServletRequest request, HttpServletResponse response) throws IOException
+	   @RequestMapping(value = "/downloadReport/{reportId}", method = RequestMethod.GET) 
+	   public void generatePDFReportForwarder(@PathVariable("reportId") Integer reportId,HttpServletRequest request, HttpServletResponse response) throws IOException
+	   {
+		   try {
+			request.getRequestDispatcher("/downloadReport/"+SharedConstants.SOURCE+"/"+reportId).forward(request,response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
+		   
+	   }
+	 
+	 @RequestMapping(value = "/downloadReport/{type}/{reportId}", method = RequestMethod.GET) 
+	   public void generatePDFReport(@PathVariable String type ,@PathVariable("reportId") Integer reportId,HttpServletRequest request, HttpServletResponse response) throws IOException
 	   {	
 		 	LOGGER.debug("generatePDFReport entry {}",reportId);
    	
@@ -46,7 +58,7 @@ public class DownloadController {
 			DownLoadReportVo vo = new DownLoadReportVo();
 			vo.setEmailId(emailId);
 			vo.setReportId(reportId);
-			
+			vo.setType(type);
 			UserProfileType role = Helper.getRole();
 			vo.setRole(role);
 			ByteArrayOutputStream baos =  null;
@@ -79,4 +91,8 @@ public class DownloadController {
 		  
 	   }
 
+
+
+
 }
+

@@ -24,7 +24,7 @@ public class Author extends User {
       
     @NotEmpty
     @Size(max = 50)
-    @Column(name = "country", nullable = false)
+    @Column(name = "country_id", nullable = false)
     private String country;
     
     @NotEmpty

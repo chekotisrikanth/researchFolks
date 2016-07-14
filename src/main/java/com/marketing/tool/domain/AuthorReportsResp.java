@@ -1,6 +1,7 @@
 package com.marketing.tool.domain;
 
 import java.util.List;
+import java.util.Map;
 
 import com.marketing.tool.vo.ReportVo;
 
@@ -8,10 +9,25 @@ public class AuthorReportsResp {
 
 	List<ReportVo> pulishedReports;
 	List<ReportVo> repList;
-
+	
+	Map<Integer,List<Integer>> publishedChartsData;
+	
+	
+	
+	
 	long pubRepCount;
 	long otherrepCount;
 	
+	
+	
+
+	public Map<Integer, List<Integer>> getPublishedChartsData() {
+		return publishedChartsData;
+	}
+
+	public void setPublishedChartsData(Map<Integer, List<Integer>> publishedChartsData) {
+		this.publishedChartsData = publishedChartsData;
+	}
 
 	public List<ReportVo> getPulishedReports() {
 		return pulishedReports;

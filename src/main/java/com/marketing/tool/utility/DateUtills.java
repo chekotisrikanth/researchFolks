@@ -16,5 +16,19 @@ public static Date getCurrentDate() throws ParseException {
 	
 	return sdf.parse(dateString);
 }
+public static Date getDateFromString(String dateString) throws ParseException {
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	return sdf.parse(dateString);
+}
 
+public static String getStringFromDate(Date dateString) throws ParseException {
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+	sdf.format(dateString);
+	return sdf.format(dateString);
+}
+
+
+// 04/22/2016
 }

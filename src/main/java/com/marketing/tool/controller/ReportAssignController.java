@@ -25,10 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marketing.tool.domain.ReportAssigners;
 import com.marketing.tool.domain.ReportCommentsVo;
 import com.marketing.tool.domain.UserProfileType;
-import com.marketing.tool.repository.ReportCommentsRepository;
-import com.marketing.tool.service.AdminService;
 import com.marketing.tool.service.ReportService;
-import com.marketing.tool.service.ReportStatusService;
 import com.marketing.tool.utility.Helper;
 import com.marketing.tool.utility.SharedConstants;
 import com.marketing.tool.validator.CreateFormValidator;
@@ -40,20 +37,15 @@ public class ReportAssignController {
 	 private static final Logger LOGGER = LoggerFactory.getLogger(ReportAssignController.class);
 	    
 	 ObjectMapper mapper = new ObjectMapper();
-	  
-	    @Autowired
-	    private AdminService adminService;
+	 
 	    
 	    @Autowired
 	    private CreateFormValidator createFormValidator;
 	    @Autowired
 	    private  ReportService reportServiceImpl;
 	    
-	    @Autowired
-	    private ReportStatusService reportStatusService;
-	    
-	    @Autowired
-	    private ReportCommentsRepository reportCommentsRepository; 
+	
+	  
 	    
 	         
 	    @InitBinder("form")
@@ -95,6 +87,7 @@ public class ReportAssignController {
 	    		 //validate and get userId from Assignment
 	    		String emailId = Helper.getPrincipal();
 	    		reports.setEmailId(emailId);
+	    		reports.setRole(Helper.getRole());
 	    		resp=reportServiceImpl.saveReportComments(reports);
 	    		
 	    		//	 				FileUtils.saveFiles(reportForm.getReportImg(),String.valueOf(reportForm.getReportId()),new StringBuilder("E:\\gitImages").append("\\Profile").toString());

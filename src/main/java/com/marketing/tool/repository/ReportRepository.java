@@ -43,4 +43,5 @@ public interface ReportRepository extends Repository<ReportForm,Integer>,PagingA
 	
 	@Query("select a from ReportForm a where profiletype = ?1 order by publishingDate desc")
 	List<ReportForm> findByProfileTypeOrderByPublishingDate(String profileType,Pageable pagable);
+
 }

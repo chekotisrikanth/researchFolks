@@ -82,7 +82,7 @@
                 <ul class="nav navbar-nav">
                   <li><a href="/">Home</a></li>
                   <li><a href="#">How It Works</a></li>
-                  <li><a href="#">Research Store</a></li>
+                  <li><a href="/freefolk/getPublishedReports">Research Store</a></li>
                   <li><a href="#">Custom Research</a></li>
                   <li><a href="#">Blog</a></li>
                   <li><a href="#">Contact Us</a></li>
