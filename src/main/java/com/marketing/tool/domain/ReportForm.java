@@ -1,10 +1,14 @@
 package com.marketing.tool.domain;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -12,7 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -25,6 +31,8 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.marketing.tool.utility.DateUtills;
+
 //@MappedSuperclass
 /**
  * @author anil
@@ -33,6 +41,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Entity
 @Table(name = "report")  
 @Inheritance(strategy=InheritanceType.JOINED)
+@DiscriminatorColumn(name="profiletype", discriminatorType=DiscriminatorType.STRING)
 public class ReportForm {
 
 	public MultipartFile getReportImg() {
@@ -60,33 +69,31 @@ public class ReportForm {
 	@Column(name="industry" , nullable=false)
 	private String industry;
 	
-	@NotEmpty
-	@Column(name="country" , nullable=false)
-	private String country;
+	@NotNull
+	@Column(name="countryId" , nullable=false)
+	private Integer country;
 	
 	//TODO: nned  to update after dev
 	@Column(name="insertedDate", nullable=true)
 	@DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss.SSS")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date insertedDate;
+	
 	@NotEmpty
 	@Column(name="price" , nullable=false)
 	@Size(max=20)
 	private String price;
 	
 	@NotEmpty
-	@Lob
 	@Size(max=1500)
 	@Column(name="overview" , nullable=false)
 	private String overview;
 	
 	@NotEmpty
-	@Lob
 	@Size(max=1500)
 	@Column(name="tableOfContents" , nullable=false)
 	private String tableOfContents;
 	
-	// new cloumns start
 	
 	
 	@NotEmpty
@@ -120,17 +127,76 @@ public class ReportForm {
 	private MultipartFile reportImg;
 	
 	@NotEmpty
-	@Column(name="publishingDate", nullable=false)
+	//@Column(name="publishingDate", nullable=false)
+	@Transient
 	private String publishingDate;
 	
 	
+	// new cloumns start
+	@Column(name="publishingDate", nullable=true)
+	@DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss.SSS")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date publishedDate  ;
 	
 	@Column(name="company_intl_type" , nullable=true)
 	private Integer comIntl;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "report",cascade = CascadeType.ALL)
+	private List<ReportComments> reportComments = null;
+	//Country
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "countryId", insertable =false,updatable = false)
+	private Country countryObj;
+	
+		
+	@Transient
+	private String haveComments;
+	@Transient
+	private Integer comntCnt;
 	
 	
 	
+	
+
+	public Country getCountryObj() {
+		return countryObj;
+	}
+
+	public void setCountryObj(Country countryObj) {
+		this.countryObj = countryObj;
+	}
+
+	public String getHaveComments() {
+		return haveComments;
+	}
+
+	public void setHaveComments(String haveComments) {
+		this.haveComments = haveComments;
+	}
+
+	public Integer getComntCnt() {
+		return comntCnt;
+	}
+
+	public void setComntCnt(Integer comntCnt) {
+		this.comntCnt = comntCnt;
+	}
+
+	public List<ReportComments> getReportComments() {
+		return reportComments;
+	}
+
+	public void setReportComments(List<ReportComments> reportComments) {
+		this.reportComments = reportComments;
+	}
+
+	public Date getPublishedDate() {
+		return publishedDate;
+	}
+
+	public void setPublishedDate(Date publishedDate) {
+		this.publishedDate = publishedDate;
+	}
 
 	public Integer getComIntl() {
 		return comIntl;
@@ -192,15 +258,16 @@ public class ReportForm {
 		this.industry = industry;
 	}
 
-	public String getCountry() {
+	
+	
+
+	public Integer getCountry() {
 		return country;
 	}
 
-	public void setCountry(String country) {
+	public void setCountry(Integer country) {
 		this.country = country;
 	}
-
-	
 
 	public Date getInsertedDate() {
 		return insertedDate;
@@ -211,11 +278,36 @@ public class ReportForm {
 	}
 
 	public String getPublishingDate() {
-		return publishingDate;
+		String pubDate = null;
+		if(getPublishedDate() != null) {
+			 pubDate = getPublishedDate().toString();
+			try {
+				pubDate = DateUtills.getStringFromDate(getPublishedDate());
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block,to be removed after logging
+				e.printStackTrace();
+			}
+			
+		} else {
+			pubDate = this.publishingDate;
+		}
+	
+		
+		return pubDate;
 	}
 
 	public void setPublishingDate(String publishingDate) {
 		this.publishingDate = publishingDate;
+		if(publishingDate != null ) {	
+			try {
+				this.publishedDate = DateUtills.getDateFromString(publishingDate);
+			} catch (ParseException e) {
+				//log exception
+				e.printStackTrace();
+
+			}
+		}
+		
 	}
 
 	public String getOverview() {
@@ -283,6 +375,13 @@ public class ReportForm {
 
 	public void setRepTypeId(Integer repTypeId) {
 		this.repTypeId = repTypeId;
+	}
+	
+	@Transient
+	public String getDiscriminatorValue(){
+	    DiscriminatorValue val = this.getClass().getAnnotation(DiscriminatorValue.class);
+
+	    return val == null ? null : val.value();
 	}
 
 	@Override
