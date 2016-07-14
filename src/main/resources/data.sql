@@ -65,7 +65,7 @@ insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('r
 
 update hibernate_sequences set sequence_next_hi_value = 3 where sequence_next_hi_value = 2 and sequence_name = 'user';
 insert into user (account_type, is_agreed_tc, email_id, first_name, last_name, password, title, user_name, userstatus, id) values ('AUTHOR', 1, 'kumar@gmail.com', 'Anilkumar ', 'Ravula', 'pirate', 'MR', 'anil', 'Active', 65536);
-insert into author (bio, city, country, mobile, id) values ('asdasdasdasds', 'hello', '1', '9505485048', 65536);
+insert into author (bio, city, country_id, mobile, id) values ('asdasdasdasds', 'hello', '1', '9505485048', 65536);
 insert into author_key_skill (author_id, skill_id) values (65536, 2);
 
 insert into user (account_type, email_id, first_name, last_name,  password, title, userstatus,IS_AGREED_TC,USER_NAME, id) values ('PUBLISHER', 'anil1@gamil.com', 'anil', 'sri', 'pirate', 'MR', 'Active',1,'anil', 32769);
@@ -93,41 +93,10 @@ insert  into master_industries (mi_id,mi_indus_name,mi_parent_id,mi_child_id,mi_
 
 
 
+
 update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'report';
-insert into report (COMPANY_INTL_TYPE,country, file_path, industry, inserted_date, overview, price, publishing_date, reptype_id, report_title, table_of_contents, update_cycle, report_id) values (1,'1', 'reports\bfa5fd81-9ab5-4b7c-8066-2b7c6a6870de1461395919696.doc', 'Chemicals,Ingredients', null, '<Reader of length 56>', '4,565', '04/22/2016', 2, 'kumar industry', '<Reader of length 98>', 'Quarterly', 1);
+insert into report (COMPANY_INTL_TYPE,country_id, file_path, industry, inserted_date, overview, price, publishing_date, reptype_id, report_title, table_of_contents, update_cycle, report_id)
+values (1,1, 'reports\bfa5fd81-9ab5-4b7c-8066-2b7c6a6870de1461395919696.doc', 'Chemicals,Ingredients', null, 'Blahhhhhh', 
+'4,565', CURDATE(), 2, 'kumar industry', 'Blahhhhhh1', 'Quarterly', 1);
 insert into industry_report_form (report_id) values (1);
 insert into report_status (report_status_id, comments, cycle_id, report_id, status, status_id, user_id, user_type) values (null, 'reported created', 1, 1, 'Created', 1, 65536, 'AUTHOR');
-insert into report (COMPANY_INTL_TYPE,country, file_path, industry, inserted_date, overview, price, publishing_date, reptype_id, report_title, table_of_contents, update_cycle, report_id) values (1,'1', 'reports\74ba4c4b-e263-4b10-9885-1e7c3ba791671461395922382.doc', '<Reader of length 28>',null, '<Reader of length 56>', '4,565', '04/22/2016', 2, 'kumar industry', '<Reader of length 98>', 'Quarterly', 2);
-insert into industry_report_form (report_id) values (2);
-insert into report_status (report_status_id, comments, cycle_id, report_id, status, status_id, user_id, user_type) values (null, 'reported created', 1, 2, 'Created', 1, 65536, 'AUTHOR');
-insert into report (COMPANY_INTL_TYPE,country, file_path, industry, inserted_date, overview, price, publishing_date, reptype_id, report_title, table_of_contents, update_cycle, report_id) values (1,'1', 'reports\f7674a3c-5d8c-442d-bc59-a42c5ccd183a1461395923896.doc', '<Reader of length 28>',null, '<Reader of length 56>', '4,565', '04/22/2016', 2, 'kumar industry', '<Reader of length 98>', 'Quarterly', 3);
-insert into industry_report_form ( report_id) values (3);
-insert into report_status (report_status_id, comments, cycle_id, report_id, status, status_id, user_id, user_type) values (null, 'reported created', 1, 3, 'Created', 1, 65536, 'AUTHOR');
-insert into report (COMPANY_INTL_TYPE,country, file_path, industry, inserted_date, overview, price, publishing_date, reptype_id, report_title, table_of_contents, update_cycle, report_id) values (1,'1', 'reports\f8ace2f8-c93b-4df9-bede-1a72de969adf1461395925377.doc', '<Reader of length 28>',null, '<Reader of length 56>', '4,565', '04/22/2016', 2, 'kumar industry', '<Reader of length 98>', 'Quarterly', 4);
-insert into industry_report_form (report_id) values (4);
-insert into report_status (report_status_id, comments, cycle_id, report_id, status, status_id, user_id, user_type) values (null, 'reported created', 1, 4, 'Created', 1, 65536, 'AUTHOR');
-insert into report (COMPANY_INTL_TYPE,country, file_path, industry, inserted_date, overview, price, publishing_date, reptype_id, report_title, table_of_contents, update_cycle, report_id) values (2,'2', 'reports\44f23360-0827-4be9-8e3f-7b6d22a1c9441461395971485.xlsm', 'Agriculture',null, '<Reader of length 16>', '4565', '04/20/2016', 2, 'anilcpdp', '<Reader of length 32>', 'Annually', 5);
-insert into industry_report_form ( report_id) values (5);
-insert into report_status (report_status_id, comments, cycle_id, report_id, status, status_id, user_id, user_type) values (null, 'reported created', 1, 5, 'Created', 1, 65536, 'AUTHOR');
-insert into report (COMPANY_INTL_TYPE,country, file_path, industry, inserted_date, overview, price, publishing_date, reptype_id, report_title, table_of_contents, update_cycle, report_id) values (2,'2', 'reports\7c84f3b2-34e5-4d25-9f5e-58f92306595a1461395975184.xlsm', 'Metals and Mining', null, '<Reader of length 16>', '4565', '04/20/2016', 2, 'anilcpdp', '<Reader of length 32>', 'Annually', 6);
-insert into industry_report_form (report_id) values (6);
-insert into report_status (report_status_id, comments, cycle_id, report_id, status, status_id, user_id, user_type) values (null, 'reported created', 1, 6, 'Created', 1, 65536, 'AUTHOR');
-insert into report (COMPANY_INTL_TYPE,country, file_path, industry, inserted_date, overview, price, publishing_date, reptype_id, report_title, table_of_contents, update_cycle, report_id) values (2,'2', 'reports\55ce6a8c-a55a-4410-8eb6-f5783c7c8ada1461395978036.xlsm', 'Chemicals,Media',null, '<Reader of length 16>', '4565', '04/20/2016', 2, 'anilcpdp', '<Reader of length 32>', 'Annually', 7);
-insert into industry_report_form ( report_id) values (7);
-insert into report_status (report_status_id, comments, cycle_id, report_id, status, status_id, user_id, user_type) values (null, 'reported created', 1, 7, 'Created', 1, 65536, 'AUTHOR');
-update report_status set status_id=4 where report_id=1;
-insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('report_history', 0);
-update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'report_history';
-update report_status set status_id=4 where report_id=2;
-insert into report_history (inserted_date, report_id, status_id, user_id, id) values (null, 1, 1, 32768, 1);
-insert into report_history (inserted_date, report_id, status_id, user_id, id) values (null, 2, 1, 32768, 2);
-update report_status set status_id=5 where report_id in (1 , 2);
-insert into report_assigners (report_assigners_id, active, publisher_id, report_id, reviwer_id) values (null, 'Y', 32769, 6, 32768);
-insert into report_assigners (report_assigners_id, active, publisher_id, report_id, reviwer_id) values (null, 'Y', 32769, 7, 32768);
-update report_status set status_id=2 where report_id in (6 , 7);
-update report_status set status_id=4 where report_id=6;
-update report_status set status_id=4 where report_id=7;
-insert into report_history (inserted_date, report_id, status_id, user_id, id) values (null, 6, 1, 32768, 3);
-insert into report_history (inserted_date, report_id, status_id, user_id, id) values (null, 7, 1, 32768, 4);
-update report_status set status_id=5 where report_id in (6 , 7);
-
