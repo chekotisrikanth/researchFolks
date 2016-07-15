@@ -7,6 +7,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -34,6 +36,7 @@ public class PurchaseOrder  {
 
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.TABLE)
 	@Column(name = "txnid", unique = true, nullable = false,length=10)
 	public int getTxnid() {
 		return this.txnid;
@@ -65,16 +68,16 @@ public class PurchaseOrder  {
 		this.report = report;
 	}
 	
-	private User cutomer;
+	private User customer;
 
 	@ManyToOne
 	@JoinColumn(name = "customerId")
-	public User getCutomer() {
-		return cutomer;
+	public User getCustomer() {
+		return customer;
 	}
 
-	public void setCutomer(User cutomer) {
-		this.cutomer = cutomer;
+	public void setCustomer(User cutomer) {
+		this.customer = customer;
 	}
 	
 	

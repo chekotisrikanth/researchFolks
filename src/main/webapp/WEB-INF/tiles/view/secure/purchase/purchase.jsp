@@ -18,7 +18,7 @@
 	margin: 16px;
 }
 </style>
-<form:form method="POST" class="form-horizontal alignHCenter " action="/secure/purchasereport.html" commandpath="form" modelAttribute="form">
+<form:form method="POST" class="form-horizontal alignHCenter " action="/secure/purchase/purchasereport.html" commandpath="form" modelAttribute="form">
         <form:errors path="*" cssClass="errorblock" element="div" />
         	 <div class="form-group comapany">
             	<div class="col-md-2 boldTxt text-right">

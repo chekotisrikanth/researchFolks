@@ -130,4 +130,7 @@ update report_status set status_id=4 where report_id=7;
 insert into report_history (inserted_date, report_id, status_id, user_id, id) values (null, 6, 1, 32768, 3);
 insert into report_history (inserted_date, report_id, status_id, user_id, id) values (null, 7, 1, 32768, 4);
 update report_status set status_id=5 where report_id in (6 , 7);
+update hibernate_sequences set sequence_next_hi_value = 4 where sequence_next_hi_value = 3 and sequence_name = 'user';
+insert into user (account_type, is_agreed_tc, email_id, first_name, last_name, password, title, user_name, userstatus, id) values ('USER', 0, 'test@gmail.com', 'user', 'ch', '123', 'MR', 'test', 'Active', 98304);
+insert into customer (city, country, occupation, id) values ('hyd', '1', '0', 98304);
 

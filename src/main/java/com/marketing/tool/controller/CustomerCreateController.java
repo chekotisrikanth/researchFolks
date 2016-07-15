@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marketing.tool.domain.Country;
@@ -26,7 +27,9 @@ import com.marketing.tool.domain.User;
 import com.marketing.tool.exception.UserAlreadyExistsException;
 import com.marketing.tool.service.CountryStateService;
 import com.marketing.tool.service.CustomerService;
+import com.marketing.tool.service.LoginUserService;
 import com.marketing.tool.service.UserService;
+import com.marketing.tool.utility.Helper;
 import com.marketing.tool.validator.CreateFormValidator;
 
 @Controller
@@ -38,6 +41,9 @@ public class CustomerCreateController {
 	    
 	    @Autowired
 		 private CountryStateService countryStateService;
+	    
+	    @Autowired
+		private LoginUserService loginUserService;
 	    
 	    @Inject
 	    public CustomerCreateController(CustomerService customerService, CreateFormValidator createFormValidator) {
@@ -111,5 +117,24 @@ public class CustomerCreateController {
 			List<Country> countries = countryStateService.listAllCountries();
 			model.addObject("countryList",countries);
 		}
+	  
+	    @RequestMapping(value = { "/secure/home/customer.html", "/author/home/customerhome" }, method = RequestMethod.GET)
+	    public ModelAndView loginSuccessPage(@RequestParam(value = "error",required = false) String error,
+	    @RequestParam(value = "logout", required = false) String logout) {
+	         
+	        ModelAndView model = new ModelAndView();
+	        if (error != null) {
+	            model.addObject("error", "Invalid Credentials provided.");
+	        }
+	 
+	        if (logout != null) {
+	            model.addObject("message", "Logged out from JournalDEV successfully.");
+	        }
+	        User user = loginUserService.findByEmailId(Helper.getPrincipal()); 
+	        model.addObject("user",user);
+	        model.setViewName("customerhome");
+	        return model;
+	    }
+	 
 	    
 }

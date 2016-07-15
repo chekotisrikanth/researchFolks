@@ -18,7 +18,7 @@
    
     
      <logger name="jdbc.sqlonly" additivity="false">
-  		<level value="error"/>
+  		<level value="info"/>
   		<appender-ref ref="sql-appender"/>
 	</logger>
     

@@ -43,7 +43,7 @@ public class ReportsSearchResponseBuilder {
 				}else {
 					vo.setComIntlString(ServiceConstants.COMPANY_DATABASE);
 				}
-				vo.setPublishingDate(reportForm.getPublishingDate());
+				vo.setPublishingDate(reportForm.getPublishingDate().toString());
 				List<ReportComments> comments = reportForm.getReportComments();
 				if(flag) {
 					setCommentsAlert(vo, repMap, comments);
