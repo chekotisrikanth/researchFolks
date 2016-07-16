@@ -126,17 +126,6 @@ public class ReportForm {
 	@Transient
 	private MultipartFile reportImg;
 	
-	@NotEmpty
-	//@Column(name="publishingDate", nullable=false)
-	@Transient
-	private String publishingDate;
-	
-	
-	// new cloumns start
-	@Column(name="publishingDate", nullable=true)
-	@DateTimeFormat(pattern = "MM/dd/yyyy HH:mm:ss.SSS")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date publishedDate  ;
 	
 	@Column(name="company_intl_type" , nullable=true)
 	private Integer comIntl;
@@ -154,7 +143,22 @@ public class ReportForm {
 	@Transient
 	private Integer comntCnt;
 	
-	
+	//@NotEmpty
+		@Column(name="publishingDate", nullable=true)
+		//@Temporal(TemporalType.DATE)
+		//@Date
+		 //@DateTimeFormat(style = "MM-dd-yyyy")
+		//@DateTimeFormat(pattern="MM/DD/YYYY")
+		//@DateTimeFormat(pattern="MM-dd-yyyy")
+		private Date publishingDate;
+		
+		public Date getPublishingDate() {
+			return publishingDate;
+		}
+
+		public void setPublishingDate(Date publishingDate) {
+			this.publishingDate = publishingDate;
+		}
 	
 	
 
@@ -190,14 +194,7 @@ public class ReportForm {
 		this.reportComments = reportComments;
 	}
 
-	public Date getPublishedDate() {
-		return publishedDate;
-	}
-
-	public void setPublishedDate(Date publishedDate) {
-		this.publishedDate = publishedDate;
-	}
-
+	
 	public Integer getComIntl() {
 		return comIntl;
 	}
@@ -277,39 +274,7 @@ public class ReportForm {
 		this.insertedDate = insertedDate;
 	}
 
-	public String getPublishingDate() {
-		String pubDate = null;
-		if(getPublishedDate() != null) {
-			 pubDate = getPublishedDate().toString();
-			try {
-				pubDate = DateUtills.getStringFromDate(getPublishedDate());
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block,to be removed after logging
-				e.printStackTrace();
-			}
-			
-		} else {
-			pubDate = this.publishingDate;
-		}
 	
-		
-		return pubDate;
-	}
-
-	public void setPublishingDate(String publishingDate) {
-		this.publishingDate = publishingDate;
-		if(publishingDate != null ) {	
-			try {
-				this.publishedDate = DateUtills.getDateFromString(publishingDate);
-			} catch (ParseException e) {
-				//log exception
-				e.printStackTrace();
-
-			}
-		}
-		
-	}
-
 	public String getOverview() {
 		return overview;
 	}

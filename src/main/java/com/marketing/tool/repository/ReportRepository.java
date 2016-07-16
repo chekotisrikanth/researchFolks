@@ -38,7 +38,7 @@ public interface ReportRepository extends Repository<ReportForm,Integer>,PagingA
 	Page<ReportForm> findAuthorReports(int userId,List<Integer> statusIds,Pageable pagable);
 	@Modifying
 	@Transactional
-    @Query("update ReportForm rt set rt.publishedDate=?1 where  rt.reportId in (?2)")
+    @Query("update ReportForm rt set rt.publishingDate=?1 where  rt.reportId in (?2)")
     public int  updatePublishedDateForReports( Date currentDate,Collection<Integer> reportIds) ;
 	
 	@Query("select a from ReportForm a where profiletype = ?1 order by publishingDate desc")

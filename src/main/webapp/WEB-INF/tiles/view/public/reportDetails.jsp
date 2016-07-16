@@ -28,7 +28,7 @@
                         </tbody>
               </table>
                       <div class="col-md-12 marginB20">
-                <button class="btn btn-warning">Buy this Research</button>
+                <a href="/secure/purchase/purchasereport.html?reportid=${viewreport.report.reportId}" class="btn btn-warning">Buy this Research</a>
               </div>
                     </div>
             <div class="col-md-6 col-sm-12"> <span class="descripTitle">Description of the Research</span>
