@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -35,7 +34,6 @@ import com.marketing.tool.domain.User;
 import com.marketing.tool.domain.UserProfileType;
 import com.marketing.tool.domain.ViewReport;
 import com.marketing.tool.domain.ViewReports;
-import com.marketing.tool.reponse.builder.ReportsSearchResponseBuilder;
 import com.marketing.tool.repository.ReportAssignerRepository;
 import com.marketing.tool.repository.ReportCommentsAlertRepository;
 import com.marketing.tool.repository.ReportCommentsRepository;
@@ -46,7 +44,6 @@ import com.marketing.tool.utility.FileUtils;
 import com.marketing.tool.utility.ReportStatusEnum;
 import com.marketing.tool.utility.SharedConstants;
 import com.marketing.tool.vo.BasicResp;
-import com.marketing.tool.vo.ReportVo;
 
 @Service
 @Validated

@@ -64,10 +64,16 @@ $(document).ready(function() {
 				 reportsObj.append('reports['+index+'].comment',comment);
 			 }
 			 
-
+			 $($(".file-"+reportId)).each(function(index1,object1){
+				 if(typeof this.files[0] !== typeof undefined  ) {
+					//reportsObj.append('reports['+index+'].reportFile',$(".file-"+reportId).val());
+						reportsObj.append('reports['+index+'].reportFile',this.files[0]);
+						 
+				 }
+			 });
 			
 			//reportsObj.append('reports['+index+'].reportFile',$(".file-"+reportId).val());
-			reportsObj.append('reports['+index+'].reportFile',$(".file-"+reportId)[0].files[0]);
+			//reportsObj.append('reports['+index+'].reportFile',$(".file-"+reportId)[0].files[0]);
 			 
 			cnt++;
 			

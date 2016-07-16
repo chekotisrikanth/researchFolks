@@ -4,37 +4,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang = "en">
 		<style>
+		
 		div .open{
 		 display: block;
 		 text-indent: 0px;
 		}
 		
-		table.dataTable thead .sorting { background: url('${pageContext.request.contextPath}/images/sort_both.png') no-repeat center right; }
+		
+table.dataTable thead .sorting { background: url('${pageContext.request.contextPath}/images/sort_both.png') no-repeat center right; }
 table.dataTable thead .sorting_asc { background: url('${pageContext.request.contextPath}/images/sort_asc.png') no-repeat center right; }
 table.dataTable thead .sorting_desc { background: url('${pageContext.request.contextPath}/images/sort_desc.png') no-repeat center right; }
 
 table.dataTable thead .sorting_asc_disabled { background: url('${pageContext.request.contextPath}/images/sort_asc_disabled.png') no-repeat center right; }
 table.dataTable thead .sorting_desc_disabled { background: url('${pageContext.request.contextPath}/images/sort_desc_disabled.png') no-repeat center right; }
-		</style>
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
-
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-
-        <!--[if lt IE 9]>
-      <script src = "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src = "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
+		</style>      
 
         <script type="text/javascript">
         	try{
-        		jQuery.noConflict();	
+        		//jQuery.noConflict();	
         	}catch(e) {
-        		
+        		console.log(e);
         	}
             
         </script>
@@ -104,9 +93,9 @@ table.dataTable thead .sorting_desc_disabled { background: url('${pageContext.re
                 <option value="Automotive">Automotive</option>  -->
               </select>
                     </div>
-            <div class="col-md-2">
+         <!--    <div class="col-md-2">
                       <button class="btn btn-primary pull-left marginL10" type="submit">Advanced Search</button>
-                    </div>
+                    </div> --> 
           </div>
                   <div class="row analystSer marginT20">
                   
@@ -136,36 +125,12 @@ table.dataTable thead .sorting_desc_disabled { background: url('${pageContext.re
     <div class="col-md-2"></div>
   </section>
 </div>
-<footer class="container-fluid">
-          <div class="container clearfix">
-    <div class="links clearfix">
-              <div class="col">
-        <h3>Solutions</h3>
-        <a href="">Company Information</a> <a href="">Industry Analysis</a> <a href="">Contact Lists</a> <a href="">IPO Central</a> </div>
-              <div class="col">
-        <h3>Global Search</h3>
-        <a href="">Build Custom Lists</a> <a href="">Reports - Company</a> <a href="">Reports - Industry</a> <a href="">Subscriptions</a> </div>
-              <div class="col">
-        <h3>Support</h3>
-        <a href="">Customer Service</a> <a href="">Conctact Us</a> </div>
-              <div class="col">
-        <h3>Company</h3>
-        <a href="">About Us</a> <a href="">Careers</a> <a href="">Why Report Matters</a> </div>
-              <div class="col col2"> <a href="callto:18001234567" class="ico call">1800.234.5678</a> <a href="mailto:support@reportmatters.com" class="ico mail">support@reportmatters.com</a> </div>
-            </div>
-    <div class="copyrights clearfix">
-              <div class="share"> <a href="" class="ico icon1">Facebook</a> <a href="" class="ico icon2">Twitter</a> <a href="" class="ico icon3">Linkedin</a> <a href="" class="ico icon4">Youtube</a> </div>
-              <div class="copy">
-        <div>&copy; Research Floks, 2016. All rights reserved.</div>
-        <a href="">Privacy Policy</a> <a href="">Terms &amp; Conditions</a> <a href="">Sitemap</a> <a href="">Feedback</a> </div>
-            </div>
-  </div>
-        </footer>
+ <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>  	  
+<script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script> 
-<script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>
 <!-- multi select -->
 <!-- Include the plugin's CSS and JS: -->
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-multiselect.css" type="text/css"/>
@@ -184,7 +149,7 @@ table.dataTable thead .sorting_desc_disabled { background: url('${pageContext.re
 
 <script>
         $(document).ready(function() {
-            $(".open, .impatient").pageslide();
+           // $(".open, .impatient").pageslide();
             
             $('#example-filterBehavior').multiselect({
 		            enableFiltering: true,

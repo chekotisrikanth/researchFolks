@@ -21,55 +21,7 @@
 </head>
 <body>
    <div class="container-fluid">
-   <header class="clearfix paddT20">
-     <div class="logo col-md-8 col-sm-12">
-     <a href="#"><img src="${pageContext.request.contextPath}/images/logo.png" alt="Research Floks"/></a>
-     </div>
-     <div class="customerInfo col-md-4 col-sm-12 paddT20">
-     	<div class="col-md-8 col-sm-12">
-        	<div class="col-md-4">
-            	<a href="#"><img src="${pageContext.request.contextPath}/images/icon-user.png" alt="Customer Img"/></a>
-            </div>
-            <div class="col-md-8 noPaddRL paddT15">
-            <div class="customerName col-md-12 col-sm-12 noPaddRL">Customer Name</div>
-            <div class="fontSmall  col-md-12 col-sm-12">Customer Skill</div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-12 noPaddRL paddT15 ">
-	        <div class="col-md-12 fontSmall marginB5">
-            	<span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-alert.png" alt="alerts"/></span> <a href="#">Alerts</a>
-            </div>
-            <div class="col-md-12 fontSmall">
-            	<span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-mesage.png" alt="Message"/></span> <a href="#">Message</a>
-            </div>
-        </div>
-     </div>
-     </header>
-    <section>
-    <nav id="myNavbar" class="navbar navbar-default" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse noPaddRL" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Customer Research</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-    </nav>
-      </section>
+
       <form:form method="POST" action="/secure/updateReports.html" commandName="ViewReports" modelAttribute="editreports">
       <section>
         <article class="col-md-12 noPaddRL table-responsive">
@@ -99,7 +51,7 @@
 				            <td> <c:out value="${reportStatuses.user.firstName}"/> </td>
 				            <td> <c:out value="${reportStatuses.userType}"/> </td>
 				            <td> <c:out value="${reportStatuses.status}"/> </td>
-				            <td><a href="#" class="downreport" rep-id="${report.reportId}"><img src="${pageContext.request.contextPath}/images/icon-download.png" alt="Edit"/></a>
+				            <td class="col-md-1"><a href="#" class="downreport" rep-id="${report.reportId}"><img src="${pageContext.request.contextPath}/images/icon-download.png" alt="Edit"/></a>
 				            	<a href="#" class="uploadDoc"><img src="${pageContext.request.contextPath}/images/icon-upload.png" alt="Edit"/></a>
 				           		<input type='file'  class="fileUp file-${report.reportId}" name ="report" style="display:none;" />
 				            </td>
@@ -175,9 +127,10 @@
       <script type="text/javascript" src="${pageContext.request.contextPath}/js/simplePagination.js" ></script>
       <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/pagenationutil.js" ></script>
       <!-- pagenation end -->
+            <script src="${pageContext.request.contextPath}/js/reviwer/reviwerAjaxCalls.js"></script>
+      
       <script src="${pageContext.request.contextPath}/js/utils/chatHistory.js"></script>
       
-      <script src="${pageContext.request.contextPath}/js/reviwer/reviwerAjaxCalls.js"></script>
       <script type="text/javascript" src="${pageContext.request.contextPath}/js/common/popuputil.js" ></script>
        
       

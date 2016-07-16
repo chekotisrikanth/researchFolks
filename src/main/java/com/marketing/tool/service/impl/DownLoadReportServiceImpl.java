@@ -46,10 +46,11 @@ public class DownLoadReportServiceImpl implements DownLoadReportService {
     		//validate Report Accessible to LoginUser 
     		 if(!reportVo.getRole().equals(UserProfileType.ADMIN)) {    			 
     			 userId = reportAssignerService.reportAccessForUser(reportVo.getReportId(), reportVo.getEmailId(),reportVo.getRole(),reportVo.getType());
+    			 if(userId == null || userId ==0 ) {
+        			 throw new ReportAccessExpetion("USer Not Have Access To DownLoad This Report");
+        		 }
     		 }
-    		 if(userId == null || userId ==0) {
-    			 throw new ReportAccessExpetion("USer Not Have Access To DownLoad This Report");
-    		 }
+    		
     		 String filePath = null;
     		 if(SharedConstants.COMMENTS.equals(reportVo.getType())) {
     			 //gte Path from Comments

@@ -31,7 +31,7 @@ public class ReportsSearchResponseBuilder {
 			rep=new ArrayList<>();
 			for (ReportForm reportForm : reports) {
 				ReportVo vo = new ReportVo();
-				vo.setCountry(reportForm.getCountry().toString());
+				vo.setCountry(reportForm.getCountryObj().getCountryName().toString());
 				vo.setReportId(reportForm.getReportId());
 				vo.setIndustry(reportForm.getIndustry());
 				vo.setReportTitle(reportForm.getReportTitle());

@@ -31,9 +31,17 @@ $(document).ready(function() {
             	$(".chk").each(function(index) {
             		if(parseInt($(this).attr("rep-id")) == reportId) {
             			$(this).prop('checked', true);
-            			
             			$(".modalHide").trigger("click");
-                    	$(".sncButton").trigger("click");
+
+            			try{
+            				$(".sncButton").trigger("click");
+            			}catch(e) {
+            				console.log(e);
+            			}
+            			
+            			
+                    	
+
                     	//return;
             		}            		
             	})
@@ -134,11 +142,14 @@ function  buildChatHistory(ajaxresp,divClass) {
 		str+=' <span class="col-md-6">Date : '+object.date+'</span>';
 		str+=' <span class="col-md-6">User : '+object.userName+'</span>';        
         str+='</p>';     
+        if(object.comment != null) {
+        	str+='<p class="bg-success">'+object.comment;
+     		str+='</p>';
+        }
         
-        str+='<p class="bg-success">'+object.comment;
-		str+='</p>';
+       
 		if(object.filePath != null && object.filePath.length>2) {
-			str+='<a href="#" class="downreportCmnt" rep-id="'+object.cmntId+'" ><img src="/images/icon-download.png" alt="Attachments"/></a>';
+			str+='<p><a href="#" class="downreportCmnt" rep-id="'+object.cmntId+'" ><img src="/images/icon-download.png" alt="Attachments"/></a><p>';
 		}
 		
 		
