@@ -1,6 +1,8 @@
 package com.marketing.tool.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,16 +28,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.marketing.tool.domain.Country;
-import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.Author;
 import com.marketing.tool.domain.AuthorReportsResp;
+import com.marketing.tool.domain.Country;
+import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.User;
 import com.marketing.tool.exception.UserAlreadyExistsException;
+import com.marketing.tool.service.AuthorService;
 import com.marketing.tool.service.CountryStateService;
 import com.marketing.tool.service.KeySkillsService;
 import com.marketing.tool.service.LoginUserService;
-import com.marketing.tool.service.AuthorService;
 import com.marketing.tool.service.UserService;
 import com.marketing.tool.utility.Helper;
 import com.marketing.tool.validator.CreateFormValidator;
@@ -46,6 +48,9 @@ public class AuthorController {
 	 private static final Logger LOGGER = LoggerFactory.getLogger(AuthorController.class);
 	   
 	   private final UserService userService;
+	   
+	   @Autowired
+		KeySkillsService skills;
 	 
 	 @Autowired
 	 private KeySkillsService keySkillsService;
@@ -63,6 +68,7 @@ public class AuthorController {
 	    public AuthorController(AuthorService authorService) {
 	        this.userService = authorService;
 	    }
+	   
 	  @Autowired 
 	  private AuthorService  authorService;
 	    
@@ -124,9 +130,15 @@ public class AuthorController {
 	        modelAndView.setViewName("author_create");
    	        return modelAndView;
 	    }
-
+	    
 	    @RequestMapping(value = "/public/author_create.html", method = RequestMethod.POST)
 	    public ModelAndView createAuthor(@ModelAttribute("form") @Valid Author author, BindingResult result) {
+	    	
+	    	//Timer
+	    	//private final Timer responseTime = Metrics.newTimer(AuthorController.class, "Response-Time");
+	    	
+	    	
+	    	 
 	        LOGGER.debug("Received request to create {}, with result={}", author, result);
 	        ModelAndView modelAndView = new ModelAndView();
 			//modelAndView.addObject("pers", person);
@@ -225,5 +237,36 @@ public class AuthorController {
 	        return authorService.getReportsCount(user.getEmailId());
 	    }
 	    
+	    @RequestMapping(value = {"/public/authors/searchauthors2" }, method = {RequestMethod.POST})
+	    public ModelAndView searchAuthors2(@ModelAttribute("form") @Valid Author author,BindingResult result) {
+	    	//Author author = new Author();
+	    	List<Author> authors =null;// authorService.searchAuthors(author);
+	    	ModelAndView modelAndView = new ModelAndView();
+	    	modelAndView.addObject("authors",authors);
+	    	modelAndView.setViewName("authorsearchresults");
+	    	return modelAndView;
+	    }
 	    
+	    @RequestMapping(value = {"/public/authors/searchauthors" }, method = {RequestMethod.POST})
+	    public ModelAndView searchAuthors(@RequestParam(value="name",required=false) String name,
+	    		@RequestParam(value="country",required=false) String country,
+	    		@RequestParam(value="exprange",required=false) String exprange,
+	    		@RequestParam(value="skillset",required=false) Collection<String> skillIds) {
+	    	//Author author = new Author();
+	    	/*Set<Keyskills> skillList = new HashSet<Keyskills>();
+	    	for(String skillId : skillIds) {
+				Keyskills skill = skills.findByName(skillId);
+				skillList.add(skill);
+			}*/
+	    	//author.setKeyskills(skillList);
+	    	if("any".equals(country)) {
+	    		country=null;
+	    	}
+	    	List<Author> authors = authorService.searchAuthors(name,country,skillIds);
+	    	ModelAndView modelAndView = new ModelAndView();
+	    	modelAndView.addObject("authors",authors);
+	    	modelAndView.setViewName("authorsearchresults");
+	    	return modelAndView;
+	    }
+
 }

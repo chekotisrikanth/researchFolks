@@ -25,6 +25,11 @@ public class KeyskillsServiceImpl implements KeySkillsService {
 	public Keyskills findById(Integer id) {
 		return keyskillsRepositoryRepository.findById(id);
 	}
+
+	@Override
+	public Keyskills findByName(String name) {
+		return keyskillsRepositoryRepository.findBySkill(name);
+	}
 	
 	
 

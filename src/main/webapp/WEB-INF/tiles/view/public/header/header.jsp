@@ -80,10 +80,10 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse noPaddRL" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                  <li><a href="/">Home</a></li>
+                  <li><a href="/home">Home</a></li>
                   <li><a href="#">How It Works</a></li>
                   <li><a href="/freefolk/getPublishedReports">Research Store</a></li>
-                  <li><a href="#">Custom Research</a></li>
+                  <li><a href="${pageContext.request.contextPath}/public/customresearch">Custom Research</a></li>
                   <li><a href="#">Blog</a></li>
                   <li><a href="#">Contact Us</a></li>
                 </ul>

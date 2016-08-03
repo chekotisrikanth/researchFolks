@@ -15,6 +15,5 @@ public interface LoginUserRepository extends Repository<User,Integer> {
     User findByEmailId(String emailId);
     List<User> findByAccountType(String accountType);
     
-    
 	
 }

@@ -23,7 +23,7 @@ public interface ReportService {
 	EditReports getPublisherReports(int userId,Integer pageNumber,Integer results);
 	int publishReports(List<Integer> reportIds, String userId);
 	EditReports getAllReports(Integer pageNumber, Integer results);
-	List<ReportForm> findReportsByProfileType(String industry);
+	List<ReportForm> findReportsByProfileType(Integer reportId,String industry);
 	//Map<String,Integer> getReportsCount(String email);
 }
 

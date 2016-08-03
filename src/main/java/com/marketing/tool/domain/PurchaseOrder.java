@@ -26,6 +26,7 @@ public class PurchaseOrder  {
 
 	private int txnid;
 	private Date purchsedate;
+	private User customer;
 	
 	public PurchaseOrder() {
 	}
@@ -56,19 +57,17 @@ public class PurchaseOrder  {
 		this.purchsedate = purchsedate;
 	}
 
-	private Set<ReportForm> report=new HashSet<ReportForm>(0);;
+	private Set<ReportForm> reports=new HashSet<ReportForm>(0);;
 	
 	@OneToMany
 	@JoinColumn(name="purchaseId", referencedColumnName="txnId",nullable=true)
-	public Set<ReportForm> getReport() {
-		return report;
+	public Set<ReportForm> getReports() {
+		return reports;
 	}
 
-	public void setReport(Set<ReportForm> report) {
-		this.report = report;
+	public void setReports(Set<ReportForm> reports) {
+		this.reports = reports;
 	}
-	
-	private User customer;
 
 	@ManyToOne
 	@JoinColumn(name = "customerId")
@@ -76,7 +75,7 @@ public class PurchaseOrder  {
 		return customer;
 	}
 
-	public void setCustomer(User cutomer) {
+	public void setCustomer(User customer) {
 		this.customer = customer;
 	}
 	

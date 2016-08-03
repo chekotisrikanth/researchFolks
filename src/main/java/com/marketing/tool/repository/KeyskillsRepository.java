@@ -15,4 +15,5 @@ public interface KeyskillsRepository extends Repository<Keyskills,Integer> {
 	List<Keyskills> findAll();
 	
 	Keyskills findById(Integer id);
+	Keyskills findBySkill(String skillName);
 }

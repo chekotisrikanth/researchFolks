@@ -16,8 +16,8 @@ import com.marketing.tool.service.LoginUserService;
 public class Helper {
 
 	@Autowired
-	
 	private LoginUserService loginUserService;
+	
 	public static String getPrincipal(){
 		String userName = null;
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -67,4 +67,19 @@ public class Helper {
 		
 		return role;
 	}
+	
+	 public static String getHomePageURL(String userType) {
+		 if (userType.equals(UserProfileType.USER.getUserProfileType())) {
+	        	return "/secure/home/customerhome";
+	        } else if (userType.equals(UserProfileType.ADMIN.getUserProfileType())) {
+	        	return "/secure/home/admin/0/10";
+	        } else if(userType.equals(UserProfileType.AUTHOR.getUserProfileType())) {
+	        	return "/author/home/authorhome";
+	        } else if(userType.equals(UserProfileType.REVIEWER.getUserProfileType())) {
+	        	return "/secure/home/reviewer/0/10";
+	        }else if(userType.equals(UserProfileType.PUBLISHER.getUserProfileType())) {
+	        	return "/secure/home/publisher/0/10";
+	        }else 
+	        	return "/secure/home/homepage.html";
+	   }
 }

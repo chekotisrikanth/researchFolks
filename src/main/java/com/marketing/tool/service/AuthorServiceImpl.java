@@ -1,7 +1,9 @@
 package com.marketing.tool.service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +23,7 @@ import org.springframework.validation.annotation.Validated;
 import com.marketing.tool.domain.Author;
 import com.marketing.tool.domain.AuthorReportsResp;
 import com.marketing.tool.domain.Keyskills;
+import com.marketing.tool.domain.QAuthor;
 import com.marketing.tool.domain.ReportCommentsAlert;
 import com.marketing.tool.domain.ReportForm;
 import com.marketing.tool.domain.User;
@@ -32,7 +35,11 @@ import com.marketing.tool.repository.ReportRepository;
 import com.marketing.tool.repository.ReportStatusRepository;
 import com.marketing.tool.repository.RoleRepository;
 import com.marketing.tool.utility.ReportStatusEnum;
+import com.marketing.tool.utility.WhereClauseBuilder;
 import com.marketing.tool.vo.ReportVo;
+import com.mysema.query.support.Expressions;
+import com.mysema.query.types.expr.BooleanExpression;
+import com.mysema.query.types.path.StringPath;
 
 @Service
 @Validated
@@ -215,4 +222,37 @@ public class AuthorServiceImpl extends UserServiceImpl implements AuthorService 
 		return resp;
 	}
 
+    @Override
+    public List<Author> searchAuthors(String name,String country,Collection<String> keySkills) {
+    	/*ExampleMatcher matcher = ExampleMatcher.matching()
+    			  .withMatcher("firstName", GenericPropertyMatchers.contains().ignoreCase())
+    			  .withMatcher("lastName", GenericPropertyMatchers.contains().ignoreCase());
+    			  
+    			  ExampleMatcher matcher2 = ExampleMatcher.matching()     
+    					  .withIncludeNullValues()                             
+    					  .withStringMatcher(StringMatcher.STARTING);
+    			  
+    	Example<Author> example = Example.of(author,matcher);
+    	Iterator<Author> it = authorRepository.findAll(example).iterator();*/
+    	List<Author> results= new ArrayList<Author>();
+    	QAuthor qauthor = QAuthor.author;
+    	
+    	WhereClauseBuilder predicate =new WhereClauseBuilder()
+    	.optionalAnd(name, () -> qauthor.firstName.startsWithIgnoreCase(name))
+    	.optionalOr(name, () ->qauthor.lastName.startsWithIgnoreCase(name))
+    	.optionalAnd(keySkills, () ->  qauthor.keyskills.any().skill.in(keySkills))
+    	.optionalAnd(country, () -> qauthor.country.eq(country));
+    	
+    	
+    	/*BooleanExpression hasfirstName = new StringPath(qauthor, "firstName").startsWithIgnoreCase(author.getFirstName());
+    	BooleanExpression haslastName = qauthor.lastName.startsWithIgnoreCase(author.getFirstName());
+    	BooleanExpression skills = qauthor.keyskills.any().skill.in(keySkills);
+    	BooleanExpression predicate3 = hasfirstName.or(haslastName).and(skills);*/
+    	//BooleanExpression expRange = qauthor.keyskills.
+    	Iterator<Author> it = authorRepository.findAll(predicate).iterator();
+    	while(it.hasNext()) {
+    		results.add(it.next());
+    	}
+    	return results;
+    }
 }

@@ -41,7 +41,7 @@ public interface ReportRepository extends Repository<ReportForm,Integer>,PagingA
     @Query("update ReportForm rt set rt.publishingDate=?1 where  rt.reportId in (?2)")
     public int  updatePublishedDateForReports( Date currentDate,Collection<Integer> reportIds) ;
 	
-	@Query("select a from ReportForm a where profiletype = ?1 order by publishingDate desc")
-	List<ReportForm> findByProfileTypeOrderByPublishingDate(String profileType,Pageable pagable);
+	@Query("select a from ReportForm a where profiletype = ?2 and a.reportId!=?1 order by publishingDate desc")
+	List<ReportForm> findByProfileTypeOrderByPublishingDate(Integer reportId,String profileType,Pageable pagable);
 
 }

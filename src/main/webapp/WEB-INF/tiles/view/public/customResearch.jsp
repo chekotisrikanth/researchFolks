@@ -243,7 +243,7 @@ function fillAnalystTable() {
 	if(country=='undefined') {
 		country = null;
 	}
-	$.ajaxSetup({
+	/* $.ajaxSetup({
         global: false,
         type: "GET",
         url: "http://www.telize.com/jsonip",
@@ -253,7 +253,7 @@ function fillAnalystTable() {
         complete: function () {
             $(".modal").hide();
         }
-    });
+    }); */
 	
 	$.ajax({
         async : true,

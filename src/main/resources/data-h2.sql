@@ -114,7 +114,7 @@ insert into report_status (report_status_id, comments, cycle_id, report_id, stat
 insert into report (purchase_Id,profiletype,COMPANY_INTL_TYPE,country_id, file_path, industry, inserted_date, overview, price, publishing_date, reptype_id, report_title, table_of_contents, update_cycle, report_id) values (1235555521,'industryreport',2,'2', 'reports\7c84f3b2-34e5-4d25-9f5e-58f92306595a1461395975184.xlsm', 'Metals and Mining', null, '<Reader of length 16>', '4565', PARSEDATETIME('04-22-2016','MM-dd-yyyy'), 2, 'anilcpdp', '<Reader of length 32>', 'Annually', 6);
 insert into industry_report_form (report_id) values (6);
 insert into report_status (report_status_id, comments, cycle_id, report_id, status, status_id, user_id, user_type) values (null, 'reported created', 1, 6, 'Created', 1, 65536, 'AUTHOR');
-insert into report (purchase_Id,profiletype,COMPANY_INTL_TYPE,country_id, file_path, industry, inserted_date, overview, price, publishing_date, reptype_id, report_title, table_of_contents, update_cycle, report_id) values (1235555522,'industryreport',2,'2', 'reports\55ce6a8c-a55a-4410-8eb6-f5783c7c8ada1461395978036.xlsm', 'Chemicals,Media',null, '<Reader of length 16>', '4565', PARSEDATETIME('04-23-2016','MM-dd-yyyy'), 2, 'anilcpdp', '<Reader of length 32>', 'Annually', 7);
+insert into report (purchase_Id,profiletype,COMPANY_INTL_TYPE,country_id, file_path, industry, inserted_date, overview, price, publishing_date, reptype_id, report_title, table_of_contents, update_cycle, report_id) values (1235555522,'industryreport',2,'2', 'reports\55ce6a8c-a55a-4410-8eb6-f5783c7c8ada1461395978036.xlsm', 'Chemicals,Media',null, 'this report is about chemical and media', '4565', PARSEDATETIME('04-23-2016','MM-dd-yyyy'), 2, 'anilcpdp', 'sample toc', 'Annually', 7);
 insert into industry_report_form ( report_id) values (7);
 insert into report_status (report_status_id, comments, cycle_id, report_id, status, status_id, user_id, user_type) values (null, 'reported created', 1, 7, 'Created', 1, 65536, 'AUTHOR');
 update report_status set status_id=4 where report_id=1;
@@ -135,6 +135,13 @@ update report_status set status_id=5 where report_id in (6 , 7);
 update hibernate_sequences set sequence_next_hi_value = 4 where sequence_next_hi_value = 3 and sequence_name = 'user';
 insert into user (account_type, is_agreed_tc, email_id, first_name, last_name, password, title, user_name, userstatus, id) values ('USER', 0, 'test@gmail.com', 'user', 'ch', '123', 'MR', 'test', 'Active', 98304);
 insert into customer (city, country, occupation, id) values ('hyd', '1', '0', 98304);
+insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('purchaseorder', 0);
+update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'purchaseorder';
+insert into purchaseorder (customer_id, purchsedate, txnid) values (98304, PARSEDATETIME('07-16-2016','MM-dd-yyyy'), 1);
+update report set purchase_id=1 where report_id=7;
+insert into purchaseorder (customer_id, purchsedate, txnid) values (98304, PARSEDATETIME('07-15-2016','MM-dd-yyyy'), 2);
+update report set purchase_id=2 where report_id=6;
+insert into customerauthorfavlist (favourite, rating, review, authorid, customerid, reportid) values (1, NULL, 'report is very good', 65536, 98304, 7);
 
 
 

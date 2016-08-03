@@ -36,15 +36,27 @@
                     </div>
             <div>&nbsp;</div>
             <div class="row">
-                      <div class="col-md-12">
+              <div class="col-md-12">
                 <ul class="nav nav-pills tabs">
-                          <li class="active"><a href="#">TOC</a></li>
-                          <li><a href="#">Synopsys</a></li>
-                          <li><a href="#">Reviews</a></li>
-                        </ul>
+                          <li class="active"><a data-toggle="pill" href="#toc">TOC</a></li>
+                          <li><a data-toggle="pill" href="#synopsys">Synopsys</a></li>
+                          <li><a data-toggle="pill" href="#reviews">Reviews</a></li>
+                </ul>
+                        
+                        <div class="tab-content">
+							  <div id="toc" class="tab-pane fade in active">
+							    <p>${viewreport.report.tableOfContents}</p>
+							  </div>
+							  <div id="synopsys" class="tab-pane fade">
+							    <p>${viewreport.report.overview}</p>
+							  </div>
+							  <div id="reviews" class="tab-pane fade">
+							    <p>${customerreviews}</p>
+							  </div>
+						</div>
               </div>
                       <div class="col-md-12 border widthMinus">
-                ${viewreport.report.tableOfContents}
+                
               </div>
                     </div>
             <div>&nbsp;</div>
@@ -56,7 +68,7 @@
                          <strong>${viewreport.reportAuthor.firstName}  ${viewreport.reportAuthor.lastName}
                           
                           </strong>${viewreport.reportAuthor.bio} </p>
-                      <a href="#" class="readMore pull-right">Read More...</a> </div>
+                      <a target="_blank" href='/public/author/bio?authorId=${viewreport.reportAuthor.id}' class="readMore pull-right">Read More...</a> </div>
           </div>
                   <div class="col-md-4 latestPublications">
 			            <h3>Latest Publishings</h3>
@@ -66,7 +78,7 @@
 			                      <p>$ ${report.price}</p>
 			                      <p>Publishing Date: <fmt:formatDate value="${report.publishingDate}" pattern="MM-dd-yyyy" /></p>
 			                      <div class="discrip">${report.overview}</div>
-			                      <a href="#" class="readMore">Read More...</a> 
+			                      <a href="/public/getReport/${report.reportId}" class="readMore">Read More...</a> 
 			             </div>
 			            </c:forEach> 
             

@@ -472,8 +472,8 @@ public class ReportServiceImpl implements ReportService {
 	}	
 
 	@Override
-	public List<ReportForm> findReportsByProfileType(String profileType) {
-		return repository.findByProfileTypeOrderByPublishingDate(profileType,new PageRequest(0,10));
+	public List<ReportForm> findReportsByProfileType(Integer reportId,String profileType) {
+		return repository.findByProfileTypeOrderByPublishingDate(reportId,profileType,new PageRequest(0,10));
 	}
 
 

@@ -11,11 +11,13 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name="Author")
 @PrimaryKeyJoinColumn(name="id")  

@@ -1,8 +1,13 @@
 package com.marketing.tool.domain;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -27,10 +32,21 @@ public class Customer extends User {
     @Column(name = "occupation", nullable = false)
     private String occupation;  
     
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+    //@OneToMany(fetch = FetchType.LAZY)
+	//@JoinColumn(name="customerid", referencedColumnName="customerid",nullable=true)
+    private Set<CustomerAuthorFavList> customerauthorfavlists = new HashSet<CustomerAuthorFavList>(0);
     
     
-   
+	public Set<CustomerAuthorFavList> getCustomerauthorfavlists() {
+		return this.customerauthorfavlists;
+	}
 
+	public void setCustomerauthorfavlists(Set<CustomerAuthorFavList> customerauthorfavlists) {
+		this.customerauthorfavlists = customerauthorfavlists;
+	}
+
+	
 	public String getCountry() {
 		return country;
 	}

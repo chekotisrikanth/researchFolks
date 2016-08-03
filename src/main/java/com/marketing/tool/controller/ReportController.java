@@ -2,6 +2,7 @@ package com.marketing.tool.controller;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -24,6 +25,7 @@ import com.marketing.tool.domain.ReportForm;
 import com.marketing.tool.domain.ViewReports;
 import com.marketing.tool.service.AdminService;
 import com.marketing.tool.service.AuthorService;
+import com.marketing.tool.service.CustomerService;
 import com.marketing.tool.service.LoginUserService;
 import com.marketing.tool.service.PurchaseOrderService;
 import com.marketing.tool.service.ReportService;
@@ -59,6 +61,9 @@ public class ReportController {
 	    @Autowired
 	    private Helper helper;
 	    
+	    @Autowired
+	    private CustomerService customerService;
+	    
 	         
 	    @RequestMapping(value = "/secure/updateReports.html", method = RequestMethod.POST)
 	    public String updateReports(@ModelAttribute("editreports") @Valid ViewReports viewReports, BindingResult result) {
@@ -73,8 +78,10 @@ public class ReportController {
 	         ViewReportDetails reportDetails = new ViewReportDetails();
 	         reportDetails.setReport(report);
 	         reportDetails.setReportAuthor(authorService.findById(report.getReportStatuses().get(0).getUser().getId()));
-	         reportDetails.setLatestPublishings(reportFormService.findReportsByProfileType(report.getDiscriminatorValue()));
+	         reportDetails.setLatestPublishings(reportFormService.findReportsByProfileType(report.getReportId(),report.getDiscriminatorValue()));
+	         List<String> reviews = customerService.findReviewsByReportId(reportId);
 	         model.addObject("viewreport",reportDetails);
+	         model.addObject("customerreviews",reviews);
 	         model.setViewName("reportDetails");
 	        return model;
 	    }
@@ -99,11 +106,13 @@ public class ReportController {
 	        Set<ReportForm> reportSet = new HashSet<ReportForm>();
 	        reportSet.add(reportFormService.findByReportId(reportid));
 	        order.setCustomer(helper.getPrincipalUser());
-	        order.setReport(reportSet);
+	        order.setReports(reportSet);
 	        order.setPurchsedate(new Date());
 	        PurchaseOrder purchaseResult = orderService.saveOrder(order);
 	        modelAndView.addObject("txnId",purchaseResult.getTxnid());
 	        modelAndView.setViewName("purchaseresult");
 	        return modelAndView;
 	    }
+	    
+	   
 }

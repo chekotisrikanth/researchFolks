@@ -1,7 +1,9 @@
 package com.marketing.tool.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -19,14 +21,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.marketing.tool.domain.Author;
 import com.marketing.tool.domain.Country;
 import com.marketing.tool.domain.Customer;
+import com.marketing.tool.domain.CustomerAuthorFavList;
+import com.marketing.tool.domain.CustomerAuthorFavListId;
+import com.marketing.tool.domain.Keyskills;
+import com.marketing.tool.domain.PurchaseOrder;
 import com.marketing.tool.domain.User;
 import com.marketing.tool.exception.UserAlreadyExistsException;
 import com.marketing.tool.service.CountryStateService;
 import com.marketing.tool.service.CustomerService;
+import com.marketing.tool.service.KeySkillsService;
 import com.marketing.tool.service.LoginUserService;
 import com.marketing.tool.service.UserService;
 import com.marketing.tool.utility.Helper;
@@ -40,10 +49,19 @@ public class CustomerCreateController {
 	    private final CreateFormValidator createFormValidator;
 	    
 	    @Autowired
+		KeySkillsService skills;
+	    
+	    @Autowired
+		CountryStateService countryService;
+	    
+	    @Autowired
 		 private CountryStateService countryStateService;
 	    
 	    @Autowired
 		private LoginUserService loginUserService;
+	    
+	    @Autowired
+	    private CustomerService customerService;
 	    
 	    @Inject
 	    public CustomerCreateController(CustomerService customerService, CreateFormValidator createFormValidator) {
@@ -118,7 +136,7 @@ public class CustomerCreateController {
 			model.addObject("countryList",countries);
 		}
 	  
-	    @RequestMapping(value = { "/secure/home/customer.html", "/author/home/customerhome" }, method = RequestMethod.GET)
+	    @RequestMapping(value = { "/secure/home/customer.html", "/secure/home/customerhome" }, method = RequestMethod.GET)
 	    public ModelAndView loginSuccessPage(@RequestParam(value = "error",required = false) String error,
 	    @RequestParam(value = "logout", required = false) String logout) {
 	         
@@ -131,10 +149,102 @@ public class CustomerCreateController {
 	            model.addObject("message", "Logged out from JournalDEV successfully.");
 	        }
 	        User user = loginUserService.findByEmailId(Helper.getPrincipal()); 
-	        model.addObject("user",user);
+	        
+	        if(user==null) {
+	        	model.setViewName("loginPage");
+	        	return model;
+	        }
+	        
+	        List<PurchaseOrder> purchases = user.getOrders();
+	        model.addObject("customer",user);
+	        model.addObject("purchases",purchases);
 	        model.setViewName("customerhome");
 	        return model;
 	    }
-	 
+	    
+	    
+	    
+	    @RequestMapping(value = "/secure/customer/authorshortlist", method = RequestMethod.POST)
+	    public @ResponseBody String shortListAuthor(@RequestParam(value = "reportId",required = true) Integer reportId,
+	    		@RequestParam(value = "custmerId",required = true) Integer custmerId,
+	    		@RequestParam(value = "authorId",required = true) Integer authorId) {
+	    	CustomerAuthorFavListId customerAuthorFavListId = new CustomerAuthorFavListId(authorId,custmerId,reportId);
+	    	CustomerAuthorFavList favlist = customerService.loadFavList(customerAuthorFavListId);
+	    	if(favlist==null) {
+	    		favlist = new CustomerAuthorFavList(customerAuthorFavListId,true);
+	    	}else {
+	    		favlist.setFavourite(true);
+	    	}
+	    	customerService.saveFavList(favlist);
+	    	return "success";
+	    }
+	    
+	    @RequestMapping(value = "/secure/customer/rateauthor", method = RequestMethod.POST)
+	    public @ResponseBody String rateAuthor(@RequestParam(value = "reportId",required = true) Integer reportId,
+	    		@RequestParam(value = "custmerId",required = true) Integer custmerId,
+	    		@RequestParam(value = "authorId",required = true) Integer authorId,
+	    		@RequestParam(value = "rating",required = true) Integer rating) {
+	    	CustomerAuthorFavListId customerAuthorFavListId = new CustomerAuthorFavListId(authorId,custmerId,reportId);
+	    	CustomerAuthorFavList favlist = customerService.loadFavList(customerAuthorFavListId);
+	    	if(favlist==null) {
+	    		favlist = new CustomerAuthorFavList(customerAuthorFavListId,false,rating);
+	    	}else {
+	    		favlist.setRating(rating);
+	    	}
+	    	customerService.saveFavList(favlist);
+	    	return "success";
+	    }
+	    
+	    @RequestMapping(value = "/secure/customer/customerreview", method = RequestMethod.GET)
+	    public ModelAndView customerreviewlandingpage(@RequestParam(value = "reportId",required = true) Integer reportId,
+	    		@RequestParam(value = "customerId",required = true) Integer custmerId,
+	    		@RequestParam(value = "authorId",required = true) Integer authorId) {
+	    	CustomerAuthorFavListId customerAuthorFavListId = new CustomerAuthorFavListId(authorId,custmerId,reportId);
+	    	CustomerAuthorFavList favlist = new CustomerAuthorFavList(customerAuthorFavListId);
+	    	ModelAndView view = new ModelAndView();
+	    	view.addObject("favlist",favlist);
+	    	view.setViewName("customerauthorreview");
+	    	return view;
+	    }
+	    
+	    @RequestMapping(value = "/secure/customer/customerreview", method = RequestMethod.POST)
+	    public @ResponseBody String customerreview(@ModelAttribute("favlist") @Valid CustomerAuthorFavList favlist, BindingResult result) {
+	    	CustomerAuthorFavList existingfavlist = customerService.loadFavList(favlist.getId());
+	    	if(existingfavlist!=null) {
+	    		existingfavlist.setReview(favlist.getReview());
+	    	}else {
+	    		existingfavlist = favlist;
+	    	}
+	    	customerService.saveFavList(existingfavlist);
+	    	return "success";
+	    }
+	    
+	    @RequestMapping(value = { "/secure/customer/loadFavList"}, method = RequestMethod.POST)
+	    public ModelAndView loadFavList(@RequestParam(value = "customerId",required = true) Integer customerId) {
+	    	User customer = loginUserService.findById(customerId);
+	    	List<CustomerAuthorFavList> favAnalyst = customerService.loadFavAnalyst((Customer) customer);
+	    	Map<Integer,Author> filterFavAnalyst = new HashMap<Integer,Author>();
+	    	
+	    	for(CustomerAuthorFavList analyst: favAnalyst) {
+	    		filterFavAnalyst.put(analyst.getAuthor().getId(), analyst.getAuthor());
+	    	}
+	    	List<Keyskills> skillList = skills.loadAllKeyskills();
+			List<Country> countries= countryService.listAllCountries();
+	    	ModelAndView modelAndView = new ModelAndView();
+	    	modelAndView.addObject("favAnalyst", filterFavAnalyst.values());
+	    	modelAndView.addObject("skills", skillList);
+	    	modelAndView.addObject("countries", countries);
+	    	modelAndView.setViewName("customerFavAnalyst");
+	    	return modelAndView;
+	    }
+	    
+	    @RequestMapping(value = {"/public/author/bio" }, method = {RequestMethod.GET})
+	    public ModelAndView getAuthorBio(@RequestParam(value="authorId",required = true) Integer authorId) {
+	        User user = loginUserService.findById(authorId); 	
+	        ModelAndView view= new ModelAndView();
+	        view.setViewName("userbio");
+	        view.addObject("author",user);
+	        return view;
+	    }
 	    
 }

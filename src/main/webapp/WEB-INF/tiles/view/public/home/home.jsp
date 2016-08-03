@@ -33,7 +33,7 @@
 <a  class="btn-info btn" href="/public/customer_create.html">Customer Registraion</a>
 <a class="btn-info btn" href="${pageContext.request.contextPath}/publish/cpdpReportForm_create.html">Create cpdp report</a>
 <a class="btn-info btn" href="${pageContext.request.contextPath}/publish/industryReportForm_create.html">Create industry report</a>
-<a class="btn-info btn" href="/public/customresearch">Custom Research</a>
+<a class="btn-info btn" href="${pageContext.request.contextPath}/public/customresearch">Custom Research</a>
 </div>
   </nav>
   </section>

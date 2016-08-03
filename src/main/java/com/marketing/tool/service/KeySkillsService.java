@@ -9,4 +9,5 @@ public interface KeySkillsService {
 	List<Keyskills> loadAllKeyskills();
 
 	Keyskills findById(Integer id);
-}
+	Keyskills findByName(String name);
+} 

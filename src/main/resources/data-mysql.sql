@@ -133,4 +133,11 @@ update report_status set status_id=5 where report_id in (6 , 7);
 update hibernate_sequences set sequence_next_hi_value = 4 where sequence_next_hi_value = 3 and sequence_name = 'user';
 insert into user (account_type, is_agreed_tc, email_id, first_name, last_name, password, title, user_name, userstatus, id) values ('USER', 0, 'test@gmail.com', 'user', 'ch', '123', 'MR', 'test', 'Active', 98304);
 insert into customer (city, country, occupation, id) values ('hyd', '1', '0', 98304);
+insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('purchaseorder', 0);
+update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'purchaseorder';
+insert into purchaseorder (customer_id, purchsedate, txnid) values (98304, '07/16/2016 00:19:52.912', 1);
+update report set purchase_id=1 where report_id=7;
+insert into purchaseorder (customer_id, purchsedate, txnid) values (98304, '07/16/2016 00:20:04.229', 2);
+update report set purchase_id=2 where report_id=6;
+
 

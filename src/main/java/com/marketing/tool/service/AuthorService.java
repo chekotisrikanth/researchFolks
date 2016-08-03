@@ -1,5 +1,6 @@
 package com.marketing.tool.service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -18,4 +19,6 @@ public interface AuthorService extends UserService {
 	Map<String, Integer> getReportsCount(String email);
 
 	public Author findById(Integer id);
+
+	List<Author> searchAuthors(String name,String country,Collection<String> keySkills);
 }

@@ -15,6 +15,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -23,14 +24,19 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.marketing.tool.handler.SuccessHandler;
 
+import de.codecentric.boot.admin.config.EnableAdminServer;
 import net.sf.log4jdbc.Log4jdbcProxyDataSource;
 
+@ComponentScan
 @Configuration
 @EnableAutoConfiguration
-@ComponentScan
+@EnableAdminServer
+@EnableSpringDataWebSupport
+
 //@EnableWebSecurity
 //@EnableGlobalMethodSecurity(prePostEnabled=true)
 public class Application extends SpringBootServletInitializer {
+	
 
 	@Autowired
     DataSourceProperties dataSourceProperties;
