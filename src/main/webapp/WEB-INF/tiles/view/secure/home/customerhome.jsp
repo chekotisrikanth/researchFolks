@@ -71,7 +71,7 @@
 								<div>
 
 									<div class="col-sm-12">
-										<a target="_blank" href='/public/author/bio?authorId=${report.getReportStatuses().get(0).getUser().getId()}'>Read Bio</a>
+										<a href = "javascript:void(0)" Onclick="showBio(${report.getReportStatuses().get(0).getUser().getId()})">Read Bio</a>
 									</div>
 									<div class="col-sm-12 marginB5">
 										Rate Him <select name="ratehim">
@@ -83,9 +83,8 @@
 										</select>
 									</div>
 									<div class="col-sm-12 marginB20">
-											<a href="/secure/customer/customerreview?authorId=${report.getReportStatuses().get(0).getUser().getId()}&customerId=${purchase.customer.id}&reportId=${report.reportId}"
-    onclick="return !window.open(this.href, 'Review', 'width=500,height=500')"
-    target="_blank">Write Review</a>
+											<a href = "javascript:void(0)" Onclick="writereview(${report.getReportStatuses().get(0).getUser().getId()},${purchase.customer.id},${report.reportId})" 
+											>Write Review</a>
 									</div>
 								</div>
 							</div>
@@ -100,6 +99,18 @@
 			</div>
 		</div>
 	</article>
+</div>
+
+<div class="popup_box" id="light">
+
+</div>
+<div class="popup_box" id="light1">	<!-- OUR PopupBox DIV-->
+	
+    <p id="paddT20" class="paddT20">Pop up forms are the smart way to present your site. These forms are similar to other forms except, these forms appears abruptly on exact center of screen and requests user to take immediate action over them.
+
+Here, In this example, we explained how to create popup form like Login and Contact form to fulfill below requirements:</p>
+    <div style=" margin-top:10px;"><button type="submit" class="btn btn-primary pull-right marginL10 cancel ">Cancel</button></div>
+	<a href = "javascript:void(0)" onclick = "document.getElementById('light1').style.display='none';document.getElementById('fade').style.display='none'" class="closeBT"><img src="images/icon_close.png" border="0" alt="close"/></a>	
 </div>
 
  <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>  	  
@@ -123,6 +134,42 @@
     });
 
 }  */
+
+
+////public/author/bio?authorId=${analyst.id}
+function showBio(id) {
+	$.ajax({
+        async : true,
+        type : "GET",
+        url : "/public/author/bio",
+        data:'authorId='+id,
+        success : function(html) {
+        	$("#paddT20").html(html);
+        },    
+        error : function(xhr, ajaxOptions, thrownError) {
+            //alert(xhr.status);
+            //alert(thrownError);
+        }
+    });
+	document.getElementById('light1').style.display='block';
+}
+
+function writereview(authorId,customerId,reportId) {
+	$.ajax({
+        async : true,
+        type : "GET",
+        url : "/secure/customer/customerreview",
+        data:'authorId='+authorId+'&customerId='+customerId+'&reportId='+reportId,
+        success : function(html) {
+        	$("#light").html(html);
+        },    
+        error : function(xhr, ajaxOptions, thrownError) {
+            //alert(xhr.status);
+            //alert(thrownError);
+        }
+    });
+	document.getElementById('light').style.display='block';
+}
 
 function loadFavAnalyst(id) {
 	$.ajax({

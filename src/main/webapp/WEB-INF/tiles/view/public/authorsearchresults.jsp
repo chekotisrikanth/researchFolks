@@ -31,7 +31,7 @@ Authors
 							<span>years of Exp :</span><span class="paddRL">${analyst.id} years</span>
 						</div>
 						<div class=" col-md-6">
-							<a target="_blank" href='/public/author/bio?authorId=${analyst.id}'>Read Bio</a>
+							<a href = "javascript:void(0)" Onclick="showBio(${analyst.id})" >Read Bio</a>
 						</div>
 					</div>
 
@@ -49,3 +49,29 @@ Authors
 	</div>
   </c:forEach>
 </article>
+
+<div class="popup_box" id="light1">	<!-- OUR PopupBox DIV-->
+	
+    <p id="paddT20" class="paddT20"></p>
+    <div style=" margin-top:10px;"><button type="submit" class="btn btn-primary pull-right marginL10 cancel ">Cancel</button></div>
+	<a href = "javascript:void(0)" onclick = "document.getElementById('light1').style.display='none';document.getElementById('fade').style.display='none'" class="closeBT"><img src="images/icon_close.png" border="0" alt="close"/></a>	
+</div>
+
+   
+<script>
+function showBio(id) {
+	$.ajax({
+        type : "GET",
+        url : "/public/author/bio",
+        data:'authorId='+id,
+        success : function(html) {
+        	$("#paddT20").html(html);
+        },    
+        error : function(xhr, ajaxOptions, thrownError) {
+            //alert(xhr.status);
+            //alert(thrownError);
+        }
+    });
+	document.getElementById('light1').style.display='block';
+}
+</script>
