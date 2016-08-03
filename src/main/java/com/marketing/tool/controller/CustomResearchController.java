@@ -53,21 +53,23 @@ public class CustomResearchController {
 	
 	
 	@RequestMapping(value = "/public/customresearch", method = RequestMethod.GET)
-	public ModelAndView view(Model model) {
+	public ModelAndView view(Model model,@RequestParam(value="authorId",required = false) Integer authorId) {
 		ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("form", new CustomResearch());
-        initModelList(modelAndView);
+		CustomResearch customResearch = new CustomResearch();
+		customResearch.setAnalyst(String.valueOf(authorId));
+        modelAndView.addObject("form",customResearch );
+        initModelList(modelAndView,authorId);
         modelAndView.setViewName("customResearch");
         return modelAndView;
 	}
 	
 	@RequestMapping(value = "/public/customresearch", method = RequestMethod.POST)
-	public ModelAndView submit(@ModelAttribute("form") @Valid CustomResearch customResearch, BindingResult result) {
+	public ModelAndView submit(@ModelAttribute("form") @Valid CustomResearch customResearch,BindingResult result,@RequestParam(value="authorId",required = false) Integer authorId) {
 		LOGGER.debug("Received request to create {}, with result={}", customResearch, result);
         ModelAndView modelAndView = new ModelAndView("customResearch", result.getModel());//new ModelAndView();
 		
         if (result.hasErrors()) {
-        	//initModelList(modelAndView);
+        	initModelList(modelAndView,authorId);
         	modelAndView.setViewName("customResearch");
    	        return modelAndView;
         }
@@ -85,12 +87,14 @@ public class CustomResearchController {
 	
 	@RequestMapping(value="/public/loadauthors",method=RequestMethod.GET)
 	public ModelAndView loadAuthors(@RequestParam(value = "country",required = false) String country,
-		    @RequestParam(value = "skills", required = true) Integer[] skillIds) {
+		    @RequestParam(value = "skills", required = true) String skillIds) {
 		ModelAndView view = new ModelAndView();
 		List<Keyskills> skillList = new ArrayList<Keyskills>();
-		for(Integer skillId : skillIds) {
-			Keyskills skill = skills.findById(skillId);
-			skillList.add(skill);
+		String[] skills = skillIds.split(",");
+		for(String skill : skills) {
+			Integer skillId = new Integer(skill);
+			Keyskills keyskill = keySkillsService.findById(skillId);
+			skillList.add(keyskill);
 		}
 		List<Author> authorsList = authorService.findAuhtors(country, skillList);
 		view.addObject("authorsList", authorsList);
@@ -98,10 +102,16 @@ public class CustomResearchController {
 		return view;
 	}
 	
-	private void initModelList(ModelAndView modelAndView) {
+	private void initModelList(ModelAndView modelAndView,Integer authorId) {
+		Author author=null;
 		List<Keyskills> skillList = skills.loadAllKeyskills();
 		List<Country> countries= countryService.listAllCountries();
+		if(authorId!=null) {
+			author = authorService.findById(authorId);
+		}
+		author = authorService.findById(authorId);
 		modelAndView.addObject("skills", skillList);
 		modelAndView.addObject("countries", countries);
+		modelAndView.addObject("reqauthor",author);
 	}
 }

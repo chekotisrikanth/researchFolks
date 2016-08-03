@@ -37,8 +37,7 @@ public class CustomResearch {
 	@Column(nullable = false)
 	private String description;
 	
-	@NotNull
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String reqSkillSet;
 	
 	@NotNull

@@ -205,10 +205,6 @@ public class User {
 		this.id = id;
 	}
 	
-	
-
-	
-
 	public boolean isAgreedTc() {
 		return agreedTc;
 	}

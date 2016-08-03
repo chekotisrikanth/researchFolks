@@ -18,8 +18,13 @@
 	margin: 16px;
 }
 </style>
-<form:form method="POST" class="form-horizontal alignHCenter " action="/public/customresearch" commandpath="form" modelAttribute="form">
+<c:if test="${not empty reqauthor}" >
+<div>Request analyst ${reqauthor.firstName} ${reqauthor.lastName} for custom research</div>
+</c:if>
+
+<form:form method="POST" class="form-horizontal alignHCenter " action="/public/customresearch"  modelAttribute="form">
      
+       
         <form:errors path="*" cssClass="errorblock" element="div" />
         	<div class="form-group">
             
@@ -75,29 +80,30 @@
                 </div>
                 
             </div>
-             <div class="form-group">
-            
-            	<div class="col-md-2 boldTxt text-right">
-                	<spring:message code="custm.research.requiredSkillSet"/>
-                </div>
-                <div class="col-md-10">
-                	<div class="col-md-5 noPaddRL">
-                	<select  class="form-control allSkills" multiple>
-                    	<c:forEach items="${skills}" var="skill">
-							<option   value="${skill.id}"  >${skill.skill}</option>
-						</c:forEach>
-                    </select></div>
-                    <div class="col-md-1 paddT15">
-                    	<a id="addSkill" class="alignHCenter " href="#" onClick="selectskill('Add')"><img alt="right arrow" src="/images/right-arrow2.png"></a>
-                        <a id="addSkill" class="alignHCenter " href="#" onClick="selectskill('Remove')"><img alt="left arrow" src="/images/left-arrow-2.png"></a>
-        			</div>
-                    <div class="col-md-6 noPaddRL">
-                    	<select id="reqSkillSet" path="reqSkillSet" class="form-control reqSkillSet" multiple="">
-                    	</select>
-                    </div>
-                </div>
-                
-            </div>
+            <c:if test="${empty reqauthor}"    >
+	             <div class="form-group">
+	            	<div class="col-md-2 boldTxt text-right">
+	                	<spring:message code="custm.research.requiredSkillSet"/>
+	                </div>
+	                <div class="col-md-10">
+	                	<div class="col-md-5 noPaddRL">
+	                	<select  class="form-control allSkills" multiple>
+	                    	<c:forEach items="${skills}" var="skill">
+								<option   value="${skill.id}"  >${skill.skill}</option>
+							</c:forEach>
+	                    </select></div>
+	                    <div class="col-md-1 paddT15">
+	                    	<a id="addSkill" class="alignHCenter " href="#" onClick="selectskill('Add')"><img alt="right arrow" src="/images/right-arrow2.png"></a>
+	                        <a id="addSkill" class="alignHCenter " href="#" onClick="selectskill('Remove')"><img alt="left arrow" src="/images/left-arrow-2.png"></a>
+	        			</div>
+	                    <div class="col-md-6 noPaddRL">
+	                    	<select id="selectselectreqSkillSet" class="form-control selectreqSkillSet" multiple="">
+	                    	</select>
+	                    	<input type="hidden" id="reqSkillSet" name="reqSkillSet" value="0"/>
+	                    </div>
+	                </div>
+	            </div>
+           </c:if>  
             <div class="form-group">
             
             	<div class="col-md-2 boldTxt text-right">
@@ -131,20 +137,19 @@
                 
             </div>
             
-            <div class="form-group">
-            
-            	<div class="col-md-2 boldTxt text-right">
-                	<spring:message code="custm.research.analystPreference"/>
-                </div>
-                <div class="col-md-10">
-                	<select id="analystPrefe"  class="form-control analystPrefe">
-                    	<option selected value="anyOne">Any one can apply</option>
-                        <option value="onlyInvited">Only the one who i Invited</option>
-                    </select>
-                </div>
-                
-            </div>
-            
+            <c:if test="${empty reqauthor}"    >
+	            <div class="form-group">
+	            	<div class="col-md-2 boldTxt text-right">
+	                	<spring:message code="custm.research.analystPreference"/>
+	                </div>
+	                <div class="col-md-10">
+	                	<select id="analystPrefe"  class="form-control analystPrefe">
+	                    	<option selected value="anyOne">Any one can apply</option>
+	                        <option value="onlyInvited">Only the one who i Invited</option>
+	                    </select>
+	                </div>
+	            </div>
+          </c:if>  
             <div id="analysttableheading" style="display:none" class="row analystSer">
                      <div class="col-md-12"><h4 class="customeTiltels">Analyst Search</h4>
              </div>
@@ -180,6 +185,9 @@
              </div>
                      
             </div>
+            <c:if test="${not empty reqauthor}" >
+           		 <input type="hidden" name="analyst" value="${reqauthor.id}"/>
+           	</c:if>	 
             <div id="analysttable">
             </div>
             <div class="form-group">
@@ -199,34 +207,47 @@
 	//alert('k');
 	//add skil
 	var sourceList = "allSkills";
-	var destList = "reqSkillSet";
+	var destList = "selectreqSkillSet";
 	if($(this).text() === "Remove") {
 		console.log("remove");
-		sourceList = "reqSkillSet";
+		sourceList = "selectreqSkillSet";
 		destList = "allSkills";					
 	} 				
+	var skills="0";
 	$("."+sourceList+" > option").each(function(index,object) {
 		console.log($(object).prop('selected'));
 		if($(object).prop('selected')) {						
 			$("."+destList).append(object);
-			//$(object).remove();
+			if(skills=="0" ) {
+				skills = $(object).val();
+			}else {
+				skills = skills+","+$(object).val()
+			}
+			console.log('skills set '+skills);
+			$('#reqSkillSet').val(skills);
 		}
 	});
 });	
 	
 	function selectskill(action) {
 		var sourceList = "allSkills";
-		var destList = "reqSkillSet";
+		var destList = "selectreqSkillSet";
 		if(action === "Remove") {
 			console.log("remove");
-			sourceList = "reqSkillSet";
+			sourceList = "selectreqSkillSet";
 			destList = "allSkills";					
-		} 				
+		} 	
+		var skills="0";
 		$("."+sourceList+" > option").each(function(index,object) {
-			//console.log($(object).prop('selected'));
 			if($(object).prop('selected')) {						
 				$("."+destList).append(object);
-				//$(object).remove();
+				if(skills=="0" ) {
+					skills = $(object).val();
+				}else {
+					skills = skills+","+$(object).val()
+				}
+				console.log('skills set '+skills);
+				$('#reqSkillSet').val(skills);
 			}
 		});
 	}
