@@ -49,7 +49,17 @@ public class Author extends User {
 					nullable = false, updatable = false) })
     private Set<Keyskills> keyskills;  
     
+    @Column(nullable = true)
+    private Integer experience;
     
+        
+	public Integer getExperience() {
+		return experience;
+	}
+
+	public void setExperience(Integer experience) {
+		this.experience = experience;
+	}
 
 	public String getCountry() {
 		return country;

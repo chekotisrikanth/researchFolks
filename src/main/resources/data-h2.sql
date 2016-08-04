@@ -65,7 +65,7 @@ insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('r
 
 update hibernate_sequences set sequence_next_hi_value = 3 where sequence_next_hi_value = 2 and sequence_name = 'user';
 insert into user (account_type, is_agreed_tc, email_id, first_name, last_name, password, title, user_name, userstatus, id) values ('AUTHOR', 1, 'kumar@gmail.com', 'Anilkumar ', 'Ravula', 'pirate', 'MR', 'anil', 'Active', 65536);
-insert into author (bio, city, country_id, mobile, id) values ('asdasdasdasds', 'hello', '1', '9505485048', 65536);
+insert into author (bio, city, country_id, mobile, id,experience) values ('asdasdasdasds', '1', '1', '9505485048', 65536,15);
 insert into author_key_skill (author_id, skill_id) values (65536, 2);
 
 insert into user (account_type, email_id, first_name, last_name,  password, title, userstatus,IS_AGREED_TC,USER_NAME, id) values ('PUBLISHER', 'anil1@gamil.com', 'anil', 'sri', 'pirate', 'MR', 'Active',1,'anil', 32769);

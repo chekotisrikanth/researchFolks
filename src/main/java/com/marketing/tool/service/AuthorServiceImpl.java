@@ -223,7 +223,7 @@ public class AuthorServiceImpl extends UserServiceImpl implements AuthorService 
 	}
 
     @Override
-    public List<Author> searchAuthors(String name,String country,Collection<String> keySkills) {
+    public List<Author> searchAuthors(String name,String country,Collection<String> keySkills,String exprange) {
     	/*ExampleMatcher matcher = ExampleMatcher.matching()
     			  .withMatcher("firstName", GenericPropertyMatchers.contains().ignoreCase())
     			  .withMatcher("lastName", GenericPropertyMatchers.contains().ignoreCase());
@@ -234,14 +234,18 @@ public class AuthorServiceImpl extends UserServiceImpl implements AuthorService 
     			  
     	Example<Author> example = Example.of(author,matcher);
     	Iterator<Author> it = authorRepository.findAll(example).iterator();*/
+    	
+    	String exp[] = exprange.split("-");
+    	Integer minExp = Integer.valueOf(exp[0]);
+    	Integer maxExp = Integer.valueOf(exp[1]);	
     	List<Author> results= new ArrayList<Author>();
     	QAuthor qauthor = QAuthor.author;
     	
     	WhereClauseBuilder predicate =new WhereClauseBuilder()
-    	.optionalAnd(name, () -> qauthor.firstName.startsWithIgnoreCase(name))
-    	.optionalOr(name, () ->qauthor.lastName.startsWithIgnoreCase(name))
+    	.optionalAnd(name, () -> qauthor.firstName.startsWithIgnoreCase(name).or(qauthor.lastName.startsWithIgnoreCase(name)))
     	.optionalAnd(keySkills, () ->  qauthor.keyskills.any().skill.in(keySkills))
-    	.optionalAnd(country, () -> qauthor.country.eq(country));
+    	.optionalAnd(country, () -> qauthor.country.eq(country))
+    	.optionalAnd(exprange, () -> qauthor.experience.between(minExp, maxExp));
     	
     	
     	/*BooleanExpression hasfirstName = new StringPath(qauthor, "firstName").startsWithIgnoreCase(author.getFirstName());

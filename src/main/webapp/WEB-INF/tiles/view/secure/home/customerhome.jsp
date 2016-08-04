@@ -93,10 +93,7 @@
 				</c:forEach>
 			</div>
 
-			<div class="col-md-4">
-				<span class="marginB20 marginT20 pull-right">Displaying 10
-					out of 250</span>
-			</div>
+			
 		</div>
 	</article>
 </div>

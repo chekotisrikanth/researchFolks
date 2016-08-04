@@ -43,7 +43,6 @@
               </div>
 			<div class="form-group">				
 				<div class="col-md-3">
-					
 					<spring:message code="user.password" var="passwordLal"/>
 					<form:password path="password" class ="form-control" placeholder="${passwordLal}" required="required" />
 					<form:errors path="password"/>                	
@@ -55,6 +54,17 @@
 					<form:errors path="reTypePwd"/> 
                 </div>
             </div> 
+            <div class="form-group">
+        		<div class="col-md-6">
+			       <form:select path="experience" class ="form-control" required="required" >
+			           <form:option value="" label="select experience" /> 
+			         <c:forEach var="i" begin="5" end="25">
+			            <form:option value="${i}" label="${i}" />
+			         </c:forEach>
+					</form:select>
+			        <form:errors path="experience"/>	
+				</div>
+			</div>	
                   <%@ include file=".././countrystate.jsp" %>
                 <div class="form-group">
             	<div class="col-md-6">

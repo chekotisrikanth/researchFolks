@@ -20,5 +20,5 @@ public interface AuthorService extends UserService {
 
 	public Author findById(Integer id);
 
-	List<Author> searchAuthors(String name,String country,Collection<String> keySkills);
+	List<Author> searchAuthors(String name,String country,Collection<String> keySkills,String exprange);
 }

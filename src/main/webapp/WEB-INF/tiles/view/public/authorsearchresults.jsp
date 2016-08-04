@@ -28,7 +28,7 @@ Authors
 					<div style="display: table"
 						class=" paddT15 paddTB10 border clearfix col-sm-12">
 						<div class=" col-md-6">
-							<span>years of Exp :</span><span class="paddRL">${analyst.id} years</span>
+							<span>years of Exp :</span><span class="paddRL">${analyst.experience} years</span>
 						</div>
 						<div class=" col-md-6">
 							<a href = "javascript:void(0)" Onclick="showBio(${analyst.id})" >Read Bio</a>

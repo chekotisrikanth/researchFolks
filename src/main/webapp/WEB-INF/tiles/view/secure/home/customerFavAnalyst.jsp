@@ -23,7 +23,7 @@ Shortlist <form:form id="myform" action="/public/authors/searchauthors"
 				<div class="col-md-1 col-sm-1 "></div>
 				<div class="col-md-1 col-sm-6 ">Title</div>
 				<div class="col-md-3 col-sm-6">
-					<input type="text" name="firstName" class="form-control">
+					<input type="text" name="name" class="form-control">
 				</div>
 				<div class="col-md-1 col-sm-1 "></div>
 				<div class="col-md-2 col-sm-6 ">Years of Experience</div>
@@ -33,7 +33,7 @@ Shortlist <form:form id="myform" action="/public/authors/searchauthors"
 						<option>5-9</option>
 						<option>10-14</option>
 						<option>15-19</option>
-						<option>20</option>
+						<option>20-30</option>
 					</select>
 				</div>
 				<div class="col-md-1 col-sm-1 "></div>

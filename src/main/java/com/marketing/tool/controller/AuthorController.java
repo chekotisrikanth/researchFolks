@@ -237,32 +237,16 @@ public class AuthorController {
 	        return authorService.getReportsCount(user.getEmailId());
 	    }
 	    
-	    @RequestMapping(value = {"/public/authors/searchauthors2" }, method = {RequestMethod.POST})
-	    public ModelAndView searchAuthors2(@ModelAttribute("form") @Valid Author author,BindingResult result) {
-	    	//Author author = new Author();
-	    	List<Author> authors =null;// authorService.searchAuthors(author);
-	    	ModelAndView modelAndView = new ModelAndView();
-	    	modelAndView.addObject("authors",authors);
-	    	modelAndView.setViewName("authorsearchresults");
-	    	return modelAndView;
-	    }
 	    
 	    @RequestMapping(value = {"/public/authors/searchauthors" }, method = {RequestMethod.POST})
 	    public ModelAndView searchAuthors(@RequestParam(value="name",required=false) String name,
 	    		@RequestParam(value="country",required=false) String country,
 	    		@RequestParam(value="exprange",required=false) String exprange,
 	    		@RequestParam(value="skillset",required=false) Collection<String> skillIds) {
-	    	//Author author = new Author();
-	    	/*Set<Keyskills> skillList = new HashSet<Keyskills>();
-	    	for(String skillId : skillIds) {
-				Keyskills skill = skills.findByName(skillId);
-				skillList.add(skill);
-			}*/
-	    	//author.setKeyskills(skillList);
 	    	if("any".equals(country)) {
 	    		country=null;
 	    	}
-	    	List<Author> authors = authorService.searchAuthors(name,country,skillIds);
+	    	List<Author> authors = authorService.searchAuthors(name,country,skillIds,exprange);
 	    	ModelAndView modelAndView = new ModelAndView();
 	    	modelAndView.addObject("authors",authors);
 	    	modelAndView.setViewName("authorsearchresults");
