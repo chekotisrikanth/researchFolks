@@ -1,5 +1,6 @@
 package com.marketing.tool;
 
+import javax.servlet.MultipartConfigElement;
 import javax.sql.DataSource;
 
 import org.h2.server.web.WebServlet;
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.embedded.MultipartConfigFactory;
 import org.springframework.boot.context.embedded.ServletRegistrationBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.web.SpringBootServletInitializer;
@@ -20,7 +22,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.marketing.tool.handler.SuccessHandler;
 
@@ -74,11 +75,21 @@ public class Application extends SpringBootServletInitializer {
         registrationBean.addUrlMappings("/console/*");
         return registrationBean;
     }
-    @Bean
+   
+    /*@Bean
     public CommonsMultipartResolver multipartResolve() {
     	CommonsMultipartResolver res = new CommonsMultipartResolver();
 		res.setMaxUploadSize(-1);;
     	return res;
+    }
+    */
+    
+    @Bean
+    MultipartConfigElement multipartConfigElement() {
+        MultipartConfigFactory factory = new MultipartConfigFactory();
+        factory.setMaxFileSize(-1);
+        factory.setMaxRequestSize(-1);
+        return factory.createMultipartConfig();
     }
     
 	protected static class ApplicationSecurity extends WebSecurityConfigurerAdapter {

@@ -10,6 +10,8 @@
 		<put-attribute name="body" value="" />
 	</definition>
 	
+	
+	
 	<definition name="layout.basic" template="/WEB-INF/tiles/layout/basic.jsp">
 		<put-attribute name="title" value="Research Folks" />
 		<put-attribute name="header" value="/WEB-INF/tiles/view/public/header/header.jsp" />
@@ -39,6 +41,12 @@
 	<definition name="customerFavAnalyst" extends="layout.empty">
 		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/home/customerFavAnalyst.jsp" />
 	</definition>
+	
+	<definition name="imageupload" extends="layout.empty">
+		<put-attribute name="body" value="/WEB-INF/tiles/view/public/imageupload.jsp" />
+	</definition>
+	
+	
 	
 	<definition name="customerauthorreview" extends="layout.empty">
 		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/home/customerauthorreview.jsp" />

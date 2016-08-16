@@ -64,6 +64,9 @@ public class CPDPReportFormCreateController {
 	
 	    @Autowired
 	    private MasterIndustriesService masterIndustriesService;
+	    
+	    @Autowired
+		 private FileUtils fileUtils;
 	   	    
 	   /* @InitBinder("form")
 	    public void initBinder(WebDataBinder binder) {
@@ -127,11 +130,9 @@ public class CPDPReportFormCreateController {
 			    return modelAndView;
 			}
 	        try {
-				long time= Calendar.getInstance().getTimeInMillis();
-				String uuid = UUID.randomUUID().toString();
-				FileUtils.saveFiles(reportForm.getReportImg(),String.valueOf(uuid+""+time),StringUtil.buildString(SharedConstants.FILE_PATH+SharedConstants.REEEPORT_FOLDER_PATH));
+	        	String filePath = fileUtils.saveFile(reportForm.getReportImg(),StringUtil.buildString(SharedConstants.FILE_PATH+SharedConstants.REEEPORT_FOLDER_PATH));
 				//reportComments2.setFilePath(SharedConstants.FILE_PATH+String.valueOf(reportComments2.getReportId()+""+time)+SharedConstants.DOT+reportComments2.getReportFile().getOriginalFilename().split("\\.")[1]);
-				String filePath = StringUtil.buildString(SharedConstants.REEEPORT_FOLDER_PATH,SharedConstants.FILE_SEPERATOR,uuid,time,SharedConstants.DOT,reportForm.getReportImg().getOriginalFilename().split("\\.")[1]);
+				//String filePath = StringUtil.buildString(SharedConstants.REEEPORT_FOLDER_PATH,SharedConstants.FILE_SEPERATOR,uuid,time,SharedConstants.DOT,reportForm.getReportImg().getOriginalFilename().split("\\.")[1]);
 				//FileUtils.saveFiles(reportForm.getReportImg(),String.valueOf(reportForm.getReportId()),new StringBuilder("E:\\gitImages").append("\\Profile").toString());
 				
 				reportForm.setFilePath(filePath);

@@ -17,93 +17,108 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.marketing.tool.validator.Email;
 
-@Entity  
-@Table(name = "user")  
-@Inheritance(strategy=InheritanceType.JOINED)  
+@Entity
+@Table(name = "user")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
-	
-	@Id 
-	@GeneratedValue(strategy = GenerationType.TABLE)  
-    @Column(name = "id", nullable = false, updatable = false)
-    private Integer  id;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	@Column(name = "id", nullable = false, updatable = false)
+	private Integer id;
 
 	@NotEmpty
-    @Size(max = 10)
-    @Column(name = "password", nullable = false)
-    private String password;
-	
-   /* @Size(max = 50)
-    @Column(name = "accountType", nullable = false)*/
-    private String accountType;  
-   
-	
-	
-	//@Column(name="userstatus", nullable=false)
-	private String userstatus=UserStatus.ACTIVE.getState();
-	
+	@Size(max = 10)
+	@Column(name = "password", nullable = false)
+	private String password;
+
+	/*
+	 * @Size(max = 50)
+	 * 
+	 * @Column(name = "accountType", nullable = false)
+	 */
+	private String accountType;
+
+	// @Column(name="userstatus", nullable=false)
+	private String userstatus = UserStatus.ACTIVE.getState();
+
 	@NotNull
-    @Size(max = 3)
-    @Column(name = "title", nullable = false)
+	@Size(max = 3)
+	@Column(name = "title", nullable = false)
 	protected String title;
-    
-    @NotEmpty
-    @Size(max = 20)
-    @Column(name = "firstName", nullable = false)
+
+	@NotEmpty
+	@Size(max = 20)
+	@Column(name = "firstName", nullable = false)
 	protected String firstName;
-    
-    @Size(max = 20)
-    @Column(name = "lastName", nullable = true)
-    private String lastName;
-    
-   // @Size(min=10) @Phone
-   // @Column(name = "mobileNo", nullable = true)
-   
-    
-    @NotEmpty
-    @Size(max = 50)
-    @Email
-    @Column(name = "emailId", nullable = false)
+
+	@Size(max = 20)
+	@Column(name = "lastName", nullable = true)
+	private String lastName;
+
+	// @Size(min=10) @Phone
+	// @Column(name = "mobileNo", nullable = true)
+
+	@NotEmpty
+	@Size(max = 50)
+	@Email
+	@Column(name = "emailId", nullable = false)
 	protected String emailId;
-    
-     @Transient
-	 private String reTypePwd;
-	 
-     
-     @Size(max = 50)
-     @Column(name = "userName", nullable = false)    
-     private String userName;
-	 
-     
-     @Column(name = "isAgreedTc", nullable = false)
-	    private boolean agreedTc;
-	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-	private Set<ReportStatus> reportStatuses = new HashSet<ReportStatus>(0);
-	
-	
-	public Set<ReportStatus> getReportStatuses() {
-		return this.reportStatuses;
+
+	@Transient
+	private String reTypePwd;
+
+	@Size(max = 50)
+	@Column(name = "userName", nullable = false)
+	private String userName;
+
+	@Column(name = "isAgreedTc", nullable = false)
+	private boolean agreedTc;
+	/*
+	 * @OneToMany(fetch = FetchType.LAZY, mappedBy = "user") private
+	 * Set<ReportStatus> reportStatuses = new HashSet<ReportStatus>(0);
+	 * 
+	 * 
+	 * public Set<ReportStatus> getReportStatuses() { return
+	 * this.reportStatuses; }
+	 * 
+	 * public void setReportStatuses(Set<ReportStatus> reportStatuses) {
+	 * this.reportStatuses = reportStatuses; }
+	 */
+
+	/*
+	 * public String getUserName() { return userName; }
+	 * 
+	 * public void setUserName(String userName) { this.userName = userName; }
+	 */
+	@Column
+	private String profilePicName;
+
+	@Transient
+	private MultipartFile profiePic;
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+	private List<PurchaseOrder> orders;
+
+	public String getProfilePicName() {
+		return profilePicName;
 	}
 
-	public void setReportStatuses(Set<ReportStatus> reportStatuses) {
-		this.reportStatuses = reportStatuses;
-	}*/
-
-	
-   /* public String getUserName() {
-		return userName;
+	public void setProfilePicName(String profilePicName) {
+		this.profilePicName = profilePicName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public MultipartFile getProfiePic() {
+		return profiePic;
 	}
-*/
-   
-   @OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
-   private List<PurchaseOrder> orders;
-     
+
+	public void setProfiePic(MultipartFile profiePic) {
+		this.profiePic = profiePic;
+	}
 
 	public List<PurchaseOrder> getOrders() {
 		return orders;
@@ -121,13 +136,11 @@ public class User {
 		this.reTypePwd = reTypePwd;
 	}
 
-	
-    
-   public Integer  getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer  id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -155,7 +168,6 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	
 	public String getEmailId() {
 		return emailId;
 	}
@@ -170,8 +182,7 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}	
-
+	}
 
 	public String getUserstatus() {
 		return userstatus;
@@ -180,8 +191,7 @@ public class User {
 	public void setUserstatus(String userstatus) {
 		this.userstatus = userstatus;
 	}
-	
-		
+
 	public String getAccountType() {
 		return accountType;
 	}
@@ -190,8 +200,6 @@ public class User {
 		this.accountType = accountType;
 	}
 
-	 
-	
 	public String getUserName() {
 		return userName;
 	}
@@ -200,11 +208,11 @@ public class User {
 		this.userName = userName;
 	}
 
-	public User(Integer  id) {
+	public User(Integer id) {
 		super();
 		this.id = id;
 	}
-	
+
 	public boolean isAgreedTc() {
 		return agreedTc;
 	}
@@ -234,7 +242,7 @@ public class User {
 		builder.append(firstName);
 		builder.append(", lastName=");
 		builder.append(lastName);
-		
+
 		builder.append(", emailId=");
 		builder.append(emailId);
 		builder.append(", reTypePwd=");
@@ -242,5 +250,5 @@ public class User {
 		builder.append("]");
 		return builder.toString();
 	}
-    
+
 }

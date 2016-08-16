@@ -2,7 +2,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<form:form method="POST" class="form-horizontal alignHCenter " action="/public/author_create.html" commandName="form" modelAttribute="form">
+<form:form enctype="multipart/form-data" method="POST" class="form-horizontal alignHCenter " action="/public/author_create.html" commandName="form" modelAttribute="form">
 			<div class="form-group">
 					<div class="col-md-12"  >
 						<span> Author Login Form</span>
@@ -112,6 +112,11 @@
                 </div>
                
               </div>
+              <div class="form-group">
+	             <div class="col-md-6">
+	                 <%@ include file=".././imageupload.jsp" %>
+		    	 </div>
+	    	</div>
                <div class="form-group">
             	<div class="col-md-6">
 					<div class="col-md-1 noPaddL">

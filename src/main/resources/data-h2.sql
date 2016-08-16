@@ -64,7 +64,7 @@ insert into stock_exchange(name) values('Tel Aviv Stock Exchange');
 insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('report', 0);
 
 update hibernate_sequences set sequence_next_hi_value = 3 where sequence_next_hi_value = 2 and sequence_name = 'user';
-insert into user (account_type, is_agreed_tc, email_id, first_name, last_name, password, title, user_name, userstatus, id) values ('AUTHOR', 1, 'kumar@gmail.com', 'Anilkumar ', 'Ravula', 'pirate', 'MR', 'anil', 'Active', 65536);
+insert into user (account_type, is_agreed_tc, email_id, first_name, last_name, password, title, user_name, userstatus, id,profile_Pic_Name) values ('AUTHOR', 1, 'kumar@gmail.com', 'Anilkumar ', 'Ravula', 'pirate', 'MR', 'anil', 'Active', 65536,'author3@gmail.com.JPG');
 insert into author (bio, city, country_id, mobile, id,experience) values ('asdasdasdasds', '1', '1', '9505485048', 65536,15);
 insert into author_key_skill (author_id, skill_id) values (65536, 2);
 

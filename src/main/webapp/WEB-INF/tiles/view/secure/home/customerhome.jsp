@@ -59,7 +59,7 @@
 									<h4>Author</h4>
 								</div>
 								<div class="col-sm-12">
-									<p class="authorPic col-md-6"></p>
+									<p class="authorPic col-md-6"><img class="img-circle" src="/uploads/profilepics/${report.getReportStatuses().get(0).getUser().getProfilePicName()}" /></p>
 									<p class="col-md-6 boldTxt">${report.getReportStatuses().get(0).getUser().getFirstName()}
 										${report.getReportStatuses().get(0).getUser().getLastName()}</p>
 									<p class="col-md-6">

@@ -1,17 +1,21 @@
 package com.marketing.tool.utility;
 
-import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
     /** 
      * Description     
@@ -20,10 +24,24 @@ import org.springframework.web.multipart.MultipartFile;
 	 *
 	 * 
 	 */
-    
+  
+@Service
 public class FileUtils {
 	
 	private static final Map<String, String> fileExtensionMap;
+	
+	@Value("${storagepath:D:/uploads}")
+	private String rootFolder;
+
+	
+	
+	public String getRootFolder() {
+		return rootFolder;
+	}
+
+	public void setRootFolder(String rootFolder) {
+		this.rootFolder = rootFolder;
+	}
 
 	static {
 	    fileExtensionMap = new HashMap<String, String>();
@@ -79,28 +97,63 @@ public class FileUtils {
 
 	private  static final Logger LOGGER = LoggerFactory.getLogger(FileUtils.class);
 	
-	public static void saveFiles(MultipartFile reportImage,String imageName,String parenFolderPath) throws IOException {
-		BufferedOutputStream stream = null;
-		byte[] bytes =null;
+	@Autowired
+	private ResourceLoader resourceLoader; 
+	
+	
+	public String saveFile(MultipartFile reportImage,String fileName,String parenFolderPath) throws IOException {
+		//BufferedOutputStream stream = null;
+		//byte[] bytes =null;
+		
 		 try {
-			
-             bytes = reportImage.getBytes();
-             String ext = "."+reportImage.getOriginalFilename().split("\\.")[1];
-             stream =
-                     new BufferedOutputStream(new FileOutputStream(checkAndReturnFiles(StringUtil.buildString(imageName,ext), parenFolderPath)));
-             stream.write(bytes);
+			 String extn = reportImage.getOriginalFilename().split("\\.")[1];
+			 
+			 //Resource resource = resourceLoader.getResource("classpath:/"+parenFolderPath+"/"+imageName);
+			 
+			 File file = new File(rootFolder+"/"+parenFolderPath+"/"+fileName+"."+extn);
+			 
+			 if(!file.getParentFile().exists()) {
+				 file.getParentFile().mkdirs();
+			 }
+			 if(file.exists()) {
+				    long time= Calendar.getInstance().getTimeInMillis();
+				    fileName= String.valueOf(fileName+"_"+time+"."+extn);
+				    file = new File(rootFolder+"/"+parenFolderPath+"/"+fileName);
+			 }
+        	 reportImage.transferTo(file);
+        	 
+			 //file.renameTo(file.)
+			 
+			 //File file = resourceLoader.getResource("../"+parenFolderPath+"/"+imageName).getFile();
+			 //File file = new File(this.getClass().getResource("/"+parenFolderPath+"/"+imageName).toURI());
+			 //file.createNewFile();
+			 //reportImage.transferTo(file);
+
+			 //reportImage.transferTo(dest);
+			 //parenFolderPath = resourceLoader.getResource("resources/"+parenFolderPath).toString();
+             //bytes = reportImage.getBytes();
              
+             //File file = checkAndReturnFiles(StringUtil.buildString(imageName,ext),parenFolderPath);
+             /*stream =
+                     new BufferedOutputStream(new FileOutputStream(file));
+             stream.write(bytes);*/
              LOGGER.info("You successfully uploaded"); 
-         } catch (IOException fnpe) {
-        	 LOGGER.error("fail saving failed for the {} employeeID the message {}", imageName , fnpe.getCause());
-        	 throw fnpe;
+             return fileName;
+         } catch (Exception fnpe) {
+        	 LOGGER.error("fail saving failed for the {}  the message {}", fileName , fnpe.getCause());
+        	 throw new RuntimeException(fnpe);
 		} finally {
-			if(stream != null) {
+			/*if(stream != null) {
 				stream.close();
-			}
+			}*/
 			
-			bytes = null;
+			//bytes = null;
          }
+		
+	}
+	
+	public String saveFile(MultipartFile reportImage,String parenFolderPath) throws IOException { 
+		return saveFile(reportImage,null,parenFolderPath);
 	}
 	
 	public static File checkAndReturnFiles(String fileName,String directory) {

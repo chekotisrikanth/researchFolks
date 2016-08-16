@@ -76,6 +76,9 @@ public class ReportServiceImpl implements ReportService {
 	 @Autowired
 	 private ReportRepository reportRepository;
 	 
+	 @Autowired
+	 private FileUtils fileUtils;
+	 
 	 
 	@Inject
 	public ReportServiceImpl(final ReportRepository repository) {
@@ -360,9 +363,8 @@ public class ReportServiceImpl implements ReportService {
 				
 				//save commnets if required
 				 if(reportComments2.getReportFile() != null) {
-					 long time= Calendar.getInstance().getTimeInMillis();
-					 FileUtils.saveFiles(reportComments2.getReportFile(),String.valueOf(reportComments2.getReportId()+""+time),SharedConstants.FILE_PATH);
-						reportComments2.setFilePath(SharedConstants.FILE_PATH+String.valueOf(reportComments2.getReportId()+""+time)+SharedConstants.DOT+reportComments2.getReportFile().getOriginalFilename().split("\\.")[1]);
+					String filePath =  fileUtils.saveFile(reportComments2.getReportFile(),String.valueOf(reportComments2.getReportId()),SharedConstants.FILE_PATH);
+						reportComments2.setFilePath(filePath);
 				}
 				 if(StringUtils.hasText(reportComments2.getComment()) || reportComments2.getReportFile() != null) {
 					 reportComments2.setUserId(userId);
