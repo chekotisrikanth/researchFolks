@@ -63,7 +63,9 @@
             <div class="col-md-12 borderB">
                       <h4>About Author</h4>
                     </div>
-            <div class="authorContent col-md-12 marginT20 "> <a class="pull-left" href="#"> <img class="author-ava" src="http://tokokoodemo.us/raakbookoo/wp-content/themes/raakbookoo/img/avatar.png" alt="Author"> </a>
+            <div class="authorContent col-md-12 marginT20 "> <a class="pull-left" href="#"> 
+            <img class="img-circle" src="/uploads/profilepics/${viewreport.reportAuthor.getProfilePicName()}" alt="Author"/></a>
+            
                       <p class="author-des">
                          <strong>${viewreport.reportAuthor.firstName}  ${viewreport.reportAuthor.lastName}
                           
