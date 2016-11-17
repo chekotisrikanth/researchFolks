@@ -7,6 +7,7 @@ import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -32,6 +33,7 @@ import net.sf.log4jdbc.Log4jdbcProxyDataSource;
 @Configuration
 @EnableAutoConfiguration
 @EnableAdminServer
+@SpringBootApplication
 @EnableSpringDataWebSupport
 
 //@EnableWebSecurity

@@ -83,12 +83,12 @@ public class WhereClauseBuilder implements Predicate, Cloneable
         }
         return this.delegate;
     }
-    	public static void main(String[] args) {
+    /*	public static void main(String[] args) {
 		QAuthor qauthor = QAuthor.author;
 		WhereClauseBuilder predicate2 = new WhereClauseBuilder().optionalAnd("anil", () -> qauthor.lastName.startsWithIgnoreCase("anil"));
 		System.out.println(predicate2);
 	}
-
+*/
 	
    }
 

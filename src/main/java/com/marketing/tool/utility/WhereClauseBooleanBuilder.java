@@ -81,9 +81,9 @@ public class WhereClauseBooleanBuilder
 		}
    	}
     
-    public static void main(String[] args) {
+   /* public static void main(String[] args) {
     	WhereClauseBooleanBuilder b = startsWithIgnoreCaseIfNotNull("firstName",null).and(startsWithIgnoreCaseIfNotNull("lastName", "Anil"));
        System.out.println(b);
-    }
+    }*/
 }
     
