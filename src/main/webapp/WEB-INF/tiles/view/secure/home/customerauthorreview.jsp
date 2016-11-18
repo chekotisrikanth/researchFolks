@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
    
-        <form:form id="myform" name="myform" method="POST" class="form-horizontal alignHCenter " action="/secure/customer/customerreview" command="form" modelAttribute="favlist">
+        <form:form id="myform" name="myform" method="POST" class="form-horizontal alignHCenter " action="${pageContext.request.contextPath}/secure/customer/customerreview" command="form" modelAttribute="favlist">
 			
 		
 		<h3>Your Ratging</h3>

@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div>
 <h1><spring:message code="admin.create"/></h1>
-<form:form method="POST" action="/public/admin_create.html" commandName="form" modelAttribute="form">
+<form:form method="POST" action="${pageContext.request.contextPath}/public/admin_create.html" commandName="form" modelAttribute="form">
     <form:errors path="" element="div"/>
     <div>
         <form:label path="title"><spring:message code="user.title"/></form:label>

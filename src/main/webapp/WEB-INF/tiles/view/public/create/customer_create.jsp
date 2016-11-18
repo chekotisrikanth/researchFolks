@@ -3,7 +3,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
    
-        <form:form method="POST" class="form-horizontal alignHCenter " action="/public/customer_create.html" commandName="form" modelAttribute="form">
+        <form:form method="POST" class="form-horizontal alignHCenter " action="${pageContext.request.contextPath}/public/customer_create.html" commandName="form" modelAttribute="form">
 	       <form:errors />
         
 			<div class="form-group">

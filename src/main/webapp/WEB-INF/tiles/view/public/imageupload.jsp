@@ -49,7 +49,7 @@
     </div>
 </div>
 
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="${pageContext.request.contextPath}//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
       <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
       <script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>

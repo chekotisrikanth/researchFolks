@@ -28,7 +28,7 @@
                         </tbody>
               </table>
                       <div class="col-md-12 marginB20">
-                <a href="/secure/purchase/purchasereport.html?reportid=${viewreport.report.reportId}" class="btn btn-warning">Buy this Research</a>
+                <a href="${pageContext.request.contextPath}/secure/purchase/purchasereport.html?reportid=${viewreport.report.reportId}" class="btn btn-warning">Buy this Research</a>
               </div>
                     </div>
             <div class="col-md-6 col-sm-12"> <span class="descripTitle">Description of the Research</span>
@@ -64,7 +64,7 @@
                       <h4>About Author</h4>
                     </div>
             <div class="authorContent col-md-12 marginT20 "> <a class="pull-left" href="#"> 
-            <img class="img-circle" src="/uploads/profilepics/${viewreport.reportAuthor.getProfilePicName()}" alt="Author"/></a>
+            <img class="img-circle" src="${pageContext.request.contextPath}/uploads/profilepics/${viewreport.reportAuthor.getProfilePicName()}" alt="Author"/></a>
             
                       <p class="author-des">
                          <strong>${viewreport.reportAuthor.firstName}  ${viewreport.reportAuthor.lastName}
@@ -80,7 +80,7 @@
 			                      <p>$ ${report.price}</p>
 			                      <p>Publishing Date: <fmt:formatDate value="${report.publishingDate}" pattern="MM-dd-yyyy" /></p>
 			                      <div class="discrip">${report.overview}</div>
-			                      <a href="/public/getReport/${report.reportId}" class="readMore">Read More...</a> 
+			                      <a href="${pageContext.request.contextPath}/public/getReport/${report.reportId}" class="readMore">Read More...</a> 
 			             </div>
 			            </c:forEach> 
             

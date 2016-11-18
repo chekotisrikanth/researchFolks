@@ -13,7 +13,7 @@ Authors <c:forEach items="${favAnalyst}" var="analyst">
 	</div>
 </c:forEach> </article>
 <article class="col-md-9 noPaddRL"> Search Authoers to
-Shortlist <form:form id="myform" action="/public/authors/searchauthors"
+Shortlist <form:form id="myform" action="${pageContext.request.contextPath}/public/authors/searchauthors"
 	method="post" commandName="author">
 
 

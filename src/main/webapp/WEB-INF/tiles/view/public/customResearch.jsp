@@ -1,10 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-		<link rel="stylesheet" href="/css/bootstrap-theme.css">
-       <link rel="stylesheet" href="/css/bootstrap.css">
-       <link rel="stylesheet" href="/css/customStyles.css">
-       <link rel="stylesheet" href="/css/datepicker.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/datepicker.min.css">
        <style>
 .error {
 	color: #ff0000;
@@ -22,10 +22,10 @@
 <div>Request analyst ${reqauthor.firstName} ${reqauthor.lastName} for custom research</div>
 </c:if>
 
-<form:form method="POST" class="form-horizontal alignHCenter " action="/public/customresearch"  modelAttribute="form">
+<form:form method="POST" class="form-horizontal alignHCenter " action="${pageContext.request.contextPath}/public/customresearch"  modelAttribute="form">
      
        
-        <form:errors path="*" cssClass="errorblock" element="div" />
+       
         	<div class="form-group">
             
             	<div class="col-md-2 boldTxt text-right">
@@ -49,7 +49,7 @@
                 <div class="col-md-1 boldTxt text-right">
                 	<spring:message code="custm.research.webLink"/>
                 </div>
-                <div class="col-md-4"><form:input required="required" id="webLink" path="webLink" type="text" class="form-control"/></div>
+                <div class="col-md-4"><form:input  id="webLink" path="webLink" type="text" class="form-control"/></div>
                 </div>
             <div class="form-group industry">
             
@@ -93,8 +93,8 @@
 							</c:forEach>
 	                    </select></div>
 	                    <div class="col-md-1 paddT15">
-	                    	<a id="addSkill" class="alignHCenter " href="#" onClick="selectskill('Add')"><img alt="right arrow" src="/images/right-arrow2.png"></a>
-	                        <a id="addSkill" class="alignHCenter " href="#" onClick="selectskill('Remove')"><img alt="left arrow" src="/images/left-arrow-2.png"></a>
+	                    	<a id="addSkill" class="alignHCenter " href="#" onClick="selectskill('Add')"><img alt="right arrow" src="${pageContext.request.contextPath}/images/right-arrow2.png"></a>
+	                        <a id="addSkill" class="alignHCenter " href="#" onClick="selectskill('Remove')"><img alt="left arrow" src="${pageContext.request.contextPath}/images/left-arrow-2.png"></a>
 	        			</div>
 	                    <div class="col-md-6 noPaddRL">
 	                    	<select id="selectselectreqSkillSet" class="form-control selectreqSkillSet" multiple="">
@@ -279,7 +279,7 @@ function fillAnalystTable() {
 	$.ajax({
         async : true,
         type : "GET",
-        url : "http://localhost:8080/public/loadauthors?country="+country+"&skills="+skills,
+        url : "${pageContext.request.contextPath}/public/loadauthors?country="+country+"&skills="+skills,
         success : function(html) {
         	$("#analysttable").html(html);
         },    

@@ -14,7 +14,7 @@
       
 
 </head>
-      <form:form method="POST" action="/secure/updateReports.html" commandName="ViewReports" modelAttribute="editreports">
+      <form:form method="POST" action="${pageContext.request.contextPath}/secure/updateReports.html" commandName="ViewReports" modelAttribute="editreports">
       <section>
         <article class="col-md-12 noPaddRL table-responsive">
         

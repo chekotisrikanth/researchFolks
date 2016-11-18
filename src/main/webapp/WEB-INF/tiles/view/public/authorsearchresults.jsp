@@ -41,7 +41,7 @@ Authors
 							<a class="btn btn-primary" href="#">Engagement History</a>
 						</div>
 						<div class=" col-md-6">
-							<a class="btn btn-primary" href="/public/customresearch?authorId=${analyst.id}">Request New Research</a>
+							<a class="btn btn-primary" href="${pageContext.request.contextPath}/public/customresearch?authorId=${analyst.id}">Request New Research</a>
 						</div>
 					</div>
 				</div>

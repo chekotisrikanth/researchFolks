@@ -26,13 +26,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.marketing.tool.handler.SuccessHandler;
 
-import de.codecentric.boot.admin.config.EnableAdminServer;
 import net.sf.log4jdbc.Log4jdbcProxyDataSource;
 
 @ComponentScan
 @Configuration
 @EnableAutoConfiguration
-@EnableAdminServer
+//@EnableAdminServer
 @SpringBootApplication
 @EnableSpringDataWebSupport
 

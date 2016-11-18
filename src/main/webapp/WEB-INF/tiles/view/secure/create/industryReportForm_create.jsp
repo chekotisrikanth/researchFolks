@@ -27,7 +27,7 @@
         </aside>
         <article class="col-md-9 noPaddRL">
         <div class="contentWraper">
-		<form:form method="POST"  class="form-horizontal alignHCenter" action="/publish/industryReportForm_create.html" commandName="form" modelAttribute="form" enctype="multipart/form-data">
+		<form:form method="POST"  class="form-horizontal alignHCenter" action="${pageContext.request.contextPath}/publish/industryReportForm_create.html" commandName="form" modelAttribute="form" enctype="multipart/form-data">
 			<form:errors path="" element="div"/>
 			<%-- <div class="form-group">
 			<form:label class="col-md-3 control-label text-right" path="reportTitle"><spring:message code="indReportForm.reportTitle"/></form:label>	
@@ -50,8 +50,8 @@
               <form:label path="" class="col-md-2 control-label text-right">Taxonomy / Industries Tree</form:label>
                                         <div class="col-md-10">
                 							<div style='cursor: pointer; cursor: hand; display: inline-block;' onclick="popupTree();" id="overlayContainer">
-                                    			<img class="img-responsive" id="main_image" src="/tree/assets/images/tree.png"></img>
-                                    			<img class="img-responsive" id="overlay_image" src="/tree/assets/images/hand.png"></img>
+                                    			<img class="img-responsive" id="main_image" src="${pageContext.request.contextPath}/tree/assets/images/tree.png"></img>
+                                    			<img class="img-responsive" id="overlay_image" src="${pageContext.request.contextPath}/tree/assets/images/hand.png"></img>
                                 			</div> 
                 						</div>   
               </div>	
@@ -214,7 +214,7 @@
       <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
        <script src = "${pageContext.request.contextPath}/js/CalendarBase.min.js"></script>       
        <script src = "${pageContext.request.contextPath}/js/Calendar.js"></script>
-     <script src="/tree/assets/dist/jstree.min.js"></script>
+     <script src="${pageContext.request.contextPath}/tree/assets/dist/jstree.min.js"></script>
      <!--   <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="${pageContext.request.contextPath}/js/bootstrap-datepicker.js"></script>

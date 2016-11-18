@@ -40,7 +40,7 @@
                 <div class="col-md-12 noPaddRL">
             
             <ul class="nav nav-list leftNav" id="nav">
-                <li><a href="/author/home/authorhome" class="leftNavHeader">Reports <span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-chart.png" alt="chart"/></span></a></li>
+                <li><a href="${pageContext.request.contextPath}/author/home/authorhome" class="leftNavHeader">Reports <span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-chart.png" alt="chart"/></span></a></li>
                 <li><a href="#">Stake</a></li>
                 <li><a href="#">Sales</a></li>
                 <li class="marginB20"><a href="#">Uploads</a></li>

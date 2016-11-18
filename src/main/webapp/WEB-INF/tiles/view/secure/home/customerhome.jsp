@@ -13,7 +13,7 @@
 
 			<ul id="nav" class="nav nav-list leftNav">
 				<li><a class="leftNavHeader" href="#">My Account</a></li>
-				<li><a href="/secure/home/customerhome" >Orders</a></li>
+				<li><a href="${pageContext.request.contextPath}/secure/home/customerhome" >Orders</a></li>
 
 				<li><a href="javascript:void(0)" onClick="loadFavAnalyst(${customer.id})">Favorite Analyst</a></li>
 
@@ -60,7 +60,7 @@
 								</div>
 								<div class="col-sm-12">
 									<p class="authorPic col-md-6">
-									<img class="img-circle" src="/uploads/profilepics/${report.getReportStatuses().get(0).getUser().getProfilePicName()}" /></p>
+									<img class="img-circle" src="${pageContext.request.contextPath}/uploads/profilepics/${report.getReportStatuses().get(0).getUser().getProfilePicName()}" /></p>
 									<p class="col-md-6 boldTxt">${report.getReportStatuses().get(0).getUser().getFirstName()}
 										${report.getReportStatuses().get(0).getUser().getLastName()}</p>
 									<p class="col-md-6">

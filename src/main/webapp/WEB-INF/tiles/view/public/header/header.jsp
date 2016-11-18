@@ -38,20 +38,20 @@
    <div class="row">
    <header class="clearfix paddB10 paddTB10">
      <div class="logo col-md-8 col-sm-12">
-     <a href="#"><img src="/images/logo.png" alt="Research Floks"/></a>
+     <a href="#"><img src="${pageContext.request.contextPath}/images/logo.png" alt="Research Floks"/></a>
      </div>
      <div class="col-md-4 col-sm-12">
      <sec:authorize access="isAnonymous()">
      	<div class="col-md-6 col-sm-12 noPaddRL">
         <div class="registrationBT col-md-12 col-sm-12">Registration <span>
-        <a href="/public/login.html?referrer=loginlink">
-        <img src="/images/icon-register.png" alt="Registration"/>
+        <a href="${pageContext.request.contextPath}/public/login.html?referrer=loginlink">
+        <img src="${pageContext.request.contextPath}/images/icon-register.png" alt="Registration"/>
         </a>
         </span></div>
         </div>
         <div class="col-md-6 col-sm-12">
-        <a href="/public/login.html?referrer=loginlink">
-        <div class="loginBT col-md-12 col-sm-12">Login  <span><img src="/images/icon-login.png" alt="Login"/></span>
+        <a href="${pageContext.request.contextPath}/public/login.html?referrer=loginlink">
+        <div class="loginBT col-md-12 col-sm-12">Login  <span><img src="${pageContext.request.contextPath}/images/icon-login.png" alt="Login"/></span>
         
         </div>
         </a>
@@ -60,7 +60,7 @@
        <sec:authorize access="isAuthenticated()">
        <a href="<c:url value="/public/logout.html" />">
         <div class="col-md-6 col-sm-12">
-        <div class="logoutBT col-md-12 col-sm-12">Logout  <span><img src="/images/icon-logout.png" alt="Logout"/></span></div>
+        <div class="logoutBT col-md-12 col-sm-12">Logout  <span><img src="${pageContext.request.contextPath}/images/icon-logout.png" alt="Logout"/></span></div>
         </div>
        </a> 
        </sec:authorize> 
@@ -80,9 +80,9 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse noPaddRL" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                  <li><a href="/home">Home</a></li>
+                  <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
                   <li><a href="#">How It Works</a></li>
-                  <li><a href="/freefolk/getPublishedReports">Research Store</a></li>
+                  <li><a href="${pageContext.request.contextPath}/freefolk/getPublishedReports">Research Store</a></li>
                   <li><a href="${pageContext.request.contextPath}/public/customresearch">Custom Research</a></li>
                   <li><a href="#">Blog</a></li>
                   <li><a href="#">Contact Us</a></li>
@@ -97,7 +97,7 @@
         Password: <input name="j_password" type="password" /> 
         <input type="submit" value="Sign in" />
     </form>
-    <a href="/public/login.html?referrer=loginlink">Login</a>
+    <a href="${pageContext.request.contextPath}/public/login.html?referrer=loginlink">Login</a>
 </sec:authorize>
 <sec:authorize access="isAuthenticated()">
     <a href="<c:url value="/public/logout.html" />">Logout</a>

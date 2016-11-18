@@ -28,8 +28,8 @@
 					      <td>${author.firstName}  ${author.lastName}</td>
 					      <td>${author.country}</td>
 					      <td>4</td>
-					      <td><a href="#"><img alt="Profile" src="/images/icon-view-profile.png"></a></td>
-					      <td><a href="#"><img alt="Profile" src="/images/icon-short-list.png"></a></td>
+					      <td><a href="#"><img alt="Profile" src="${pageContext.request.contextPath}/images/icon-view-profile.png"></a></td>
+					      <td><a href="#"><img alt="Profile" src="${pageContext.request.contextPath}/images/icon-short-list.png"></a></td>
 					      <td><input name="analyst" value="${author.id}" type="checkbox"></td>
     			</tr>		
 			</c:forEach>

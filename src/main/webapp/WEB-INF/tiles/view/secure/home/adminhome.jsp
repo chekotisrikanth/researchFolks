@@ -4,7 +4,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
       <div id="total_count" total-cnt="${editreports.totalPages}"></div>
-      <form:form method="POST" action="/secure/updateReports.html" commandName="ViewReports" modelAttribute="editreports">
+      <form:form method="POST" action="${pageContext.request.contextPath}/secure/updateReports.html" commandName="ViewReports" modelAttribute="editreports">
       <section>
         <article class="col-md-12 noPaddRL table-responsive">
         

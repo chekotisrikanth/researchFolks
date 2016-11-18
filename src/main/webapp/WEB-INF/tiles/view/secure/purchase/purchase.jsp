@@ -1,10 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-		<link rel="stylesheet" href="/css/bootstrap-theme.css">
-       <link rel="stylesheet" href="/css/bootstrap.css">
-       <link rel="stylesheet" href="/css/customStyles.css">
-       <link rel="stylesheet" href="/css/datepicker.min.css">
+		<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
+       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/datepicker.min.css">
        <style>
 .error {
 	color: #ff0000;
@@ -18,7 +18,7 @@
 	margin: 16px;
 }
 </style>
-<form:form method="POST" class="form-horizontal alignHCenter " action="/secure/purchase/purchasereport.html" commandpath="form" modelAttribute="form">
+<form:form method="POST" class="form-horizontal alignHCenter " action="${pageContext.request.contextPath}/secure/purchase/purchasereport.html" commandpath="form" modelAttribute="form">
         <form:errors path="*" cssClass="errorblock" element="div" />
         	 <div class="form-group comapany">
             	<div class="col-md-2 boldTxt text-right">
