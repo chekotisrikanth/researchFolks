@@ -47,8 +47,11 @@ public class UserServiceImpl implements UserService {
 		
 		try {
 			String imageName = user.getEmailId();
-			String fileName =	fileUtils.saveFile(user.getProfiePic(),imageName,SharedConstants.PROFILEPICS_FOLDER_PATH);
-			user.setProfilePicName(fileName);
+			if(user.getProfiePic()!=null) {
+				String fileName =	fileUtils.saveFile(user.getProfiePic(),imageName,SharedConstants.PROFILEPICS_FOLDER_PATH);
+				user.setProfilePicName(fileName);
+			}
+			
 		} catch (IOException e) {
 			LOGGER.error("failed to upload profile pic");
 		}

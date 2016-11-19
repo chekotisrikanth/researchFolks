@@ -3,10 +3,10 @@ package com.marketing.tool.controller;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.validation.Valid;
 
@@ -14,14 +14,18 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
@@ -68,7 +72,7 @@ public class CPDPReportFormCreateController {
 	    @Autowired
 		 private FileUtils fileUtils;
 	   	    
-	   /* @InitBinder("form")
+	    @InitBinder("form")
 	    public void initBinder(WebDataBinder binder) {
 	    	binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 	    	final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
@@ -90,7 +94,7 @@ public class CPDPReportFormCreateController {
 	            }
 	    	});
 	    }
-	   */ 
+	    
 	   
 	    @RequestMapping(value = "/publish/cpdpReportForm_create.html", method = RequestMethod.GET)
 	    public ModelAndView getCreateReportFormView(Model model, @Validated CPDPReportForm reportForm, BindingResult result) {

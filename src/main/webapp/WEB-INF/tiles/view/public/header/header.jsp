@@ -58,7 +58,7 @@
         </div>
        </sec:authorize> 
        <sec:authorize access="isAuthenticated()">
-       <a href="<c:url value="/public/logout.html" />">
+       <a href="<c:url value="${pageContext.request.contextPath}/public/logout.html" />">
         <div class="col-md-6 col-sm-12">
         <div class="logoutBT col-md-12 col-sm-12">Logout  <span><img src="${pageContext.request.contextPath}/images/icon-logout.png" alt="Logout"/></span></div>
         </div>

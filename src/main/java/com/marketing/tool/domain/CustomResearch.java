@@ -52,7 +52,6 @@ public class CustomResearch {
 	@Column(nullable = false)
     private String turnArndTime;
     
-	@NotNull
 	@Column(nullable = true)
     private String analyst;
 

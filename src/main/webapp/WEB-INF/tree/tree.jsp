@@ -4,7 +4,7 @@
     <!--[if lt IE 9]><script src="./assets/respond.js"></script><![endif]-->
 
     <link rel="icon" href="/tree/assets/favicon.ico" type="image/x-icon" />
-    <link rel="apple-touch-icon-precomposed" href="/tree/assets/apple-touch-icon-precomposed.png" />
+    <link rel="apple-touch-icon-precomposed" href="${pageContext.request.contextPath}/tree/assets/apple-touch-icon-precomposed.png" />
     <script src="${pageContext.request.contextPath}/tree/assets/jquery-1.10.2.min.js"></script>
     <script src="${pageContext.request.contextPath}/tree/assets/tree.js"></script>
    <!--  <script src="/tree/assets/dist/jstree.min.js"></script> -->
