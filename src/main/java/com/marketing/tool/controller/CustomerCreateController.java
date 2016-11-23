@@ -45,8 +45,12 @@ import com.marketing.tool.validator.CreateFormValidator;
 public class CustomerCreateController {
 
 	 private static final Logger LOGGER = LoggerFactory.getLogger(CustomerCreateController.class);
-	    private final UserService userService;
-	    private final CreateFormValidator createFormValidator;
+	    
+	   /*@Autowired
+	   private CustomerService userService;*/
+	    
+	 @Autowired
+	    private CreateFormValidator createFormValidator;
 	    
 	    @Autowired
 		KeySkillsService skills;
@@ -63,11 +67,11 @@ public class CustomerCreateController {
 	    @Autowired
 	    private CustomerService customerService;
 	    
-	    @Inject
+	   /* @Inject
 	    public CustomerCreateController(CustomerService customerService, CreateFormValidator createFormValidator) {
 	        this.userService = customerService;
 	        this.createFormValidator = createFormValidator;
-	    }
+	    }*/
 
 	   	    
 	    @InitBinder("form")
@@ -100,13 +104,13 @@ public class CustomerCreateController {
 	   	        return modelAndView;
 	        }
 	        try {
-	        	userService.save(customer);
+	        	customerService.save(customer);
 	        } catch (UserAlreadyExistsException e) {
 	            LOGGER.debug("Tried to create customer with existing id", e);
 	            result.reject("customer.error.exists");
 	            modelAndView.setViewName("customer_create");
 	        }
-	        List<User>  customers= userService.getList();
+	        List<User>  customers= customerService.getList();
 	        modelAndView.addObject("customerUsers", customers);
 	        modelAndView.setViewName("customer_created");
 	        return modelAndView;

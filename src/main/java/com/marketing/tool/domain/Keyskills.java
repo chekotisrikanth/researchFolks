@@ -9,16 +9,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-public class Keyskills {
+@Table(name = "KEYSKILLS")
+@PrimaryKeyJoinColumn(name="id")
+public class Keyskills extends MasterEntity {
 
-	@Id 
-	@GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "id", nullable = false, updatable = false)
-	private Integer id;
 	
 	@NotEmpty
 	@Column(name = "skill", nullable = false, updatable = false)
@@ -38,13 +38,6 @@ public class Keyskills {
 		this.author = author;
 	}
 
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 
 	public String getSkill() {
 		return skill;

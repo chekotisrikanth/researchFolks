@@ -170,4 +170,15 @@
 		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/purchase/purchaseresult.jsp" />
 	</definition>
 	
+	<definition name="keySkillsMaster" extends="layout.basic">
+   		 <!-- <put-attribute name="header" value="header" /> -->
+		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/master/keySkillsMaster.jsp" />
+	</definition>
+	
+	<definition name="keySkillsMasterList" extends="layout.basic">
+   		 <!-- <put-attribute name="header" value="header" /> -->
+		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/master/keySkillsMasterList.jsp" />
+	</definition>
+	
+	
 </tiles-definitions>
