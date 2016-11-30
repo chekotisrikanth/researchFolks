@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 
-import com.marketing.tool.domain.Keyskills;
+import com.marketing.tool.domain.master.Keyskills;
 
 public interface KeyskillsRepository extends Repository<Keyskills,Integer> {
 

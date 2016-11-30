@@ -25,13 +25,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marketing.tool.domain.Author;
-import com.marketing.tool.domain.Country;
 import com.marketing.tool.domain.Customer;
 import com.marketing.tool.domain.CustomerAuthorFavList;
 import com.marketing.tool.domain.CustomerAuthorFavListId;
-import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.PurchaseOrder;
 import com.marketing.tool.domain.User;
+import com.marketing.tool.domain.master.Country;
+import com.marketing.tool.domain.master.Keyskills;
 import com.marketing.tool.exception.UserAlreadyExistsException;
 import com.marketing.tool.service.CountryStateService;
 import com.marketing.tool.service.CustomerService;

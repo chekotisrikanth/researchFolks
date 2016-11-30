@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.repository.Repository;
 
-import com.marketing.tool.domain.Country;
 import com.marketing.tool.domain.StockExchange;
+import com.marketing.tool.domain.master.Country;
 
 public interface StockExchangeRepository extends Repository<StockExchange,Integer> {
 

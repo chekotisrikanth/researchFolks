@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.repository.Repository;
 
-import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.User;
+import com.marketing.tool.domain.master.Keyskills;
 
 public interface LoginUserRepository extends Repository<User,Integer> {
 

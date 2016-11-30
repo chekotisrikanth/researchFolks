@@ -8,14 +8,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.marketing.tool.domain.MasterEntity;
 import com.marketing.tool.domain.MasterEntity.MasterDataType;
-import com.marketing.tool.repository.MasterRepository;
+import com.marketing.tool.repository.MasterEntityRepository;
 import com.marketing.tool.service.MasterService;
 
 @Service
 public class MasterServiceImpl implements MasterService {
 	
 	@Autowired
-	MasterRepository repo;
+	MasterEntityRepository repo;
 	
 	@Override
 	@Transactional

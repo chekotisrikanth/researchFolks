@@ -8,8 +8,8 @@ import org.springframework.data.querydsl.binding.QuerydslBinderCustomizer;
 import org.springframework.data.querydsl.binding.QuerydslBindings;
 
 import com.marketing.tool.domain.Author;
-import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.QAuthor;
+import com.marketing.tool.domain.master.Keyskills;
 import com.querydsl.core.types.dsl.StringPath;
 
 

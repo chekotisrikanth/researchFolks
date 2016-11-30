@@ -7,9 +7,9 @@ import org.springframework.data.repository.CrudRepository;
 import com.marketing.tool.domain.MasterEntity;
 import com.marketing.tool.domain.MasterEntity.MasterDataType;
 
-public interface MasterRepository extends CrudRepository<MasterEntity,Integer> {
+public interface MasterEntityRepository extends CrudRepository<MasterEntity,Integer> {
 
-	  public  MasterEntity save(MasterEntity entity);    
+	  //public  MasterEntity save(MasterEntity entity);  
       
 	  
       public List<MasterEntity> findAll();
@@ -18,7 +18,7 @@ public interface MasterRepository extends CrudRepository<MasterEntity,Integer> {
       
       //public MasterEntity update(final MasterEntity entity);
       
-      public  void delete(final MasterEntity entity);
+      //public  void delete(final MasterEntity entity);
 
       //public  void delete(Serializable id, Class entityClass);
       

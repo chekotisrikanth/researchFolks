@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.marketing.tool.domain.Keyskills;
+import com.marketing.tool.domain.master.Keyskills;
 import com.marketing.tool.repository.KeyskillsRepository;
 
 @Service

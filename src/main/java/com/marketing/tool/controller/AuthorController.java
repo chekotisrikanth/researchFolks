@@ -33,9 +33,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.marketing.tool.domain.Author;
 import com.marketing.tool.domain.AuthorReportsResp;
-import com.marketing.tool.domain.Country;
-import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.User;
+import com.marketing.tool.domain.master.Country;
+import com.marketing.tool.domain.master.Keyskills;
 import com.marketing.tool.exception.UserAlreadyExistsException;
 import com.marketing.tool.service.AuthorService;
 import com.marketing.tool.service.CountryStateService;

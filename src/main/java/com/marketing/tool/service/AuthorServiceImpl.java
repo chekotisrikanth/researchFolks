@@ -22,12 +22,12 @@ import org.springframework.validation.annotation.Validated;
 
 import com.marketing.tool.domain.Author;
 import com.marketing.tool.domain.AuthorReportsResp;
-import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.QAuthor;
 import com.marketing.tool.domain.ReportCommentsAlert;
 import com.marketing.tool.domain.ReportForm;
 import com.marketing.tool.domain.User;
 import com.marketing.tool.domain.UserProfileType;
+import com.marketing.tool.domain.master.Keyskills;
 import com.marketing.tool.reponse.builder.ReportsSearchResponseBuilder;
 import com.marketing.tool.repository.AuthorRepository;
 import com.marketing.tool.repository.ReportCommentsAlertRepository;

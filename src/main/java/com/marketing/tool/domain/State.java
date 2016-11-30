@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.marketing.tool.domain.master.Country;
+
 
 @Entity
 @Table(name="state")

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.marketing.tool.domain.Author;
 import com.marketing.tool.domain.AuthorReportsResp;
-import com.marketing.tool.domain.Keyskills;
+import com.marketing.tool.domain.master.Keyskills;
 
 public interface AuthorService extends UserService {
 	public AuthorReportsResp getAuthorReports(int userId, int pageNumber, int results);

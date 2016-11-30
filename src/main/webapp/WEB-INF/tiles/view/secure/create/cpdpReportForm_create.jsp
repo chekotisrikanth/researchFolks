@@ -17,7 +17,17 @@
                 <li><a href="#" class="leftNavHeader">Reports <span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-chart.png" alt="chart"/></span></a></li>
                 <li><a href="#">Stake</a></li>
                 <li><a href="#">Sales</a></li>
-                <li class="marginB20"><a href="#">Uploads</a></li>
+            	<li><a href="${pageContext.request.contextPath}/publish/cpdpReportForm_create.html">Create cpdp report</a></li>
+				<li><a href="${pageContext.request.contextPath}/publish/industryReportForm_create.html">Create industry report</a></li>
+                
+                
+                <li class="dropdown-toggle"><a data-toggle="dropdown" role="button" 
+                aria-haspopup="true" aria-expanded="false" href="#">Uploads<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+          </ul>  
+            </li>
             
                 <li><a href="#" class="leftNavHeader">Profile <span><img src="${pageContext.request.contextPath}/images/icon-profie.png" alt="profile"/></span></a></li>
                 <li><a href="#">Edit profile</a></li>
@@ -155,7 +165,7 @@
                 	<select id="country" name="country" class = "form-control form-temp" form-temp="${form.country}" required="required">
                         <option value="">Select Country</option> 
                         <c:forEach items="${countryList}" var="country">
-                            <option   value="${country.countryId}"  >${country.countryName}</option>
+                            <option   value="${country.id}"  >${country.countryName}</option>
                         </c:forEach>
                     </select>
 				<!--<form:errors path="country"/> -->

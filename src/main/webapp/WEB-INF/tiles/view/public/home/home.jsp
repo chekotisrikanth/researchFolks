@@ -31,9 +31,8 @@
 <!--  <a class="btn-info btn" href="${pageContext.request.contextPath}/public/admin_create.html" >Admin Registration</a> -->
 <a class="btn-info btn " href="${pageContext.request.contextPath}/public/author_create.html" >Author Registraion</a>
 <a  class="btn-info btn" href="${pageContext.request.contextPath}/public/customer_create.html">Customer Registraion</a>
-<a class="btn-info btn" href="${pageContext.request.contextPath}/publish/cpdpReportForm_create.html">Create cpdp report</a>
-<a class="btn-info btn" href="${pageContext.request.contextPath}/publish/industryReportForm_create.html">Create industry report</a>
 <a class="btn-info btn" href="${pageContext.request.contextPath}/public/customresearch">Custom Research</a>
+<a class="btn-info btn" href="${pageContext.request.contextPath}/secure/master/mastershome">Add/Edit Master Data</a>
 </div>
   </nav>
   </section>

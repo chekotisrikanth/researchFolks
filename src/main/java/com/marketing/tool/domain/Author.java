@@ -15,6 +15,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import com.marketing.tool.domain.master.Keyskills;
+
 import lombok.Data;
 
 @Data

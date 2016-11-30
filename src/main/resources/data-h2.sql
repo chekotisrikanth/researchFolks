@@ -1,10 +1,14 @@
-INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME)  VALUES ('1', 'India');
-INSERT INTO COUNTRY (COUNTRY_ID, COUNTRY_NAME)  VALUES ('2', 'USA');
+INSERT INTO MASTERENTITY (ID,MASTER_DATA_TYPE) VALUES (3,'KEYSKILLS');
+INSERT INTO MASTERENTITY (ID,MASTER_DATA_TYPE) VALUES (4,'KEYSKILLS');
+INSERT INTO MASTERENTITY (ID,MASTER_DATA_TYPE) VALUES (1,'COUNTRY');
+INSERT INTO MASTERENTITY (ID,MASTER_DATA_TYPE) VALUES (2,'COUNTRY');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 3, 'java');
+INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 4, '.net');
+INSERT INTO COUNTRY (ID,COUNTRY_NAME)  VALUES (1,'India');
+INSERT INTO COUNTRY (ID,COUNTRY_NAME)  VALUES (2,'USA');
 INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('1', '1', 'Telangana');
 INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('2', '1', 'Ap');
 INSERT INTO STATE ( STATE_ID, COUNTRY_ID, STATE_NAME ) VALUES ('3', '2', 'Colorado');
-INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 1, 'java');
-INSERT INTO KEYSKILLS ( ID, SKILL ) VALUES ( 2, '.net');
 insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('user', 0);
 update hibernate_sequences set sequence_next_hi_value = 1 where sequence_next_hi_value = 0 and sequence_name = 'user';
 insert into user (account_type, email_id, first_name, last_name, password, title, userstatus,IS_AGREED_TC,USER_NAME, id) values ('ADMIN', 'sri3', 'sri', 'ch', 's', 'MR', 'Active',1,'a', 1);
@@ -66,7 +70,7 @@ insert into hibernate_sequences(sequence_name, sequence_next_hi_value) values('r
 update hibernate_sequences set sequence_next_hi_value = 3 where sequence_next_hi_value = 2 and sequence_name = 'user';
 insert into user (account_type, is_agreed_tc, email_id, first_name, last_name, password, title, user_name, userstatus, id,profile_Pic_Name) values ('AUTHOR', 1, 'kumar@gmail.com', 'Anilkumar ', 'Ravula', 'pirate', 'MR', 'anil', 'Active', 65536,'author3@gmail.com.JPG');
 insert into author (bio, city, country_id, mobile, id,experience) values ('asdasdasdasds', '1', '1', '9505485048', 65536,15);
-insert into author_key_skill (author_id, skill_id) values (65536, 2);
+insert into author_key_skill (author_id, skill_id) values (65536, 3);
 
 insert into user (account_type, email_id, first_name, last_name,  password, title, userstatus,IS_AGREED_TC,USER_NAME, id) values ('PUBLISHER', 'anil1@gamil.com', 'anil', 'sri', 'pirate', 'MR', 'Active',1,'anil', 32769);
 

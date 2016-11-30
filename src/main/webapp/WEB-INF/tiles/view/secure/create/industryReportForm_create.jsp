@@ -102,7 +102,7 @@
 					<select id="country" name="country" class = "form-control form-temp" form-temp="${form.country}" required="required">
 						<option value="">Select Country</option>
 						<c:forEach items="${countryList}" var="country">
-							<option   value="${country.countryId}"  >${country.countryName}</option>
+							<option   value="${country.id}"  >${country.countryName}</option>
 						</c:forEach>
 					</select>
 				<!--<form:errors path="country"/>-->                                                               

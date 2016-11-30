@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.marketing.tool.domain.Country;
 import com.marketing.tool.domain.State;
+import com.marketing.tool.domain.master.Country;
 import com.marketing.tool.repository.CountryRepository;
 import com.marketing.tool.repository.StateRepository;
 

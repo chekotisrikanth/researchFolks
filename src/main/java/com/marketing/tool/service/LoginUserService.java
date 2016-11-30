@@ -2,8 +2,8 @@ package com.marketing.tool.service;
 
 import java.util.List;
 
-import com.marketing.tool.domain.Keyskills;
 import com.marketing.tool.domain.User;
+import com.marketing.tool.domain.master.Keyskills;
 
 public interface LoginUserService {
 	
