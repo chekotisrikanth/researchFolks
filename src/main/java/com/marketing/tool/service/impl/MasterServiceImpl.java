@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.marketing.tool.domain.MasterDataType;
 import com.marketing.tool.domain.MasterEntity;
-import com.marketing.tool.domain.MasterEntity.MasterDataType;
 import com.marketing.tool.repository.MasterEntityRepository;
 import com.marketing.tool.service.MasterService;
 

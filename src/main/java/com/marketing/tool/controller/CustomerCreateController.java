@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
@@ -28,6 +27,8 @@ import com.marketing.tool.domain.Author;
 import com.marketing.tool.domain.Customer;
 import com.marketing.tool.domain.CustomerAuthorFavList;
 import com.marketing.tool.domain.CustomerAuthorFavListId;
+import com.marketing.tool.domain.MasterDataType;
+import com.marketing.tool.domain.MasterEntity;
 import com.marketing.tool.domain.PurchaseOrder;
 import com.marketing.tool.domain.User;
 import com.marketing.tool.domain.master.Country;
@@ -37,7 +38,7 @@ import com.marketing.tool.service.CountryStateService;
 import com.marketing.tool.service.CustomerService;
 import com.marketing.tool.service.KeySkillsService;
 import com.marketing.tool.service.LoginUserService;
-import com.marketing.tool.service.UserService;
+import com.marketing.tool.service.MasterService;
 import com.marketing.tool.utility.Helper;
 import com.marketing.tool.validator.CreateFormValidator;
 
@@ -66,6 +67,9 @@ public class CustomerCreateController {
 	    
 	    @Autowired
 	    private CustomerService customerService;
+	    
+	    @Autowired
+	    private MasterService masterService;
 	    
 	   /* @Inject
 	    public CustomerCreateController(CustomerService customerService, CreateFormValidator createFormValidator) {
@@ -125,10 +129,8 @@ public class CustomerCreateController {
 			model.addObject("titles", titles);
 			
 			
-			List<String> occupationList = new ArrayList<String>();
-			occupationList.add("Occupation-1");
-			occupationList.add("Occupation-2");
-			occupationList.add("Occupation-3");
+			List<MasterEntity> occupationList = masterService.findByMasterDataType(MasterDataType.OCCUPATION); 
+			
 			model.addObject("occupationList", occupationList);
 			
 			List<String> accountTypes = new ArrayList<String>();

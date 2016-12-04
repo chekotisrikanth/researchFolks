@@ -1,11 +1,7 @@
 package com.marketing.tool.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
@@ -19,8 +15,8 @@ import org.springframework.web.bind.support.WebRequestDataBinder;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.marketing.tool.domain.MasterDataType;
 import com.marketing.tool.domain.MasterEntity;
-import com.marketing.tool.domain.MasterEntity.MasterDataType;
 import com.marketing.tool.domain.master.AnalystPreference;
 import com.marketing.tool.domain.master.CompanyTitle;
 import com.marketing.tool.domain.master.CompanyType;
@@ -86,7 +82,15 @@ public class MasterController<T> {
     
     @RequestMapping("saveMaster")
     public @ResponseBody String saveMaster(@RequestParam Integer typeid,WebRequest request) {
-    	MasterEntity domainObject = objMaster[typeid.intValue()];
+    	MasterEntity domainObject=null;
+		try {
+			Class c= MasterDataType.getMasterDomainClassById(typeid.intValue());
+			domainObject = (MasterEntity) MasterDataType.getMasterDomainClassById(typeid.intValue()).newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} 
     	//domainObject.setMasterDataType(entityTypes[typeid]);
     	WebRequestDataBinder binder = new WebRequestDataBinder(domainObject);
     	binder.bind(request);

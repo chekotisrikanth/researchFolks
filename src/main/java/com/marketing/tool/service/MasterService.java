@@ -2,8 +2,8 @@ package com.marketing.tool.service;
 
 import java.util.List;
 
+import com.marketing.tool.domain.MasterDataType;
 import com.marketing.tool.domain.MasterEntity;
-import com.marketing.tool.domain.MasterEntity.MasterDataType;
 
 public interface MasterService {
 

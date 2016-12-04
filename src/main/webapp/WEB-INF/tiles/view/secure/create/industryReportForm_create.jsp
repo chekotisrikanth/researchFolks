@@ -154,10 +154,9 @@
 					<div class="col-md-3">
 					 <select class = "form-control form-temp" name="updateCycle" form-temp="${form.updateCycle}" required="required">
 					 <option value="">Select Cycle</option>
-	                    <option value="Annually">Annually </option>
-						<option value="Half-Yearly">Half-Yearly</option>
-						<option value="Quarterly">Quarterly</option>
-						<option value="Monthly">Monthly</option>					
+	                    <c:forEach items="${updatecycleList}" var="updatecycle">
+                            	<option   value="${updatecycle.id}"  >${updatecycle.cycle}</option>
+                        	</c:forEach>					
 						</select>
 	                </div>
 					<!--<form:errors path="updateCycle"/>-->

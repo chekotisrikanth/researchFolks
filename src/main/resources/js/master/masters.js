@@ -334,11 +334,11 @@ function addMasterData() {
                 jQuery("#editMasterFormContainer").empty();
                 jQuery("#editMasterFormContainer").append("<table>");
                 jQuery("#editMasterFormContainer").append("<tr>");
-                jQuery("#editMasterFormContainer").append("<td colspan='3'><b>Add OCCUPATION Name </b></td>");
+                jQuery("#editMasterFormContainer").append("<td colspan='3'><b>Add OCCUPATION </b></td>");
                 jQuery("#editMasterFormContainer").append("</tr>");
                 jQuery("#editMasterFormContainer").append("<tr><td height='5px'/></tr>");
                 jQuery("#editMasterFormContainer").append("<tr>");
-                jQuery("#editMasterFormContainer").append("<td>country name:</td>");
+                jQuery("#editMasterFormContainer").append("<td>Occupation name:</td>");
                 jQuery("#editMasterFormContainer").append("<td><input type='text' id='name' name='name'/></td>");
                 jQuery("#editMasterFormContainer").append("<td/>");
                 jQuery("#editMasterFormContainer").append("</tr>");

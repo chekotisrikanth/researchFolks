@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
+import com.marketing.tool.domain.MasterDataType;
 import com.marketing.tool.domain.MasterEntity;
-import com.marketing.tool.domain.MasterEntity.MasterDataType;
 
 public interface MasterEntityRepository extends CrudRepository<MasterEntity,Integer> {
 

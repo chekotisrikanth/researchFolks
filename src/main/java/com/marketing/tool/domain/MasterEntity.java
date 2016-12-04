@@ -49,49 +49,6 @@ public class MasterEntity {
 
 
 
-	public enum MasterDataType {
-		
-	      KEYSKILLS(1),
-	      COUNTRY(2),
-	      ANALYSTPREFERANCE(3),
-	      COMPANYTITLE(4),
-	      COMPANYTYPE(5),
-	      CURRENCY(6),
-	      INDUSTRY(7),
-	      OCCUPATION(8),
-	      RESEARCHTYPE(9),
-	      TURNAROUNDTIME(10),
-	      UNITS(11),
-	      UPDATECYCLE(12);
-		
-		private int typeid;
-		
-		public int getTypeid() {
-			return typeid;
-		}
-
-		public void setTypeid(int typeid) {
-			this.typeid = typeid;
-		}
-
-		private MasterDataType(int typeid) {
-			this.typeid = typeid;
-		}
-		
-		 private final static Map<Integer, MasterDataType> REVERSE_MAP = new HashMap<>();
-		
-		static {
-	        for (MasterDataType status: values()) {
-	            REVERSE_MAP.put(status.typeid, status);
-	        }
-	    }
-
-	    public static MasterDataType getMasterDataType(int id) {
-	        return REVERSE_MAP.get(id);
-	    }
-	}
-	
-	 
 	
 	@Override
     public boolean equals(Object obj) {

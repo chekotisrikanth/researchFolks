@@ -57,34 +57,14 @@
 					<form:errors path="reTypePwd"/> 
                 </div>
             </div>             
-            <div class="form-group">
-            	<div class="col-md-6">
-            		<spring:message code="user.country" var="countryLbl"/>	
-					<select id="country" name="country" class = "form-control" required="required">					
-								      
-					  <option value="">${countryLbl}</option>
-						<c:forEach items="${countryList}" var="country">
-							<option   value="${country.countryId}"  >${country.countryName}</option>
-						</c:forEach>
-					</select>
-					<form:errors path="country"/>
-                	
-                </div>
-            </div>
-			<div class="form-group">
-				<div class="col-md-6">
-					<spring:message code="user.city" var="cityLbl"/>					
-					<form:input path="city" class = "form-control" placeholder="${cityLbl}" required="required"/>
-					<form:errors path="city"/>                	
-				</div>
-			</div>
+             <%@ include file=".././countrystate.jsp" %>
 			<div class="form-group">            	
                 <div class="col-md-6">				
 					<spring:message code="customer.occupation" var="occupationLbl" />
 					<select id="occupation" name="occupation" class = "form-control" required>																      
 						  <option value="">${occupationLbl}</option>
 							<c:forEach items="${occupationList}" var="occupation" varStatus="loop">
-								<option value="${loop.index}">${occupation}</option>
+								<option value="${occupation.id}">${occupation.name}</option>
 							</c:forEach>
 					</select>
 					<form:errors path="occupation"/>                	

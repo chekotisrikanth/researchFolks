@@ -33,9 +33,10 @@
                 </div>
                 <div class="col-md-10">
                 	<form:select id="researchType" path="researchType" class="form-control resType">
-                    	<option selected value="company">Company Analysis</option>
-                        <option value="industry">Industry Analysis</option>
-                        <option value="others">Others</option>
+                	 <option value="">Select Cycle</option> 
+                    	 <c:forEach items="${researchTypeList}" var="researchType">
+                            	<option   value="${researchType.id}"  >${researchType.type}</option>
+                        	</c:forEach>
                     </form:select>
                 </div>
                 <form:errors path="researchType"/>
@@ -128,10 +129,10 @@
                 </div>
                 <div class="col-md-10">
                 	<form:select id="turnArndTime" path="turnArndTime" class="form-control">
-                    	<option>One Day</option>
-                        <option>Two Days</option>
-                        <option>Three Days</option>
-                        <option>Less than a week</option>
+                	 	<option value="">Select Cycle</option> 
+                    	 <c:forEach items="${turnaroundtimeList}" var="turnaroundtime">
+                            	<option   value="${turnaroundtime.id}"  >${turnaroundtime.time}</option>
+                        	</c:forEach>
                     </form:select>
                 </div>
                 
@@ -162,7 +163,7 @@
                     <select id="country" name="" class="form-control">
                         <option  selected value="any"  >Any</option>
                     	<c:forEach items="${countries}" var="country">
-							<option   value="${country.countryId}"  >${country.countryName}</option>
+							<option   value="${country.id}"  >${country.countryName}</option>
 						</c:forEach>
                     </select>
                     </div>

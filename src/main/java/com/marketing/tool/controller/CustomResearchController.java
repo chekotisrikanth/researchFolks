@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.marketing.tool.domain.Author;
 import com.marketing.tool.domain.CustomResearch;
+import com.marketing.tool.domain.MasterDataType;
 import com.marketing.tool.domain.master.Country;
 import com.marketing.tool.domain.master.Keyskills;
 import com.marketing.tool.exception.UserAlreadyExistsException;
@@ -28,6 +29,7 @@ import com.marketing.tool.service.AuthorService;
 import com.marketing.tool.service.CountryStateService;
 import com.marketing.tool.service.CustomResearchService;
 import com.marketing.tool.service.KeySkillsService;
+import com.marketing.tool.service.MasterService;
 
 @Controller
 public class CustomResearchController {
@@ -47,7 +49,9 @@ public class CustomResearchController {
 	@Autowired
 	KeySkillsService keySkillsService;
 	
-	
+	 @Autowired
+	    private MasterService masterService;
+	 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CustomResearchController.class);
 	
 	
@@ -113,5 +117,7 @@ public class CustomResearchController {
 		modelAndView.addObject("skills", skillList);
 		modelAndView.addObject("countries", countries);
 		modelAndView.addObject("reqauthor",author);
+		modelAndView.addObject("turnaroundtimeList",masterService.findByMasterDataType(MasterDataType.TURNAROUNDTIME));
+		modelAndView.addObject("researchTypeList",masterService.findByMasterDataType(MasterDataType.RESEARCHTYPE));
 	}
 }

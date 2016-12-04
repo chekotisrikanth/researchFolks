@@ -17,17 +17,7 @@
                 <li><a href="#" class="leftNavHeader">Reports <span class="iconL"><img src="${pageContext.request.contextPath}/images/icon-chart.png" alt="chart"/></span></a></li>
                 <li><a href="#">Stake</a></li>
                 <li><a href="#">Sales</a></li>
-            	<li><a href="${pageContext.request.contextPath}/publish/cpdpReportForm_create.html">Create cpdp report</a></li>
-				<li><a href="${pageContext.request.contextPath}/publish/industryReportForm_create.html">Create industry report</a></li>
-                
-                
-                <li class="dropdown-toggle"><a data-toggle="dropdown" role="button" 
-                aria-haspopup="true" aria-expanded="false" href="#">Uploads<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-          </ul>  
-            </li>
+                <li class="marginB20"><a href="#">Uploads</a></li>
             
                 <li><a href="#" class="leftNavHeader">Profile <span><img src="${pageContext.request.contextPath}/images/icon-profie.png" alt="profile"/></span></a></li>
                 <li><a href="#">Edit profile</a></li>
@@ -61,10 +51,9 @@
 	                <div class="col-md-10">
 	                	<select class = "form-control form-temp reportType" name="reportType" form-temp="${form.reportType}" required="required">
 	                	 <option value="">Select CompanyType</option>  
-						 <option value="1">Public</option>
-						 <option value="2">Private</option>
-						 <option value="3">Non-Profit</option>
-						 <option value="4">Government</option>					 
+						  <c:forEach items="${companyTypeList}" var="companyType">
+                            	<option   value="${companyType.id}"  >${companyType.type}</option>
+                        	</c:forEach>				 
 					  </select>
 					<!--<form:errors  class="text-warning" path="reportType"/>--> 
 	                </div>              
@@ -191,10 +180,9 @@
                 <div class="col-md-4">
                  <select class = "form-control form-temp currency dis-able dis-able-supp" name="units" form-temp="${form.units}" >
                  	<option value="">Select Units</option> 
-					 <option value="1">Thousands</option>
-					 <option value="2">Millions</option>
-					 <option value="3">Billions</option>
-					 <option value="4">Trillions</option>					 
+					  <c:forEach items="${unitList}" var="unit">
+                            	<option   value="${unit.id}"  >${unit.unit}</option>
+                        	</c:forEach>				 
 				  </select>  
 				<!--<form:errors path="units"/>-->
                 </div>
@@ -209,13 +197,9 @@
 			                <div class="input-append date col-md-4">
 			                  <select class = "form-control form-temp currency dis-able dis-able-supp" name="currency" form-temp="${form.currency}" >
 			                  	<option value="">Select Currency</option> 
-								 <option value="US$">US$</option>
-								 <option value="GBP">GBP</option>
-								 <option value="INR">INR</option>
-								 <option value="CHF">CHF</option>
-								 <option value="CAD">CAD</option>
-								 <option value="AU$">AU$</option>
-								 <option value="ZAR">ZAR</option>						 
+								  <c:forEach items="${currencies}" var="currency">
+                            			<option   value="${currency.id}"  >${currency.currencyName}</option>
+                        		</c:forEach>					 
 							  </select>  
 							<!--<form:errors path="currency"/>-->
 			                </div>
@@ -253,10 +237,9 @@
 	                    <div class="col-md-4">
 						 <select class = "form-control form-temp" name="updateCycle" form-temp="${form.updateCycle}" required="required">
 						   <option value="">Select Cycle</option> 
-		                    <option value="Annually" >Annually </option>
-							<option value="Half-Yearly" >Half-Yearly</option>
-							<option value="Quarterly" >Quarterly</option>
-							<option value="Monthly"  >Monthly</option>					
+		                   <c:forEach items="${updatecycleList}" var="updatecycle">
+                            	<option   value="${updatecycle.id}"  >${updatecycle.cycle}</option>
+                        	</c:forEach>				
 							</select>
 		                  </div>
 					<!--<form:errors path="updateCycle"/>-->

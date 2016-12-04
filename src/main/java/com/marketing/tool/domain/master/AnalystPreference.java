@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+import com.marketing.tool.domain.MasterDataType;
 import com.marketing.tool.domain.MasterEntity;
 
 @Entity

@@ -31,6 +31,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.marketing.tool.domain.CPDPReportForm;
+import com.marketing.tool.domain.MasterDataType;
 import com.marketing.tool.domain.MasterIndustries;
 import com.marketing.tool.domain.MasterIndustriesView;
 import com.marketing.tool.domain.ReportForm;
@@ -39,6 +40,7 @@ import com.marketing.tool.exception.UserAlreadyExistsException;
 import com.marketing.tool.service.CPDPReportFormService;
 import com.marketing.tool.service.CountryStateService;
 import com.marketing.tool.service.MasterIndustriesService;
+import com.marketing.tool.service.MasterService;
 import com.marketing.tool.service.StockExchangeService;
 import com.marketing.tool.utility.DateUtills;
 import com.marketing.tool.utility.FileUtils;
@@ -71,6 +73,9 @@ public class CPDPReportFormCreateController {
 	    
 	    @Autowired
 		 private FileUtils fileUtils;
+	    
+	    @Autowired
+	    private MasterService masterService;
 	   	    
 	    @InitBinder("form")
 	    public void initBinder(WebDataBinder binder) {
@@ -177,6 +182,11 @@ public class CPDPReportFormCreateController {
 			
 			List<Country> countries = countryStateService.listAllCountries();
 			model.addObject("countryList",countries);			
+			
+			model.addObject("updatecycleList",masterService.findByMasterDataType(MasterDataType.UPDATECYCLE));
+			model.addObject("currencies",masterService.findByMasterDataType(MasterDataType.CURRENCY));
+			model.addObject("unitList",masterService.findByMasterDataType(MasterDataType.UNITS));
+			model.addObject("companyTypeList",masterService.findByMasterDataType(MasterDataType.COMPANYTYPE));
 			
 			//adding stock exchages
 			model.addObject("stocksList",stockExchangeService.findAll());

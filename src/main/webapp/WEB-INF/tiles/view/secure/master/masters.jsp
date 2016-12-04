@@ -39,7 +39,7 @@
                         <option value="9">RESEARCH TYPES</option>
                         <option value="10">TURN AROUND TIMES</option>
                         <option value="11">UNITS</option>
-                        <option value="11">UPDATE CYCLES</option>
+                        <option value="12">UPDATE CYCLES</option>
                     </select>
                 </td>
                 <td width="20px"/>

@@ -6,11 +6,11 @@
         $(document).ready(
         function() {
 
-            $('#countryId').change(
+            $('#id').change(
             function() {
                 
                 $.getJSON('loadStates.json', {
-                    countryId : $(this).val(),
+                    id : $(this).val(),
                     ajax : 'true'
                 }, function(data) {
                     
@@ -33,10 +33,10 @@
 	<div class="form-group">
             	<div class="col-md-6">
             	<spring:message code="user.country" var="countryLbl"/>
-                	<select id="countryId" name="country" class = "form-control" required>	
+                	<select id="id" name="country" class = "form-control" required>	
 					  <option value=""> ${countryLbl} </option>
 						<c:forEach items="${countryList}" var="country">
-							<option   value="${country.countryId}"  >${country.countryName}</option>
+							<option   value="${country.id}"  >${country.countryName}</option>
 						</c:forEach>
 					</select>
 					<form:errors path="country"/>

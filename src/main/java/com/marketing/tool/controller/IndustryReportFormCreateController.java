@@ -25,10 +25,12 @@ import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.marketing.tool.domain.IndustryReportForm;
+import com.marketing.tool.domain.MasterDataType;
 import com.marketing.tool.domain.ReportForm;
 import com.marketing.tool.domain.master.Country;
 import com.marketing.tool.exception.UserAlreadyExistsException;
 import com.marketing.tool.service.IndustryReportFormService;
+import com.marketing.tool.service.MasterService;
 import com.marketing.tool.utility.DateUtills;
 import com.marketing.tool.utility.FileUtils;
 import com.marketing.tool.utility.SharedConstants;
@@ -49,6 +51,9 @@ public class IndustryReportFormCreateController {
 	    
 	    @Autowired
 		 private FileUtils fileUtils;
+	    
+	    @Autowired
+	    private MasterService masterService;
 	    
 	    private static String xlFormats ="xlsx,xlsm,xls";
 	   	    
@@ -169,6 +174,7 @@ public class IndustryReportFormCreateController {
 			
 			List<Country> countries = countryStateService.listAllCountries();
 			model.addObject("countryList",countries);
+			model.addObject("updatecycleList",masterService.findByMasterDataType(MasterDataType.UPDATECYCLE));
 		}
 	    
 }

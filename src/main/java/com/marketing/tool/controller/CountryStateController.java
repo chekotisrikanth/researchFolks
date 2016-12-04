@@ -33,7 +33,7 @@ public class CountryStateController {
 
 	    @RequestMapping(value = "/public/loadStates.json", headers = "Accept=*/*",produces = "application/json", method = RequestMethod.GET)
 	    public @ResponseBody
-	    List<State> loadStates(@RequestParam(value = "countryId", required = true) Integer countryId) throws IllegalStateException {
+	    List<State> loadStates(@RequestParam(value = "id", required = true) Integer countryId) throws IllegalStateException {
 
 	        //Specify the returning object you want here
 	    	List<State> statesForCountry = countryStateServiceImpl.findByCountryId(countryId);

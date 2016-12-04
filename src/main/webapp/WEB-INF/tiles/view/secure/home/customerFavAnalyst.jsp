@@ -45,7 +45,7 @@ Shortlist <form:form id="myform" action="${pageContext.request.contextPath}/publ
 					<select id="country" name="country" class="form-control">
 						<option selected value="any">Any</option>
 						<c:forEach items="${countries}" var="country">
-							<option value="${country.countryId}">${country.countryName}</option>
+							<option value="${country.id}">${country.countryName}</option>
 						</c:forEach>
 					</select>
 
