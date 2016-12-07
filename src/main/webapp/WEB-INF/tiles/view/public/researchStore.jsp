@@ -143,14 +143,15 @@ table.dataTable thead .sorting_desc_disabled { background: url('${pageContext.re
 <script type="text/javascript" src="${pageContext.request.contextPath}/css/datatables/jquery.dataTables.min.css" ></script>
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/datatables/jquery.dataTables.min.js" ></script>
-
+<script > var contextPath = "${pageContext.request.contextPath}";
+</script>
 <!-- js -->
 <script src="${pageContext.request.contextPath}/js/public/researchStore.js"></script>
 
 <script>
         $(document).ready(function() {
            // $(".open, .impatient").pageslide();
-            
+
             $('#example-filterBehavior').multiselect({
 		            enableFiltering: true,
 		            filterBehavior: 'value'
@@ -160,7 +161,9 @@ table.dataTable thead .sorting_desc_disabled { background: url('${pageContext.re
         });
        
     </script> 
+    
 <script type="text/javascript">
+
 function hideAll() {	
 	 $('.industry').hide();
 	 $('.others').hide();

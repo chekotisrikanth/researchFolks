@@ -42,7 +42,7 @@
 				</div>
 			</div>
 			<div class="regcustomer">
-			   <div class="imganalyst"><img src="${pageContext.request.contextPath}/images/login/Customer.png"></div>
+			   <div class="imganalyst"><img src="${pageContext.request.contextPath}/images/login/customer.png"></div>
 				<div class="analystheading"><label class="labelcustomer">Customer</label></div>
 				<div class="analystext"><p>Explore and Buy Research Reports</p>
 					<form><input type="checkbox" id="regcustomer" value=""></form> 
@@ -68,8 +68,8 @@
 			width:600,
 			
 		});
-		$('#newUser').click(function(){
-			$( "#registerdetails" ).dialog('open');
+		$('#newUser').click(function(){			
+			 $( "#registerdetails" ).dialog('open');
 			$(".ui-dialog-titlebar").hide();
 		});
 		$('#regcustomer').onchange=(function(){
