@@ -35,70 +35,45 @@ table.dataTable thead .sorting_desc_disabled { background: url('${pageContext.re
     <article class="col-md-12 noPaddRL">
               <div class="contentWraper marginB20">
         <form class="form-horizontal alignHCenter ">
-                  <div class="form-group">
-            <div class="col-md-2 boldTxt text-right"> Research Category</div>
-            <div class="col-md-4">
-               <select class="form-control search-data resType" name="catagryId">
+          <div class="form-group">
+            <div class="col-md-2 boldTxt text-left"> Research Title </div>
+            <div class="col-md-6"><input type="text" class="form-control search-data" name="tittle"></div>
+            <div class="col-md-1 boldTxt text-left"> Research Category</div>
+            <div class="col-md-3">
+               <select class="form-control search-data resType"  name="catagryId">
                 <option value="">Select Category</option>
                 <option value=1>Company Intellegence</option>
                 <option value=2>Industry Intellegence</option>
                 <option value=3>Others</option>
               </select>
-                    </div>
-            <div class="col-md-1 boldTxt text-right">Display No Of Records</div>
-            <!-- <div class="col-md-3">
-                <select class="form-control search-data"  name="comIntl">
-                  <option value="">Select SoryType</option>                
-	                <option value=1>Classic Report</option>
-	                <option value=2>Report Database</option>
-	            </select>
-            </div> -->
-            <div class="col-md-3">
-                    <select class="form-control  recordsPerPage">
-                    	<option value=10>10</option>
-                        <option value=50>50</option>
-                        <option value=100>100</option>
-                        <option value=5000>All</option>
-                    </select>
-                    </div>
-          <!--  <div class="col-md-3 industry">
-                <select class="form-control search-data" name="comIntl">
-                 <option value="">Select SoryType</option>
-	                <option value=3>Industry Report</option>
-	                <option value=4>Industry Database</option>
-              </select>
-            </div>
-            <div class="col-md-3 others">
-              <select class="form-control search-data" name="comIntl">
-                <option value="">Select SoryType</option>              
-                <option value=4>Research Report</option>
-                <option value=5>Research Database</option>
-              </select>
-            </div> -->  
-            <div class="col-md-1 noPaddL">
-                <button class="btn btn-primary buttonSmall sncButton pull-left" type=button>Search</button>
-            </div>
-          </div>
-                  <div class="form-group">
-            <div class="col-md-2 boldTxt text-right"> Search By Title </div>
-            <div class="col-md-3"><input type="text" class="form-control search-data" name="tittle"></div>
-            <div class="col-md-2 boldTxt text-right"> Search By Industry </div>
+            </div>  
+         </div>
+         <div class="form-group">
+            <div class="col-md-2 boldTxt text-left"> Search By Industry </div>
             <div class="col-md-2"> <!-- class="form-control search-data"  -->
               <select  id="example-filterBehavior" class="form-control search-data" name="industry" multiple="multiple">
 <!--               	<option value="">Select Industry</option>
  -->                 <c:forEach var="item" items="${industries}">					 
 						 <option value="${item.text}">${item.text}</option>
 				</c:forEach>
-                <!--     <option value="Retail" >Retail</option>
-                <option value="Automotive">Automotive</option>  -->
               </select>
-                    </div>
-         <!--    <div class="col-md-2">
-                      <button class="btn btn-primary pull-left marginL10" type="submit">Advanced Search</button>
-                    </div> --> 
+            </div>    
+            <div class="col-md-3 boldTxt text-right ">Display No Of Records</div>            
+            <div class="col-md-2">
+                    <select class="form-control  recordsPerPage">
+                    	<option value=10>10</option>
+                        <option value=50>50</option>
+                        <option value=100>100</option>
+                        <option value=5000>All</option>
+                    </select>
+             </div>     
+                         
+            <div class="col-md-2 pull-left ">
+                <button class="btn btn-primary buttonSmall sncButton pull-left" type=button>Search</button>
+            </div>
           </div>
-                  <div class="row analystSer marginT20">
-                  
+            
+     <div class="row analystSer marginT20">                  
             <div class="col-md-12">
 	            <input type="hidden" id="totalCount" name="totalCount" value="${totalCount}">
 	            <div class="tableHeight">
@@ -116,7 +91,7 @@ table.dataTable thead .sorting_desc_disabled { background: url('${pageContext.re
                   	<div class="col-md-4">
                   		<div class = "pagination"/>
 						   
-		<div class="col-md-4"> <span class="marginB20 marginT20 pull-right">Displaying 10 out of 250</span></div>
+			<div class="col-md-4"> <span class="marginB20 marginT20 pull-right">Displaying 10 out of 250</span></div>
                   </div>
           </div>
                 </form>
@@ -154,7 +129,11 @@ table.dataTable thead .sorting_desc_disabled { background: url('${pageContext.re
 
             $('#example-filterBehavior').multiselect({
 		            enableFiltering: true,
-		            filterBehavior: 'value'
+		            filterBehavior: 'value',
+		            enableCaseInsensitiveFiltering: true,
+		            maxHeight: 300
+
+
 		   });
             
             
