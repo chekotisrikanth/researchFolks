@@ -106,18 +106,18 @@ public class FileUtils {
 		//byte[] bytes =null;
 		
 		 try {
-			 String extn = reportImage.getOriginalFilename().split("\\.")[1];
+			 //String extn = reportImage.getOriginalFilename().split("\\.")[1];
 			 
 			 //Resource resource = resourceLoader.getResource("classpath:/"+parenFolderPath+"/"+imageName);
 			 
-			 File file = new File(rootFolder+"/"+parenFolderPath+"/"+fileName+"."+extn);
+			 File file = new File(rootFolder+"/"+parenFolderPath+"/"+fileName);
 			 
 			 if(!file.getParentFile().exists()) {
 				 file.getParentFile().mkdirs();
 			 }
 			 if(file.exists()) {
 				    long time= Calendar.getInstance().getTimeInMillis();
-				    fileName= String.valueOf(fileName+"_"+time+"."+extn);
+				    fileName= String.valueOf(fileName+"_"+time);
 				    file = new File(rootFolder+"/"+parenFolderPath+"/"+fileName);
 			 }
         	 reportImage.transferTo(file);
@@ -153,7 +153,7 @@ public class FileUtils {
 	}
 	
 	public String saveFile(MultipartFile reportImage,String parenFolderPath) throws IOException { 
-		return saveFile(reportImage,null,parenFolderPath);
+		return saveFile(reportImage,reportImage.getOriginalFilename(),parenFolderPath);
 	}
 	
 	public static File checkAndReturnFiles(String fileName,String directory) {

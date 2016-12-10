@@ -29,7 +29,7 @@
      -->
     <logger name="com.marketing" level="info" />
     
-    <root level="info">
+    <root level="error">
         <appender-ref ref="stdout"/>
     </root>
 </configuration>

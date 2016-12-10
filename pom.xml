@@ -33,9 +33,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
             <exclusions>
-            	<exclusion>
+            	<!-- <exclusion>
             		<artifactId>log4j-over-slf4j</artifactId>
             		<groupId>org.slf4j</groupId>
+            	</exclusion> -->
+            	<!-- include spring-boot-starter-logging to generate sql inserts statements -->
+            	<exclusion>
+            		<artifactId>spring-boot-starter-logging</artifactId>
+            		<groupId>org.springframework.boot</groupId>
             	</exclusion>
             </exclusions>
         </dependency>

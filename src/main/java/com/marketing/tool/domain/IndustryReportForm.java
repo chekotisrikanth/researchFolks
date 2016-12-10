@@ -1,11 +1,14 @@
 package com.marketing.tool.domain;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
 @DiscriminatorValue("industryreport")
 public class IndustryReportForm extends ReportForm {
+	
+	
 	
 	
 	
@@ -22,6 +25,8 @@ public class IndustryReportForm extends ReportForm {
 		super.setComIntl(comIntl);
 		this.comIntl = comIntl;
 	}*/
+
+	
 
 	@Override
 	public String toString() {

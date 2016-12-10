@@ -44,7 +44,9 @@
                 <li><a href="#">Stake</a></li>
                 <li><a href="#">Sales</a></li>
                 <li class="marginB20"><a href="#">Uploads</a></li>
-           
+            	<li><a href="${pageContext.request.contextPath}/publish/cpdpReportForm_create.html">CPDP Report</a></li>
+            	 <li><a href="${pageContext.request.contextPath}/publish/industryReportForm_create.html">Industry Report</a></li>
+            	 <li><a href="${pageContext.request.contextPath}/publish/otherReportForm_create.html?otherForm=true">Other Report</a></li>
                 <li><a href="#" class="leftNavHeader">Profile <span><img src="${pageContext.request.contextPath}/images/icon-profie.png" alt="profile"/></span></a></li>
                 <li><a href="#">Edit profile</a></li>
                 <li class="marginB20"><a href="#">Change Password</a></li>

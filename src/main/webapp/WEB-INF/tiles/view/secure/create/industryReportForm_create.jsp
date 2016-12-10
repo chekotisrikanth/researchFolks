@@ -27,7 +27,7 @@
         </aside>
         <article class="col-md-9 noPaddRL">
         <div class="contentWraper">
-		<form:form method="POST"  class="form-horizontal alignHCenter" action="${pageContext.request.contextPath}/publish/industryReportForm_create.html" commandName="form" modelAttribute="form" enctype="multipart/form-data">
+		<form:form method="POST"  class="form-horizontal alignHCenter" action="${pageContext.request.contextPath}/publish/reportForm_create.html" commandName="form" modelAttribute="form" enctype="multipart/form-data">
 			<form:errors path="" element="div"/>
 			<%-- <div class="form-group">
 			<form:label class="col-md-3 control-label text-right" path="reportTitle"><spring:message code="indReportForm.reportTitle"/></form:label>	
@@ -38,7 +38,8 @@
             </div> --%>
             <spring:bind path="reportTitle">
             <div class="form-group ${status.error ?'has-error':''} ">        	
-			<form:label class="col-md-3 control-label text-right" path="reportTitle"><spring:message code="indReportForm.reportTitle"/></form:label>	
+			<form:label class="col-md-3 control-label text-right" path="reportTitle">
+			${title}</form:label>	
                 <div class="col-md-9">
                 	<form:input path="reportTitle" class="form-control" required="required"/>
 					<!--<form:errors path="reportTitle"/>-->
@@ -135,14 +136,14 @@
 		    </spring:bind>
 		</div>
 		<div class="form-group">
-			<spring:bind path="comIntl">
+			<spring:bind path="repTypeId">
 			   <div class="${status.error ?'has-error':''}">
-				<form:label class="col-md-3 control-label text-right" path="comIntl"><spring:message code="indReportForm.comIntl"/></form:label>                                                                
+				<form:label class="col-md-3 control-label text-right" path="repTypeId"><spring:message code="indReportForm.repTypeId"/></form:label>                                                                
 				<div class="col-md-4">
-					<select class = "form-control cit" name="comIntl" required="required">
+					<select class = "form-control cit" name="repTypeId" required="required">
 					<option value="">Select Intelligence</option>
-						<option value=1 ${form.comIntl eq 1 ?'selected':''}>Industry Report</option> 
-						<option value=2 ${form.comIntl eq 2 ?'selected':''}>Industry Database</option>                                                                               
+						<option value=1 ${form.repTypeId eq 1 ?'selected':''}>Industry Report</option> 
+						<option value=2 ${form.repTypeId eq 2 ?'selected':''}>Industry Database</option>                                                                               
 					  </select>      
 					                                                                        
 				</div>
@@ -165,7 +166,8 @@
 	   </div>
 		<spring:bind path="overview">
 	       <div class="form-group ${status.error ?'has-error':''} ">
-			<form:label path="overview" class="col-md-3 control-label text-right"><spring:message code="reportForm.overview"/></form:label> 
+			<form:label path="overview" class="col-md-3 control-label text-right">
+			${discription}</form:label> 
 			<div class="col-md-9">
 				<form:textarea class="form-control" path="overview" max-char="1500" rows="3" cols="30" required="required"/>
 				<!--<form:errors path="overview"/>-->
@@ -202,7 +204,7 @@
 					<button class="btn btn-primary btn-lg sncButton pull-right" type="submit">Save & Submit</button>
 				</div>
 		</div>
-		<input type="hidden" name="repTypeId" value="2">
+		<input type="hidden" name="comIntl" value="${form.comIntl}"/>
      </form:form>
             </div>
         </article>
