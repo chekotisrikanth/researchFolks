@@ -1,105 +1,62 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
- 
-  	  <script src = "${pageContext.request.contextPath}/js/JqueryBase.min.js"></script>
-      <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
-      <script src="${pageContext.request.contextPath}/js/jquery.pageslide.min.js"></script>
-      <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap-theme.css">
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/tree/assets/bootstrap/css/bootstrap-theme.min.css">
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/customStyles.css">
- <div class="container">       
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-      <meta charset = "utf-8">
-      <meta http-equiv = "X-UA-Compatible" content = "IE = edge">
-      <meta name = "viewport" content = "width = device-width, initial-scale = 1">
-      
-      <title>Research Floks</title>
-      
-      <!-- Bootstrap -->
-       <link rel="stylesheet" href="${pageContext.request.contextPath}/css/datepicker.min.css">
-      
-      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      
-      <!--[if lt IE 9]>
-      <script src = "https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src = "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-      
-      <script type="text/javascript">
-            jQuery.noConflict();
-        </script>
-      
-   </head>
-   
-   <body>
-   <div class="row">
-   <header class="clearfix paddB10 paddTB10">
-     <div class="logo col-md-8 col-sm-12">
-     <a href="#"><img src="${pageContext.request.contextPath}/images/logo.png" alt="Research Floks"/></a>
-     </div>
-     <div class="col-md-4 col-sm-12">
-     <sec:authorize access="isAnonymous()">
-     	<div class="col-md-6 col-sm-12 noPaddRL">
-        <div class="registrationBT col-md-12 col-sm-12">Registration <span>
-        <a href="${pageContext.request.contextPath}/public/login.html?referrer=loginlink">
-        <img src="${pageContext.request.contextPath}/images/icon-register.png" alt="Registration"/>
-        </a>
-        </span></div>
-        </div>
-        <div class="col-md-6 col-sm-12">
-        <a href="${pageContext.request.contextPath}/public/login.html?referrer=loginlink">
-        <div class="loginBT col-md-12 col-sm-12">Login  <span><img src="${pageContext.request.contextPath}/images/icon-login.png" alt="Login"/></span>
-        
-        </div>
-        </a>
-        </div>
-       </sec:authorize> 
-       <sec:authorize access="isAuthenticated()">
-       <a href="<c:url value="${pageContext.request.contextPath}/public/logout.html" />">
-        <div class="col-md-6 col-sm-12">
-        <div class="logoutBT col-md-12 col-sm-12">Logout  <span><img src="${pageContext.request.contextPath}/images/icon-logout.png" alt="Logout"/></span></div>
-        </div>
-       </a> 
-       </sec:authorize> 
-     </div>
-     </header>
-	  <nav id="myNavbar" class="navbar navbar-default hompageNavbar" role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse noPaddRL" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  <li><a href="${pageContext.request.contextPath}/home">Home</a></li>
-                  <li><a href="#">How It Works</a></li>
-                  <li><a href="${pageContext.request.contextPath}/freefolk/getPublishedReports">Research Store</a></li>
-                  <li><a href="${pageContext.request.contextPath}/public/customresearch">Custom Research</a></li>
-                  <li><a href="#">Blog</a></li>
-                  <li><a href="#">Contact Us</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-    </nav>
-</div>
-</div>
-<%-- <sec:authorize access="isAnonymous()">
-    <form method="POST" action="<c:url value='j_spring_security_check'/>">
-        Username: <input name="j_username" type="text" value="${SPRING_SECURITY_LAST_USERNAME}" /> 
-        Password: <input name="j_password" type="password" /> 
-        <input type="submit" value="Sign in" />
-    </form>
-    <a href="${pageContext.request.contextPath}/public/login.html?referrer=loginlink">Login</a>
-</sec:authorize>
-<sec:authorize access="isAuthenticated()">
-    <a href="<c:url value="/public/logout.html" />">Logout</a>
-</sec:authorize> --%>
+	<title>Login Page</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.css">
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css">
+	<link href="${pageContext.request.contextPath}/css/jquery/jquery-ui.min.css" rel="stylesheet">
+    <script src="${pageContext.request.contextPath}/tree/assets/jquery-1.10.2.min.js"></script>
+	<script src="${pageContext.request.contextPath}/js/jquery/jquery-ui.min.js"></script>
 
+</head>
+<body>
+   <!-- start header -->
+  <header>
+    <div class="business content visible-desktop hidden-tablet " style="width: 100%; top: 0px;">
+        <div class=" clearfix">
+            <div class="info-container">
+                <span class="item email">
+                    <span class="icon icon-Mail"><a href="#"><img src="${pageContext.request.contextPath}/images/login/mailicon.png"></a></span>
+                    <span class="email-content">sales@researchfolks.com</span>
+                </span>
+            </div>
+            <div class="social icon">
+                <span data-social="facebook"><a href="#"><img src="${pageContext.request.contextPath}/images/login/facebook.png"></a></span>
+                <span data-social="twitter"><a href="#"><img src="${pageContext.request.contextPath}/images/login/twitter.png"></a></span>
+                <span data-social="linkedin"><a href="#"><img src="${pageContext.request.contextPath}/images/login/linkedin.png"></a></span>
+            </div>
+        </div>
+    </div>
+   
+    <nav class="navbar navbar-default navbar-static-top">
+          <div class="container-fluid">
+           <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+          <a class="navbar-brand" href="index.html"><img src="${pageContext.request.contextPath}/images/login/ResearchFolks-color-WEB.png" width="250" height="53"/></a> </div>
+           
+            <div class="navbar-collapse collapse ">
+                <ul class="nav navbar-nav">
+                    <li class="navmenu"><a href="#">Home</a></li>
+                    <li class="navmenu"><a href="${pageContext.request.contextPath}/public/customresearch">Customer Research</a></li>
+                    <li class="navmenu"><a href="${pageContext.request.contextPath}/freefolk/getPublishedReports">Research Store</a></li>
+                    <li class="navmenu"><a href="#">About Us</a></li>
+                    <li class="navmenu"><a href="#">Subscribe</a></li>
+                    <li class="navmenu"><a href="#">Blog</a></li>
+                    <li class="navmenu"><a href="#">Contact</a></li>
+                   <sec:authorize access="isAnonymous()">
+                    <li class="navmenu"><a href="${pageContext.request.contextPath}/public/login.html">Login/Register</a></li>
+					 </sec:authorize> 
+					  <sec:authorize access="isAuthenticated()">
+					    <li class="navmenu"><a href="${pageContext.request.contextPath}/public/logout.html">Logout</a></li>
+					   </sec:authorize> 
+                </ul>
+			  </div>
+           </div>  
+    </nav>
+    </header>
+    </body>
+    </html>
