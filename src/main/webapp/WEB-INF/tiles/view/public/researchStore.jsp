@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html lang = "en">
 		<style>
+		.contentWraper{background-color:#fafafa; color:#333; border:solid 1px #d7d7d7; padding:20px;}
 		
 		div .open{
 		 display: block;
