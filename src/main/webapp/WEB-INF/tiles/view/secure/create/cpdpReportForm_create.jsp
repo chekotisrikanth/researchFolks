@@ -247,14 +247,14 @@
 	            </spring:bind>
 	   	    </div>
            
-			<spring:bind path="comIntl">
+			<spring:bind path="repTypeId">
 	             <div class="form-group ${status.error ?'has-error':''} ">    			
-					<form:label class="col-md-2 control-label text-right" path="comIntl"><spring:message code="reportForm.comIntl"/></form:label> 				
+					<form:label class="col-md-2 control-label text-right" path="repTypeId"><spring:message code="reportForm.repTypeId"/></form:label> 				
 					<div class="col-md-4">
-					 <select class = "form-control cit" name="comIntl" required="required">
+					 <select class = "form-control cit" name="repTypeId" required="required">
 					  <option value="">Select Intelligence</option>
-						 <option value="1" ${form.comIntl eq 1 ?'selected':''}>Company Report</option> 
-						 <option value="2" ${form.comIntl eq 2 ?'selected':''}>Company Database</option> 				
+						 <option value="1" ${form.repTypeId eq 1 ?'selected':''}>Company Report</option> 
+						 <option value="2" ${form.repTypeId eq 2 ?'selected':''}>Company Database</option> 				
 					  </select>						
 					</div>
 					<!--<form:errors path="comIntl"/> -->
@@ -296,7 +296,7 @@
                         <!-- <button class="btn btn-primary btn-lg pull-right" type="submit">Save</button> -->
                     </div>
             </div>
-            <input type="hidden" name="repTypeId" value="1">
+            <input type="hidden" name="comIntl" value="${form.comIntl}"/>
 </form:form>
             </div>
         </article>

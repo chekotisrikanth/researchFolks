@@ -183,6 +183,5 @@
 	<definition name="mastershome" extends="layout.empty">
    		 <!-- <put-attribute name="header" value="header" /> -->
 		<put-attribute name="body" value="/WEB-INF/tiles/view/secure/master/masters.jsp" />
-	</definition>
-	
+	</definition>	
 </tiles-definitions>

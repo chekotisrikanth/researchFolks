@@ -1,5 +1,7 @@
 package com.marketing.tool.service;
 
+import java.io.IOException;
+import java.text.ParseException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,7 +19,11 @@ import com.marketing.tool.domain.ReportStatus;
 import com.marketing.tool.domain.ReportWorkFlowStatus;
 import com.marketing.tool.domain.UserProfileType;
 import com.marketing.tool.repository.ReportFormRepository;
+import com.marketing.tool.utility.DateUtills;
+import com.marketing.tool.utility.FileUtils;
 import com.marketing.tool.utility.Helper;
+import com.marketing.tool.utility.SharedConstants;
+import com.marketing.tool.utility.StringUtil;
 
 
 public class ReportFormServiceImpl implements ReportFormService {
@@ -28,13 +34,22 @@ public class ReportFormServiceImpl implements ReportFormService {
 	@Autowired
 	private Helper helper;
 	
+	  @Autowired
+		 private FileUtils fileUtils;
+	
 	@Inject
 	public ReportFormServiceImpl(final ReportFormRepository repository) {
 		this.repository = repository;
 	}
 
 	@Transactional
-	public ReportForm save(@NotNull @Valid ReportForm reportForm) {
+	public ReportForm save(@NotNull @Valid ReportForm reportForm) throws IOException, ParseException {
+		
+		 String filePath = fileUtils.saveFile(reportForm.getReportImg(),StringUtil.buildString(SharedConstants.FILE_PATH+SharedConstants.REEEPORT_FOLDER_PATH));
+     	reportForm.setInsertedDate(DateUtills.getCurrentDate());
+     	reportForm.getPublishingDate();
+     	reportForm.setFilePath(filePath);
+     	
 		AutoPopulatingList<ReportStatus> reportStatusSet = new AutoPopulatingList<ReportStatus>(ReportStatus.class);
 		ReportStatus status = new ReportStatus();
 		status.setReport(reportForm);

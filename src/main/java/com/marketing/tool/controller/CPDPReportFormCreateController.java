@@ -105,6 +105,8 @@ public class CPDPReportFormCreateController {
 	    public ModelAndView getCreateReportFormView(Model model, @Validated CPDPReportForm reportForm, BindingResult result) {
 	        LOGGER.debug("Received request for reportForm create view");
 	        ModelAndView modelAndView = new ModelAndView();
+	        CPDPReportForm form =  new CPDPReportForm();
+	        form.setComIntl(1);
 	        modelAndView.addObject("form", new CPDPReportForm());
 	        initModelList(modelAndView);
 	        modelAndView.setViewName("cpdpReportForm_create");
@@ -117,21 +119,7 @@ public class CPDPReportFormCreateController {
 	        LOGGER.debug("Received request to create {}, with result={}", reportForm, result);
 	        ModelAndView modelAndView = new ModelAndView();
 			//modelAndView.addObject("pers", person);
-			
-			if(reportForm.getReportImg() != null && reportForm.getReportImg().getSize() > 0){
-			String ext = reportForm.getReportImg().getOriginalFilename().split("\\.")[1];
-			if(reportForm.getComIntl() != null && reportForm.getComIntl().intValue() == 2)
-			    FileUploadValidator.validatefile(reportForm,result,xlFormats);
-			else if(!((ext.contains("ppt") || ext.contains("docx") || ext.contains("doc"))))
-			 FileUploadValidator.validatefile(reportForm,result,"Other");
-			}
-			else
-			{	
-				
-				//result.addError(new ObjectError("reportImg", "Please Upload Report"));
-				//result.reject("reportImg", "File Required");
-				result.rejectValue("reportImg", "FileRequired");
-			}
+	        FileUploadValidator.validatefile(reportForm,result);
 			if (result.hasErrors()) {
 				 //initModel List(model);
 				initModelList(modelAndView);
@@ -139,14 +127,6 @@ public class CPDPReportFormCreateController {
 			    return modelAndView;
 			}
 	        try {
-	        	String filePath = fileUtils.saveFile(reportForm.getReportImg(),StringUtil.buildString(SharedConstants.FILE_PATH+SharedConstants.REEEPORT_FOLDER_PATH));
-				//reportComments2.setFilePath(SharedConstants.FILE_PATH+String.valueOf(reportComments2.getReportId()+""+time)+SharedConstants.DOT+reportComments2.getReportFile().getOriginalFilename().split("\\.")[1]);
-				//String filePath = StringUtil.buildString(SharedConstants.REEEPORT_FOLDER_PATH,SharedConstants.FILE_SEPERATOR,uuid,time,SharedConstants.DOT,reportForm.getReportImg().getOriginalFilename().split("\\.")[1]);
-				//FileUtils.saveFiles(reportForm.getReportImg(),String.valueOf(reportForm.getReportId()),new StringBuilder("E:\\gitImages").append("\\Profile").toString());
-				
-				reportForm.setFilePath(filePath);
-				reportForm.setInsertedDate(DateUtills.getCurrentDate());
-				//reportForm.setPublishingDate(DateUtills.getCurrentDate());
 				cpdpPReportFormService.save(reportForm);
 	        	
 	        	} catch (UserAlreadyExistsException e) {

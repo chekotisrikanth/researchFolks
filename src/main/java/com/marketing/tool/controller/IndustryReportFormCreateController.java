@@ -2,8 +2,10 @@ package com.marketing.tool.controller;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -12,8 +14,8 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +32,7 @@ import com.marketing.tool.domain.MasterDataType;
 import com.marketing.tool.domain.ReportForm;
 import com.marketing.tool.domain.master.Country;
 import com.marketing.tool.exception.UserAlreadyExistsException;
+import com.marketing.tool.service.CountryStateService;
 import com.marketing.tool.service.IndustryReportFormService;
 import com.marketing.tool.service.MasterService;
 import com.marketing.tool.utility.DateUtills;
@@ -36,7 +40,6 @@ import com.marketing.tool.utility.FileUtils;
 import com.marketing.tool.utility.SharedConstants;
 import com.marketing.tool.utility.StringUtil;
 import com.marketing.tool.validator.FileUploadValidator;
-import com.marketing.tool.service.CountryStateService;
 
 @Controller
 public class IndustryReportFormCreateController {
@@ -50,115 +53,67 @@ public class IndustryReportFormCreateController {
 		 private CountryStateService countryStateService;
 	    
 	    @Autowired
-		 private FileUtils fileUtils;
-	    
-	    @Autowired
 	    private MasterService masterService;
 	    
-	    private static String xlFormats ="xlsx,xlsm,xls";
+	    
 	   	    
 	    @InitBinder("form")
 	    public void initBinder(WebDataBinder binder) {
-	        //binder.addValidators(createFormValidator);
-	    	//SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	    	//dateFormat.setLenient(false);
-	    	////binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
-	    	// binder.registerCustomEditor(Date.class, "publishingDate", new CustomDateEditor(dateFormat, true));
-	    	/*binder.registerCustomEditor(Date.class, "keyskills", new CustomCollectionEditor(Set.class) {
-	            protected Object convertElement(Object element) {
-	                if (element != null) {
-	                    String date = ((String)element);
-	                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-	                    java.util.Date date = dateFormat.parse("12/31/2006");
-	                    return skill;
-	                }
-	                return null;
-	            }
-	        });*/
-	    	// Convert multipart object to byte[]
+	    	SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	    	binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
 	    	binder.registerCustomEditor(byte[].class, new ByteArrayMultipartFileEditor());
 	    }
 	    
-	    
-	    
-			    
-	   
-	    /*@Override
-	    protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception
-	    {
-	    binder.registerCustomEditor(Integer.class, null, new CustomNumberEditor(Integer.class, true));
-	    super.initBinder(request, binder);
-	    }
-*/
-	    @RequestMapping(value = "/publish/industryReportForm_create.html", method = RequestMethod.GET)
-	    public ModelAndView getCreateReportFormView(Model model, @Validated IndustryReportForm reportForm, BindingResult result) {
+	    @RequestMapping(value = { "/publish/industryReportForm_create.html"}, method = RequestMethod.GET)
+	    public ModelAndView getCreateReportFormView(@RequestParam(required = false) boolean otherForm, @Validated IndustryReportForm reportForm, BindingResult result) {
 	        LOGGER.debug("Received request for reportForm create view");
 	        ModelAndView modelAndView = new ModelAndView();
-	        modelAndView.addObject("form", new IndustryReportForm());
+	        IndustryReportForm form = new IndustryReportForm();
+	        modelAndView.addObject("form", form);
+	        form.setComIntl(2);
+	        modelAndView.addObject("title","Report Title");
+		    modelAndView.addObject("discription","Business Overview");
 	        initModelList(modelAndView);
 	        modelAndView.setViewName("industryReportForm_create");
    	        return modelAndView;
 	    }
 
-	    @RequestMapping(value = "/publish/industryReportForm_create.html", method = RequestMethod.POST)
-	    public ModelAndView createReportForm(@ModelAttribute("form") @Valid IndustryReportForm reportForm, BindingResult result) {
+	    	    
+	    @RequestMapping(value = { "/publish/otherReportForm_create.html"}, method = RequestMethod.GET)
+	    public ModelAndView getOtherCreateReportFormView(@RequestParam(required = false) boolean otherForm, @Validated IndustryReportForm reportForm, BindingResult result) {
+	        LOGGER.debug("Received request for reportForm create view");
+	        ModelAndView modelAndView = new ModelAndView();
+	        IndustryReportForm form = new IndustryReportForm();
+	        modelAndView.addObject("form", form);
+	        form.setComIntl(3);
+	        modelAndView.addObject("title","Research Title");
+		    modelAndView.addObject("discription","Research Discription");
+	        initModelList(modelAndView);
+	        modelAndView.setViewName("industryReportForm_create");
+   	        return modelAndView;
+	    }
+
+	    @RequestMapping(value = "/publish/reportForm_create.html", method = RequestMethod.POST)
+	    public ModelAndView createOtherReportForm(@ModelAttribute("form") @Valid IndustryReportForm reportForm, BindingResult result) {
 	        LOGGER.debug("Received request to create {}, with result={}", reportForm, result);
 	        ModelAndView modelAndView = new ModelAndView();
-			//modelAndView.addObject("pers", person);
-			
-	        if(reportForm.getReportImg() != null && reportForm.getReportImg().getSize() > 0){
-				String ext = reportForm.getReportImg().getOriginalFilename().split("\\.")[1];
-				if(reportForm.getComIntl() != null && reportForm.getComIntl().equals(2))
-				    FileUploadValidator.validatefile(reportForm,result,xlFormats);
-				else if(!(ext.contains("ppt") || ext.contains("docx") || ext.contains("doc")))
-				 FileUploadValidator.validatefile(reportForm,result,"Other");
-				}
-				else
-				{	
-					
-					//result.addError(new ObjectError("reportImg", "Please Upload Report"));
-					//result.reject("reportImg", "File Required");
-					result.rejectValue("reportImg", "FileRequired");
-				}
-			
+	        FileUploadValidator.validatefile(reportForm,result);
 	        if (result.hasErrors()) {
-	        	 //initModelList(model);
 	        	initModelList(modelAndView);
 	        	modelAndView.setViewName("industryReportForm_create");
 	   	        return modelAndView;
 	        }
 	        try {
-	        	long time= Calendar.getInstance().getTimeInMillis();
-	        	 String uuid = UUID.randomUUID().toString();
-	        	 String filePath = fileUtils.saveFile(reportForm.getReportImg(),StringUtil.buildString(SharedConstants.FILE_PATH+SharedConstants.REEEPORT_FOLDER_PATH));
-					//reportComments2.setFilePath(SharedConstants.FILE_PATH+String.valueOf(reportComments2.getReportId()+""+time)+SharedConstants.DOT+reportComments2.getReportFile().getOriginalFilename().split("\\.")[1]);
-	        	//String filePath = StringUtil.buildString(SharedConstants.REEEPORT_FOLDER_PATH,SharedConstants.FILE_SEPERATOR,uuid,time,SharedConstants.DOT,reportForm.getReportImg().getOriginalFilename().split("\\.")[1]);
-				//FileUtils.saveFiles(reportForm.getReportImg(),String.valueOf(reportForm.getReportId()),new StringBuilder("E:\\gitImages").append("\\Profile").toString());
-	        	reportForm.setInsertedDate(DateUtills.getCurrentDate());
-	        	// 
-	        	reportForm.getPublishingDate();
-	        	//reportForm.setPublishedDate(reportForm.getPublishingDate());
-	        	//reportForm.setPublishingDate(DateUtills.getCurrentDate());
-	        	reportForm.setFilePath(filePath);
 	        	industryReportFormService.save(reportForm);
-	        } catch (UserAlreadyExistsException e) {
-	            LOGGER.error("Tried to create reportForm with existing id", e);
-	            result.reject("reportForm.error.exists");
-	            modelAndView.setViewName("industryReportForm_create");
-	        }catch (IOException e) {
+	        } catch (IOException | ParseException e) {
 	        	 LOGGER.error("Tried to create reportForm with existing id", e);
 		          result.reject("reportForm.error.exists");
 		          modelAndView.setViewName("industryReportForm_create");
-			} catch (ParseException e) {
-				LOGGER.error("Date Parsing Exception", e);
-		        result.reject("reportForm.error.exists");
-		        modelAndView.setViewName("industryReportForm_create");
-			}
+			} 
 	        List<ReportForm>  reportForms= industryReportFormService.getAllReports();
 	        modelAndView.addObject("reports", reportForms);
 	        modelAndView.setViewName("industryReportForm_created");
 	        return modelAndView;
-	        //return "redirect:/reportForm_created.html";
 	    }
 	    
 	    private void initModelList(ModelAndView model) {
